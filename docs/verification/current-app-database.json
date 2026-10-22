@@ -1,0 +1,10 @@
+{
+  "source": "real_supabase_repository",
+  "database_write_verified": true,
+  "task_id": "88a6cfaa-795e-4ac4-ac83-7412afcc5bf2",
+  "status": "draft",
+  "idempotency_verified": true,
+  "initial_state_event_verified": true,
+  "provider_execution": "skipped",
+  "cleanup": "Draft retained for independent MCP inspection; no jobs were submitted."
+}

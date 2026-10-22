@@ -1,0 +1,6 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/verify_postgres_runtime.py --isolated
+BLOCKED: MEND_TEST_DATABASE_DSN missing
+BLOCKED: psql unavailable
+PostgreSQL fixture executed: no
+
+Process exit code: 2

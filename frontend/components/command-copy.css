@@ -1,0 +1,10 @@
+.mend-command-copy{--command-paper:#F5F2EA;--command-surface:#FFFFFF;--command-ink:#18201B;--command-muted:#5B615B;font-family:"Mend Archivo",Arial,sans-serif;min-width:0;width:100%}
+.command-copy-row{display:flex;align-items:center;gap:10px;min-width:0}
+.command-copy-row input{display:block;min-width:0;width:100%;flex:1;min-height:44px;padding:9px 0;border:0;border-radius:2px;background:transparent;color:var(--command-ink);font:400 12px/20px "Mend Plex",ui-monospace,monospace}
+.command-copy-row button{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:none;min-height:44px;padding:9px 12px;border:1px solid var(--command-muted);border-radius:6px;background:var(--command-surface);color:var(--command-ink);font:500 12px/20px "Mend Archivo",Arial,sans-serif;cursor:pointer;touch-action:manipulation}
+.command-copy-row button:active{background:var(--command-paper)}
+.command-copy-row button:disabled{cursor:wait}
+.mend-command-copy :is(input,button):focus-visible{outline:3px solid var(--command-ink);outline-offset:3px;box-shadow:0 0 0 3px var(--command-paper)}
+.mend-command-copy .command-copy-status{margin:7px 0 0!important;font:400 11px/19px "Mend Archivo",Arial,sans-serif!important;color:var(--command-muted)}
+@media(prefers-color-scheme:dark){.mend-command-copy{--command-paper:#121814;--command-surface:#1B251F;--command-ink:#F5F2EA;--command-muted:#B6BFB2;color-scheme:dark}}
+@media(max-width:520px){.command-copy-row{align-items:stretch;flex-wrap:wrap}.command-copy-row input{flex-basis:100%}.command-copy-row button{min-width:94px}}

@@ -1,0 +1,70 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-workbench@1.0.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ catchall waits for framework params before forwarding through the existing proxy (8.402717ms)
+✔ awaited catchall params preserve the route and method allowlist (0.503419ms)
+✔ actual task page awaits framework params and passes only the validated task ID (63.540988ms)
+✔ actual task page still invokes notFound for malformed or uppercase task IDs (19.080756ms)
+✔ proxy exposes existing routes and excludes missing history/source APIs (2.244406ms)
+✔ proxy refuses credential-bearing or unencrypted remote destinations (0.457259ms)
+✔ proxy rejects an unexpected cursor before forwarding (3.767514ms)
+✔ proxy streams bytes and preserves separate sealed session cookies (7.041638ms)
+✔ already-cancelled streamed input is released without waiting or forwarding (1.367824ms)
+✔ cancellation during input reading prevents backend forwarding (2.437136ms)
+✔ empty intake cannot masquerade as a prepared case (4.69906ms)
+✔ error-only packet records absent source and no execution evidence (4.379768ms)
+✔ original source and blank lines survive JSON export unchanged (0.362667ms)
+✔ source must identify a single safe Python module (2.938543ms)
+✔ UTF-8 byte limits apply independently of textarea character limits (6.55559ms)
+✔ invalid Unicode and NUL source are rejected before export (0.254023ms)
+✔ reported error and expected behavior are bounded (0.709561ms)
+✔ whitespace source accompanying an error is preserved as original evidence (0.184579ms)
+✔ preview limits rows without changing the exported source (7.413003ms)
+✔ preview bounds long lines and preserves blank-line numbering inputs (0.516849ms)
+✔ preview truncation does not split a Unicode surrogate pair (0.17903ms)
+✔ successful download removes the anchor and hands URL ownership to the caller (0.659225ms)
+✔ download failures release the URL and remove any acquired anchor (0.486524ms)
+✔ failed anchor removal cannot prevent object URL revocation (0.367073ms)
+✔ failed URL creation acquires no anchor or pending download (0.192951ms)
+✔ preview hydrates paused, derives normal-motion autoplay and never copies preference in an effect (88.333547ms)
+✔ manual Next stays paused when the initially unknown motion preference resolves (29.271301ms)
+✔ reduced motion pauses startup but explicit Play and Pause remain available (22.41022ms)
+✔ draft hydration restores valid storage without overwriting it or issuing effect state updates (88.8494ms)
+✔ draft edits persist and clear through events; oversized UTF-8 drafts do not restore (53.711874ms)
+✔ Ambiguous creation reuses the exact key and rejects changed prompts until reconciliation (2.377657ms)
+✔ Event replay does not duplicate accepted evidence, and bounded logs keep the newest entries (2.347942ms)
+✔ Real backend message envelope displays text and foreign task events never change status (1.887518ms)
+✔ Passing receipts require live evidence, matching task, exact frozen checks and bundle consistency (0.900268ms)
+✔ Receipt summary preserves observed checks and refuses invented counts or live attribution (2.119207ms)
+✔ Pending-review cache survives reload for verified owner and is removed for another owner (1.84249ms)
+✔ Pending-review cache rejects corrupt identities and oversized prompts, and excludes extra fields (0.465011ms)
+✔ pointer micro-events batch to one write using one stable bounds read (2.961317ms)
+✔ pointer exit returns through the shared spring and stops scheduling (0.729841ms)
+✔ focus/reduced/coarse/drag suppression and teardown cancel pending writes (0.305791ms)
+✔ only a complete passing receipt qualifies as success (1.18579ms)
+✔ sample receipts cannot masquerade as live execution (0.196888ms)
+✔ rejects malformed and over-budget events; preserves stderr text (0.229977ms)
+✔ contradictory upstream readiness cannot enable Start (5.474659ms)
+✔ consistent live configuration passes through while failures stay blocked (2.033528ms)
+✔ original source preserves the blank third line and valid comment (1.818093ms)
+✔ patched source includes a complete empty-input guard with continuous numbers (0.211129ms)
+✔ bundle has an explicit non-execution receipt and isolated copy of named checks (0.368095ms)
+✔ every named check is included in the downloadable regression suite (0.225801ms)
+✔ phase descriptions retain the boundary between illustration and live execution (0.169556ms)
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (114.704602ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (33.684429ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (38.1955ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (22.796973ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (22.12164ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (37.656131ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (16.564892ms)
+ℹ tests 57
+ℹ suites 0
+ℹ pass 57
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1275.217818

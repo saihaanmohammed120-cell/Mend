@@ -1,0 +1,4 @@
+PASS generated HTML: captured repair first; one honest CTA; inactive live slot collapsed; four exact check results; source SHA-256 matches download.
+PASS connected flow: both layouts require failure → diagnosis → repair → rerun, then pass → receipt; four logical stages.
+PASS wordmark/font assets, authored palette/focus/dot-grid rules, favicon/share metadata and PNG, source/capture ZIP consistency.
+390px rendered layout, focus appearance, live Nebius execution and external share preview: UNVERIFIED.

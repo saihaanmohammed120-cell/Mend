@@ -1,0 +1,44 @@
+"""Actual CLI boundary, using inert input that must never be executed."""
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+
+
+SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "prepare_bug_case.py"
+
+
+class BugCaseCliTests(unittest.TestCase):
+    def test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            intake = {"kind": "mend_bug_intake", "schema_version": 1, "file_path": "helper.py",
+                      "original_source": "raise RuntimeError('Never execute this during preparation')\n",
+                      "reported_error": "failure", "expected_behavior": "Return one",
+                      "evidence": {"investigation": "not_run", "execution": "not_run", "regression": "not_generated"}}
+            source, checks, output = root / "intake.json", root / "checks.py", root / "review.json"
+            source.write_text(json.dumps(intake), encoding="utf-8")
+            checks.write_text("raise RuntimeError('Checks are not executed either')\n", encoding="utf-8")
+            args = [sys.executable, str(SCRIPT), "--intake", str(source), "--checks", str(checks),
+                    "--check", "test_regression.Checks.test_value", "--target-check",
+                    "test_regression.Checks.test_value", "--output", str(output)]
+            run = subprocess.run(args, capture_output=True, text=True, timeout=10)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            prepared = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(prepared["intake"], intake)
+            self.assertFalse(prepared["execution_enabled"])
+            snapshot = output.read_bytes()
+            run = subprocess.run(args, capture_output=True, text=True, timeout=10)
+            self.assertEqual(run.returncode, 2)
+            self.assertEqual(output.read_bytes(), snapshot)
+            source.write_text('{"kind":"mend_bug_intake","kind":"duplicate"}', encoding="utf-8")
+            args[-1] = str(root / "rejected.json")
+            run = subprocess.run(args, capture_output=True, text=True, timeout=10)
+            self.assertEqual(run.returncode, 2)
+            self.assertFalse((root / "rejected.json").exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

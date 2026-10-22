@@ -1,0 +1,7 @@
+--- before/csv_tools.py
++++ after/csv_tools.py
+@@ -1,2 +1,4 @@
+ def clean_rows(rows):
++    if not rows:
++        return [], 0
+     fields = tuple(rows[0])

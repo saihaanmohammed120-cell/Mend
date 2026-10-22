@@ -1,0 +1,45 @@
+name: isolated-postgres-runtime
+
+on:
+  workflow_dispatch:
+    inputs:
+      isolated_database_attested:
+        description: Confirm the dedicated secret targets an authorized, migrated, isolated development database
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  attest-isolation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require explicit isolation attestation
+        env:
+          ISOLATED_ATTESTED: ${{ inputs.isolated_database_attested }}
+        run: |
+          if [ "$ISOLATED_ATTESTED" != "true" ]; then
+            printf 'BLOCKED: explicit isolated database attestation required\n'
+            exit 2
+          fi
+
+  postgres-runtime:
+    needs: attest-isolation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: mend-postgres-isolated
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require genuine PostgreSQL runtime fixture
+        env:
+          MEND_TEST_DATABASE_DSN: ${{ secrets.MEND_ISOLATED_POSTGRES_DSN }}
+          MEND_TEST_DATABASE_ISOLATED: "1"
+        run: python scripts/verify_postgres_runtime.py --isolated

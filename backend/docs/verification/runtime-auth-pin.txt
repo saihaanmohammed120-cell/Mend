@@ -1,0 +1,27 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m unittest discover -s tests -p test_auth.py -v
+test_bodies_bounded_and_duplicate_nonfinite_rejected (test_auth.AsyncAuthTests.test_bodies_bounded_and_duplicate_nonfinite_rejected) ... ok
+test_overflowing_json_numbers_rejected_without_rejecting_finite_costs (test_auth.AsyncAuthTests.test_overflowing_json_numbers_rejected_without_rejecting_finite_costs) ... ok
+test_provider_errors_redacted_and_bad_tokens_not_dispatched (test_auth.AsyncAuthTests.test_provider_errors_redacted_and_bad_tokens_not_dispatched) ... ok
+test_server_identity_reverified_and_subject_bound (test_auth.AsyncAuthTests.test_server_identity_reverified_and_subject_bound) ... ok
+test_sse_disconnect_cleans_generator_without_cancelling_job (test_auth.AsyncAuthTests.test_sse_disconnect_cleans_generator_without_cancelling_job) ... ok
+test_sse_drops_event_if_client_disconnects_during_wait (test_auth.AsyncAuthTests.test_sse_drops_event_if_client_disconnects_during_wait) ... ok
+test_sse_drops_event_if_session_expires_during_serialization (test_auth.AsyncAuthTests.test_sse_drops_event_if_session_expires_during_serialization) ... ok
+test_sse_drops_event_that_arrives_after_session_expiry (test_auth.AsyncAuthTests.test_sse_drops_event_that_arrives_after_session_expiry) ... ok
+test_sse_heartbeat_replay_dedup_and_cleanup (test_auth.AsyncAuthTests.test_sse_heartbeat_replay_dedup_and_cleanup) ... ok
+test_configuration_no_secrets_in_readiness (test_auth.AuthTests.test_configuration_no_secrets_in_readiness) ... ok
+test_cookie_size_budget (test_auth.AuthTests.test_cookie_size_budget) ... ok
+test_csrf_is_bound_to_session_and_origin_exact (test_auth.AuthTests.test_csrf_is_bound_to_session_and_origin_exact) ... ok
+test_encryption_roundtrip_and_no_plain_token (test_auth.AuthTests.test_encryption_roundtrip_and_no_plain_token) ... ok
+test_ids_and_cursor_validation (test_auth.AuthTests.test_ids_and_cursor_validation) ... ok
+test_origins_normalize_equally_from_environment_and_direct_settings (test_auth.AuthTests.test_origins_normalize_equally_from_environment_and_direct_settings) ... ok
+test_origins_reject_credentials_controls_and_nonorigin_paths (test_auth.AuthTests.test_origins_reject_credentials_controls_and_nonorigin_paths) ... ok
+test_receipt_sse_preserves_finite_fractional_usage (test_auth.AuthTests.test_receipt_sse_preserves_finite_fractional_usage) ... ok
+test_sse_wire_ids_json_and_no_worker_credentials (test_auth.AuthTests.test_sse_wire_ids_json_and_no_worker_credentials) ... ok
+test_tampering_wrong_key_and_expiry_fail_closed (test_auth.AuthTests.test_tampering_wrong_key_and_expiry_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.035s
+
+OK
+
+Process exit code: 0

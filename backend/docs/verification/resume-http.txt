@@ -1,0 +1,8 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/verify_http_runtime.py
+HTTP_RUNTIME BLOCKED: genuine dependency preflight failed
+  fastapi: distribution not installed
+  starlette: distribution not installed
+  httpx: distribution not installed
+Install the declared test environment with: python -m pip install '.[test]'
+
+Process exit code: 2

@@ -1,0 +1,26 @@
+{
+  "scope": "Actual Next HTTPS loopback, unauthenticated; unavailable backend; no provider/database calls",
+  "certificate": "ephemeral self-signed localhost, no system trust-store change",
+  "views": [
+    {
+      "width": 390,
+      "status": 200,
+      "emailTop": 540.5,
+      "passwordBottom": 688.5,
+      "protocol": "https:",
+      "noSecureBrowserError": true,
+      "noOverflow": true,
+      "pageErrors": []
+    },
+    {
+      "width": 1440,
+      "status": 200,
+      "emailTop": 540.5,
+      "passwordBottom": 688.5,
+      "protocol": "https:",
+      "noSecureBrowserError": true,
+      "noOverflow": true,
+      "pageErrors": []
+    }
+  ]
+}

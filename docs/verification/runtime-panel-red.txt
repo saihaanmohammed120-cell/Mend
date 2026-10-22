@@ -1,0 +1,46 @@
+✖ Connection panel distinguishes API/database success from locked execution (5.012891ms)
+✖ Unknown connections are not shown as successful, and busy recheck is disabled (0.436156ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 393.693399
+
+✖ failing tests:
+
+test at tests/runtime-panel.test.ts:1:298
+✖ Connection panel distinguishes API/database success from locked execution (5.012891ms)
+  AssertionError [ERR_ASSERTION]: Connection panel is missing
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/runtime-panel.test.ts:8:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/runtime-panel.test.ts:1:1291
+✖ Unknown connections are not shown as successful, and busy recheck is disabled (0.436156ms)
+  AssertionError [ERR_ASSERTION]: Connection panel is missing
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/runtime-panel.test.ts:22:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

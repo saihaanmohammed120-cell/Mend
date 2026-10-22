@@ -1,0 +1,63 @@
+{
+  "scope": "reference-informed file-integrity feature and roadmap ledger; no backend/provider changes",
+  "frontend_tests": {
+    "passed": 81,
+    "failed": 0,
+    "command": "npm test",
+    "log": "research-integrity-tests.txt"
+  },
+  "lint": {
+    "exit_code": 0,
+    "command": "npm run lint",
+    "log": "research-integrity-lint.txt"
+  },
+  "production_build": {
+    "exit_code": 0,
+    "command": "npm run build",
+    "includes_typescript": true,
+    "log": "research-integrity-build.txt"
+  },
+  "browser": {
+    "discovered": 20,
+    "executed": 0,
+    "acceptance": "unverified",
+    "reason": "Playwright MCP, DevTools MCP and control-browser are not exposed; no fallback browser was run."
+  },
+  "references": {
+    "attempted_entries": 126,
+    "successful_html_entries": 121,
+    "screened_distinct_sites": 116,
+    "visual_audits": "unverified",
+    "population_preference": "unverified"
+  },
+  "hosted_artifacts": {
+    "check": "python tests/hero-output.py",
+    "result": "passed",
+    "scope": "generated HTML, source/capture/provenance/fingerprint bytes, ZIP, initial non-verified state; not browser acceptance"
+  },
+  "deployment": {
+    "version": 15,
+    "source_commit": "08155c1d51eab105dce77d2319f1be523072d111",
+    "saved_version_id": "appgprj_6acb97b759148191aa98a4553d0a34ff~appgver_6f0baaf4c3188191921214fd7c21a010",
+    "deployment_id": "appgdep_6ad2409e7ec88191b520a7943b60e6a0",
+    "observed_status": "succeeded",
+    "observed_updated_at": "2026-10-16T15:20:18.188530+00:00",
+    "url": "https://mend-paper-proof.bravebadge32.chatgpt.site",
+    "audience_changed": false
+  },
+  "provider_execution": "unverified; no Nebius or Nemotron call this continuation",
+  "cancel_to_stop": "unverified; not measured",
+  "sigstore_signature": "unverified; captured provenance remains unsigned",
+  "database_current_behavior": "unverified; no Supabase MCP query this continuation",
+  "github_and_remote_ci": "unverified; no GitHub MCP observation this continuation",
+  "evidence_tags": {
+    "S1": "video frames and scoped source inspection",
+    "S2": "recovered HTTP research records and catalog recount",
+    "S3": "independent review hard-link reproduction; fixed with inode checks and atomic writes",
+    "S4": "actual frontend tests, lint, typecheck and production build",
+    "S5": "native source workflow hosted build and generated-artifact checks; canonical/hosted byte comparison",
+    "S6": "Sites save_site_version and deploy_site_version returned succeeded",
+    "S7": "tool inventory and Playwright test discovery only; no browser execution",
+    "S8": "official MDN, GOV.UK, Linear and NNGroup pages opened via search_service_web_run"
+  }
+}

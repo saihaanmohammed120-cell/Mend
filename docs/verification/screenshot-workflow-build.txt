@@ -1,0 +1,43 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-workbench@1.0.0 prebuild
+> node scripts/prepare-proof-manifest.mjs
+
+Prepared 4 local file fingerprints; no signature or provider execution.
+
+> mend-workbench@1.0.0 build
+> next build
+
+▲ Next.js 16.4.1 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.mjs took 15ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1009ms
+  Running TypeScript ...
+  Finished TypeScript in 3.1s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/6) ...
+  Generating static pages using 8 workers (1/6) 
+  Generating static pages using 8 workers (2/6) 
+  Generating static pages using 8 workers (4/6) 
+✓ Generating static pages using 8 workers (6/6) in 302ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/[...path]
+├ ƒ /api/demo/events
+├ ƒ /api/runtime
+├ ○ /fix
+├ ○ /sample
+├ ○ /sign-in
+└ ƒ /tasks/[id]
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+exit_code 0

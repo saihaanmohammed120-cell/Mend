@@ -1,0 +1,17 @@
+
+> mend-workbench@1.0.0 test:browser:list
+> playwright test --list
+
+Listing tests:
+  [chromium] › hero.spec.ts:4:3 › Hero at 390px in light preserves one goal, focus, tap targets and containment
+  [chromium] › hero.spec.ts:4:3 › Hero at 390px in dark preserves one goal, focus, tap targets and containment
+  [chromium] › sample.spec.ts:68:1 › public sample opens with honest evidence labels and continuous original source
+  [chromium] › sample.spec.ts:78:1 › manual repair progression preserves patched line three and prints a sample-only receipt
+  [chromium] › sample.spec.ts:101:1 › explicit playback advances the sequence and can be paused
+  [chromium] › sample.spec.ts:112:1 › download contains both sources, a regression test and a non-execution receipt
+  [chromium] › sample.spec.ts:138:1 › paper canvas, hard panel, primary button and static canvas texture retain brand tokens
+  [chromium] › sample.spec.ts:170:1 › keyboard navigation displays the ink outline with the paper gap
+  [chromium] › sample.spec.ts:194:3 › normal motion and pointer depth › autoplay advances, and paused pointer tilt stays bounded before returning flat
+  [chromium] › sample.spec.ts:246:1 › mobile layout fits its viewport and keeps sample controls usable
+Total: 10 tests in 2 files
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.

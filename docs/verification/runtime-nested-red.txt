@@ -1,0 +1,32 @@
+✔ contradictory upstream readiness cannot enable Start (16.846694ms)
+✔ consistent live configuration passes through while failures stay blocked (2.112761ms)
+✔ configuration flags without a real database probe stay blocked (3.106749ms)
+✖ a valid blocked backend report preserves API/database facts and drops private fields (4.597254ms)
+✔ oversized upstream readiness is cancelled instead of buffered and trusted (4.275977ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 399.671503
+
+✖ failing tests:
+
+test at tests/runtime-readiness.test.ts:1:2543
+✖ a valid blocked backend report preserves API/database facts and drops private fields (4.597254ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/runtime-readiness.test.ts:68:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

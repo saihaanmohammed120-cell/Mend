@@ -1,0 +1,8 @@
+/ HTTP 200 (HTML response; visual rendering unverified)
+/sample HTTP 200 (HTML response; visual rendering unverified)
+/sign-in HTTP 200 (HTML response; visual rendering unverified)
+/tasks/96deff11-c0e2-4299-b5f0-b4f0a5020b7a HTTP 200 (HTML response; visual rendering unverified)
+/api/runtime {"blockers": ["database_only_mode", "phase_1_release_evidence_required", "token_factory_not_configured", "cloud_iam_not_configured", "cloud_project_not_configured", "runner_image_not_configured"], "mode": "database_only", "ready": false}
+/api/session HTTP 401 without a signed-in session
+/api/tasks unauthenticated POST rejected: 401
+No browser rendering or authenticated frontend mutation was claimed.

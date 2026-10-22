@@ -1,0 +1,19 @@
+{
+  "as_of": "2026-10-17T16:12:30.984983+00:00",
+  "blocked_tasks": 0,
+  "blocker_counts": {
+    "active_lease": 0,
+    "active_state": 0,
+    "storage_objects": 0,
+    "unresolved_attempts": 0
+  },
+  "checked_tasks": 3,
+  "deletion_performed": false,
+  "has_more": false,
+  "limit": 20,
+  "metadata_purge_guard_satisfied": 3,
+  "mode": "read_only",
+  "provider_execution": "not_run",
+  "schema_version": 1,
+  "source": "supabase_retention_plan_response"
+}

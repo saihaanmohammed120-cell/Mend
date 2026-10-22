@@ -1,0 +1,16 @@
+{
+  "task_id": "96deff11-c0e2-4299-b5f0-b4f0a5020b7a",
+  "status": "ready",
+  "contract_version": 2,
+  "template_id": "csv-cleaner-v1",
+  "required_check_ids": [
+    "test_csv_tools.CsvChecks.test_empty_input",
+    "test_csv_tools.CsvChecks.test_duplicate_rows",
+    "test_csv_tools.CsvChecks.test_missing_values",
+    "test_csv_tools.CsvChecks.test_field_order"
+  ],
+  "contract_frozen_at": null,
+  "stale_version_rejected": true,
+  "start_blocked": true,
+  "provider_execution": "skipped"
+}

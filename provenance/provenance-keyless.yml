@@ -1,0 +1,79 @@
+# Standalone export workflow source. Installation requires committing this file as
+# .github/workflows/provenance-keyless.yml in the exported Mend provenance repository.
+# It is not installed on the Sites repository, a required CI check, or an observed run.
+name: Attest the captured local CSV example
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: mend-provenance-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  keyless-local-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact dispatched commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6
+        with:
+          cosign-release: v3.1.3
+      - name: Capture real local checks and prepare provenance
+        env:
+          SOURCE_URI: https://github.com/${{ github.repository }}.git
+          BUILDER_ID: https://github.com/${{ github.repository }}/.github/workflows/provenance-keyless.yml@${{ github.ref }}
+          WORKFLOW_RUN: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist/example
+          cp example/csv_tools.py dist/example/csv_tools.py
+          cp example/test_csv_tools.py dist/example/test_csv_tools.py
+          python3 scripts/capture-example.py --output dist/example/captured-run.json
+          python3 scripts/provenance.py prepare \
+            --repo-root . \
+            --source-uri "$SOURCE_URI" \
+            --capture dist/example/captured-run.json \
+            --artifact dist/example/csv_tools.py \
+            --output dist/example/provenance.json \
+            --builder-id "$BUILDER_ID" \
+            --platform 'GitHub Actions hosted ubuntu-latest; Python subprocess' \
+            --trigger workflow_dispatch \
+            --parameter "workflow_run=$WORKFLOW_RUN"
+      - name: Sign and verify using GitHub OIDC and public Sigstore transparency
+        env:
+          CERTIFICATE_IDENTITY: https://github.com/${{ github.repository }}/.github/workflows/provenance-keyless.yml@${{ github.ref }}
+        run: |
+          set -euo pipefail
+          python3 scripts/provenance.py sign \
+            --artifact dist/example/csv_tools.py \
+            --statement dist/example/provenance.json \
+            --bundle dist/example/bundle.sigstore.json \
+            --output dist/example/verification.json \
+            --certificate-identity "$CERTIFICATE_IDENTITY" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com
+          python3 scripts/provenance.py verify \
+            --artifact dist/example/csv_tools.py \
+            --statement dist/example/provenance.json \
+            --bundle dist/example/bundle.sigstore.json \
+            --output dist/example/verification.json \
+            --certificate-identity "$CERTIFICATE_IDENTITY" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com
+      - name: Preserve exact inputs, statement, signature bundle and CLI verification
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: mend-local-provenance-${{ github.run_id }}
+          path: |
+            dist/example/csv_tools.py
+            dist/example/test_csv_tools.py
+            dist/example/captured-run.json
+            dist/example/provenance.json
+            dist/example/bundle.sigstore.json
+            dist/example/verification.json
+          if-no-files-found: error
+          retention-days: 14

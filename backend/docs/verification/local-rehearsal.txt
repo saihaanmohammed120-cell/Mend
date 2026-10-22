@@ -1,0 +1,20 @@
+Final convergence, 2026-10-12
+$ python3 scripts/local_rehearsal.py
+[LOCAL FIXTURE ENVIRONMENT — NO GENERATED CODE EXECUTED]
+PASS: failed check -> one repair -> passing fixture -> durable local_test receipt
+PASS: ordered persisted SSE events; protected source bundle round-trip verified
+{
+  "source": "local_test",
+  "live_verification": false,
+  "executions": 2,
+  "repairs": 1,
+  "checks": [
+    "test_csv_tools.CsvChecks.test_empty_input",
+    "test_csv_tools.CsvChecks.test_duplicate_rows",
+    "test_csv_tools.CsvChecks.test_missing_values",
+    "test_csv_tools.CsvChecks.test_field_order"
+  ],
+  "events": 16
+}
+
+Exit code: 0

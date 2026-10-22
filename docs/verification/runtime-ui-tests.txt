@@ -1,0 +1,23 @@
+✔ preview hydrates paused, derives normal-motion autoplay and never copies preference in an effect (167.665438ms)
+✔ manual Next stays paused when the initially unknown motion preference resolves (54.58662ms)
+✔ reduced motion pauses startup but explicit Play and Pause remain available (49.626786ms)
+✔ draft hydration restores valid storage without overwriting it or issuing effect state updates (168.541837ms)
+✔ draft edits persist and clear through events; oversized UTF-8 drafts do not restore (93.183747ms)
+✔ Connection panel distinguishes API/database success from locked execution (126.546546ms)
+✔ Unknown connections are not shown as successful, and busy recheck is disabled (1.911257ms)
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (201.64828ms)
+✔ A failed explicit connection recheck clears the old readiness snapshot (87.349995ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (93.460103ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (77.246895ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (55.217144ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (41.378916ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (55.14105ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (30.83781ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2818.445658

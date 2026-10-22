@@ -1,0 +1,25 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-paper-proof@1.0.0 build
+> node build.cjs
+
+Reused captured local example: /workspace/scratch/ca486ef6d53d/mend-site-hero/dist/example/captured-run.json
+dist/favicon.svg
+dist/favicon.ico
+dist/share/mend-proof.png
+Prepared 4 local file fingerprints; no signature or provider execution.
+Built landing/handoff page; JavaScript 318 KB; example source 10e6a30c3be0.
+PASS generated HTML: captured repair first; one honest CTA; inactive live slot collapsed; four exact check results; source SHA-256 matches download.
+PASS connected flow: both layouts require failure → diagnosis → repair → rerun, then pass → receipt; four logical stages.
+PASS wordmark/font assets, authored palette/focus/dot-grid rules, favicon/share metadata and PNG, source/capture ZIP consistency.
+PASS evidence workspace markup: four linked tabs/panels, patch initially selected, continuous source numbering, actual guard lines, downloads and no-JavaScript evidence fallback. Browser interactions remain UNVERIFIED.
+390px rendered layout, focus appearance, live Nebius execution and external share preview: UNVERIFIED.
+PASS standard receipt: actual in-toto/SLSA document binds the captured artifact; signature remains unsigned, no transparency entry fabricated.
+PASS roadmap: six read-only planned cards, explicitly Not yet built, after flow and before footer; no controls or links.
+PASS file fingerprints: hosted assets, build record and downloaded ZIP agree; initial UI makes no browser hash-match or signature claim.
+PASS compact evidence: exact opening context plus closed complete-source/provenance disclosures; all original source remains present.
+PASS local case markup: labeled inputs, explicit local boundary, no native form submission or pre-validation export; handoff before case before roadmap. Browser behavior remains UNVERIFIED.
+/workspace/scratch/ca486ef6d53d/Mend_Screenshot_Workflow_Site.zip
+{"project_id":"appgprj_6acb97b759148191aa98a4553d0a34ff","checkout_path":"/workspace/scratch/ca486ef6d53d/mend-site-hero","commit_sha":"dd937a48038c9a0680bbb633a055bb01eb518b15","archive":"/workspace/scratch/ca486ef6d53d/Mend_Screenshot_Workflow_Site.zip"}
+
+exit_code 0

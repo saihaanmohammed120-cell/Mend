@@ -1,0 +1,41 @@
+[
+  {
+    "check": "tooling-tests",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exit_code": 0,
+    "log": "tooling-tests.txt"
+  },
+  {
+    "check": "tooling-typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "log": "tooling-typecheck.txt"
+  },
+  {
+    "check": "tooling-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "log": "tooling-build.txt"
+  },
+  {
+    "check": "tooling-browser-discovery",
+    "command": [
+      "npm",
+      "run",
+      "test:browser:list"
+    ],
+    "exit_code": 0,
+    "log": "tooling-browser-discovery.txt"
+  }
+]

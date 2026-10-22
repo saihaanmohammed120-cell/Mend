@@ -1,0 +1,51 @@
+[
+  {
+    "check": "frontend-tests",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exit_code": 0,
+    "log": "frontend-tests.txt"
+  },
+  {
+    "check": "frontend-lint",
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exit_code": 0,
+    "log": "frontend-lint.txt"
+  },
+  {
+    "check": "frontend-typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "log": "frontend-typecheck.txt"
+  },
+  {
+    "check": "frontend-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "log": "frontend-build.txt"
+  },
+  {
+    "check": "browser-test-discovery",
+    "command": [
+      "npm",
+      "run",
+      "test:browser:list"
+    ],
+    "exit_code": 0,
+    "log": "browser-test-discovery.txt"
+  }
+]

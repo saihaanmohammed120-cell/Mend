@@ -1,0 +1,19 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-workbench@1.0.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ pointer micro-events batch to one write using one stable bounds read (2.412753ms)
+✔ pointer exit returns through the shared spring and stops scheduling (0.39893ms)
+✔ focus/reduced/coarse/drag suppression and teardown cancel pending writes (0.286081ms)
+✔ only a complete passing receipt qualifies as success (1.332316ms)
+✔ sample receipts cannot masquerade as live execution (0.186731ms)
+✔ rejects malformed and over-budget events; preserves stderr text (0.254213ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.092744

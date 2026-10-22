@@ -1,0 +1,56 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-workbench@1.0.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ proxy exposes existing routes and excludes missing history/source APIs (1.403721ms)
+✔ proxy refuses credential-bearing or unencrypted remote destinations (0.521708ms)
+✔ proxy rejects an unexpected cursor before forwarding (4.280858ms)
+✔ proxy streams bytes and preserves separate sealed session cookies (10.724122ms)
+✔ already-cancelled streamed input is released without waiting or forwarding (1.167444ms)
+✔ cancellation during input reading prevents backend forwarding (1.336599ms)
+✔ empty intake cannot masquerade as a prepared case (1.766769ms)
+✔ error-only packet records absent source and no execution evidence (0.996976ms)
+✔ original source and blank lines survive JSON export unchanged (0.276898ms)
+✔ source must identify a single safe Python module (0.544973ms)
+✔ UTF-8 byte limits apply independently of textarea character limits (4.310462ms)
+✔ invalid Unicode and NUL source are rejected before export (0.27853ms)
+✔ reported error and expected behavior are bounded (1.033371ms)
+✔ whitespace source accompanying an error is preserved as original evidence (0.197739ms)
+✔ preview limits rows without changing the exported source (5.847635ms)
+✔ preview bounds long lines and preserves blank-line numbering inputs (0.294805ms)
+✔ preview truncation does not split a Unicode surrogate pair (0.197027ms)
+✔ successful download removes the anchor and hands URL ownership to the caller (0.700729ms)
+✔ download failures release the URL and remove any acquired anchor (0.566817ms)
+✔ failed anchor removal cannot prevent object URL revocation (0.184378ms)
+✔ failed URL creation acquires no anchor or pending download (0.498954ms)
+✔ Ambiguous creation reuses the exact key and rejects changed prompts until reconciliation (1.642582ms)
+✔ Event replay does not duplicate accepted evidence, and bounded logs keep the newest entries (3.609673ms)
+✔ Real backend message envelope displays text and foreign task events never change status (0.26472ms)
+✔ Passing receipts require live evidence, matching task, exact frozen checks and bundle consistency (0.455538ms)
+✔ Receipt summary preserves observed checks and refuses invented counts or live attribution (0.82723ms)
+✔ Pending-review cache survives reload for verified owner and is removed for another owner (0.459874ms)
+✔ Pending-review cache rejects corrupt identities and oversized prompts, and excludes extra fields (0.345772ms)
+✔ pointer micro-events batch to one write using one stable bounds read (2.149347ms)
+✔ pointer exit returns through the shared spring and stops scheduling (3.791028ms)
+✔ focus/reduced/coarse/drag suppression and teardown cancel pending writes (0.39047ms)
+✔ only a complete passing receipt qualifies as success (1.558655ms)
+✔ sample receipts cannot masquerade as live execution (0.350209ms)
+✔ rejects malformed and over-budget events; preserves stderr text (0.350489ms)
+✔ contradictory upstream readiness cannot enable Start (6.853424ms)
+✔ consistent live configuration passes through while failures stay blocked (1.9787ms)
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (102.854039ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (30.094219ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (27.792251ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (28.804801ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (20.055361ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (42.496256ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (18.070622ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 893.364935

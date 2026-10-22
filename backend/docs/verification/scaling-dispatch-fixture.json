@@ -1,0 +1,14 @@
+{
+  "environment": "local_injected_fixture_not_live_database",
+  "task_count": 20,
+  "full_payload_bytes": 2559451,
+  "compact_payload_bytes": 2081,
+  "fields": [
+    "created_at",
+    "id",
+    "status"
+  ],
+  "same_task_ids": true,
+  "maximum_report_bytes": 61340,
+  "report_limit_bytes": 65536
+}

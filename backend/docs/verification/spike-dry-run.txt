@@ -1,0 +1,39 @@
+Final convergence, 2026-10-12
+$ python3 scripts/phase1_spike.py --dry-run
+{
+  "generation_calls": 1,
+  "inference": [],
+  "job": {},
+  "live_release_ready": false,
+  "operator_flag_required": "--run-live",
+  "production_bootstrap_unchanged": true,
+  "provider_requests": 0,
+  "required_environment_names": [
+    "NEBIUS_TOKEN_FACTORY_API_KEY",
+    "NEBIUS_IAM_TOKEN",
+    "NEBIUS_PROJECT_ID",
+    "NEBIUS_SUBNET_ID",
+    "NEBIUS_PLATFORM",
+    "NEBIUS_PRESET",
+    "MEND_SPIKE_IMAGE",
+    "MEND_INPUT_PRICE_PER_MILLION",
+    "MEND_OUTPUT_PRICE_PER_MILLION",
+    "MEND_PRICE_PROVENANCE",
+    "MEND_TASK_COST_CAP",
+    "MEND_SPIKE_PROBE_APPROVED"
+  ],
+  "sampling_is_not_a_guarantee": true,
+  "schema_version": 1,
+  "source": "dry_run",
+  "unmeasured": [
+    "trusted_report_transfer",
+    "receipt_finalization",
+    "isolation",
+    "log_delivery",
+    "cloud_job_cost",
+    "actual_infrastructure_termination"
+  ],
+  "warning": "Live mode makes paid requests. Separate timing image required; production stays blocked."
+}
+
+Exit code: 0

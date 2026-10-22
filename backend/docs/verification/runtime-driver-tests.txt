@@ -1,0 +1,24 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m unittest discover -s tests -p test_*runtime_driver.py -v
+test_discovery_selects_only_existing_http_suite (test_http_runtime_driver.HttpRuntimeDriverTests.test_discovery_selects_only_existing_http_suite) ... ok
+test_empty_discovery_is_blocked (test_http_runtime_driver.HttpRuntimeDriverTests.test_empty_discovery_is_blocked) ... ok
+test_failure_is_not_misreported_as_blocked_or_pass (test_http_runtime_driver.HttpRuntimeDriverTests.test_failure_is_not_misreported_as_blocked_or_pass) ... ok
+test_import_error_reports_type_without_exception_values (test_http_runtime_driver.HttpRuntimeDriverTests.test_import_error_reports_type_without_exception_values) ... ok
+test_missing_canonical_test_blocks_before_suite_execution (test_http_runtime_driver.HttpRuntimeDriverTests.test_missing_canonical_test_blocks_before_suite_execution) ... ok
+test_missing_dependencies_block_before_loading_suite (test_http_runtime_driver.HttpRuntimeDriverTests.test_missing_dependencies_block_before_loading_suite) ... ok
+test_passing_unittest_suite_reports_pass_and_zero_skips (test_http_runtime_driver.HttpRuntimeDriverTests.test_passing_unittest_suite_reports_pass_and_zero_skips) ... ok
+test_shadow_module_is_rejected_without_loading_http_suite (test_http_runtime_driver.HttpRuntimeDriverTests.test_shadow_module_is_rejected_without_loading_http_suite) ... ok
+test_skip_cannot_count_as_runtime_success (test_http_runtime_driver.HttpRuntimeDriverTests.test_skip_cannot_count_as_runtime_success) ... ok
+test_connection_failure_and_timeout_block_without_printing_private_output (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_connection_failure_and_timeout_block_without_printing_private_output) ... ok
+test_dsn_alone_does_not_authorize_connection (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_dsn_alone_does_not_authorize_connection) ... ok
+test_explicit_isolated_flag_authorizes_only_the_attested_test_connection (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_explicit_isolated_flag_authorizes_only_the_attested_test_connection) ... ok
+test_fixture_failure_or_exception_returns_one_without_private_details (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_fixture_failure_or_exception_returns_one_without_private_details) ... ok
+test_missing_prerequisites_block_before_any_connection (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_missing_prerequisites_block_before_any_connection) ... ok
+test_preflight_is_read_only_and_secret_stays_in_environment (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_preflight_is_read_only_and_secret_stays_in_environment) ... ok
+test_skipped_and_empty_fixture_are_blocked_not_green (test_postgres_runtime_driver.PostgresRuntimeDriverTests.test_skipped_and_empty_fixture_are_blocked_not_green) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.004s
+
+OK
+
+Process exit code: 0

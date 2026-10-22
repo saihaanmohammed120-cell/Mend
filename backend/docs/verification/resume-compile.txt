@@ -1,0 +1,3 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m compileall -q mend scripts tests
+
+Process exit code: 0

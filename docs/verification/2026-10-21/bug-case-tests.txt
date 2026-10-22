@@ -1,0 +1,15 @@
+test_both_pass_or_wrong_failure_cannot_demonstrate_regression (tests.test_bug_cases.BugCaseTests.test_both_pass_or_wrong_failure_cannot_demonstrate_regression) ... ok
+test_checks_must_be_named_unique_and_include_the_target (tests.test_bug_cases.BugCaseTests.test_checks_must_be_named_unique_and_include_the_target) ... ok
+test_comparison_uses_one_job_with_distinct_authenticated_runs (tests.test_bug_cases.BugCaseTests.test_comparison_uses_one_job_with_distinct_authenticated_runs) ... ok
+test_invalid_intakes_fail_closed (tests.test_bug_cases.BugCaseTests.test_invalid_intakes_fail_closed) ... ok
+test_modified_contract_or_empty_candidate_is_rejected (tests.test_bug_cases.BugCaseTests.test_modified_contract_or_empty_candidate_is_rejected) ... ok
+test_patch_counts_only_lf_lines_and_preserves_unicode_separators (tests.test_bug_cases.BugCaseTests.test_patch_counts_only_lf_lines_and_preserves_unicode_separators) ... ok
+test_preparation_is_frozen_bounded_and_never_starts_execution (tests.test_bug_cases.BugCaseTests.test_preparation_is_frozen_bounded_and_never_starts_execution) ... ok
+test_source_bound_comparison_keeps_authority_limits_and_exact_diff (tests.test_bug_cases.BugCaseTests.test_source_bound_comparison_keeps_authority_limits_and_exact_diff) ... ok
+test_tampered_checks_commands_keys_or_identity_are_rejected (tests.test_bug_cases.BugCaseTests.test_tampered_checks_commands_keys_or_identity_are_rejected) ... ok
+test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output (tests.test_bug_case_cli.BugCaseCliTests.test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.438s
+
+OK

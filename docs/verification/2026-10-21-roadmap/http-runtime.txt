@@ -1,0 +1,15 @@
+HTTP_RUNTIME dependencies: fastapi=0.148.0, starlette=1.9.0, httpx=0.28.1, cryptography=50.0.1
+test_bug_contract_preparation_requires_csrf_and_has_no_worker_or_store_side_effect (test_http.HttpIntegrationTests.test_bug_contract_preparation_requires_csrf_and_has_no_worker_or_store_side_effect) ... <workspace>\work\mend-backend-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+ok
+test_http_to_store_repair_receipt_and_sse_roundtrip (test_http.HttpIntegrationTests.test_http_to_store_repair_receipt_and_sse_roundtrip) ... ok
+test_real_http_expired_during_identity_verification_is_unauthenticated (test_http.HttpIntegrationTests.test_real_http_expired_during_identity_verification_is_unauthenticated) ... ok
+test_real_http_rejects_csrf_wrong_origin_and_oversized_prompt (test_http.HttpIntegrationTests.test_real_http_rejects_csrf_wrong_origin_and_oversized_prompt) ... ok
+test_real_http_rejects_overflowing_numeric_json (test_http.HttpIntegrationTests.test_real_http_rejects_overflowing_numeric_json) ... ok
+test_real_http_unexpected_errors_keep_security_and_strict_cors_headers (test_http.HttpIntegrationTests.test_real_http_unexpected_errors_keep_security_and_strict_cors_headers) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.220s
+
+OK
+HTTP_RUNTIME PASS: 6 genuine HTTP tests, zero skips

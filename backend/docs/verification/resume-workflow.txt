@@ -1,0 +1,7 @@
+Actual PyYAML 6.0.3
+PASS: manual trigger, required/default-false attestation, fixed isolated environment, dedicated secret, dependent DB job, no services, exact driver command.
+Attestation false: exit 2
+Attestation true: exit 0
+GitHub Actions execution: NOT RUN
+Database connection: NOT ATTEMPTED
+Process exit code: 0

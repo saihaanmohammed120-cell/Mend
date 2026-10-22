@@ -1,0 +1,23 @@
+Existing local TypeScript: Version 5.9.3
+MEND_TSC_BIN supplied from existing sibling dependencies; no install.
+$ node --test web/mend-client.test.cjs
+✔ Actual API routes, session exchange, CSRF, idempotency and 12 persisted states (9.341255ms)
+✔ Cookie SSE replay cursor, duplicate suppression and terminal cleanup (1.698638ms)
+✔ Bounded JSON response, non-HTTPS local link rejection and AbortSignal (1.749344ms)
+✔ Bounded stream errors, secure browser requirement and owned resource disposal (1.331925ms)
+✔ Completed task replays pending receipt and closes when already caught up (0.95653ms)
+✔ Terminal snapshot without a safely representable cursor retains replay (0.727245ms)
+✔ Header rejection cancels response body and aborts fetch ownership (0.743119ms)
+✔ Consumer notification errors cannot break disposal or 401 handling (1.614511ms)
+✔ Consumer event failure preserves cursor for a fresh replay (0.714406ms)
+✔ Server owner changes retire prior account streams; prompt limits count UTF-8 bytes (0.887666ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 952.477088
+
+Process exit code: 0

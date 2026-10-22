@@ -1,0 +1,11 @@
+{
+  "reviewer": "independent scoped reviewer",
+  "scope": "runtime readiness, database RPC, frontend proxy/panel and stale state",
+  "findings_corrected": ["nested database fields escaped the allowlist", "failed pre-start fetch retained earlier ready snapshot", "socket inactivity timeout lacked total caller deadline and bounded concurrency"],
+  "reviewed_fix": "field reconstruction, clearing readiness before start fetch, total deadline plus retained single transport slot",
+  "focused_backend_passed": 8,
+  "focused_frontend_passed": 16,
+  "remaining_material_findings": 0,
+  "later_budget_adjustment": "3 to 10 seconds based on measured real database latency; complete suites and live chain rerun afterward",
+  "provider_execution_verified": false
+}

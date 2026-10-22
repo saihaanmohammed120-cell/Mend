@@ -1,0 +1,190 @@
+[
+  {
+    "route": "https://mend-paper-proof.bravebadge32.chatgpt.site/",
+    "label": "public-0",
+    "status": 200,
+    "url": "https://mend-paper-proof.bravebadge32.chatgpt.site/",
+    "title": "Mend — Code that runs. Proof to keep.",
+    "text": "Skip to main content\nmend\nThe flow\nPrepare a case\nThe handoff\nPaper and Proof\n\nMEND / PAPER AND PROOF\n\nCode that runs.\nProof to keep.\n\nA patch can look right and still fail. Follow the actual run, then keep its verification receipt. Ship with evidence instead of taking a diff on faith.\n\nSee a real repair, start to finish\n\nCaptured CSV-cleaner example\n\nThis is a curated patch, not a model-generated repair.\n\n60s / job required\nStop latency unverified\nUp to 3 repairs\nBounded repair loop\nNamed checks\nSpecific test results\n\nBuilt for the Nebius × NVIDIA\nGlobal AI Hackathon\n\nCoding & Agentic Engineering\nSubmission deadline: 30 Oct 2026 · 10:00 PDT\n\nCAPTURED EXAMPLE / PYTHON\nActual local output\n\nCSV CLEANER / EMPTY INPUT\n\nOne failure. A checked fix.\n\nCaptured local\nSame checks, before and after the guard.\n\nBEFORE / EXIT 1\n3 / 4 passed\nAFTER / EXIT 0\n4 of 4 checks passed\nPROVENANCE\nUnsigned\nBefore\nPatch\nChecks\nProvenance\nHandle the empty case first.\n+2 / −0 lines\n\nThe guard returns before rows[0].\n\ncsv_tools.py\nOpening lines / exact source\n1\ndef clean_rows(rows):\n\n2\n    if not rows:\n\n3\n        return [], 0\n\n4\n    fields = tuple(rows[0])\n\n5\n    cleaned = []\n\nRead complete checked source\nDownload the patch\n\nCHECKED SOURCE / SHA-256\n10e6a30c3be085a9965b999f3e1f4f3d2696bd34773e755804566c2e3acd4263\n\nCaptured 2026-10-15T18:37:35.491954Z\n\nDownload checked code\nRaw capture\n\nUnsigned provenance\n\nLive execution slot\nNot connected\nWhat this build can prove\nWhat’s real on this page\nCaptured local example\nReal local checks. Curated patch.\nSLSA provenance\nReal document. Unsigned.\nNebius execution\nNot yet connected.\n\nTHE REPAIR LOOP\n\nThe flow, in four steps.\n\nA failed check sends the patch back through Run. A passing run leads to the receipt.\n\n01\nDescribe the task\n02\nWrite and run\n03\nRepair if a check fails\n04\nKeep the receipt + code\nCHECKS PASS\nCHECK FAILS\nPATCH → RE-RUN\nTask\nDescribe the change\nWrite\nToken Factory\nRun\nIsolated Nebius job\nDiagnose\nRead the failed check\nRepair\nUp to 3 attempts\nReceipt\nCode + check results\nPlanned Nebius workflow · see legend\nTHE HANDOFF / EXAMPLE\nCode to keep. Checks to inspect.\nCaptured local\n\nSame captured CSV-cleaner example, same checked source hash. Inspect the evidence above ↗\n\nThe example bundle\n\nThe complete CSV cleaner, its named tests, and the reproduction command from the proof card.\n\ncsv_tools.py\nSource\ntest_csv_tools.py\nChecks\nREADME.md\nReproduce\nREPRODUCTION COMMAND\nCopy\n\nRun from the extracted example folder. Copying does not execute it.\n\nDownload example code\nView source\n\nCaptured local · same example bundle\n\nA CASE OF ITS OWN / LOCAL WORKFLOW\n\nBring the next bug.\n\nCapture the error, keep the original source, and prepare a reviewable case file. The case file is prepared in this browser.\n\nFields stay in this page’s memory. Clear supports Undo until the next edit or reload. Preparing or downloading a case sends nothing to Mend.\n\n01\nDescribe\nCurrent step\n02\nReview\nNext\n03\nDownload\nNext\nThe original problem.\nUse the captured CSV case\n\nAdd an error or a Python sample. Expected behavior helps make the intended outcome explicit.\n\nReported error or provide source below\nPython filename required with source\n\nOne Python module; no folder paths or dependencies.\n\nOriginal source optional with an error\nExpected behavior optional\nReview the case\nClear fields\nLOCAL CASE FILE / NOT A RECEIPT\nFirst the facts. Then the fix.\n\nThe validated case will appear here. No investigation or execution has run.\n\nm.\n\nA clear error.\nThe unchanged source.\nAn explicit expected result.\n\nThese are inputs, not execution evidence.\n\nThis local workflow does not diagnose, repair, execute, merge or sign anything. The exported JSON is an intake packet, not verified code or a verification receipt.\n\nTHE NEXT CHAPTER / ROADMAP\n\nWhere this goes next.\nNot yet built\n\nDirections for Mend after the verified repair loop. These are planned capabilities, not available features.\n\n01\nWhole-repo repair\n\nFollow a failure across files and dependencies, beyond a single function.\n\n02\nA required CI/CD check\n\nRun inside GitHub Actions and gate changes in the existing delivery workflow.\n\n03\nPolicy-as-code approval\n\nAuto-approve below a defined risk threshold; require human review above it.\n\n04\nA team-wide receipt ledger\n\nQuery provenance and verification evidence across every recorded run.\n\n05\nFlaky-test detection\n\nIdentify inconsistent checks and quarantine them for deliberate review.\n\n06\nReceipts inside the IDE\n\nSurface the run, provenance and review context beside the code change.\n\nmend\n\nRequired checks passed means those checks passed on that snapshot.\n\nPAPER AND PROOF",
+    "headings": [
+      "Code that runs.Proof to keep.",
+      "One failure. A checked fix.",
+      "Empty-input check failed",
+      "Handle the empty case first.",
+      "Exact checks that ran",
+      "SLSA provenance",
+      "The run and its record.",
+      "What’s real on this page",
+      "The flow, in four steps.",
+      "Code to keep. Checks to inspect.",
+      "The example bundle",
+      "Bring the next bug.",
+      "The original problem.",
+      "First the facts. Then the fix.",
+      "Where this goes next.",
+      "Whole-repo repair",
+      "A required CI/CD check",
+      "Policy-as-code approval",
+      "A team-wide receipt ledger",
+      "Flaky-test detection",
+      "Receipts inside the IDE"
+    ],
+    "links": [
+      {
+        "text": "Skip to main content",
+        "href": "#main"
+      },
+      {
+        "text": "mend",
+        "href": "#main"
+      },
+      {
+        "text": "The flow",
+        "href": "#flow"
+      },
+      {
+        "text": "Prepare a case",
+        "href": "#prepare-case"
+      },
+      {
+        "text": "The handoff",
+        "href": "#handoff"
+      },
+      {
+        "text": "See a real repair, start to finish",
+        "href": "#worked-example"
+      },
+      {
+        "text": "Captured local",
+        "href": "#evidence-local"
+      },
+      {
+        "text": "Download the patch",
+        "href": "/example/repair.diff"
+      },
+      {
+        "text": "Captured local",
+        "href": "#evidence-local"
+      },
+      {
+        "text": "Read the test file",
+        "href": "/example/test_csv_tools.py"
+      },
+      {
+        "text": "Unsigned provenance · see legend",
+        "href": "#evidence-provenance"
+      },
+      {
+        "text": "Download in-toto provenance JSON ↗",
+        "href": "/example/provenance.json"
+      },
+      {
+        "text": "Fingerprint JSON",
+        "href": "/example/integrity.json"
+      },
+      {
+        "text": "Download checked code",
+        "href": "/example/mend-example.zip"
+      },
+      {
+        "text": "Raw capture",
+        "href": "/example/captured-run.json"
+      },
+      {
+        "text": "Unsigned provenance",
+        "href": "#evidence-provenance"
+      },
+      {
+        "text": "Nebius execution · see legend",
+        "href": "#evidence-nebius"
+      },
+      {
+        "text": "Planned Nebius workflow · see legend",
+        "href": "#evidence-nebius"
+      },
+      {
+        "text": "Captured local",
+        "href": "#evidence-local"
+      },
+      {
+        "text": "Inspect the evidence above ↗",
+        "href": "#worked-example"
+      },
+      {
+        "text": "Download example code",
+        "href": "/example/mend-example.zip"
+      },
+      {
+        "text": "mend",
+        "href": "#main"
+      }
+    ],
+    "controls": [
+      {
+        "text": "Copy",
+        "label": "Copy reproduction command",
+        "disabled": false
+      },
+      {
+        "text": "View source",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Use the captured CSV case",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Review the case",
+        "label": null,
+        "disabled": false
+      },
+      {
+        "text": "Clear fields",
+        "label": null,
+        "disabled": true
+      }
+    ],
+    "contained": true,
+    "layout": {
+      "height": 4569,
+      "sections": [
+        {
+          "text": "Code that runs.Proof to keep.",
+          "top": 206
+        },
+        {
+          "text": "One failure. A checked fix.",
+          "top": 248
+        },
+        {
+          "text": "The run and its record.",
+          "top": 1270
+        },
+        {
+          "text": "What’s real on this page",
+          "top": 1270
+        },
+        {
+          "text": "The flow, in four steps.",
+          "top": 1486
+        },
+        {
+          "text": "Code to keep. Checks to inspect.",
+          "top": 2347
+        },
+        {
+          "text": "Bring the next bug.",
+          "top": 2969
+        },
+        {
+          "text": "Where this goes next.",
+          "top": 3993
+        }
+      ]
+    },
+    "mobileContained": true,
+    "browserErrors": []
+  }
+]

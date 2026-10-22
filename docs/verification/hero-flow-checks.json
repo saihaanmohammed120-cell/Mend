@@ -1,0 +1,60 @@
+{
+  "hero-flow-tests": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-tests.txt"
+  },
+  "hero-flow-lint": {
+    "command": [
+      "npx",
+      "eslint",
+      "components/proof-hero.tsx",
+      "components/proof-flow.tsx",
+      "components/workbench.tsx",
+      "app/layout.tsx",
+      "tests/hero-render.test.ts",
+      "tests/component-initialization.test.ts",
+      "e2e/hero.spec.ts"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-lint.txt"
+  },
+  "hero-flow-types": {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-types.txt"
+  },
+  "hero-flow-build": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-build.txt"
+  },
+  "hero-flow-browser-discovery": {
+    "command": [
+      "npm",
+      "run",
+      "test:browser:list"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-browser-discovery.txt"
+  },
+  "hero-flow-capture": {
+    "command": [
+      "python3",
+      "tests/captured-example.test.py"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/ca486ef6d53d/Mend/docs/verification/hero-flow-capture.txt"
+  }
+}

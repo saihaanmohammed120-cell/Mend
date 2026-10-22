@@ -1,0 +1,4 @@
+Actual parser: PyYAML 6.0.3
+PASS: YAML parsed; unittest -> genuine HTTP verifier -> rehearsal step order verified.
+GitHub Actions workflow execution: NOT RUN.
+Process exit code: 0

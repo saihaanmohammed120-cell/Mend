@@ -1,0 +1,39 @@
+{
+  "deployment": {
+    "id": "appgdep_6ad8fdbb3c0481919ecd2d6cb3f81f0c",
+    "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+    "title": "Mend — Paper and Proof",
+    "version_id": "appgprj_6acb97b759148191aa98a4553d0a34ff~appgver_10716c31f52c81918c1fdcdfca7511f7",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://mend-paper-proof.bravebadge32.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6acb97b759148191aa98a4553d0a34ff",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-21T18:00:51.278803+00:00"
+  },
+  "version": {
+    "id": "appgprj_6acb97b759148191aa98a4553d0a34ff~appgver_10716c31f52c81918c1fdcdfca7511f7",
+    "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+    "version_number": 20,
+    "source": {
+      "commit_sha": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000d4148211887dbb9fe8e1a11c",
+      "content_hash": "sha256:366481968b23594004612ebd8479bbe2a28bdb1e8c1ef5465f0321076f32025b",
+      "size_bytes": 1341440,
+      "file_count": 29
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "source": {
+    "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+    "commit_sha": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
+    "archive": "<workspace>\\outputs\\Mend_Evidence_Site_20261021.tar.gz"
+  }
+}

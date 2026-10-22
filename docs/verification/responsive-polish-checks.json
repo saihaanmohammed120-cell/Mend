@@ -1,0 +1,25 @@
+{
+  "frontend_tests": {
+    "tests": 76,
+    "pass": 76,
+    "fail": 0,
+    "skipped": 0
+  },
+  "next_build_exit_code": 0,
+  "compiled_theme_and_font_bindings_present": true,
+  "browser_specs_discovered": 20,
+  "browser_specs_executed": 0,
+  "browser_rendering": "unverified",
+  "live_nebius_execution": "unverified",
+  "sigstore_signature": "unsigned; no signing performed",
+  "notes": "Build/test counts reflect commands in this continuation. Browser discovery is not browser execution.",
+  "publication": {
+    "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+    "site_version": 14,
+    "source_commit": "0936eb800e0fb0f1728bdc72b2bfd4ee995e7d78",
+    "deployment_id": "appgdep_6ad22958940481918842d8274cf15f39",
+    "deployment_status": "succeeded",
+    "url": "https://mend-paper-proof.bravebadge32.chatgpt.site",
+    "audience": "custom"
+  }
+}

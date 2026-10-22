@@ -1,0 +1,54 @@
+{
+  "status": "verified_read_only_readiness_chain",
+  "environment": "local_production_next_and_uvicorn_real_supabase",
+  "backend": {
+    "http_status": 503,
+    "body": {
+      "ready": false,
+      "mode": "database_only",
+      "blockers": [
+        "database_only_mode",
+        "phase_1_release_evidence_required",
+        "token_factory_not_configured",
+        "cloud_iam_not_configured",
+        "cloud_project_not_configured",
+        "runner_image_not_configured",
+        "database_release_gate_disabled"
+      ],
+      "database": {
+        "status": "verified",
+        "source": "supabase_rpc",
+        "release_gate": "disabled"
+      },
+      "checked_at": "2026-10-17T16:35:40.970545+00:00",
+      "provider_verification": "not_established_by_this_endpoint"
+    }
+  },
+  "frontend": {
+    "http_status": 200,
+    "body": {
+      "ready": false,
+      "mode": "database_only",
+      "blockers": [
+        "database_only_mode",
+        "phase_1_release_evidence_required",
+        "token_factory_not_configured",
+        "cloud_iam_not_configured",
+        "cloud_project_not_configured",
+        "runner_image_not_configured",
+        "database_release_gate_disabled"
+      ],
+      "api_status": "reachable",
+      "database": {
+        "status": "verified",
+        "source": "supabase_rpc",
+        "release_gate": "disabled"
+      },
+      "checked_at": "2026-10-17T16:35:47.102276+00:00"
+    }
+  },
+  "database_mutation": false,
+  "provider_execution": "unverified",
+  "public_backend_deployment": "unverified",
+  "browser_panel_acceptance": "unverified"
+}

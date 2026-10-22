@@ -1,0 +1,42 @@
+# Dependencies and build outputs
+node_modules
+.next/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+*.tsbuildinfo
+
+# Private configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.certs/
+
+# Runtime state and generated evidence
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.log
+local-data/
+private-evidence/
+artifacts/
+var/
+phase1-observations*.json
+
+# Test and editor outputs
+.pytest_cache/
+.coverage
+htmlcov/
+playwright-results/
+playwright-report/
+test-results/
+playwright.local.config.ts
+.DS_Store

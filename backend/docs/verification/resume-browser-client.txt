@@ -1,0 +1,60 @@
+$ node --test web/mend-client.test.cjs
+TypeScript compilation failed. Install no packages automatically; provide tsc on PATH or set MEND_TSC_BIN to its existing executable.
+/workspace/scratch/ca486ef6d53d/mend-backend/web/mend-client.test.cjs:20
+  throw error;
+  ^
+
+<ref *1> Error: spawnSync tsc ENOENT
+    at Object.spawnSync (node:internal/child_process:1160:20)
+    at spawnSync (node:child_process:928:24)
+    at execFileSync (node:child_process:971:15)
+    at Object.<anonymous> (/workspace/scratch/ca486ef6d53d/mend-backend/web/mend-client.test.cjs:11:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'spawnSync tsc',
+  path: 'tsc',
+  spawnargs: [
+    '--strict',
+    '--target',
+    'ES2020',
+    '--module',
+    'commonjs',
+    '--lib',
+    'ES2020,DOM',
+    '--outDir',
+    '/tmp/mend-client-test-oMGfTt',
+    '/workspace/scratch/ca486ef6d53d/mend-backend/web/mend-client.ts'
+  ],
+  error: [Circular *1],
+  status: null,
+  signal: null,
+  output: null,
+  pid: 0,
+  stdout: undefined,
+  stderr: undefined
+}
+
+Node.js v24.19.0
+✖ web/mend-client.test.cjs (64.498271ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.269397
+
+✖ failing tests:
+
+test at web/mend-client.test.cjs:1:1
+✖ web/mend-client.test.cjs (64.498271ms)
+  'test failed'
+
+Process exit code: 1

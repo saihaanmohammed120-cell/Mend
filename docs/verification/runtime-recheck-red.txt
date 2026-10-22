@@ -1,0 +1,43 @@
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (145.863315ms)
+✖ A failed explicit connection recheck clears the old readiness snapshot (82.305659ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (31.949949ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (75.564672ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (29.521518ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (37.15027ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (79.933205ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (35.179783ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1772.534009
+
+✖ failing tests:
+
+test at tests/workbench-controller.test.ts:1:6335
+✖ A failed explicit connection recheck clears the old readiness snapshot (82.305659ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   blockers: [
+  +     'Provider execution disabled'
+  +   ],
+  +   mode: 'database_only',
+  +   ready: false
+  + }
+  - null
+  
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/workbench-controller.test.ts:139:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { ready: false, mode: 'database_only', blockers: [ 'Provider execution disabled' ] },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

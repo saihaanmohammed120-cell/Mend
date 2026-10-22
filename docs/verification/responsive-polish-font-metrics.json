@@ -1,0 +1,89 @@
+{
+  "scope": "Font-glyph metrics only, not rendered-browser geometry",
+  "results": [
+    {
+      "detail": "Describe the change",
+      "font_px": 14,
+      "glyph_width": 127.41,
+      "available_width": 148,
+      "fits": true
+    },
+    {
+      "detail": "Token Factory",
+      "font_px": 14,
+      "glyph_width": 87.5,
+      "available_width": 148,
+      "fits": true
+    },
+    {
+      "detail": "Isolated Nebius job",
+      "font_px": 14,
+      "glyph_width": 118.38,
+      "available_width": 148,
+      "fits": true
+    },
+    {
+      "detail": "Read the failed check",
+      "font_px": 14,
+      "glyph_width": 132.42,
+      "available_width": 148,
+      "fits": true
+    },
+    {
+      "detail": "Up to 3 attempts",
+      "font_px": 14,
+      "glyph_width": 101.98,
+      "available_width": 148,
+      "fits": true
+    },
+    {
+      "detail": "Code + check results",
+      "font_px": 14,
+      "glyph_width": 129.73,
+      "available_width": 168,
+      "fits": true
+    },
+    {
+      "detail": "Describe the change",
+      "font_px": 15,
+      "glyph_width": 136.53,
+      "available_width": 183,
+      "fits": true
+    },
+    {
+      "detail": "Token Factory",
+      "font_px": 15,
+      "glyph_width": 93.75,
+      "available_width": 183,
+      "fits": true
+    },
+    {
+      "detail": "Isolated Nebius job",
+      "font_px": 15,
+      "glyph_width": 126.83,
+      "available_width": 183,
+      "fits": true
+    },
+    {
+      "detail": "Read the failed check",
+      "font_px": 15,
+      "glyph_width": 141.86,
+      "available_width": 183,
+      "fits": true
+    },
+    {
+      "detail": "Up to 3 attempts",
+      "font_px": 15,
+      "glyph_width": 109.3,
+      "available_width": 183,
+      "fits": true
+    },
+    {
+      "detail": "Code + check results",
+      "font_px": 15,
+      "glyph_width": 139.0,
+      "available_width": 183,
+      "fits": true
+    }
+  ]
+}

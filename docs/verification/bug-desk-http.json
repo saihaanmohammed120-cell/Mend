@@ -1,0 +1,14 @@
+{
+  "route": "/fix",
+  "http_status": 200,
+  "ssr_markers": {
+    "Bug desk": true,
+    "LOCAL PACKET": true,
+    "Execution gated": true,
+    "REGRESSION GENERATION": true
+  },
+  "verification_scope": "production HTTP and rendered markup only",
+  "browser_interaction": "unverified",
+  "visual_correctness": "unverified",
+  "published_site_changed": false
+}

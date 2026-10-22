@@ -1,0 +1,22 @@
+{
+  "scope": "recoverable clearing, targeted review edits and command-copy UI",
+  "tests_passed": 90,
+  "tests_failed": 0,
+  "typecheck_exit": 0,
+  "production_build_exit": 0,
+  "browser_discovered": 21,
+  "browser_executed": 0,
+  "browser_acceptance": "unverified",
+  "hosted_artifact_qa": "passed",
+  "deployment": {
+    "version": 17,
+    "source": "a06b80e772662e73bcf75dcd3ca44fc985390e23",
+    "saved_version": "appgprj_6acb97b759148191aa98a4553d0a34ff~appgver_955769de84888191acb7dbb7965aa049",
+    "deployment_id": "appgdep_6ad24e43b01881918d89584c0e0b7d26",
+    "observed_status": "succeeded",
+    "observed_updated_at": "2026-10-16T16:18:28.152470+00:00"
+  },
+  "provider_run": "unverified; not run",
+  "clipboard_os_acceptance": "unverified; tests inject the writer",
+  "database_github_ci": "unverified; no current MCP observation"
+}

@@ -1,0 +1,27 @@
+test_bounded_inputs_and_identity_values (tests.test_check_history.CheckHistoryTests.test_bounded_inputs_and_identity_values) ... ok
+test_consistent_pass_is_observation_not_a_guarantee (tests.test_check_history.CheckHistoryTests.test_consistent_pass_is_observation_not_a_guarantee) ... ok
+test_empty_single_and_skipped_histories_cannot_pass (tests.test_check_history.CheckHistoryTests.test_empty_single_and_skipped_histories_cannot_pass) ... ok
+test_inconsistent_check_blocks_and_is_only_recommended_for_quarantine (tests.test_check_history.CheckHistoryTests.test_inconsistent_check_blocks_and_is_only_recommended_for_quarantine) ... ok
+test_inputs_not_mutated_and_canonical_history_identity (tests.test_check_history.CheckHistoryTests.test_inputs_not_mutated_and_canonical_history_identity) ... ok
+test_passing_checks_with_failed_command_still_block (tests.test_check_history.CheckHistoryTests.test_passing_checks_with_failed_command_still_block) ... ok
+test_replayed_jobs_and_mixed_context_fail_closed (tests.test_check_history.CheckHistoryTests.test_replayed_jobs_and_mixed_context_fail_closed) ... ok
+test_tampered_signature_results_missing_inventory_and_contract_are_rejected (tests.test_check_history.CheckHistoryTests.test_tampered_signature_results_missing_inventory_and_contract_are_rejected) ... ok
+test_pass_fail_inconclusive_and_no_overwrite (tests.test_check_history_cli.CheckHistoryCliTests.test_pass_fail_inconclusive_and_no_overwrite) ... ok
+test_tampering_duplicate_json_and_wrong_key_produce_no_artifact (tests.test_check_history_cli.CheckHistoryCliTests.test_tampering_duplicate_json_and_wrong_key_produce_no_artifact) ... ok
+test_both_pass_or_wrong_failure_cannot_demonstrate_regression (tests.test_bug_cases.BugCaseTests.test_both_pass_or_wrong_failure_cannot_demonstrate_regression) ... ok
+test_candidate_history_can_block_an_otherwise_passing_comparison (tests.test_bug_cases.BugCaseTests.test_candidate_history_can_block_an_otherwise_passing_comparison) ... ok
+test_checks_must_be_named_unique_and_include_the_target (tests.test_bug_cases.BugCaseTests.test_checks_must_be_named_unique_and_include_the_target) ... ok
+test_comparison_uses_one_job_with_distinct_authenticated_runs (tests.test_bug_cases.BugCaseTests.test_comparison_uses_one_job_with_distinct_authenticated_runs) ... ok
+test_history_for_a_different_candidate_cannot_be_attached_to_review (tests.test_bug_cases.BugCaseTests.test_history_for_a_different_candidate_cannot_be_attached_to_review) ... ok
+test_invalid_intakes_fail_closed (tests.test_bug_cases.BugCaseTests.test_invalid_intakes_fail_closed) ... ok
+test_modified_contract_or_empty_candidate_is_rejected (tests.test_bug_cases.BugCaseTests.test_modified_contract_or_empty_candidate_is_rejected) ... ok
+test_patch_counts_only_lf_lines_and_preserves_unicode_separators (tests.test_bug_cases.BugCaseTests.test_patch_counts_only_lf_lines_and_preserves_unicode_separators) ... ok
+test_preparation_is_frozen_bounded_and_never_starts_execution (tests.test_bug_cases.BugCaseTests.test_preparation_is_frozen_bounded_and_never_starts_execution) ... ok
+test_source_bound_comparison_keeps_authority_limits_and_exact_diff (tests.test_bug_cases.BugCaseTests.test_source_bound_comparison_keeps_authority_limits_and_exact_diff) ... ok
+test_tampered_checks_commands_keys_or_identity_are_rejected (tests.test_bug_cases.BugCaseTests.test_tampered_checks_commands_keys_or_identity_are_rejected) ... ok
+test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output (tests.test_bug_case_cli.BugCaseCliTests.test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.722s
+
+OK

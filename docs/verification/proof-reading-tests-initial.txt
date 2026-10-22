@@ -1,0 +1,134 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mend-workbench@1.0.0 pretest
+> node scripts/prepare-proof-manifest.mjs
+
+Prepared 4 local file fingerprints; no signature or provider execution.
+
+> mend-workbench@1.0.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ Actual artifact bytes match build fingerprints using real Web Crypto SHA-256 (23.500656ms)
+✔ A changed source byte is a mismatch even when all other artifact files match (3.959325ms)
+✔ HTTP failures and oversized streamed responses cannot become matches (5.27024ms)
+✔ Cancellation before or during reads never yields a matching result (0.902951ms)
+✔ Manifest generation binds the local capture and protects proof inputs against output aliasing (4.127548ms)
+✔ catchall waits for framework params before forwarding through the existing proxy (12.288775ms)
+✔ awaited catchall params preserve the route and method allowlist (0.800756ms)
+✔ actual task page awaits framework params and passes only the validated task ID (90.932128ms)
+✔ actual task page still invokes notFound for malformed or uppercase task IDs (19.747572ms)
+✔ proxy exposes existing routes and excludes missing history/source APIs (1.080849ms)
+✔ proxy refuses credential-bearing or unencrypted remote destinations (0.473684ms)
+✔ proxy rejects an unexpected cursor before forwarding (3.174253ms)
+✔ proxy streams bytes and preserves separate sealed session cookies (4.591637ms)
+✔ already-cancelled streamed input is released without waiting or forwarding (1.133247ms)
+✔ cancellation during input reading prevents backend forwarding (1.037643ms)
+✔ empty intake cannot masquerade as a prepared case (1.124073ms)
+✔ error-only packet records absent source and no execution evidence (1.004624ms)
+✔ original source and blank lines survive JSON export unchanged (0.24557ms)
+✔ source must identify a single safe Python module (0.323858ms)
+✔ UTF-8 byte limits apply independently of textarea character limits (4.741293ms)
+✔ invalid Unicode and NUL source are rejected before export (0.170968ms)
+✔ reported error and expected behavior are bounded (0.440633ms)
+✔ whitespace source accompanying an error is preserved as original evidence (0.142705ms)
+✔ preview limits rows without changing the exported source (6.691762ms)
+✔ preview bounds long lines and preserves blank-line numbering inputs (0.446863ms)
+✔ preview truncation does not split a Unicode surrogate pair (0.176475ms)
+✔ successful download removes the anchor and hands URL ownership to the caller (0.73688ms)
+✔ download failures release the URL and remove any acquired anchor (0.996712ms)
+✔ failed anchor removal cannot prevent object URL revocation (0.259931ms)
+✔ failed URL creation acquires no anchor or pending download (0.239631ms)
+✔ Captured source numbering retains internal empty lines and the actual return guard (1.846001ms)
+✔ Source comparison distinguishes insertion, removal and separated changes (0.189094ms)
+✔ Tab navigation wraps, reaches endpoints and leaves unrelated keys untouched (0.127673ms)
+✔ Actual workspace handlers keep one selected focusable tab and expose only its evidence panel (116.749135ms)
+✔ Copy reports success only after the actual writer promise resolves (96.423102ms)
+✔ Unavailable or rejected clipboard access retains a selectable command and never claims copied (59.813626ms)
+✔ A late clipboard response cannot update an unmounted control (20.731153ms)
+✔ preview hydrates paused, derives normal-motion autoplay and never copies preference in an effect (124.056495ms)
+✔ manual Next stays paused when the initially unknown motion preference resolves (42.897615ms)
+✔ reduced motion pauses startup but explicit Play and Pause remain available (34.978419ms)
+✔ draft hydration restores valid storage without overwriting it or issuing effect state updates (88.019972ms)
+✔ draft edits persist and clear through events; oversized UTF-8 drafts do not restore (53.684191ms)
+✔ Ambiguous creation reuses the exact key and rejects changed prompts until reconciliation (1.43978ms)
+✔ Event replay does not duplicate accepted evidence, and bounded logs keep the newest entries (3.7501ms)
+✔ Real backend message envelope displays text and foreign task events never change status (0.355385ms)
+✔ Passing receipts require live evidence, matching task, exact frozen checks and bundle consistency (0.587275ms)
+✔ Receipt summary preserves observed checks and refuses invented counts or live attribution (2.201837ms)
+✔ Pending-review cache survives reload for verified owner and is removed for another owner (0.626133ms)
+✔ Pending-review cache rejects corrupt identities and oversized prompts, and excludes extra fields (0.376277ms)
+✔ Hero starts empty and never presents counters without a validated receipt (2.677234ms)
+✔ Hero requires passed task plus exact frozen live check evidence (0.818593ms)
+✔ Synthetic receipts and foreign task evidence never acquire success markers (0.264469ms)
+✔ Incomplete checks and inconsistent source bundle are rejected (0.274844ms)
+✔ Missing or malformed receipt timestamps never become invented timestamps (0.578601ms)
+✔ Arbitrary signature and commit fields are never projected as proof (0.213011ms)
+✔ Only matching task log events become bounded plain text (1.478608ms)
+✔ Hero server render has one primary CTA to captured evidence before an honest collapsed live slot (29.034975ms)
+✔ Hero server render never turns a simulated receipt into a passing run (16.489293ms)
+✔ Hero server render shows only actual validated receipt values, with explicit signing and commit gaps (13.641803ms)
+✔ Captured example binds the before-failure and after-pass output to exact source bytes (0.403048ms)
+✔ Captured raw-output regions can receive keyboard focus without changing the recorded output (9.021702ms)
+✔ Flow server render has real fail/repair/rerun edges and no bypass to receipt (22.684998ms)
+✖ Standards receipt renders the actual unsigned document and cannot invent a Sigstore identity (9.461294ms)
+✔ Roadmap is six planned read-only cards, with no pretend controls (7.422093ms)
+✔ pointer micro-events batch to one write using one stable bounds read (3.06636ms)
+✔ pointer exit returns through the shared spring and stops scheduling (2.396681ms)
+✔ focus/reduced/coarse/drag suppression and teardown cancel pending writes (0.338871ms)
+✔ only a complete passing receipt qualifies as success (1.594282ms)
+✔ sample receipts cannot masquerade as live execution (0.716289ms)
+✔ rejects malformed and over-budget events; preserves stderr text (0.567826ms)
+✔ Case workflow rejects empty input, focuses errors and never creates execution evidence (91.500856ms)
+✔ Actual case handlers preserve original source, export only validated input and invalidate stale packets (36.362178ms)
+✔ Source errors inside a closed disclosure open the field before focusing it (38.363975ms)
+✔ A blocked case download retains review data and releases the acquired object URL (25.592538ms)
+✔ Undo clear restores exact draft inputs without restoring an old validated packet (30.421683ms)
+✔ New input retires undo and field-specific review actions target the intended input (29.554367ms)
+✔ Case progress advances only after validation and a requested download, then resets after edits (23.002515ms)
+✔ contradictory upstream readiness cannot enable Start (5.930996ms)
+✔ consistent live configuration passes through while failures stay blocked (1.765179ms)
+✔ original source preserves the blank third line and valid comment (1.670307ms)
+✔ patched source includes a complete empty-input guard with continuous numbers (0.169045ms)
+✔ bundle has an explicit non-execution receipt and isolated copy of named checks (1.105316ms)
+✔ every named check is included in the downloadable regression suite (0.170266ms)
+✔ phase descriptions retain the boundary between illustration and live execution (0.143897ms)
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (135.175792ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (30.932663ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (27.439801ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (32.061925ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (24.984893ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (48.415112ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (19.838609ms)
+ℹ tests 91
+ℹ suites 0
+ℹ pass 90
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2455.505995
+
+✖ failing tests:
+
+test at tests/hero-render.test.ts:1:9516
+✖ Standards receipt renders the actual unsigned document and cannot invent a Sigstore identity (9.461294ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!html.includes('Hash matches'))
+  
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/hero-render.test.ts:190:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+exit_code 1

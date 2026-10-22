@@ -1,0 +1,1365 @@
+{
+ "url": "output/playwright/evidence-static-20261021/inspection.html",
+ "at": "2026-10-21T17:56:20.503Z",
+ "allow": [
+  "palette-cream"
+ ],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.42,
+    0.5
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1338,
+     "screens": 1.5,
+     "words": 152,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 2,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Evidence",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "Mend Archivo"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Mend Plex",
+       "share": 0.56,
+       "mono": true
+      },
+      {
+       "family": "Mend Archivo",
+       "share": 0.44,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Mend Archivo",
+      "size": 13,
+      "leading": 1.62,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.5
+     },
+     "measureChars": 103,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Mend Archivo",
+      "text": "Evidence"
+     },
+     "monoShare": 0.56,
+     "monoProseShare": 0.13,
+     "monoFamilies": [
+      "Mend Plex"
+     ],
+     "monoSamples": [
+      "Unsigned",
+      "FORMAT",
+      "SOURCE REPOSITORY",
+      "SOURCE COMMIT",
+      "BUILD PLATFORM",
+      "ENTRYPOINT"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 25
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#121814",
+     "bodyBgHsl": {
+      "h": 140,
+      "s": 0.14,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#121814",
+       "top": 0,
+       "hsl": {
+        "h": 140,
+        "s": 0.14,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#1b251f",
+       "top": 80,
+       "hsl": {
+        "h": 144,
+        "s": 0.16,
+        "l": 0.13
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f5f2ea",
+       "share": 0.59
+      },
+      {
+       "color": "#b6bfb2",
+       "share": 0.37
+      },
+      {
+       "color": "#a4ccb4",
+       "share": 0.02
+      },
+      {
+       "color": "#1b251f",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#f5f2ea",
+      "hsl": {
+       "h": 44,
+       "s": 0.35,
+       "l": 0.94
+      },
+      "fg": "#1b251f"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 2,
+     "radius": 8,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Download in-toto provenance JSON ↓",
+      "Check file hashes"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 17,
+     "hairlineSamples": [
+      "details.proof-provenance-details 670px",
+      "div 670px",
+      "div 670px",
+      "div 670px",
+      "div 670px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 5,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "mend archivo",
+     "mend plex"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1338,
+    "margins": {
+     "left": 385,
+     "right": 385
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Evidence",
+      "size": 24,
+      "top": 24,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 364,
+      "n": 1
+     },
+     {
+      "x": 385,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.22,
+    "voidBox": {
+     "x": 0,
+     "y": 120,
+     "w": 360,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": true,
+    "ground": "#121814",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 385,
+     "right": 385
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 3,
+     "radii": [
+      [
+       12,
+       1
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 2,
+     "borderSamples": [
+      "#e3e4e0 on #1b251f (12.35:1)",
+      "#f4f4e9 on #1b251f (14.25:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.67,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ]
+    },
+    "title": {
+     "text": "Evidence",
+     "size": 24,
+     "top": 24
+    },
+    "colourShare": 0
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.82,
+    0.88
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1338,
+     "screens": 1.3,
+     "words": 152,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 2,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Evidence",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "Mend Archivo"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Mend Plex",
+       "share": 0.56,
+       "mono": true
+      },
+      {
+       "family": "Mend Archivo",
+       "share": 0.44,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Mend Archivo",
+      "size": 13,
+      "leading": 1.62,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.5
+     },
+     "measureChars": 97,
+     "max": {
+      "size": 24,
+      "vw": 3.1,
+      "font": "Mend Archivo",
+      "text": "Evidence"
+     },
+     "monoShare": 0.56,
+     "monoProseShare": 0.13,
+     "monoFamilies": [
+      "Mend Plex"
+     ],
+     "monoSamples": [
+      "Unsigned",
+      "FORMAT",
+      "SOURCE REPOSITORY",
+      "SOURCE COMMIT",
+      "BUILD PLATFORM",
+      "ENTRYPOINT"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 25
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#121814",
+     "bodyBgHsl": {
+      "h": 140,
+      "s": 0.14,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#121814",
+       "top": 0,
+       "hsl": {
+        "h": 140,
+        "s": 0.14,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#1b251f",
+       "top": 80,
+       "hsl": {
+        "h": 144,
+        "s": 0.16,
+        "l": 0.13
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f5f2ea",
+       "share": 0.59
+      },
+      {
+       "color": "#b6bfb2",
+       "share": 0.37
+      },
+      {
+       "color": "#a4ccb4",
+       "share": 0.02
+      },
+      {
+       "color": "#1b251f",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#f5f2ea",
+      "hsl": {
+       "h": 44,
+       "s": 0.35,
+       "l": 0.94
+      },
+      "fg": "#1b251f"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 2,
+     "radius": 8,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Download in-toto provenance JSON ↓",
+      "Check file hashes"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 17,
+     "hairlineSamples": [
+      "details.proof-provenance-details 630px",
+      "div 630px",
+      "div 630px",
+      "div 630px",
+      "div 630px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 5,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "mend archivo",
+     "mend plex"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1338,
+    "margins": {
+     "left": 69,
+     "right": 69
+    },
+    "sections": [
+     {
+      "sel": "div.proof-document-verdict",
+      "tag": "div",
+      "top": 174,
+      "height": 127,
+      "words": 27,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 87,
+      "right": 98,
+      "textLeft": 87,
+      "textRight": 98,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.proof-integrity",
+      "tag": "section",
+      "top": 692,
+      "height": 601,
+      "words": 86,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Check the proof files.",
+       "size": 16,
+       "tag": "h4"
+      },
+      "left": 69,
+      "right": 69,
+      "textLeft": 69,
+      "textRight": 69,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Evidence",
+      "size": 24,
+      "top": 24,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 48,
+      "n": 1
+     },
+     {
+      "x": 69,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "dark": true,
+    "ground": "#121814",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 69,
+     "right": 69
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 3,
+     "radii": [
+      [
+       12,
+       1
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 2,
+     "borderSamples": [
+      "#e3e4e0 on #1b251f (12.35:1)",
+      "#f4f4e9 on #1b251f (14.25:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.67,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ]
+    },
+    "title": {
+     "text": "Evidence",
+     "size": 24,
+     "top": 24
+    },
+    "colourShare": 0.001
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.73,
+    0.82,
+    0.83
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1702,
+     "screens": 2,
+     "words": 152,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 2,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Evidence",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "Mend Archivo"
+    },
+    "headings": [
+     {
+      "text": "Evidence",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Mend Archivo",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 24,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "SLSA provenance",
+      "words": 2,
+      "chars": 15,
+      "lines": 2,
+      "size": 23,
+      "vw": 5.9,
+      "font": "Mend Archivo",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.26,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 125,
+      "tag": "h3",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 2,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Mend Plex",
+       "share": 0.56,
+       "mono": true
+      },
+      {
+       "family": "Mend Archivo",
+       "share": 0.44,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Mend Archivo",
+      "size": 13,
+      "leading": 1.62,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 9.5
+     },
+     "measureChars": 41,
+     "max": {
+      "size": 24,
+      "vw": 6.2,
+      "font": "Mend Archivo",
+      "text": "Evidence"
+     },
+     "monoShare": 0.56,
+     "monoProseShare": 0.13,
+     "monoFamilies": [
+      "Mend Plex"
+     ],
+     "monoSamples": [
+      "Unsigned",
+      "FORMAT",
+      "SOURCE REPOSITORY",
+      "SOURCE COMMIT",
+      "BUILD PLATFORM",
+      "ENTRYPOINT"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 25
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#121814",
+     "bodyBgHsl": {
+      "h": 140,
+      "s": 0.14,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#121814",
+       "top": 0,
+       "hsl": {
+        "h": 140,
+        "s": 0.14,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#1b251f",
+       "top": 80,
+       "hsl": {
+        "h": 144,
+        "s": 0.16,
+        "l": 0.13
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f5f2ea",
+       "share": 0.59
+      },
+      {
+       "color": "#b6bfb2",
+       "share": 0.37
+      },
+      {
+       "color": "#a4ccb4",
+       "share": 0.02
+      },
+      {
+       "color": "#1b251f",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#f5f2ea",
+      "hsl": {
+       "h": 44,
+       "s": 0.35,
+       "l": 0.94
+      },
+      "fg": "#1b251f"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": 8,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Download in-toto provenance JSON ↓"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 17,
+     "hairlineSamples": [
+      "details.proof-provenance-details 268px",
+      "div 268px",
+      "div 268px",
+      "div 268px",
+      "div 268px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 5,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "mend archivo",
+     "mend plex"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1702,
+    "margins": {
+     "left": 61,
+     "right": 61
+    },
+    "sections": [
+     {
+      "sel": "div.proof-document-verdict",
+      "tag": "div",
+      "top": 203,
+      "height": 165,
+      "words": 27,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 75,
+      "right": 85,
+      "textLeft": 75,
+      "textRight": 85,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.proof-document-downloads",
+      "tag": "div",
+      "top": 699,
+      "height": 142,
+      "words": 10,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 61,
+      "right": 102,
+      "textLeft": 61,
+      "textRight": 102,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.proof-integrity",
+      "tag": "section",
+      "top": 865,
+      "height": 792,
+      "words": 86,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Check the proof files.",
+       "size": 16,
+       "tag": "h4"
+      },
+      "left": 61,
+      "right": 61,
+      "textLeft": 61,
+      "textRight": 61,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Evidence",
+      "size": 24,
+      "top": 24,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 40,
+      "n": 1
+     },
+     {
+      "x": 61,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": true,
+    "ground": "#121814",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 61,
+     "right": 61
+    },
+    "hero": {
+     "text": "Evidence",
+     "words": 1,
+     "chars": 8,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Mend Archivo",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.33,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 3,
+     "radii": [
+      [
+       12,
+       1
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 2,
+     "borderSamples": [
+      "#e3e4e0 on #1b251f (12.35:1)",
+      "#f4f4e9 on #1b251f (14.25:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.67,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      23,
+      24
+     ]
+    },
+    "title": {
+     "text": "Evidence",
+     "size": 24,
+     "top": 24
+    },
+    "colourShare": 0
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "67% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\desktop-fold.jpg",
+   "pages": [
+    "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\tablet-fold.jpg",
+   "pages": [
+    "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\mobile-fold.jpg",
+   "pages": [
+    "<workspace>\\work\\mend-fullstack-20261019\\Mend\\frontend\\.taste-skill\\provenance\\inspect\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

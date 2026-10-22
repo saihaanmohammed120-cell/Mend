@@ -1,0 +1,75 @@
+[WebServer] (node:1904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ Warning: Next.js ignored package-lock.json in <user-home> because it would include your home directory (<user-home>).
+[WebServer]  To use this directory, set `turbopack.root` in your Next.js config.
+[WebServer] 
+[WebServer] (node:17400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:8856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ Warning: Next.js ignored package-lock.json in <user-home> because it would include your home directory (<user-home>).
+[WebServer]  To use this directory, set `outputFileTracingRoot` in your Next.js config.
+[WebServer] 
+
+Running 34 tests using 1 worker
+
+(node:13920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › e2e\bug-desk.spec.ts:19:5 › local intake reviews, fingerprints and exports original input at 390px in light (1.3s)
+  ok  2 [chromium] › e2e\bug-desk.spec.ts:19:5 › local intake reviews, fingerprints and exports original input at 390px in dark (1.0s)
+  ok  3 [chromium] › e2e\bug-desk.spec.ts:19:5 › local intake reviews, fingerprints and exports original input at 1440px in light (989ms)
+  ok  4 [chromium] › e2e\bug-desk.spec.ts:19:5 › local intake reviews, fingerprints and exports original input at 1440px in dark (1.0s)
+  ok  5 [chromium] › e2e\bug-desk.spec.ts:81:1 › source validation opens the exact field and rejects oversized UTF-8 input (654ms)
+  ok  6 [chromium] › e2e\bug-desk.spec.ts:101:3 › before hydration › private inputs have no native form submission path (408ms)
+  ok  7 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 320px in light preserves one goal, focus, tap targets and containment (1.3s)
+  ok  8 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 320px in dark preserves one goal, focus, tap targets and containment (1.2s)
+  ok  9 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 390px in light preserves one goal, focus, tap targets and containment (1.3s)
+  ok 10 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 390px in dark preserves one goal, focus, tap targets and containment (1.3s)
+  ok 11 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 768px in light preserves one goal, focus, tap targets and containment (1.3s)
+  ok 12 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 768px in dark preserves one goal, focus, tap targets and containment (1.3s)
+  ok 13 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1024px in light preserves one goal, focus, tap targets and containment (1.4s)
+  ok 14 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1024px in dark preserves one goal, focus, tap targets and containment (1.2s)
+  ok 15 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1440px in light preserves one goal, focus, tap targets and containment (1.4s)
+  ok 16 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1440px in dark preserves one goal, focus, tap targets and containment (1.4s)
+  ok 17 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1920px in light preserves one goal, focus, tap targets and containment (1.5s)
+  ok 18 [chromium] › e2e\hero.spec.ts:5:3 › Hero at 1920px in dark preserves one goal, focus, tap targets and containment (1.6s)
+  ok 19 [chromium] › e2e\hero.spec.ts:94:1 › Local case preparation preserves input, exports a packet and invalidates review after edits (1.3s)
+  ok 20 [chromium] › e2e\hero.spec.ts:140:1 › Workbench pointer depth works without opening an authenticated task (876ms)
+  ok 21 [chromium] › e2e\hero.spec.ts:160:1 › Hash verification reports a changed file instead of a passing fingerprint (742ms)
+  ok 22 [chromium] › e2e\sample.spec.ts:71:1 › public sample opens with honest evidence labels and continuous original source (715ms)
+  ok 23 [chromium] › e2e\sample.spec.ts:81:1 › manual repair progression preserves patched line three and prints a sample-only receipt (906ms)
+  ok 24 [chromium] › e2e\sample.spec.ts:104:1 › explicit playback advances the sequence and can be paused (3.5s)
+  ok 25 [chromium] › e2e\sample.spec.ts:115:1 › download contains both sources, a regression test and a non-execution receipt (705ms)
+  ok 26 [chromium] › e2e\sample.spec.ts:141:1 › paper canvas, hard panel, primary button and static canvas texture retain brand tokens (590ms)
+  ok 27 [chromium] › e2e\sample.spec.ts:173:1 › keyboard navigation displays the ink outline with the paper gap (685ms)
+  ok 28 [chromium] › e2e\sample.spec.ts:197:3 › normal motion and pointer depth › changing reduced-motion preference pauses automatic playback while mounted (2.8s)
+  ok 29 [chromium] › e2e\sample.spec.ts:210:3 › normal motion and pointer depth › autoplay advances, and paused pointer tilt stays bounded before returning flat (4.4s)
+  ok 30 [chromium] › e2e\sample.spec.ts:262:1 › mobile layout fits its viewport and keeps sample controls usable (608ms)
+  ok 31 [chromium] › e2e\workspace.spec.ts:48:3 › landing opens a compact sign-in with credentials in view at 390px (791ms)
+  ok 32 [chromium] › e2e\workspace.spec.ts:48:3 › landing opens a compact sign-in with credentials in view at 1440px (872ms)
+  ok 33 [chromium] › e2e\workspace.spec.ts:66:1 › a restored workspace session exposes the saved draft without a second sign-in (800ms)
+  ok 34 [chromium] › e2e\workspace.spec.ts:79:1 › a private or missing task stays in its compact view and shows the owner-authorized error (726ms)
+
+  34 passed (51.4s)

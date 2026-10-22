@@ -1,0 +1,37 @@
+[
+  {
+    "check": "hero-frontend-tests",
+    "exit_code": 0,
+    "command": [
+      "npm",
+      "test"
+    ]
+  },
+  {
+    "check": "hero-typecheck",
+    "exit_code": 0,
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ]
+  },
+  {
+    "check": "hero-browser-discovery",
+    "exit_code": 0,
+    "command": [
+      "npm",
+      "run",
+      "test:browser:list"
+    ]
+  },
+  {
+    "check": "hero-build",
+    "exit_code": 0,
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ]
+  }
+]

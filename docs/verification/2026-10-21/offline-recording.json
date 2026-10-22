@@ -1,0 +1,26 @@
+{
+  "kind": "silent_offline_ui_recording",
+  "date": "2026-10-21",
+  "duration_seconds": 70.4,
+  "width": 1440,
+  "height": 1000,
+  "sha256": "c5b57565e9ad9d5f3357b5ef618d472a41d4775b642fce37da700dd76b62134e",
+  "bytes": 4030355,
+  "browser_readback": {
+    "ended": true,
+    "media_error": null,
+    "decoded_frames": 1827
+  },
+  "demonstrates": [
+    "local captured input",
+    "review",
+    "JSON download",
+    "edit invalidation",
+    "Clear/Undo",
+    "fresh review"
+  ],
+  "live_provider_execution": false,
+  "publicly_published": false,
+  "narration": false,
+  "final_hackathon_walkthrough": false
+}

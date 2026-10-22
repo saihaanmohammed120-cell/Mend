@@ -1,0 +1,42 @@
+✔ Controller retries ambiguous create with original key and blocks a changed prompt (181.535108ms)
+✔ A failed explicit connection recheck clears the old readiness snapshot (54.211861ms)
+✖ A failed pre-start connection check clears an earlier ready snapshot (43.794731ms)
+✔ Controller blocks provider start when runtime is unavailable and keeps cancellation as stopping (54.143342ms)
+✔ Controller task switching aborts receipt reads and rejects stale A-to-B-to-A response (38.383463ms)
+✔ Controller refreshes receipt-only event from authoritative task and prints only new evidence (21.315939ms)
+✔ Controller removes transient signed download URLs at expiry and clears timers on task change (28.795602ms)
+✔ Controller reload restores uncertain-create identity and explicit logout clears the cache (55.70582ms)
+✔ Controller retains unresolved identity through expiry and same-owner reauthentication (33.762692ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1707.120462
+
+✖ failing tests:
+
+test at tests/workbench-controller.test.ts:1:6654
+✖ A failed pre-start connection check clears an earlier ready snapshot (43.794731ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   blockers: [],
+  +   mode: 'live',
+  +   ready: true
+  + }
+  - null
+  
+      at TestContext.<anonymous> (/workspace/scratch/ca486ef6d53d/Mend/frontend/tests/workbench-controller.test.ts:150:37)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { ready: true, mode: 'live', blockers: [] },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

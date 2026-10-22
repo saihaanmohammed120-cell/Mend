@@ -1,0 +1,52 @@
+{
+  "database_schema": [
+    {
+      "checkpoint": {
+        "logs_table": true,
+        "command_rpc": true,
+        "tasks_table": true,
+        "receipts_table": true,
+        "tables_with_rls": {
+          "logs": true,
+          "tasks": true,
+          "receipts": true,
+          "task_attempts": true
+        },
+        "live_execution_enabled": false,
+        "authorized_owner_exists": true,
+        "authenticated_lease_read": false,
+        "service_role_direct_task_update": false
+      }
+    }
+  ],
+  "database_readback": [
+    {
+      "application_write_readback": {
+        "status": "draft",
+        "task_id": "88a6cfaa-795e-4ac4-ac83-7412afcc5bf2",
+        "repair_count": 0,
+        "execution_count": 0,
+        "initial_draft_events": 1,
+        "live_execution_enabled": false
+      }
+    }
+  ],
+  "github": {
+    "repositories": []
+  },
+  "browser": {
+    "playwright_tool_exposed": false,
+    "devtools_tool_exposed": false,
+    "visual_acceptance": "unverified"
+  },
+  "site": {
+    "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+    "access": "custom",
+    "allowed_users": 1,
+    "version": 12,
+    "source": "9cdbca05c5f9e437a5a6eef07dbb56c617be209b",
+    "deployment_id": "appgdep_6ad1f6402dec8191a36bd884ebe007fc",
+    "status": "succeeded",
+    "url": "https://mend-paper-proof.bravebadge32.chatgpt.site"
+  }
+}

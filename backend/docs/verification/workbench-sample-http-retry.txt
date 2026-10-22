@@ -1,0 +1,14 @@
+Explicit127.0.0.1 bind; server and requests in same orchestration; no installs.
+PASS: production HTML returned200 and explicitly Sample mode; no Live backend label
+PASS: real Next sample SSE delivered stderr, repair state and demo-only terminal receipt
+Events received: 11
+Scope: genuine local Next HTTP/fixture SSE; no browser visual assertion, Supabase, FastAPI or provider execution
+Process exit code: 0
+
+Server output:
+  ▲ Next.js 14.2.35
+  - Local:        http://127.0.0.1:39795
+  - Network:      http://127.0.0.1:39795
+
+ ✓ Starting...
+ ✓ Ready in 225ms

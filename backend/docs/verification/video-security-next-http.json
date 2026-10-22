@@ -1,0 +1,12 @@
+{
+  "fix_http_status": 200,
+  "ssr_labels": {
+    "Bug desk": true,
+    "LOCAL PACKET": true,
+    "Execution gated": true,
+    "REGRESSION GENERATION": true
+  },
+  "unused_optimizer_http_status": 404,
+  "browser_download": "unverified",
+  "visual_correctness": "unverified"
+}

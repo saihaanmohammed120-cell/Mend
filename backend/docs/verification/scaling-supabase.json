@@ -1,0 +1,23 @@
+{
+  "evidence": "S180",
+  "tool": "mcp__codex_apps__supabase_execute_sql",
+  "project_id": "uwkdrmdflzverflcfkgk",
+  "literal_query_result": [
+    {
+      "compact_dispatch_verification": {
+        "anon": false,
+        "pending": [],
+        "service_role": true,
+        "authenticated": false,
+        "release_enabled": false,
+        "compact_projection": true
+      }
+    }
+  ],
+  "migration": {
+    "tool": "mcp__codex_apps__supabase_list_migrations",
+    "version": "20261013145142",
+    "name": "mend_compact_pending_dispatch"
+  },
+  "scope": "Actual function migration/catalog/grants and empty dispatch read. Live active-task large-payload execution remains unverified."
+}

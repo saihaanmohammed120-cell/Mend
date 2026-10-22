@@ -1,0 +1,65 @@
+{
+  "source": "local built static Site",
+  "scenarios": [
+    {
+      "width": 1440,
+      "colorScheme": "light",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "1440-light.png"
+    },
+    {
+      "width": 1440,
+      "colorScheme": "dark",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "1440-dark.png"
+    },
+    {
+      "width": 768,
+      "colorScheme": "light",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "768-light.png"
+    },
+    {
+      "width": 768,
+      "colorScheme": "dark",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "768-dark.png"
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "390-light.png"
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "hashMatches": 4,
+      "unsigned": true,
+      "overflow": false,
+      "errors": [],
+      "forbidden": [],
+      "screenshot": "390-dark.png"
+    }
+  ]
+}

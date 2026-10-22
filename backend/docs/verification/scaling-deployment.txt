@@ -1,0 +1,11 @@
+test_fake_docker_captures_only_three_builds_from_any_working_directory (test_deployment.DeploymentBuildScriptTests.test_fake_docker_captures_only_three_builds_from_any_working_directory) ... ok
+test_first_build_failure_aborts_remaining_builds (test_deployment.DeploymentBuildScriptTests.test_first_build_failure_aborts_remaining_builds) ... ok
+test_floating_or_malformed_digest_is_rejected (test_deployment.DeploymentBuildScriptTests.test_floating_or_malformed_digest_is_rejected) ... ok
+test_missing_base_is_rejected_before_any_docker_command (test_deployment.DeploymentBuildScriptTests.test_missing_base_is_rejected_before_any_docker_command) ... ok
+test_missing_docker_fails_without_claiming_an_image_build (test_deployment.DeploymentBuildScriptTests.test_missing_docker_fails_without_claiming_an_image_build) ... ok
+test_shell_syntax_in_tag_never_executes_or_reaches_docker (test_deployment.DeploymentBuildScriptTests.test_shell_syntax_in_tag_never_executes_or_reaches_docker) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.032s
+
+OK

@@ -1,0 +1,4 @@
+✔ contradictory upstream readiness cannot enable Start (5.967664ms)
+✔ consistent live configuration passes through while failures stay blocked (2.648077ms)
+✖ configuration flags without a real database probe stay blocked (3.036504ms)
+✖ a valid blocked backend report preserves API/database facts and drops private fields (0.978357ms)

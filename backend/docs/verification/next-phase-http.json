@@ -1,0 +1,36 @@
+{
+  "authenticated_browser_flow": "unverified",
+  "database_behavior": "requires_independent_supabase_mcp_evidence",
+  "dependencies": {
+    "fastapi": "0.143.0",
+    "starlette": "1.7.0",
+    "uvicorn": "0.54.0"
+  },
+  "environment": "real_local_uvicorn_database_only",
+  "health": {
+    "body": {
+      "live_verification": false,
+      "mode": "database_only",
+      "status": "running"
+    },
+    "http_status": 200
+  },
+  "provider_execution": "unverified",
+  "readiness": {
+    "body": {
+      "blockers": [
+        "database_only_mode",
+        "phase_1_release_evidence_required",
+        "token_factory_not_configured",
+        "cloud_iam_not_configured",
+        "cloud_project_not_configured",
+        "runner_image_not_configured"
+      ],
+      "mode": "database_only",
+      "provider_verification": "not_established_by_this_endpoint",
+      "ready": false
+    },
+    "http_status": 503
+  },
+  "status": "verified_http_preflight"
+}

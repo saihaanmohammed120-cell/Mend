@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "scope": "captured_local_file_integrity",
+  "signature_verification": false,
+  "files": [
+    {
+      "name": "csv_tools.py",
+      "path": "/example/csv_tools.py",
+      "bytes": 523,
+      "sha256": "10e6a30c3be085a9965b999f3e1f4f3d2696bd34773e755804566c2e3acd4263"
+    },
+    {
+      "name": "test_csv_tools.py",
+      "path": "/example/test_csv_tools.py",
+      "bytes": 881,
+      "sha256": "2bd7431434885cda181229bc3a74bf03f2e08ef559bf467e58a035297539cd74"
+    },
+    {
+      "name": "captured-run.json",
+      "path": "/example/captured-run.json",
+      "bytes": 4244,
+      "sha256": "4666b9e1047cf4f2d138f0b5e12ef993eb3cb35db01815db0d750ba7140de6e2"
+    },
+    {
+      "name": "provenance.json",
+      "path": "/example/provenance.json",
+      "bytes": 2560,
+      "sha256": "eebe9999aa6dbd3b41e622cb72c30079226bfd8047fa0bed1f2b2ac30f4832ee"
+    }
+  ]
+}

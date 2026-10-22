@@ -1,0 +1,59 @@
+{
+  "backend_dependencies_present": true,
+  "blockers": [
+    "missing:NEBIUS_TOKEN_FACTORY_API_KEY",
+    "missing:NEBIUS_IAM_TOKEN",
+    "missing:NEBIUS_PROJECT_ID",
+    "missing:MEND_RUNNER_IMAGE_DIGEST",
+    "missing:NEBIUS_SUBNET_ID",
+    "missing:NEBIUS_PLATFORM",
+    "missing:NEBIUS_PRESET",
+    "missing:MEND_INPUT_PRICE_PER_MILLION",
+    "missing:MEND_OUTPUT_PRICE_PER_MILLION",
+    "missing:MEND_PRICE_PROVENANCE",
+    "nebius_cli_missing_for_job_logs"
+  ],
+  "configuration_presence": {
+    "MEND_INPUT_PRICE_PER_MILLION": false,
+    "MEND_OUTPUT_PRICE_PER_MILLION": false,
+    "MEND_PRICE_PROVENANCE": false,
+    "MEND_RUNNER_IMAGE_DIGEST": false,
+    "NEBIUS_IAM_TOKEN": false,
+    "NEBIUS_PLATFORM": false,
+    "NEBIUS_PRESET": false,
+    "NEBIUS_PROJECT_ID": false,
+    "NEBIUS_SUBNET_ID": false,
+    "NEBIUS_TOKEN_FACTORY_API_KEY": false
+  },
+  "configured_limits": {
+    "job_seconds": 60,
+    "max_repairs": 3,
+    "provider_feasibility": "unverified",
+    "task_seconds": 600,
+    "token_cap": 30000
+  },
+  "credentials_redacted": true,
+  "invalid_fields": [],
+  "live_observations": {
+    "cancel_to_stop_seconds": null,
+    "inference": "not_run",
+    "job_provisioning": "not_run",
+    "model_discovery": "not_run",
+    "verified_fix_receipt": "not_produced"
+  },
+  "live_release_enabled_by_probe": false,
+  "nebius_cli_present": false,
+  "runtime_integration": {
+    "independent_stop_evidence": "unverified_requires_integration",
+    "monetary_task_cap": "requires_service_and_release_gate_evidence",
+    "trusted_report_transport": "unverified_requires_integration"
+  },
+  "schema_version": 1,
+  "scope": "local_phase1_prerequisites_only",
+  "status": "blocked",
+  "submission_state": {
+    "browser_acceptance": "requires_playwright_mcp_evidence",
+    "public_repo": "requires_github_mcp_evidence",
+    "walkthrough": "unverified"
+  }
+}

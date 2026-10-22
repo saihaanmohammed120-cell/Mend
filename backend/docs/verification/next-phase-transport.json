@@ -1,0 +1,6 @@
+{
+  "scope": "unauthenticated_transport_probe_not_database_write",
+  "transport": "blocked",
+  "exception_type": "URLError",
+  "reason_type": "TimeoutError"
+}

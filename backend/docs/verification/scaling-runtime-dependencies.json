@@ -1,0 +1,16 @@
+{
+  "environment": "isolated_cpython_3_12_dependency_verification_not_docker",
+  "hash_install": "completed",
+  "dependency_check": "No broken requirements found.",
+  "test_only_dependency": "httpx",
+  "versions": {
+    "fastapi": "0.143.0",
+    "starlette": "1.8.0",
+    "uvicorn": "0.54.0",
+    "cryptography": "50.0.1",
+    "setuptools": "84.0.0",
+    "wheel": "0.48.0",
+    "httpx": "0.28.1"
+  },
+  "lock_packages": 20
+}

@@ -1,0 +1,22 @@
+Final convergence, 2026-10-12
+$ node --test tests/demo-clock.test.mjs tests/pointer-tilt.test.mjs
+✔ demo preserves fail, patch, pass, finalizing, and receipt timing (1.638634ms)
+✔ a throttled background tab resumes without counting hidden time (0.427937ms)
+✔ hidden timer ticks do not advance the loop; cleanup removes callbacks (0.269727ms)
+✔ pointer bursts use cached stable bounds and perform one DOM write per frame (2.07927ms)
+✔ small cursor reversals are damped and extreme positions stay within ±3° (0.78148ms)
+✔ follow damping is consistent across 60 Hz and 120 Hz frame schedules (0.319913ms)
+✔ leave returns to exactly flat and rapid reentry retains one frame loop (1.548688ms)
+✔ coarse pointers, touch, reduced motion, and focused controls never start tilt (0.416299ms)
+✔ focus, selection, viewport changes, and interruption cancel pending tilt (0.667558ms)
+✔ unmount cancels animation and removes every event listener (0.327785ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 102.744269
+
+Exit code: 0

@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* Preserve the v3 defaults while upgrading the compiler. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--mend-muted);
+    opacity: 1;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+:root {
+  --mend-paper: #F5F2EA;
+  --mend-surface: #FFFFFF;
+  --mend-ink: #18201B;
+  --mend-accent: #FF5B23;
+  --mend-pass: #183E32;
+  --mend-muted: #5B615B;
+  --mend-danger: #B42318;
+  --mend-line: #D8DDD5;
+  --mend-control: #717971;
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  background: var(--mend-paper);
+  color: var(--mend-ink);
+  font-family: "Mend Archivo", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--mend-accent);
+  color: var(--mend-ink);
+}
+/* Decorative 5% texture never intercepts interaction. */
+.paper-noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+@layer components {
+  .panel {
+    @apply rounded-workbench border-2 border-ink bg-white shadow-hard;
+  }
+  .focus-ring {
+    @apply focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink focus-visible:ring-[3px] focus-visible:ring-paper;
+  }
+  .label {
+    @apply font-sans text-[14px] font-medium leading-5;
+  }
+}
+.receipt-paper {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 97%,
+    97.5% 100%,
+    95% 97%,
+    92.5% 100%,
+    90% 97%,
+    87.5% 100%,
+    85% 97%,
+    82.5% 100%,
+    80% 97%,
+    77.5% 100%,
+    75% 97%,
+    72.5% 100%,
+    70% 97%,
+    67.5% 100%,
+    65% 97%,
+    62.5% 100%,
+    60% 97%,
+    57.5% 100%,
+    55% 97%,
+    52.5% 100%,
+    50% 97%,
+    47.5% 100%,
+    45% 97%,
+    42.5% 100%,
+    40% 97%,
+    37.5% 100%,
+    35% 97%,
+    32.5% 100%,
+    30% 97%,
+    27.5% 100%,
+    25% 97%,
+    22.5% 100%,
+    20% 97%,
+    17.5% 100%,
+    15% 97%,
+    12.5% 100%,
+    10% 97%,
+    7.5% 100%,
+    5% 97%,
+    2.5% 100%,
+    0 97%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+@font-face{font-family:"Mend Fraunces";src:url("/fonts/mend-fraunces-600.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Mend Archivo";src:url("/fonts/mend-archivo-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Mend Archivo";src:url("/fonts/mend-archivo-500.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Mend Archivo";src:url("/fonts/mend-archivo-600.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Mend Archivo";src:url("/fonts/mend-archivo-700.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Mend Plex";src:url("/fonts/mend-ibm-plex-mono-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mend-paper: #121814;
+    --mend-surface: #1B251F;
+    --mend-ink: #F5F2EA;
+    --mend-accent: #FF9B67;
+    --mend-pass: #A4CCB4;
+    --mend-muted: #B6BFB2;
+    --mend-danger: var(--mend-accent);
+    --mend-line: color-mix(in srgb, var(--mend-ink) 22%, transparent);
+    --mend-control: var(--mend-muted);
+    color-scheme: dark;
+  }
+  ::selection { color: var(--mend-paper); }
+  .bg-orange { color: var(--mend-paper); }
+}
+.mend-workbench { overflow-wrap: anywhere; }
+.mend-workbench :is(input, textarea, pre) { min-width: 0; max-width: 100%; }

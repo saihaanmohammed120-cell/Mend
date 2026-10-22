@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "source": "captured_local",
+  "live_verification": false,
+  "source_sha256": "10e6a30c3be085a9965b999f3e1f4f3d2696bd34773e755804566c2e3acd4263",
+  "tests_sha256": "2bd7431434885cda181229bc3a74bf03f2e08ef559bf467e58a035297539cd74",
+  "capture_script_sha256": "9ecd19d106cf7f88a8acb1fd2cb545cb4aaa2f679446a341615be99a869db223",
+  "before_source": "def clean_rows(rows):\n    fields = tuple(rows[0])\n    cleaned = []\n    seen = set()\n    missing = 0\n    for row in rows:\n        if tuple(row) != fields:\n            raise ValueError(\"Rows must share the same fields and field order\")\n        key = tuple(row[field] for field in fields)\n        if key in seen:\n            continue\n        seen.add(key)\n        cleaned.append(dict(row))\n        missing += sum(value is None or value == \"\" for value in key)\n    return cleaned, missing\n",
+  "after_source": "def clean_rows(rows):\n    if not rows:\n        return [], 0\n    fields = tuple(rows[0])\n    cleaned = []\n    seen = set()\n    missing = 0\n    for row in rows:\n        if tuple(row) != fields:\n            raise ValueError(\"Rows must share the same fields and field order\")\n        key = tuple(row[field] for field in fields)\n        if key in seen:\n            continue\n        seen.add(key)\n        cleaned.append(dict(row))\n        missing += sum(value is None or value == \"\" for value in key)\n    return cleaned, missing\n",
+  "before": {
+    "started_at": "2026-10-15T18:37:35.172075Z",
+    "finished_at": "2026-10-15T18:37:35.373024Z",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "test_duplicate_rows (test_csv_tools.CsvChecks.test_duplicate_rows) ... ok\ntest_empty_input (test_csv_tools.CsvChecks.test_empty_input) ... ERROR\ntest_field_order (test_csv_tools.CsvChecks.test_field_order) ... ok\ntest_missing_values (test_csv_tools.CsvChecks.test_missing_values) ... ok\n\n======================================================================\nERROR: test_empty_input (test_csv_tools.CsvChecks.test_empty_input)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/mend-captured-local-yd_8wx4v/test_csv_tools.py\", line 7, in test_empty_input\n    self.assertEqual(clean_rows([]), ([], 0))\n                     ^^^^^^^^^^^^^^\n  File \"/tmp/mend-captured-local-yd_8wx4v/csv_tools.py\", line 2, in clean_rows\n    fields = tuple(rows[0])\n                   ~~~~^^^\nIndexError: list index out of range\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (errors=1)\n",
+    "checks": {
+      "total": 4,
+      "passed": 3,
+      "failed": 1,
+      "skipped": 0,
+      "results": [
+        {
+          "check_id": "test_duplicate_rows",
+          "status": "passed"
+        },
+        {
+          "check_id": "test_empty_input",
+          "status": "failed"
+        },
+        {
+          "check_id": "test_field_order",
+          "status": "passed"
+        },
+        {
+          "check_id": "test_missing_values",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "after": {
+    "started_at": "2026-10-15T18:37:35.373663Z",
+    "finished_at": "2026-10-15T18:37:35.489725Z",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_duplicate_rows (test_csv_tools.CsvChecks.test_duplicate_rows) ... ok\ntest_empty_input (test_csv_tools.CsvChecks.test_empty_input) ... ok\ntest_field_order (test_csv_tools.CsvChecks.test_field_order) ... ok\ntest_missing_values (test_csv_tools.CsvChecks.test_missing_values) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+    "checks": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "check_id": "test_duplicate_rows",
+          "status": "passed"
+        },
+        {
+          "check_id": "test_empty_input",
+          "status": "passed"
+        },
+        {
+          "check_id": "test_field_order",
+          "status": "passed"
+        },
+        {
+          "check_id": "test_missing_values",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "captured_at": "2026-10-15T18:37:35.491954Z"
+}

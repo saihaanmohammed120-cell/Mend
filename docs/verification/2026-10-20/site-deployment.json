@@ -1,0 +1,15 @@
+{
+  "id": "appgdep_6ad77eec25708191847827cd66c5aab2",
+  "project_id": "appgprj_6acb97b759148191aa98a4553d0a34ff",
+  "title": "Mend — Paper and Proof",
+  "version_id": "appgprj_6acb97b759148191aa98a4553d0a34ff~appgver_05e77f8e130c8191a18654488fef4e38",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://mend-paper-proof.bravebadge32.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6acb97b759148191aa98a4553d0a34ff",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-20T14:47:26.378937+00:00"
+}

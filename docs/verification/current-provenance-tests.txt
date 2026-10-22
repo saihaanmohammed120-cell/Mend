@@ -1,0 +1,30 @@
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+Prepared unsigned in-toto/SLSA provenance for actual local capture; authenticity is unverified.
+test_changed_artifact_rejected_before_cosign (__main__.ProvenanceTests.test_changed_artifact_rejected_before_cosign) ... ok
+test_credentials_in_source_uri_rejected (__main__.ProvenanceTests.test_credentials_in_source_uri_rejected) ... ok
+test_dirty_source_rejected_and_stale_output_removed (__main__.ProvenanceTests.test_dirty_source_rejected_and_stale_output_removed) ... ok
+test_malformed_local_profile_rejected_before_crypto_verification (__main__.ProvenanceTests.test_malformed_local_profile_rejected_before_crypto_verification) ... ok
+test_missing_real_source_uri_rejected (__main__.ProvenanceTests.test_missing_real_source_uri_rejected) ... ok
+test_missing_transparency_proof_rejected (__main__.ProvenanceTests.test_missing_transparency_proof_rejected) ... ok
+test_output_cannot_delete_any_committed_capture_input (__main__.ProvenanceTests.test_output_cannot_delete_any_committed_capture_input) ... ok
+test_output_cannot_overwrite_capture_or_artifact (__main__.ProvenanceTests.test_output_cannot_overwrite_capture_or_artifact) ... ok
+test_real_local_capture_and_source_commit_are_preserved (__main__.ProvenanceTests.test_real_local_capture_and_source_commit_are_preserved) ... ok
+test_resolved_dependencies_are_unordered (__main__.ProvenanceTests.test_resolved_dependencies_are_unordered) ... ok
+test_tampered_capture_rejected (__main__.ProvenanceTests.test_tampered_capture_rejected) ... ok
+test_unattended_signing_without_oidc_is_blocked (__main__.ProvenanceTests.test_unattended_signing_without_oidc_is_blocked) ... ok
+test_unit_mock_cosign_rejection_never_leaves_verified_status (__main__.ProvenanceTests.test_unit_mock_cosign_rejection_never_leaves_verified_status) ... ok
+test_unit_mock_exact_identity_flags_and_no_insecure_bypass (__main__.ProvenanceTests.test_unit_mock_exact_identity_flags_and_no_insecure_bypass) ... ok
+test_wrong_signed_statement_rejected (__main__.ProvenanceTests.test_wrong_signed_statement_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 1.967s
+
+OK
