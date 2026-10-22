@@ -49,6 +49,8 @@ The configured Supabase reference is `uwkdrmdflzverflcfkgk`. GitHub App access w
 
 ## Local development
 
+To publish the current frontend on Vercel, import this repository with **Root Directory `frontend`** and the Next.js preset. The versioned Vercel config uses the existing lockfile install and production build. Follow [Vercel deployment and public acceptance](docs/VERCEL_DEPLOYMENT.md); frontend deployment does not enable the gated backend/provider loop.
+
 Backend setup, existing checks and safety constraints are documented in [backend/README.md](backend/README.md). Frontend setup is documented in [frontend/README.md](frontend/README.md). Use their existing package definitions and lockfiles. Dependencies and private environment files are intentionally excluded from this source checkout.
 
 Do not enable live execution based solely on a database URL or API key. The inherited deadline, ownership, isolation, evidence and release gates remain in force. Provider acknowledgement is not infrastructure-stop evidence. The `/sample` route remains simulated. The captured CSV example records actual local Python execution with unsigned in-toto/SLSA provenance; it does not establish live Nebius execution.

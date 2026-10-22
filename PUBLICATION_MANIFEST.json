@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "30279ac41162e11eb26974a8f525d3db89b447e7",
+  "observed_parent_sha": "71d5cb15ea17348d8c551dc868824b3f64e6fe5f",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,43 +24,22 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 486,
+  "packaged_file_count_excluding_manifest": 488,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Offline hackathon completion, 2026-10-22",
+  "delivery": "Vercel frontend deployment preparation, 2026-10-22",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    ".github/workflows/checks.yml",
-    "backend/deploy/build_images.sh",
-    "backend/deploy/compose.yaml",
-    "backend/docs/DEPLOYMENT.md",
-    "backend/docs/TRUSTED_EVIDENCE_READERS.md",
-    "backend/mend/evidence_readers.py",
-    "backend/scripts/prepare_bug_case.py",
-    "backend/tests/test_bug_case_cli.py",
-    "backend/tests/test_deployment.py",
-    "backend/tests/test_evidence_readers.py",
-    "docs/BUG_CASE_REVIEW.md",
-    "docs/WALKTHROUGH.md",
-    "frontend/components/bug-desk.css",
-    "frontend/components/bug-desk.tsx",
-    "frontend/DESIGN.md",
-    "frontend/e2e/bug-desk.spec.ts",
-    "frontend/lib/bug-intake.ts",
-    "frontend/tests/bug-desk.test.ts",
-    "frontend/tests/bug-intake.test.ts",
     "README.md",
-    "backend/deploy/api.Dockerfile",
-    "backend/deploy/runner.Dockerfile",
-    "backend/deploy/spike.Dockerfile",
-    "docs/HACKATHON_SUBMISSION_2026_10_22.md"
+    "frontend/vercel.json",
+    "docs/VERCEL_DEPLOYMENT.md"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -1696,6 +1675,13 @@
       "sha256": "f68993e7e59c34cddb239e3ebcb76c6d11ac4d9386bf18abd59e9ee24da331da",
       "encoding": "utf-8",
       "git_blob_sha": "2975cf552acc95df42d3b36657c092f4c33195ec"
+    },
+    {
+      "path": "docs/VERCEL_DEPLOYMENT.md",
+      "bytes": 3474,
+      "sha256": "c9b642acb23c69c0f35fb445b4e503eef2bdec1c84ff8a035d4099dd49d19878",
+      "encoding": "utf-8",
+      "git_blob_sha": "c8e1bab636f67e96c6bc561a181891b6d3696152"
     },
     {
       "path": "docs/verification/2026-10-20/backend-full-windows.txt",
@@ -3385,6 +3371,13 @@
       "git_blob_sha": "1f51897772c98459f899086e8839bb1e04090175"
     },
     {
+      "path": "frontend/vercel.json",
+      "bytes": 147,
+      "sha256": "9fd4ea9e9bbb01391e7e946e1b2d3e2af2dd003b27067dadcdcaf4f20b799fb1",
+      "encoding": "utf-8",
+      "git_blob_sha": "8c9dacfc3a413243339d7582e1806b92ebbea45d"
+    },
+    {
       "path": "LICENSE",
       "bytes": 1075,
       "sha256": "e7cf89bd361794c7c7f1b0cc930105b9a4b865b60bdb64a98eb216e97dccb2bc",
@@ -3470,14 +3463,15 @@
     },
     {
       "path": "README.md",
-      "bytes": 10783,
-      "sha256": "ebe49c5f6939e8bffaea45fc028e1d2e92150362813425afa613a7f8e62a2447",
+      "bytes": 11140,
+      "sha256": "4de8a4b4f48916101bc90314caf363e8abc1778bcb5d0200dba78298948a2bcd",
       "encoding": "utf-8",
-      "git_blob_sha": "7895ebf818f054f8a8f76b7c6e2a8e0bf433e47f"
+      "git_blob_sha": "efe2e385e7a9b65a3ba76a9cc65ad79e40d08bfb"
     }
   ],
   "holds": {
     "live_nebius": "kept explicitly by user",
     "hosted_database_changes": "kept explicitly by user"
-  }
+  },
+  "vercel_deployment": "Authorization and actual deployment recorded separately; no hosted URL claimed by this snapshot"
 }
