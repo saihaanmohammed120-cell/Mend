@@ -9,6 +9,7 @@ from types import SimpleNamespace
 
 from mend.domain import (MendError, canonical_json, curated_contract, initial_files,
                          protected_checks_sha256, source_sha256)
+from mend.evidence_readers import PersistedTaskContext
 from mend.runner import NebiusRunner
 from mend.supervisor import canonical, sign_report
 
@@ -175,11 +176,14 @@ class EvidenceReaderTests(unittest.IsolatedAsyncioTestCase):
         report_envelope = sign_report(self.report, REPORT_KEY)
         stop_envelope = sign_report(self.stop, STOP_KEY)
         self.transport.request.side_effect = [stop_envelope, report_envelope]
+        persisted = {**self.context["task"], "source": "live", "attempts": [self.context["attempt"]]}
+        task_reader = AsyncMock(return_value=persisted)
+        context_reader = PersistedTaskContext("task-1", project_id="project-1", task_reader=task_reader)
         listing = {"items": [{"metadata": {"id": "job-1"}, "status": {
             "state": "COMPLETED", "finishedAt": self.stop["workload_finished_at"]}}]}
         runner = NebiusRunner("offline-cloud-token", "project-1", "registry/image@sha256:" + "a" * 64,
             subnet_id="subnet-1", platform="cpu-1", preset="preset-1", transport=Transport(listing, listing),
-            evidence_readers=self.readers(), clock=lambda: NOW)
+            evidence_readers=self.readers(context_reader=context_reader), clock=lambda: NOW)
         observation = await runner.observe("job-1")
         self.assertEqual(observation["status"], "passed")
         self.assertEqual(observation["runner_report"], self.report)
@@ -191,12 +195,72 @@ class EvidenceReaderTests(unittest.IsolatedAsyncioTestCase):
         await service._resolve("task-1", self.context["attempt"], observation)
         persisted = service._worker.call_args.kwargs["resolution_evidence"]
         self.assertEqual(persisted["report_verification"]["envelope_sha256"], expected_digest)
+        self.assertEqual(task_reader.await_count, 2)
+        task_reader.assert_awaited_with("task-1")
         stop_envelope["report"]["job_id"] = "wrong-job"
         self.transport.request.side_effect = [stop_envelope, report_envelope]
         observation = await runner.observe("job-1")
         self.assertEqual(observation["status"], "unknown")
         self.assertFalse(observation["termination_verified"])
         self.assertIsNone(observation["provider_stopped_at"])
+
+    async def test_persisted_context_reloads_attached_identity_for_every_read(self):
+        task = {**self.context["task"], "source": "live", "attempts": [self.context["attempt"]]}
+        task_reader = AsyncMock(return_value=task)
+        lookup = PersistedTaskContext("task-1", project_id="project-1", task_reader=task_reader)
+        readers = self.readers(context_reader=lookup)
+        self.transport.request.return_value = sign_report(self.report, REPORT_KEY)
+        self.assertEqual((await readers.report("job-1"))["runner_report"], self.report)
+        task["attempts"][0]["snapshot_sha256"] = "b" * 64
+        with self.assertRaises(MendError):
+            await readers.report("job-1")
+        self.assertEqual(task_reader.await_count, 2)
+
+    async def test_persisted_context_rejects_missing_ambiguous_foreign_and_fixture_jobs_before_http(self):
+        original = {**self.context["task"], "source": "live", "attempts": [self.context["attempt"]]}
+        invalid = [None, {**original, "id": "other-task"}, {**original, "source": "local_test"},
+            {key: value for key, value in original.items() if key != "source"},
+            {**original, "attempts": []}, {**original, "attempts": {}},
+            {**original, "attempts": [None]}, {**original, "attempts": original["attempts"] * 2},
+            {**original, "attempts": [{**self.context["attempt"], "job_id": "other-job"}]},
+            {**original, "attempts": [{**self.context["attempt"], "task_id": "other-task"}]},
+            {**original, "attempts": original["attempts"] * 5}]
+        task_reader = AsyncMock()
+        readers = self.readers(context_reader=PersistedTaskContext("task-1", project_id="project-1", task_reader=task_reader))
+        for task in invalid:
+            with self.subTest(task=task):
+                task_reader.return_value = task
+                with self.assertRaises(MendError) as caught:
+                    await readers.report("job-1")
+                self.assertEqual(caught.exception.code, "evidence_unavailable")
+        self.transport.request.assert_not_called()
+
+    async def test_persisted_context_preserves_authorization_failure_and_bounded_wait(self):
+        task_reader = AsyncMock(side_effect=MendError("lease_lost", "private lookup detail", 409))
+        readers = self.readers(context_reader=PersistedTaskContext("task-1", project_id="project-1", task_reader=task_reader), timeout=.01)
+        with self.assertRaises(MendError) as caught:
+            await readers.report("job-1")
+        self.assertNotIn("private lookup detail", str(caught.exception))
+        async def hanging(task_id):
+            await asyncio.sleep(10)
+        task_reader.side_effect = hanging
+        with self.assertRaises(MendError):
+            await readers.termination("job-1")
+        self.transport.request.assert_not_called()
+
+    async def test_persisted_context_detaches_source_and_contract_before_controller_request(self):
+        task = {**self.context["task"], "source": "live", "attempts": [self.context["attempt"]]}
+        lookup = PersistedTaskContext("task-1", project_id="project-1", task_reader=AsyncMock(return_value=task))
+        detached = await lookup("job-1")
+        task["contract"]["commands"][0]["argv"][0] = "untrusted"
+        task["attempts"][0]["snapshot_sha256"] = "b" * 64
+        self.assertNotEqual(detached["task"]["contract"], task["contract"])
+        self.assertNotEqual(detached["attempt"]["snapshot_sha256"], task["attempts"][0]["snapshot_sha256"])
+
+    def test_persisted_context_requires_explicit_async_authorized_lookup(self):
+        for reader in (None, lambda task_id: self.context):
+            with self.subTest(reader=reader), self.assertRaises(MendError):
+                PersistedTaskContext("task-1", project_id="project-1", task_reader=reader)
 
     async def test_external_cancellation_propagates_and_cancels_the_reader_wait(self):
         entered, cancelled = asyncio.Event(), asyncio.Event()

@@ -4,7 +4,16 @@ Implemented 21 October 2026: offline contract preparation, a stateless authentic
 
 ## Prepare a contract
 
-The `/fix` interface still prepares its local schema-version-one intake entirely in browser memory. It does not submit source automatically. Export that packet, then supply a proposed protected `test_regression.py` and its full unittest IDs to the offline helper:
+The `/fix` interface prepares its local schema-version-one intake entirely in browser memory. It does not upload source. As of 22 October, its optional protected-test review also collects a proposed `test_regression.py`, unique full unittest IDs and a target check. Original source and expected behavior are mandatory for that review, with a combined 200,000-byte source/test cap. Review and export `mend-bug-review-request.json`, then prepare it with:
+
+```sh
+cd backend
+python scripts/prepare_bug_case.py --request /path/to/mend-bug-review-request.json --output /path/to/new-review.json
+```
+
+The JSON has exactly the same four fields as the authenticated preparation endpoint below. The CLI rejects duplicate/extra fields, malformed JSON, mixed separate-input flags and existing output files. It preserves source/test bytes without importing or executing them. The result remains `execution_enabled=false`, `approval_status=not_approved` and `live_verification=false`. Browser fingerprints identify the exported request bytes; they do not replace backend canonical contract identities. Neither exported requests nor preparation establish that the proposed test is a valid independent oracle.
+
+The original separate-file CLI remains available. Export the intake packet, then supply a proposed protected regression and its full unittest IDs:
 
 ```sh
 cd backend

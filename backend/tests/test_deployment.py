@@ -4,10 +4,33 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+import shlex
 
 
 BACKEND = Path(__file__).resolve().parents[1]
 SCRIPT = BACKEND / "deploy" / "build_images.sh"
+
+
+class DeploymentDefinitionTests(unittest.TestCase):
+    def test_every_image_definition_and_copy_source_is_packaged(self):
+        for kind in ("api", "runner", "spike"):
+            definition = BACKEND / "deploy" / f"{kind}.Dockerfile"
+            self.assertTrue(definition.is_file(), str(definition))
+            text = definition.read_text(encoding="utf-8")
+            self.assertIn("ARG PYTHON_BASE_IMAGE\nFROM ${PYTHON_BASE_IMAGE}", text)
+            self.assertIn("USER 10001:10001", text)
+            for line in text.splitlines():
+                if line.startswith("COPY "):
+                    for source in shlex.split(line)[1:-1]:
+                        self.assertTrue((BACKEND / source).exists(), source)
+
+    def test_candidate_and_timing_images_receive_only_their_trusted_probe(self):
+        for kind, source, executable in (("runner", "mend/supervisor.py", "/opt/mend/probe.py"),
+                                         ("spike", "deploy/timing_probe.py", "/opt/mend/timing_probe.py")):
+            text = (BACKEND / "deploy" / f"{kind}.Dockerfile").read_text(encoding="utf-8")
+            self.assertEqual([shlex.split(line)[1:-1] for line in text.splitlines() if line.startswith("COPY ")], [[source]])
+            self.assertIn(f'ENTRYPOINT ["python", "-I", "{executable}"]', text)
+            self.assertNotIn("pip install", text)
 
 
 class DeploymentBuildScriptTests(unittest.TestCase):
@@ -107,6 +130,22 @@ class DeploymentBuildScriptTests(unittest.TestCase):
         result = self.run_script()
         self.assertEqual(result.returncode, 7)
         self.assertEqual(len(self.calls()), 1)
+
+    def test_missing_definition_blocks_before_any_image_build(self):
+        self.fake_docker()
+        backend = self.root / "backend"
+        deploy = backend / "deploy"
+        deploy.mkdir(parents=True)
+        copied_script = deploy / "build_images.sh"
+        copied_script.write_bytes(SCRIPT.read_bytes())
+        (backend / "requirements.runtime.lock").write_text("fixture lock")
+        for kind in ("api", "runner"):
+            (deploy / f"{kind}.Dockerfile").write_text("FROM fixture\n")
+        result = subprocess.run([self.bash, str(copied_script)], cwd=self.root,
+                                env=self.environment, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("spike.Dockerfile", result.stderr)
+        self.assertEqual(self.calls(), [])
 
 
 if __name__ == "__main__":

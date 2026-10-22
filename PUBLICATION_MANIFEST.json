@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "e1f6b0cb182663ebb6bb62527ada672306c2a062",
+  "observed_parent_sha": "30279ac41162e11eb26974a8f525d3db89b447e7",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,42 +24,61 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 482,
+  "packaged_file_count_excluding_manifest": 486,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "GitHub source snapshot, 2026-10-22",
+  "delivery": "Offline hackathon completion, 2026-10-22",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    "README.md"
+    ".github/workflows/checks.yml",
+    "backend/deploy/build_images.sh",
+    "backend/deploy/compose.yaml",
+    "backend/docs/DEPLOYMENT.md",
+    "backend/docs/TRUSTED_EVIDENCE_READERS.md",
+    "backend/mend/evidence_readers.py",
+    "backend/scripts/prepare_bug_case.py",
+    "backend/tests/test_bug_case_cli.py",
+    "backend/tests/test_deployment.py",
+    "backend/tests/test_evidence_readers.py",
+    "docs/BUG_CASE_REVIEW.md",
+    "docs/WALKTHROUGH.md",
+    "frontend/components/bug-desk.css",
+    "frontend/components/bug-desk.tsx",
+    "frontend/DESIGN.md",
+    "frontend/e2e/bug-desk.spec.ts",
+    "frontend/lib/bug-intake.ts",
+    "frontend/tests/bug-desk.test.ts",
+    "frontend/tests/bug-intake.test.ts",
+    "README.md",
+    "backend/deploy/api.Dockerfile",
+    "backend/deploy/runner.Dockerfile",
+    "backend/deploy/spike.Dockerfile",
+    "docs/HACKATHON_SUBMISSION_2026_10_22.md"
   ],
   "verification": {
-    "frontend_unit_pass": 107,
-    "production_browser_pass": 39,
-    "static_responsive_scenarios": 6,
-    "public_signed_out_scenarios": 6,
-    "typecheck": "passed",
-    "build": "passed",
-    "lint_errors": 0,
-    "backend_changed": false,
-    "backend_rerun": false,
-    "linux_ci_run": false,
-    "fragment_inspection_fail": 0,
-    "fragment_inspection_warn": 1
+    "frontend_unit_pass": 115,
+    "backend_focused_pass": 44,
+    "required_http_pass": 6,
+    "existing_browser_pass": 39,
+    "new_proposal_browser_pass": 2,
+    "actual_browser_cli_roundtrips": 2,
+    "linux_ci": "recorded separately for exact commit",
+    "image_builds": "recorded separately for exact commit"
   },
   "files": [
     {
       "path": ".github/workflows/checks.yml",
-      "bytes": 1320,
-      "sha256": "0aa1ceb763402e6a8f28003c47c95034865c2fd9af7fd7f19635bb1a8450af64",
+      "bytes": 2814,
+      "sha256": "8aec51cd78e4a4e69fc2e79d3428d2b7365e332d622e59db3b15b3d583248432",
       "encoding": "utf-8",
-      "git_blob_sha": "0d72174bb8faf94e6d1a5cd77ba749ef2909176c"
+      "git_blob_sha": "1fa72fcc1aaeea8ebb74eb1e482d2a600de0385b"
     },
     {
       "path": ".gitignore",
@@ -104,6 +123,13 @@
       "git_blob_sha": "663bfc7d6d1099ac259387846c6ce92297d30ac9"
     },
     {
+      "path": "backend/deploy/api.Dockerfile",
+      "bytes": 630,
+      "sha256": "467ec1f31dd21381c6e5d8b57d9bcd5227b28585a1abb7eeda7c5bbfe990a745",
+      "encoding": "utf-8",
+      "git_blob_sha": "34d1e8008d6b25b5f72f070ee8fe3426ac64af2e"
+    },
+    {
       "path": "backend/deploy/build-requirements.in",
       "bytes": 21,
       "sha256": "0963f8ab02ad9b822777b5fe84e27abacc80a277b9881dc139d50cc2bf075e42",
@@ -112,17 +138,31 @@
     },
     {
       "path": "backend/deploy/build_images.sh",
-      "bytes": 1741,
-      "sha256": "2c9cb9a53572d61021f3d0834f80de10a9ea73781c333c606e1c2bdd84ccf1e4",
+      "bytes": 1977,
+      "sha256": "6b27a1b570114e5da2900c8c004aba97e84d5fc28ae407bb20ced6f1191ddf2f",
       "encoding": "utf-8",
-      "git_blob_sha": "e6368ee1b6dfa78a5e149ff803e950dfea68f740"
+      "git_blob_sha": "a76673cdd02f18e7a40b2fa6f2aeff3a27b430e2"
     },
     {
       "path": "backend/deploy/compose.yaml",
-      "bytes": 1111,
-      "sha256": "f22b45b962d364ceea65102f2cffac248b0f98af3dbb78833ca3884edf289c4e",
+      "bytes": 1230,
+      "sha256": "6ff595ee433ab4145bb8f75dd66dc5c339485a28cc73813a75dc3587cd5e76e2",
       "encoding": "utf-8",
-      "git_blob_sha": "54378b5bf7b1d0ffc0074bf2dcbb9e946e6899c0"
+      "git_blob_sha": "863a6d416b427f7262a555d373993d2958b697ef"
+    },
+    {
+      "path": "backend/deploy/runner.Dockerfile",
+      "bytes": 222,
+      "sha256": "18149ab611a128d3da464362452e1d9a0d09a4474b2b2a588dfc93399f477e88",
+      "encoding": "utf-8",
+      "git_blob_sha": "30ecfa1912c01cddedb97b6400898187f26b72fe"
+    },
+    {
+      "path": "backend/deploy/spike.Dockerfile",
+      "bytes": 243,
+      "sha256": "a969bebd216d10aceb8018241a270672567939b6a77f1b9f23f88d39c12bfb81",
+      "encoding": "utf-8",
+      "git_blob_sha": "68ba8e6f39416d393386c391f64bb5d203947016"
     },
     {
       "path": "backend/deploy/timing_probe.py",
@@ -308,10 +348,10 @@
     },
     {
       "path": "backend/docs/DEPLOYMENT.md",
-      "bytes": 13752,
-      "sha256": "2f8dd402feeb54c54668dbe5762a6882180b0697faf67aeba5bc5e59803614eb",
+      "bytes": 14293,
+      "sha256": "205d7a9c1b1f6156b2d1fa7e31b002177831b89b21a74048ad905e3979735b47",
       "encoding": "utf-8",
-      "git_blob_sha": "c89373a535e383751eaaab19431ddf496754bb89"
+      "git_blob_sha": "1fa638a1a0306fa52dd519635396f7bd4b7a01f8"
     },
     {
       "path": "backend/docs/FRONTEND_ACCEPTANCE.md",
@@ -336,10 +376,10 @@
     },
     {
       "path": "backend/docs/TRUSTED_EVIDENCE_READERS.md",
-      "bytes": 6567,
-      "sha256": "56c821652a5f230e6413ccf5fb4f0c5378e34650296ef2071bddd75990cadae7",
+      "bytes": 9826,
+      "sha256": "3646e1b9cdcba3b56ddc1a8c57c7c5919f1d493c11d806833d5fe3667e5fd820",
       "encoding": "utf-8",
-      "git_blob_sha": "5288a69f5b3acd22b53e503f6e327668360d550e"
+      "git_blob_sha": "f64aa7cc44e2f41133bdea5d4495f638969b4bae"
     },
     {
       "path": "backend/docs/verification/browser-client.txt",
@@ -903,10 +943,10 @@
     },
     {
       "path": "backend/mend/evidence_readers.py",
-      "bytes": 8744,
-      "sha256": "e56024395854d043cad8eaf7a6571118d5f38251e9b6b186d28f1e09aaf8a011",
+      "bytes": 10345,
+      "sha256": "3941daac1bf7dce3173530554e3594b18c0d6d7e278a571106f684d7d144c01d",
       "encoding": "utf-8",
-      "git_blob_sha": "38616cedac5a23f4f6bc0147d1720f20b3335189"
+      "git_blob_sha": "fede5381d7248a6e360091bc4c33210ec6c86c54"
     },
     {
       "path": "backend/mend/fakes.py",
@@ -1099,10 +1139,10 @@
     },
     {
       "path": "backend/scripts/prepare_bug_case.py",
-      "bytes": 1879,
-      "sha256": "f8585d61af505df9b38c192dfd86a75a312a557c1dc5e2ed271a05201e2bc18b",
+      "bytes": 2741,
+      "sha256": "13ef3bd490fd84965c20262a6fb67d30c3c6af26f46295ef30a74bf33429f18a",
       "encoding": "utf-8",
-      "git_blob_sha": "053edf99f18f4d3ddb468081f6acc63e0eff6dad"
+      "git_blob_sha": "5fca36e643a901a5901196714a7fca8d0a41be90"
     },
     {
       "path": "backend/scripts/verify_app_database.py",
@@ -1162,10 +1202,10 @@
     },
     {
       "path": "backend/tests/test_bug_case_cli.py",
-      "bytes": 2381,
-      "sha256": "73d45ae082fb38be99dbf54ef67834a7fbefd1de1ec9cda6234826a8dfe73b23",
+      "bytes": 5194,
+      "sha256": "0ac97e5682aee5873b0995b184b8abe382a9ee08ebdd389c7d72406657394a5e",
       "encoding": "utf-8",
-      "git_blob_sha": "9a8462951aedccd80cb345923a39913edeb071f8"
+      "git_blob_sha": "e49d4c9c01d12e967aeef65742c6dc9ad03a7943"
     },
     {
       "path": "backend/tests/test_bug_cases.py",
@@ -1204,17 +1244,17 @@
     },
     {
       "path": "backend/tests/test_deployment.py",
-      "bytes": 4504,
-      "sha256": "bb09f95be0ee23dbb5180ffb69a44c96821a219f27a6e266ca1715af679d4eee",
+      "bytes": 6702,
+      "sha256": "f55e5c9aee272f3e4616f1f56434bdb4d60e5f5daae5f1aefb60f55f371ff438",
       "encoding": "utf-8",
-      "git_blob_sha": "c7d67eb645efa821140aae3981624ae4de92f2a9"
+      "git_blob_sha": "c6be26eacb8edc732294eb5774d4a3ee187b1ebc"
     },
     {
       "path": "backend/tests/test_evidence_readers.py",
-      "bytes": 14593,
-      "sha256": "0131cd9a1530ba689ecac1336e597e3cbb11b1b595f9f3980e1f989a72e4da88",
+      "bytes": 18846,
+      "sha256": "3ad3d80a90f2ff5307512ce6e128710fba2594aa17438949cddec73dd07bf309",
       "encoding": "utf-8",
-      "git_blob_sha": "4e49efb89abe036580417a26516b828ae54aaf82"
+      "git_blob_sha": "2c8b3a5e2358f29b9b1540064b5bd0f189770206"
     },
     {
       "path": "backend/tests/test_http.py",
@@ -1351,10 +1391,10 @@
     },
     {
       "path": "docs/BUG_CASE_REVIEW.md",
-      "bytes": 6063,
-      "sha256": "16aad9df206582a0fde660a3340f49cc3e05cadf33f5b1b6b4c702db85f5897a",
+      "bytes": 7140,
+      "sha256": "6d2b5020fc243829a65741fea2b84712cf384a61e9558f8a31a081de2accb34c",
       "encoding": "utf-8",
-      "git_blob_sha": "3fc193bac4bc364bf8a83c5071053243ccc3775f"
+      "git_blob_sha": "87effb4f8beb3f151c27d1d9410f87199d97a7ba"
     },
     {
       "path": "docs/BUG_FIX_WORKFLOW_DELTA.md",
@@ -1439,6 +1479,13 @@
       "sha256": "59f96a1a9822fb8c50c3d3069fdb275822c3c8be640025ba96bf29df4b1d87f6",
       "encoding": "utf-8",
       "git_blob_sha": "846e6702dae2daa857afe5922f933bc29a8eca07"
+    },
+    {
+      "path": "docs/HACKATHON_SUBMISSION_2026_10_22.md",
+      "bytes": 10774,
+      "sha256": "7e67b5152698f71f9356780e5831568bc312b7ed81835023ebbd531573bffa48",
+      "encoding": "utf-8",
+      "git_blob_sha": "1228c05dc3499eef660b69956788ff0e98b0c9c0"
     },
     {
       "path": "docs/HERO_POLISH_REVIEW.md",
@@ -2520,10 +2567,10 @@
     },
     {
       "path": "docs/WALKTHROUGH.md",
-      "bytes": 5089,
-      "sha256": "947b72638ac87c1907c1e5623ca711c52e91e0d37d94d1232ea3540b2385cc20",
+      "bytes": 11455,
+      "sha256": "cdbf8d052d434f57a31aa16c8517c15279a51dd2a02543fb696c2298b1a42c07",
       "encoding": "utf-8",
-      "git_blob_sha": "d2f66ee510bb726a0bd7debfbd6bbdaaae1f8465"
+      "git_blob_sha": "8dd1887ca2d755404a9fc30fdf17ade73925cb7c"
     },
     {
       "path": "frontend/.env.example",
@@ -2625,17 +2672,17 @@
     },
     {
       "path": "frontend/components/bug-desk.css",
-      "bytes": 9206,
-      "sha256": "8be0ce56fa28517031c82c65ad2a6f901c77719d2f9cebfab0e36919dd3219b6",
+      "bytes": 9593,
+      "sha256": "aa70e4404ec019435be49f7036c75eb9f6d29c05bf48939ff4ca536a1b7f4bf1",
       "encoding": "utf-8",
-      "git_blob_sha": "d4ce0a8bb1f9bbf379b2d74e7078af65306c9561"
+      "git_blob_sha": "80d724509fbd30f900ce4478f8f64612018db609"
     },
     {
       "path": "frontend/components/bug-desk.tsx",
-      "bytes": 15306,
-      "sha256": "28ad1d4335850b8289f0fbf145c58330b54897ea16945a2839540c5146c0da39",
+      "bytes": 20531,
+      "sha256": "b58bc1121f6a6f564da1087ba4ddf2cfa88f2d58747899eb7b4006f7cb63a7da",
       "encoding": "utf-8",
-      "git_blob_sha": "2153a0212568fc80cc64963961520155e7781111"
+      "git_blob_sha": "05b67a77c7f948220f0c2ca8fd896c7467959bed"
     },
     {
       "path": "frontend/components/captured-workspace.tsx",
@@ -2758,17 +2805,17 @@
     },
     {
       "path": "frontend/DESIGN.md",
-      "bytes": 9544,
-      "sha256": "a06d777d0f630e233e578571126755ea228ec6f3cff247f89feca462f5856621",
+      "bytes": 10495,
+      "sha256": "19ecfa8171d9b60eb745c478aa174b0361c114dab45f0720065b9b227e5b239d",
       "encoding": "utf-8",
-      "git_blob_sha": "c3c0b32572ec1fdbfee09832a7375f8960488ca3"
+      "git_blob_sha": "2585af84a21cc1eb3bb49d7b00df9ba07408ed15"
     },
     {
       "path": "frontend/e2e/bug-desk.spec.ts",
-      "bytes": 7073,
-      "sha256": "ddcf5bc4c030a7428e456110b177c4734b0bfef1954db5474fc17dc272c36689",
+      "bytes": 11687,
+      "sha256": "1d7f31a2316270cd381dccb19e9e4edf3925654a8b347f95a2ae852ceaa0a711",
       "encoding": "utf-8",
-      "git_blob_sha": "62ac4302df8ee19cd613d0a321728ac2d13e09a6"
+      "git_blob_sha": "78fe1aa4c100496b8a30141c2b8a0a74524a637e"
     },
     {
       "path": "frontend/e2e/hero.spec.ts",
@@ -2856,10 +2903,10 @@
     },
     {
       "path": "frontend/lib/bug-intake.ts",
-      "bytes": 5189,
-      "sha256": "0b0a18f93695161b254217b80874bc37a797faf3255bd82eaad706ff2028f17c",
+      "bytes": 9098,
+      "sha256": "c0c3b89b31ce6443c55182e8e7e2d0c1a7515bd0d620ddaae1f0fd216077dc66",
       "encoding": "utf-8",
-      "git_blob_sha": "57bc987b21bc4fe6040c30149b2b7d3dc4627f9c"
+      "git_blob_sha": "78c6b255cc79e893f1dac54fd4dc94f0c65e39c0"
     },
     {
       "path": "frontend/lib/captured-example.json",
@@ -3220,17 +3267,17 @@
     },
     {
       "path": "frontend/tests/bug-desk.test.ts",
-      "bytes": 8848,
-      "sha256": "e2689be55abe0b7b3c63b78b0295355b3d270e42eec680483e81d0ce07718d29",
+      "bytes": 12078,
+      "sha256": "b929bb8fa23add1a00a12fa93ec5e33335ecefad2b11c412882c3fbe94fb2c44",
       "encoding": "utf-8",
-      "git_blob_sha": "84b6b209d007888b04730c1b2a31c5f2a206f7c3"
+      "git_blob_sha": "901cf473784d2799540e1a46555fb97b33606f3f"
     },
     {
       "path": "frontend/tests/bug-intake.test.ts",
-      "bytes": 9513,
-      "sha256": "cbe9291631e3e13fb1c6cd5cd2be6487f243d064598723a46abfbaa363585814",
+      "bytes": 13865,
+      "sha256": "e7d60fde0c3d8caa6679758fc5986fab978ec46a4506e1bb27a5211e1987d1f8",
       "encoding": "utf-8",
-      "git_blob_sha": "c6b284e8a92cb4a5cbaaeb44f769056ee3807785"
+      "git_blob_sha": "02be1957f10ff664363114ab1a44f6c977d67fe4"
     },
     {
       "path": "frontend/tests/captured-example.test.py",
@@ -3423,10 +3470,14 @@
     },
     {
       "path": "README.md",
-      "bytes": 9728,
-      "sha256": "2e1001cee464dc5c6465c1976204e83d85b6955d803e18267f00b1e53f955055",
+      "bytes": 10783,
+      "sha256": "ebe49c5f6939e8bffaea45fc028e1d2e92150362813425afa613a7f8e62a2447",
       "encoding": "utf-8",
-      "git_blob_sha": "99c81f478e677ed9eac8d899c4ddae3415da3af6"
+      "git_blob_sha": "7895ebf818f054f8a8f76b7c6e2a8e0bf433e47f"
     }
-  ]
+  ],
+  "holds": {
+    "live_nebius": "kept explicitly by user",
+    "hosted_database_changes": "kept explicitly by user"
+  }
 }

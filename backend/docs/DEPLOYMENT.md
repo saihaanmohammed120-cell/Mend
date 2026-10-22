@@ -1,6 +1,6 @@
 # Mend deployment preparation
 
-This is a runnable configuration preparation guide, not a completed deployment report. No provider resources, public repository or public website deployment were created by this package.
+This is a configuration preparation guide, not an authenticated application deployment report. The public MIT source and static Site exist; the provider-backed full-stack workflow remains gated. On 22 October, missing API/runner/spike Dockerfiles were restored and packaging regression checks added. The offline CI now builds all three images against a verified digest-pinned official Python base and checks non-root imports/readability without running services, generated code, timing probes or provider calls. Consult the exact commit's Actions result before treating those image checks as passed.
 
 ## 1. Local baseline
 
@@ -48,7 +48,7 @@ API binds host loopback only; an external HTTPS proxy is required. The files con
 
 Do not treat `/healthz` as a live-provider verification: it reports process liveness. `/readyz` exposes configuration blockers, with provider verification explicitly not established by that endpoint. Healthchecks may be healthy while release remains blocked.
 
-The API Dockerfile installs `requirements.runtime.lock` with `--require-hashes`, then the project with `--no-deps --no-build-isolation`. The lock includes build tooling from `deploy/build-requirements.in`; hash installation, dependency consistency and backend regressions were checked in a separate Python environment. Docker installation of that lock remains unverified. The lock was resolved for CPython 3.12/Linux x86-64; other target platforms need their own validation. `build_images.sh` requires a digest-pinned base and stops on the first build failure; direct Dockerfiles retain a floating convenience default and are not an immutable release path. Verify resulting API/runner/spike image digests before using them. Compose env files are server-only. Never build them into an image, print expanded secret-bearing Compose output, or inject them into generated-code jobs.
+The API Dockerfile installs `requirements.runtime.lock` with `--require-hashes`, then the project with `--no-deps --no-build-isolation`. The lock includes build tooling from `deploy/build-requirements.in`. It was resolved for CPython 3.12/Linux x86-64; other target platforms need separate validation. All Dockerfiles require a caller-supplied `PYTHON_BASE_IMAGE`; the build helper requires its digest-pinned form, verifies all definitions exist before building any image and stops on the first build failure. Compose explicitly passes the supplied base. Runner/timing images copy only their respective trusted probe and receive no API package, runtime dependencies or secrets. CI image smoke checks do not establish volume persistence, API startup, provider isolation or stop timing. Verify resulting API/runner/spike image digests before deployment. Compose env files are server-only. Never build them into an image, print expanded secret-bearing Compose output, or inject them into generated-code jobs.
 
 ## 4.1. Scaling boundaries
 

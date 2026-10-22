@@ -60,7 +60,7 @@ function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInput
   function render() {
     index = 0; effects = []; tree = exports.BugDesk!();
     for (const node of nodes()) {
-      const target = { focus: () => { focused = String(node.props.name ?? node.props.className); }, closest: () => ["source", "filePath"].includes(String(node.props.name)) ? disclosure : null };
+      const target = { focus: () => { focused = String(node.props.name ?? node.props.className); }, closest: () => ["source", "filePath", "protectedTestSource", "requiredCheckIds", "targetCheckId"].includes(String(node.props.name)) ? disclosure : null };
       if (typeof node.props.ref === "function") node.props.ref(target);
       else if (node.props.ref && typeof node.props.ref === "object") (node.props.ref as { current: unknown }).current = target;
     }
@@ -70,7 +70,7 @@ function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInput
     const button = nodes().find(node => node.type === "button" && (node.props["aria-label"] === label || text(node).trim() === label));
     assert.ok(button, `Missing button ${label}`); (button.props.onClick as () => void)(); render();
   }
-  function change(field: keyof intake.BugDraft, value: string) {
+  function change(field: keyof intake.BugReviewDraft, value: string) {
     const node = nodes().find(node => node.props.name === field)!;
     (node.props.onChange as (event: unknown) => void)({ target: { value } }); render();
   }
@@ -130,4 +130,58 @@ test("unavailable fingerprints and blocked downloads retain the reviewed input h
   h.failDownloads(); h.click("Download intake JSON");
   assert.ok(h.text().includes("Download could not start. Your review is intact; retry below."));
   assert.ok(h.text().includes("Exact error")); assert.equal(h.timers.size, 0); assert.deepEqual(h.revoked, ["blob:desk-1"]);
+});
+
+function proposedChecks(h: ReturnType<typeof desk>) {
+  h.click("Load captured input");
+  h.change("protectedTestSource", "# 😀\r\nimport unittest\r\n");
+  h.change("requiredCheckIds", "test_regression.CsvChecks.test_empty_input");
+  h.change("targetCheckId", "test_regression.CsvChecks.test_empty_input");
+}
+
+test("protected-test review exports its exact proposal separately from the schema-one intake", async () => {
+  const h = desk(); proposedChecks(h); h.click("Review protected-test request"); await h.settle();
+  assert.equal(h.focused, "bug-review"); assert.ok(h.text().includes("Unapproved and not executed."));
+  h.click("Download review request JSON");
+  const request = JSON.parse(await h.blobs[0].text());
+  assert.deepEqual(Object.keys(request), ["intake", "protected_test_source", "required_check_ids", "target_check_id"]);
+  assert.equal(request.protected_test_source, "# 😀\r\nimport unittest\r\n");
+  assert.equal(request.intake.original_source, capture.before_source);
+  h.click("Download intake JSON");
+  assert.deepEqual(JSON.parse(await h.blobs[1].text()), request.intake);
+  h.click("Change proposed test source"); assert.equal(h.focused, "protectedTestSource"); assert.ok(h.disclosure.open);
+  h.unmount(); assert.deepEqual(h.revoked, ["blob:desk-1", "blob:desk-2"]);
+});
+
+test("each proposed-field edit invalidates review, export and late input identities", async () => {
+  for (const field of ["protectedTestSource", "requiredCheckIds", "targetCheckId"] as const) {
+    let resolve!: (value: intake.BugInputIdentity) => void;
+    const h = desk(() => new Promise(done => { resolve = done; }));
+    proposedChecks(h); h.click("Review protected-test request");
+    h.change(field, "Changed proposal"); resolve(identity); await h.settle();
+    assert.ok(!h.text().includes("Download review request JSON"));
+    assert.ok(!h.text().includes("Download intake JSON"));
+    assert.ok(!h.text().includes(identity.intake_json_sha256)); h.unmount();
+  }
+});
+
+test("clear and undo preserve protected inputs but require another explicit request review", async () => {
+  const h = desk(); proposedChecks(h); h.click("Review protected-test request");
+  h.click("Clear fields"); h.click("Undo clear");
+  assert.ok(!h.text().includes("Download review request JSON"));
+  h.click("Review intake");
+  assert.ok(!h.text().includes("Download review request JSON"));
+  h.click("Review protected-test request"); h.click("Download review request JSON");
+  const request = JSON.parse(await h.blobs[0].text());
+  assert.equal(request.protected_test_source, "# 😀\r\nimport unittest\r\n");
+  assert.deepEqual(request.required_check_ids, ["test_regression.CsvChecks.test_empty_input"]);
+  h.unmount();
+});
+
+test("invalid protected proposal focuses the error summary and never exposes request export", () => {
+  const h = desk(); h.click("Review protected-test request");
+  assert.equal(h.focused, "bug-errors");
+  assert.ok(h.text().includes("Add the proposed test_regression.py source."));
+  assert.ok(h.text().includes("Choose a target check ID from the required checks."));
+  assert.ok(!h.text().includes("Download review request JSON")); h.unmount();
 });

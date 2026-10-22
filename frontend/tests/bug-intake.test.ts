@@ -1,9 +1,68 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { beginBugIntakeDownload, fingerprintBugIntake, prepareBugIntake, previewSource, serializeBugIntake, PREVIEW_LINE_LIMIT, PREVIEW_CHARACTER_LIMIT, type BugDraft, type BugDownloadEnvironment } from "../lib/bug-intake";
+import { beginBugIntakeDownload, beginBugReviewRequestDownload, fingerprintBugIntake, prepareBugIntake, prepareBugReviewRequest, previewSource, serializeBugIntake, serializeBugReviewRequest, PREVIEW_LINE_LIMIT, PREVIEW_CHARACTER_LIMIT, type BugDraft, type BugReviewDraft, type BugDownloadEnvironment } from "../lib/bug-intake";
 
 const blank: BugDraft = { filePath: "", errorMessage: "", source: "", expectedBehavior: "" };
+const reviewDraft: BugReviewDraft = { ...blank, filePath: "sample.py", source: "# é\r\nvalue = 1\r\n", expectedBehavior: "Returns two", protectedTestSource: "# 😀\r\nimport unittest\r\n", requiredCheckIds: "test_regression.Checks.test_value\n test_regression.Checks.test_other ", targetCheckId: "test_regression.Checks.test_value" };
+
+test("protected review request preserves exact source and backend input shape without creating a contract", async () => {
+  const result = prepareBugReviewRequest(reviewDraft);
+  assert.ok(result.ok);
+  if (!result.ok) return;
+  assert.deepEqual(Object.keys(result.request), ["intake", "protected_test_source", "required_check_ids", "target_check_id"]);
+  assert.equal(result.request.intake.original_source, reviewDraft.source);
+  assert.equal(result.request.protected_test_source, reviewDraft.protectedTestSource);
+  assert.deepEqual(result.request.required_check_ids, ["test_regression.Checks.test_value", "test_regression.Checks.test_other"]);
+  assert.equal(result.request.intake.schema_version, 1);
+  const fixture = downloadFixture();
+  beginBugReviewRequestDownload(result.request, fixture.browser);
+  assert.equal(fixture.anchor.download, "mend-bug-review-request.json");
+  assert.equal(await fixture.getBlob()!.text(), serializeBugReviewRequest(result.request));
+  assert.deepEqual(new Uint8Array(await fixture.getBlob()!.arrayBuffer()), new TextEncoder().encode(serializeBugReviewRequest(result.request)));
+  assert.deepEqual(JSON.parse(await fixture.getBlob()!.text()), result.request);
+  const failed = downloadFixture("click");
+  assert.throws(() => beginBugReviewRequestDownload(result.request, failed.browser));
+  assert.equal(failed.events.at(-1), "revoke");
+});
+
+test("protected request requires source, expected behavior and an importable distinct module", () => {
+  for (const [field, value] of [["source", " \n"], ["expectedBehavior", " "], ["protectedTestSource", ""], ["filePath", "class.py"], ["filePath", "True.py"], ["filePath", "__init__.py"], ["filePath", "test_regression.py"]] as const) {
+    const result = prepareBugReviewRequest({ ...reviewDraft, [field]: value });
+    assert.equal(result.ok, false, `${field}: ${value}`);
+    if (!result.ok) assert.ok(result.issues[field]);
+  }
+  assert.ok(prepareBugIntake({ ...blank, errorMessage: "Error only" }).ok);
+});
+
+test("protected request rejects missing, malformed, duplicate or excessive check IDs and an absent target", () => {
+  for (const requiredCheckIds of ["", "Checks.test_value", "test_regression.Checks.test_value.extra", "test_regression.Checks.test_value\n test_regression.Checks.test_value ", "test_regression.C." + "a".repeat(200), Array.from({ length: 65 }, (_, i) => `test_regression.Checks.test_${i}`).join("\n")]) {
+    const result = prepareBugReviewRequest({ ...reviewDraft, requiredCheckIds });
+    assert.equal(result.ok, false, requiredCheckIds);
+    if (!result.ok) assert.ok(result.issues.requiredCheckIds);
+  }
+  for (const targetCheckId of ["", "test_regression.Checks.test_missing"]) {
+    const result = prepareBugReviewRequest({ ...reviewDraft, targetCheckId });
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.ok(result.issues.targetCheckId);
+  }
+  assert.ok(prepareBugReviewRequest({ ...reviewDraft, requiredCheckIds: Array.from({ length: 64 }, (_, i) => `test_regression.Checks.test_${i}`).join("\n"), targetCheckId: "test_regression.Checks.test_0" }).ok);
+});
+
+test("protected request enforces combined exact UTF-8 cap and valid proposed text", () => {
+  const source = "x".repeat(100_000), protectedTestSource = "é".repeat(50_000);
+  assert.ok(prepareBugReviewRequest({ ...reviewDraft, source, protectedTestSource }).ok);
+  const oversized = prepareBugReviewRequest({ ...reviewDraft, source, protectedTestSource: protectedTestSource + "x" });
+  assert.equal(oversized.ok, false);
+  if (!oversized.ok) assert.ok(oversized.issues.protectedTestSource);
+  for (const field of ["protectedTestSource", "requiredCheckIds", "targetCheckId"] as const) {
+    for (const value of ["\ud800", "x\0"]) {
+      const result = prepareBugReviewRequest({ ...reviewDraft, [field]: value });
+      assert.equal(result.ok, false);
+      if (!result.ok) assert.ok(result.issues[field]);
+    }
+  }
+});
 
 test("local identities bind exact UTF-8 source and downloaded JSON without changing schema one", async () => {
   const result = prepareBugIntake({ ...blank, filePath: "sample.py", source: "# 😀\r\nprint('é')\r\n", errorMessage: "Reported error" });

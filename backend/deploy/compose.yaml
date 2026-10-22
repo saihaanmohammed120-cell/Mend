@@ -4,6 +4,8 @@ x-server: &server
   build:
     context: ..
     dockerfile: deploy/api.Dockerfile
+    args:
+      PYTHON_BASE_IMAGE: ${PYTHON_BASE_IMAGE:?Set an independently verified digest-pinned Python base image}
   env_file:
     - ../.env
   environment:

@@ -96,6 +96,69 @@ test("source validation opens the exact field and rejects oversized UTF-8 input"
   await expect(page.getByRole("button", { name: "Download intake JSON", exact: true })).toHaveCount(0);
 });
 
+for (const width of [390, 1440]) {
+  test(`protected-test proposal reviews and exports offline at ${width}px`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", error => errors.push(error.message));
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/fix");
+    await page.getByRole("button", { name: "Load captured input", exact: true }).click();
+    await page.locator(".bug-protected-editor > summary").click();
+    const review = page.getByRole("button", { name: "Review protected-test request", exact: true });
+    await review.click();
+    const issue = page.getByTestId("bug-desk").getByRole("alert");
+    await expect(issue).toBeFocused();
+    await issue.getByRole("link", { name: "Add the proposed test_regression.py source.", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#bug-protectedTestSource")).toBeFocused();
+    const proposed = "# Proposed only: é 😀\nimport unittest\nfrom csv_tools import clean_rows\n\nclass CsvChecks(unittest.TestCase):\n    def test_empty_input(self):\n        self.assertEqual(clean_rows([]), ([], 0))\n";
+    const checkId = "test_regression.CsvChecks.test_empty_input";
+    await page.locator("#bug-protectedTestSource").fill(proposed);
+    await page.locator("#bug-requiredCheckIds").fill(`${checkId}\n${checkId}`);
+    await page.locator("#bug-targetCheckId").fill("test_regression.CsvChecks.test_missing");
+    await review.click();
+    await expect(issue).toContainText("Each required check ID must be unique.");
+    await expect(issue).toContainText("Choose a target check ID from the required checks.");
+    await expect(page.getByRole("button", { name: "Download review request JSON", exact: true })).toHaveCount(0);
+    await page.locator("#bug-requiredCheckIds").fill(checkId);
+    await page.locator("#bug-targetCheckId").fill(checkId);
+    await review.click();
+    await expect(page.locator(".bug-review")).toBeFocused();
+    await expect(page.locator(".bug-protected-review")).toContainText("Unapproved and not executed.");
+    await page.locator("summary").filter({ hasText: "Inspect protected test source" }).click();
+    await expect(page.getByRole("region", { name: "Reviewed proposed test source", exact: true })).toContainText("class CsvChecks");
+    const waiting = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Download review request JSON", exact: true }).click();
+    const download = await waiting;
+    expect(download.suggestedFilename()).toBe("mend-bug-review-request.json");
+    await download.saveAs(test.info().outputPath("mend-bug-review-request.json"));
+    await page.screenshot({ path: test.info().outputPath("protected-review.png"), fullPage: true });
+    const bytes = readFileSync((await download.path())!);
+    const request = JSON.parse(bytes.toString("utf8"));
+    expect(Object.keys(request)).toEqual(["intake", "protected_test_source", "required_check_ids", "target_check_id"]);
+    expect(request.protected_test_source).toBe(proposed);
+    expect(request.intake.original_source).toBe(capture.before_source);
+    expect(request.required_check_ids).toEqual([checkId]);
+    expect(request.target_check_id).toBe(checkId);
+    expect(bytes.equals(Buffer.from(JSON.stringify(request, null, 2) + "\n", "utf8"))).toBe(true);
+    await page.getByRole("button", { name: "Change proposed test source", exact: true }).click();
+    await expect(page.locator("#bug-protectedTestSource")).toBeFocused();
+    await page.locator("#bug-protectedTestSource").fill(proposed + "\n");
+    await expect(page.getByRole("button", { name: "Download review request JSON", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Download intake JSON", exact: true })).toHaveCount(0);
+    await page.getByRole("button", { name: "Clear fields", exact: true }).click();
+    await page.getByRole("button", { name: "Undo clear", exact: true }).click();
+    await expect(page.locator("#bug-protectedTestSource")).toHaveValue(proposed + "\n");
+    await expect(page.getByRole("button", { name: "Download review request JSON", exact: true })).toHaveCount(0);
+    expect(await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length }))).toEqual({ local: 0, session: 0 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.reload();
+    await expect(page.locator("#bug-protectedTestSource")).toHaveValue("");
+    expect(errors).toEqual([]);
+  });
+}
+
 test.describe("before hydration", () => {
   test.use({ javaScriptEnabled: false });
   test("private inputs have no native form submission path", async ({ page }) => {

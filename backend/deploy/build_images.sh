@@ -27,6 +27,12 @@ if [[ ! -s "$task_backend_root/requirements.runtime.lock" ]]; then
   printf '%s\n' 'Blocked: the hashed API runtime dependency lock is missing or empty.' >&2
   exit 2
 fi
+for task_kind in api runner spike; do
+  if [[ ! -s "$task_backend_root/deploy/$task_kind.Dockerfile" ]]; then
+    printf 'Blocked: deploy/%s.Dockerfile is missing or empty; no images were built.\n' "$task_kind" >&2
+    exit 2
+  fi
+done
 
 docker build --build-arg "PYTHON_BASE_IMAGE=$task_python_base" --tag "$task_api_tag" --file "$task_backend_root/deploy/api.Dockerfile" "$task_backend_root"
 docker build --build-arg "PYTHON_BASE_IMAGE=$task_python_base" --tag "$task_runner_tag" --file "$task_backend_root/deploy/runner.Dockerfile" "$task_backend_root"

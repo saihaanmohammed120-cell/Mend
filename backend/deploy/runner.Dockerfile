@@ -1,0 +1,7 @@
+ARG PYTHON_BASE_IMAGE
+FROM ${PYTHON_BASE_IMAGE}
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /input
+COPY mend/supervisor.py /opt/mend/probe.py
+USER 10001:10001
+ENTRYPOINT ["python", "-I", "/opt/mend/probe.py"]

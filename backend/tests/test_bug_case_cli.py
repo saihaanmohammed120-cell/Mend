@@ -11,6 +11,45 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "prepare_bug_case.py"
 
 
 class BugCaseCliTests(unittest.TestCase):
+    def test_browser_review_request_prepares_exact_sources_without_execution(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            intake = {"kind": "mend_bug_intake", "schema_version": 1, "file_path": "helper.py",
+                      "original_source": "# é 😀\r\nraise RuntimeError('Must never run')\r\n",
+                      "reported_error": "failure", "expected_behavior": "Return one",
+                      "evidence": {"investigation": "not_run", "execution": "not_run", "regression": "not_generated"}}
+            request = {"intake": intake, "protected_test_source": "raise RuntimeError('Never run checks')\r\n",
+                       "required_check_ids": ["test_regression.Checks.test_value"],
+                       "target_check_id": "test_regression.Checks.test_value"}
+            source, output = root / "request.json", root / "review.json"
+            source.write_bytes(json.dumps(request, ensure_ascii=False).encode("utf-8"))
+            args = [sys.executable, str(SCRIPT), "--request", str(source), "--output", str(output)]
+            run = subprocess.run(args, capture_output=True, text=True, timeout=10)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            prepared = json.loads(output.read_bytes())
+            self.assertEqual(prepared["intake"], intake)
+            self.assertEqual(prepared["contract"]["protected_files"]["test_regression.py"], request["protected_test_source"])
+            self.assertFalse(prepared["execution_enabled"])
+            self.assertEqual(prepared["approval_status"], "not_approved")
+            self.assertFalse(prepared["live_verification"])
+            frozen = output.read_bytes()
+            self.assertEqual(subprocess.run(args, capture_output=True, timeout=10).returncode, 2)
+            self.assertEqual(output.read_bytes(), frozen)
+
+    def test_request_rejects_extra_duplicate_or_mixed_inputs_without_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, output = root / "request.json", root / "review.json"
+            args = [sys.executable, str(SCRIPT), "--request", str(source), "--output", str(output)]
+            for content in ['{"intake":{},"intake":{}}', '{"extra":true}', '[]', '{"intake":']:
+                source.write_text(content, encoding="utf-8")
+                self.assertEqual(subprocess.run(args, capture_output=True, timeout=10).returncode, 2)
+                self.assertFalse(output.exists())
+            source.write_text("{}", encoding="utf-8")
+            run = subprocess.run(args + ["--check", "test_regression.Checks.test_value"], capture_output=True, timeout=10)
+            self.assertEqual(run.returncode, 2)
+            self.assertFalse(output.exists())
+
     def test_cli_preserves_source_and_refuses_existing_or_duplicate_key_output(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

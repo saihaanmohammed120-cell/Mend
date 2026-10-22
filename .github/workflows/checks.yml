@@ -14,6 +14,25 @@ env:
   NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
+  images:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      # Official library/python index; body digest verified on 22 October 2026.
+      PYTHON_BASE_IMAGE: python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: bash deploy/build_images.sh
+      - name: Check isolated image imports without starting services or workloads
+        run: |
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --entrypoint python mend-api:local -c 'import os, mend.bootstrap; assert os.getuid() == 10001; print("API imports as non-root; no application factory called")'
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --entrypoint python mend-runner:local -I -c 'import os, pathlib; assert os.getuid() == 10001; compile(pathlib.Path("/opt/mend/probe.py").read_text(), "probe.py", "exec"); print("Runner probe readable; workload not executed")'
+          docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --entrypoint python mend-spike:local -I -c 'import os, pathlib; assert os.getuid() == 10001; compile(pathlib.Path("/opt/mend/timing_probe.py").read_text(), "timing_probe.py", "exec"); print("Timing probe readable; workload not executed")'
   backend:
     runs-on: ubuntu-24.04
     timeout-minutes: 10

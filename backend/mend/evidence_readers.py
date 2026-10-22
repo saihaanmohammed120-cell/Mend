@@ -24,6 +24,35 @@ from .termination import aware, confirmed_stop
 from .transport import JsonTransport
 
 
+class PersistedTaskContext:
+    """Bind a worker-authorized persisted task read to one configured task.
+
+    task_reader(task_id) must read durable state and enforce its owner or worker
+    lease. This adapter never accepts identity from the evidence endpoint.
+    """
+
+    def __init__(self, task_id, *, project_id, task_reader):
+        self.task_id, self.project_id = identifier(task_id), identifier(project_id)
+        if task_reader is None or not async_reader(task_reader):
+            raise MendError("evidence_configuration", "An authorized asynchronous persisted task reader is required.", 503)
+        self._task_reader = task_reader
+
+    async def __call__(self, job_id):
+        identifier(job_id)
+        task = await self._task_reader(self.task_id)
+        if (not isinstance(task, dict) or task.get("id") != self.task_id
+                or task.get("source") != "live"
+                or not isinstance(task.get("attempts"), list)
+                or not 1 <= len(task["attempts"]) <= 4
+                or any(not isinstance(attempt, dict) for attempt in task["attempts"])):
+            raise ValueError("Invalid persisted task context")
+        matches = [attempt for attempt in task["attempts"] if attempt.get("job_id") == job_id]
+        if len(matches) != 1 or matches[0].get("task_id") != self.task_id:
+            raise ValueError("Job is not uniquely attached to the configured task")
+        # Detach durable identity before any controller transport can mutate it.
+        return json.loads(canonical_json({"project_id": self.project_id, "task": task, "attempt": matches[0]}))
+
+
 class TrustedEvidenceReaders:
     """Explicit injection only: no environment discovery or live-gate changes.
 

@@ -33,12 +33,16 @@
 .bug-field :is(textarea,input){display:block;width:100%;margin-top:8px;padding:10px 12px;border:1px solid var(--mend-control);border-radius:6px;background:var(--mend-surface);color:var(--mend-ink);font:400 16px/24px "Mend Archivo",Arial,sans-serif}
 .bug-field textarea{resize:vertical;min-height:92px}
 .bug-field :is([name=errorMessage],[name=source],[name=filePath]){font-family:"Mend Plex",monospace;font-size:13px;line-height:22px}
+.bug-field :is([name=protectedTestSource],[name=requiredCheckIds],[name=targetCheckId]){font-family:"Mend Plex",monospace;font-size:13px;line-height:22px}
+.bug-protected-review{margin-top:20px;padding-top:16px;border-top:1px solid var(--mend-line)}
+.bug-protected-review>.bug-help,.bug-export-note{margin-top:8px!important}
 .bug-field input{min-height:44px}
 .bug-field [aria-invalid=true]{border-color:var(--mend-danger)}
 .bug-field-error{color:var(--mend-danger);font-size:13px;line-height:21px;margin-top:6px!important}
 .bug-field>.bug-help{margin-top:6px}
 .bug-byte-count{font-size:12px;line-height:20px;font-variant-numeric:tabular-nums;color:var(--mend-muted);text-align:right;margin-top:6px!important}
 .bug-source-editor{border-block:1px solid var(--mend-line)}
+.bug-protected-editor{border-block:1px solid var(--mend-line)}
 .mend-bug-desk summary{cursor:pointer;min-height:44px;padding:12px 0;font-size:13px;font-weight:500;line-height:22px}
 .mend-bug-desk summary span{font-weight:400;color:var(--mend-muted);margin-left:8px}
 .bug-source-fields{display:grid;gap:20px;padding:8px 0 20px}
