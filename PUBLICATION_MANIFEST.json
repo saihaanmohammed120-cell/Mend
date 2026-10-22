@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "71d5cb15ea17348d8c551dc868824b3f64e6fe5f",
+  "observed_parent_sha": "cd42278ccc6bb0ab282b8ce9075189626d045c81",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -31,15 +31,15 @@
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Vercel frontend deployment preparation, 2026-10-22",
+  "delivery": "Public Vercel frontend, 2026-10-22",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
     "README.md",
-    "frontend/vercel.json",
-    "docs/VERCEL_DEPLOYMENT.md"
+    "docs/VERCEL_DEPLOYMENT.md",
+    "frontend/app/layout.tsx"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -1678,10 +1678,10 @@
     },
     {
       "path": "docs/VERCEL_DEPLOYMENT.md",
-      "bytes": 3474,
-      "sha256": "c9b642acb23c69c0f35fb445b4e503eef2bdec1c84ff8a035d4099dd49d19878",
+      "bytes": 4041,
+      "sha256": "8610aad7b60e0ff291b763bf7010ad03eb4ddc242b4afbf640d8865d52ebd4d0",
       "encoding": "utf-8",
-      "git_blob_sha": "c8e1bab636f67e96c6bc561a181891b6d3696152"
+      "git_blob_sha": "819c0a86436d7c46cd49607c97a9f608d4432800"
     },
     {
       "path": "docs/verification/2026-10-20/backend-full-windows.txt",
@@ -2616,10 +2616,10 @@
     },
     {
       "path": "frontend/app/layout.tsx",
-      "bytes": 990,
-      "sha256": "c55606b0ae3716210fc3257e39225fc19f1792352d0f96313a760221d7ddef00",
+      "bytes": 971,
+      "sha256": "554134ee99f5d843a810366ba349c525f8af57976fdfe0cfb7d22de8fd61534b",
       "encoding": "utf-8",
-      "git_blob_sha": "17cadca9bfab0997a75429cda81154471d0290a9"
+      "git_blob_sha": "25b182f56800e5c5bd1206f2ce34b43709472d91"
     },
     {
       "path": "frontend/app/page.tsx",
@@ -3463,15 +3463,15 @@
     },
     {
       "path": "README.md",
-      "bytes": 11140,
-      "sha256": "4de8a4b4f48916101bc90314caf363e8abc1778bcb5d0200dba78298948a2bcd",
+      "bytes": 11753,
+      "sha256": "c41ecc35d8b13fbc60d948e88f3961ec14946335b8ae09b7ede67b7566fa9ca0",
       "encoding": "utf-8",
-      "git_blob_sha": "efe2e385e7a9b65a3ba76a9cc65ad79e40d08bfb"
+      "git_blob_sha": "89068f3df13ef9ba4cbc23bbf79df9aeca68fe40"
     }
   ],
   "holds": {
     "live_nebius": "kept explicitly by user",
     "hosted_database_changes": "kept explicitly by user"
   },
-  "vercel_deployment": "Authorization and actual deployment recorded separately; no hosted URL claimed by this snapshot"
+  "vercel_deployment": "https://mend-smasher.vercel.app; frontend-only, backend remains gated"
 }

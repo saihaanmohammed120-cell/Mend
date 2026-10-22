@@ -2,6 +2,8 @@
 
 This deploys the Next.js frontend, including the local protected-test review at `/fix`. It does not deploy FastAPI, create database records or enable Nebius execution. The existing ChatGPT Site is a separate static deployment.
 
+Current public frontend: https://mend-smasher.vercel.app/ . Open `/fix` to use the protected-test review and `/sample` for explicitly simulated playback. The custom address is registered to the Mend project with no branch pin, so production Git deployments can update it. Four signed-out desktop/mobile light/dark scenarios passed on 22 October, including exact JSON downloads, keyboard errors, duplicate/target checks, edit invalidation and Clear/Undo. The frontend-only `/api/runtime` correctly reports `ready=false`; no backend or provider connection is claimed.
+
 ## Import the existing source
 
 1. Open https://vercel.com/new and select the intended workspace.

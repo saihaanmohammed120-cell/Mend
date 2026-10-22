@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
   title: "Mend — Code that runs. Proof to keep.",
-  metadataBase: new URL("https://mend-paper-proof.bravebadge32.chatgpt.site"),
+  metadataBase: new URL("https://mend-smasher.vercel.app"),
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico" }] },
   openGraph: {
     type: "website", title: "Mend — Code that runs. Proof to keep.",
