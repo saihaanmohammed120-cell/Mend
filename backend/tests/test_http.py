@@ -115,6 +115,55 @@ class HttpIntegrationTests(unittest.TestCase):
         rejected = self.client.post('/api/bug-cases/prepare', headers=self.headers, json=body)
         self.assertEqual(rejected.status_code, 400)
 
+    def test_team_ledger_derives_actor_and_preserves_csrf_membership_and_write_hold(self):
+        from dataclasses import replace
+        from fastapi.testclient import TestClient
+        from mend.api import create_app
+        from mend.domain import MendError
+        team, receipt = str(uuid.uuid4()), str(uuid.uuid4())
+        calls = []
+        owner = self.user
+        class LedgerFixture:
+            def list_receipts(self, user, selected_team, *, limit, cursor):
+                self.check(user, selected_team)
+                calls.append(('list', limit, cursor))
+                return {'receipts': [], 'next_cursor': None}
+            def check(self, user, selected_team):
+                if user != owner or selected_team != team:
+                    raise MendError('not_found', 'Team is unavailable.', 404)
+            def share(self, user, selected_team, selected_receipt):
+                self.check(user, selected_team)
+                calls.append(('share', selected_receipt))
+                return {'shared': True, 'receipt_id': selected_receipt}
+            def unshare(self, user, selected_team, selected_receipt):
+                self.check(user, selected_team)
+                calls.append(('unshare', selected_receipt))
+                return {'shared': False, 'receipt_id': selected_receipt}
+        for held in (False, True):
+            settings = replace(self.authenticator.settings, mode='database_only' if held else 'local_test')
+            app = create_app(self.service, settings, self.authenticator, team_ledger=LedgerFixture())
+            with TestClient(app, base_url='https://mend.test') as client:
+                client.cookies.update(self.client.cookies)
+                path = f'/api/teams/{team}/receipts'
+                self.assertEqual(client.get(path+'?limit=1&after=2').status_code, 200)
+                self.assertEqual(calls[-1], ('list', 1, '2'))
+                self.assertEqual(client.get(f'/api/teams/{uuid.uuid4()}/receipts').status_code, 404)
+                for query in ('?limit=0', '?limit=101', '?limit=1&limit=2', '?user_id='+owner):
+                    self.assertEqual(client.get(path+query).status_code, 400)
+                self.assertEqual(client.post(path, headers={'Origin':'https://mend.test'}, json={'receipt_id':receipt}).status_code, 403)
+                count = len(calls)
+                shared = client.post(path, headers=self.headers, json={'receipt_id':receipt})
+                removed = client.delete(path+'/'+receipt, headers=self.headers)
+                self.assertEqual(shared.status_code, 503 if held else 200)
+                self.assertEqual(removed.status_code, 503 if held else 200)
+                if held:
+                    self.assertEqual(shared.json()['error']['code'], 'database_write_hold')
+                    self.assertEqual(len(calls), count)
+                else:
+                    self.assertEqual(calls[-2:], [('share',receipt),('unshare',receipt)])
+                    forged = client.post(path, headers=self.headers, json={'receipt_id':receipt,'user_id':owner})
+                    self.assertEqual(forged.status_code, 400)
+
     def test_http_to_store_repair_receipt_and_sse_roundtrip(self):
         response = self.client.post("/api/tasks", headers=self.headers, json={"prompt": "Clean CSV rows"})
         self.assertEqual(response.status_code, 201)

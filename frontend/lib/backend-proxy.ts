@@ -3,6 +3,8 @@ const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 export function allowedRoute(path: string, method: string): boolean {
   if (path === "session") return ["GET", "POST", "DELETE"].includes(method);
   if (path === "bug-cases/prepare") return method === "POST";
+  if (new RegExp(`^teams/${UUID}/receipts$`).test(path)) return ["GET", "POST"].includes(method);
+  if (new RegExp(`^teams/${UUID}/receipts/${UUID}$`).test(path)) return method === "DELETE";
   if (path === "tasks") return method === "POST";
   if (new RegExp(`^tasks/${UUID}$`).test(path)) return method === "GET";
   if (new RegExp(`^tasks/${UUID}/contract$`).test(path)) return method === "PATCH";
@@ -27,8 +29,11 @@ export async function proxy(request: Request, segments: string[]): Promise<Respo
   // Allow JSON escaping of the 200KB combined source cap without widening task/session routes.
   const bodyLimit = path === "bug-cases/prepare" ? 1_400_000 : 65_536;
   const query = new URL(request.url).searchParams;
-  if ([...query.keys()].some(key => key !== "after") || (query.has("after") &&
-      (!path.endsWith("/events") || !/^[0-9]{1,19}$/.test(query.get("after")!))))
+  const ledgerRead = new RegExp(`^teams/${UUID}/receipts$`).test(path) && request.method === "GET";
+  if (new Set(query.keys()).size !== [...query.keys()].length ||
+      [...query.keys()].some(key => key !== "after" && !(ledgerRead && key === "limit")) || (query.has("after") &&
+      (!(path.endsWith("/events") || ledgerRead) || !/^[0-9]{1,19}$/.test(query.get("after")!))) ||
+      (query.has("limit") && (!/^[0-9]{1,3}$/.test(query.get("limit")!) || Number(query.get("limit")) < 1 || Number(query.get("limit")) > 100)))
     return error("invalid_cursor", "The replay cursor is invalid.", 400);
   let origin: string;
   try { origin = backendOrigin(); } catch { return error("backend_configuration", "The backend is not configured.", 503); }

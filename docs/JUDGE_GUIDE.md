@@ -49,6 +49,8 @@ Use your actual downloaded input path and a new output filename. The output must
 
 ## Verification evidence
 
+Additional source tools are documented in [the six-item implementation record](ROADMAP_IMPLEMENTATION_2026_10_24.md): repository case/diff review CLI, authenticated-evidence policy gate, team-ledger API/migration and VS Code receipt inspection. Their guides distinguish working local/source behavior from hosted or live verification. The website's roadmap links directly to those guides; none of its cards starts a provider job.
+
 Review the [Actions run for the exact selected commit](https://github.com/saihaanmohammed120-cell/Mend/actions), not a count copied from an older README paragraph. The workflow checks backend/HTTP, frontend/browser/production proxy chain, image builds and disposable PostgreSQL migrations/rollback. The HTTP chain uses fixture identity. The PostgreSQL service uses synthetic Supabase prerequisite schemas; neither establishes hosted Auth, Storage, concurrency or provider performance.
 
 For live judge testing, this guide must be updated only after real hosted authentication, a genuine supported repair, required evidence and private judge access actually pass. See the [release blockers](RELEASE_READINESS_2026_10_24.md). Never ask judges to supply service-role or provider keys.

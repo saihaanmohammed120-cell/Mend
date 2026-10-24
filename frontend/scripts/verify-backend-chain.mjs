@@ -68,6 +68,12 @@ try {
   const cookie = setCookies.map(value => value.split(';')[0]).join('; ');
   const headers = { Cookie: cookie, 'X-CSRF-Token': identity.csrf_token };
   assert.equal((await request('session', 'GET', undefined, headers)).status, 200);
+  const ledgerPath = 'teams/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb/receipts';
+  const ledger = await request(ledgerPath + '?limit=1&after=2', 'GET', undefined, headers);
+  assert.equal(ledger.status, 200);
+  assert.deepEqual(await ledger.json(), { receipts: [], next_cursor: null });
+  assert.equal((await request(ledgerPath, 'POST', { receipt_id: identity.user_id }, headers)).status, 503);
+  assert.equal((await request(ledgerPath + '/' + identity.user_id, 'DELETE', undefined, headers)).status, 503);
   const body = { intake: { kind: 'mend_bug_intake', schema_version: 1, file_path: 'helper.py',
     original_source: 'def value(): return 0\n# exact UTF-8: é 😀\n', reported_error: null,
     expected_behavior: 'Return one', evidence: { investigation: 'not_run', execution: 'not_run', regression: 'not_generated' } },

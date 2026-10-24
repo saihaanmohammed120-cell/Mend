@@ -10,6 +10,10 @@ test("proxy exposes existing routes and excludes missing history/source APIs", (
   assert.equal(allowedRoute("bug-cases/prepare", "POST"), true);
   assert.equal(allowedRoute("bug-cases/prepare", "GET"), false);
   assert.equal(allowedRoute("bug-cases/prepare/extra", "POST"), false);
+  assert.equal(allowedRoute(`teams/${id}/receipts`, "GET"), true);
+  assert.equal(allowedRoute(`teams/${id}/receipts`, "POST"), true);
+  assert.equal(allowedRoute(`teams/${id}/receipts/${id}`, "DELETE"), true);
+  assert.equal(allowedRoute(`teams/${id}/receipts/${id}`, "GET"), false);
 });
 test("proxy refuses credential-bearing or unencrypted remote destinations", () => {
   const previous = process.env.MEND_BACKEND_URL;
@@ -22,6 +26,29 @@ test("proxy refuses credential-bearing or unencrypted remote destinations", () =
 test("proxy rejects an unexpected cursor before forwarding", async () => {
   const response = await proxy(new Request("https://mend.test/api/tasks?after=0", { method: "POST", body: "{}" }), ["tasks"]);
   assert.equal(response.status, 400);
+  for (const query of ['after=1&after=2', 'limit=101', 'limit=1&limit=2', 'user_id=owner']) {
+    const invalid = await proxy(new Request(`https://mend.test/api/teams/${id}/receipts?${query}`), ['teams', id, 'receipts']);
+    assert.equal(invalid.status, 400);
+  }
+});
+
+test("ledger proxy forwards only the permitted pagination and verified session headers", async () => {
+  const previousURL = process.env.MEND_BACKEND_URL; const previousFetch = globalThis.fetch;
+  try {
+    process.env.MEND_BACKEND_URL = 'http://127.0.0.1:8000';
+    let actual = '';
+    globalThis.fetch = async (url, init) => {
+      actual = String(url);
+      assert.equal(new Headers(init?.headers).get('cookie'), '__Host-mend-session=sealed');
+      return new Response('{"receipts":[],"next_cursor":null}');
+    };
+    const response = await proxy(new Request(`https://mend.test/api/teams/${id}/receipts?limit=10&after=2`, { headers: { Cookie: '__Host-mend-session=sealed' } }), ['teams',id,'receipts']);
+    assert.equal(actual, `http://127.0.0.1:8000/api/teams/${id}/receipts?limit=10&after=2`);
+    assert.deepEqual(await response.json(), { receipts: [], next_cursor: null });
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousURL === undefined) delete process.env.MEND_BACKEND_URL; else process.env.MEND_BACKEND_URL = previousURL;
+  }
 });
 
 test("review transport accepts escaped source while preserving route-specific hard caps", async () => {

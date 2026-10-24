@@ -230,7 +230,9 @@ def create_app_from_env():
         transport = JsonTransport({urlsplit(runtime.settings.supabase_url).hostname})
         runtime.resources.append(transport)
         authenticator = SupabaseAuthenticator(runtime.settings, transport)
-        app = create_app(runtime.service, runtime.settings, authenticator)
+        from .team_ledger import TeamLedger
+        ledger = TeamLedger(runtime.service.store) if isinstance(runtime.service.store, SupabaseRepository) else None
+        app = create_app(runtime.service, runtime.settings, authenticator, team_ledger=ledger)
         app.state.mend_runtime = runtime
         application_lifespan = app.router.lifespan_context
 

@@ -1,5 +1,7 @@
 # Mend release readiness — 24 October 2026
 
+Roadmap implementation update: [six-item source/tooling status](ROADMAP_IMPLEMENTATION_2026_10_24.md). Repository review, an offline policy gate, team-ledger API/SQL and a local VS Code receipt viewer are now implemented as bounded slices. The website shows individual statuses. Hosted/live operation remains blocked as described below.
+
 **Decision: not ready for a provider-backed hackathon submission.** Public source, frontend and offline verification are available; the working model repair and its evidence still need implementation/infrastructure and real validation. A Token Factory key does not complete the other prerequisites. Both explicit holds remain: no live Nebius/model/discovery/job/cancellation experiments and no hosted database writes or migrations.
 
 ## Deadline and minimum submission
@@ -40,12 +42,12 @@ These are target work windows, not promises that unknown infrastructure or evide
 
 | Capability | Current status | Submission priority |
 | --- | --- | --- |
-| Whole-repository repair | Not implemented; one-module preparation is not whole-repo execution. | After the controlled repair loop works; not required as a six-feature bundle by the rules. |
-| Required CI/CD gate | Real four-job CI exists; required branch enforcement is unverified. | Useful hardening; do not describe branch protection as configured. |
-| Policy-as-code approval | Not implemented; release holds/check validation grant no general approval authority. | After a reviewed risk/authority policy exists. |
-| Team receipt ledger | Not implemented; current owner task evidence is not a team service. | Later; needs team roles, persistence and database authorization. |
+| Whole-repository repair | Bounded multi-file repository preparation/diff review CLI exists; live repair is not implemented. | Model/runner integration, dependencies and actual protected execution remain. |
+| Required CI/CD gate | Five workflow jobs and concrete required-check JSON exist; required branch enforcement is unverified. | Requires GitHub administration-write access and an actual failing-PR enforcement test. |
+| Policy-as-code approval | Offline source-bound policy gate implemented with authenticated comparison/history inputs. | Review approval only; production execution/merge authority and trusted real inputs remain outside it. |
+| Team receipt ledger | Membership/ownership-aware API, safe summary adapter and service-only migration source implemented. | Hosted migration, trusted team provisioning, real auth and team UI are pending. |
 | Flaky-test detection | Offline signed-history consistency analyzer/CLI/comparative integration exists. | Trusted complete history and quarantine lifecycle/UI remain. |
-| IDE receipts | No editor extension/integration implemented. | Later; no plugin install substitutes for a verified product extension. |
+| IDE receipts | Local VS Code receipt viewer implemented and checked in an isolated editor host. | Current curated contract only; public signatures, arbitrary-repository receipts and packaged installation remain. |
 
 ## Private configuration and release limits
 

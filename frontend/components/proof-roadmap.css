@@ -11,5 +11,8 @@
 .proof-roadmap-grid>article:nth-last-child(-n+2){border-bottom:0}.proof-roadmap-index{padding-top:3px;color:var(--proof-muted);font:400 11px/18px var(--proof-mono)}
 .mend-proof-roadmap h3{font:600 16px/23px var(--proof-body);letter-spacing:-.01em}
 .proof-roadmap-grid p{font-size:14px;line-height:23px;color:var(--proof-muted);margin-top:6px!important}
+.proof-roadmap-grid .proof-roadmap-status{font-weight:600;color:var(--proof-ink);font-size:12px;line-height:20px}
+.proof-roadmap-guide{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-size:13px;line-height:20px;color:inherit;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.proof-roadmap-guide:focus-visible{outline:3px solid currentColor;outline-offset:3px}
 @media(prefers-color-scheme:dark){.mend-proof-roadmap{--proof-paper:#121814;--proof-ink:#F5F2EA;--proof-muted:#B6BFB2;background:var(--proof-paper);color-scheme:dark}}
 @media(max-width:760px){.proof-roadmap-overview{grid-template-columns:minmax(0,1fr);gap:16px;margin-bottom:22px}.proof-roadmap-grid{grid-template-columns:minmax(0,1fr)}.proof-roadmap-grid>article:nth-last-child(2){border-bottom:1px dashed color-mix(in srgb,var(--proof-ink) 30%,transparent)}.mend-proof-roadmap{grid-template-columns:minmax(0,1fr);gap:26px;padding-top:38px;padding-bottom:42px}.mend-proof-roadmap h2{max-width:none;font-size:31px}.proof-roadmap-label{margin-top:16px}.mend-proof-roadmap .proof-roadmap-intro{max-width:52ch}.proof-roadmap-grid>article{grid-template-columns:26px minmax(0,1fr);gap:10px;padding:19px 0}}

@@ -1,0 +1,17 @@
+{
+  "name": "mend-receipts",
+  "displayName": "Mend Receipts",
+  "description": "Inspect a local Mend receipt and compare its source hash with selected workspace files.",
+  "version": "0.1.0",
+  "publisher": "mend-local",
+  "license": "MIT",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "extensionKind": ["workspace"],
+  "capabilities": { "untrustedWorkspaces": { "supported": true }, "virtualWorkspaces": false },
+  "contributes": {
+    "commands": [{ "command": "mend.openReceipt", "title": "Mend: Inspect Local Receipt" }]
+  },
+  "scripts": { "test": "node --test test/receipt.test.js test/extension.test.js" }
+}

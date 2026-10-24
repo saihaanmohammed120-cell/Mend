@@ -1,5 +1,9 @@
 # Mend application screens
 
+## Roadmap status, 24 October 2026
+
+Retain the existing Paper and Proof two-column ruled section, fonts, warm paper/dark forest palette and mobile single-column flow. Replace the inaccurate blanket planned-state label with six individual implementation statuses and real source-guide links. Source/local tools, fixture-tested API code, required-rule administration and hosted/live operation remain distinct. No success counters, simulated execution, new imagery or animation. Keyboard-visible guide links have44px minimum targets; status is conveyed by text, never color alone. Asset guidance remains unchanged: this section uses real product status and requires no decorative images. Browser-check desktop/mobile/light/dark, reduced motion, guide focus and containment before claiming visual acceptance.
+
 Keep Paper and Proof: the existing paper, ink, orange and forest tokens, self-hosted Mend Archivo, and Mend Plex for source and content identities. Brand assets and existing token values take priority over style defaults. No new imagery is needed for a private source editor; its evidence is the user's actual input. Do not invent repair output, charts or execution activity as decoration.
 
 ## Bug desk `/fix`

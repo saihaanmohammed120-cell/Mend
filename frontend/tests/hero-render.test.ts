@@ -194,7 +194,7 @@ test("Flow server render has real fail/repair/rerun edges and no bypass to recei
   assert.ok(!html.includes('The fetched files match this build’s recorded hashes.')); 
  });
 
- test("Roadmap is six planned read-only cards, with no pretend controls", () => {
+ test("Roadmap separates actual tools from remaining live and hosted work", () => {
   const output = ts.transpileModule(readFileSync(new URL("../components/proof-roadmap.tsx", import.meta.url), "utf8"), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
   }).outputText;
@@ -202,6 +202,14 @@ test("Flow server render has real fail/repair/rerun edges and no bypass to recei
   vm.runInNewContext(output, { exports, require(id: string) { return id === "./proof-roadmap.css" ? {} : require(id); } });
   const html = renderToStaticMarkup(React.createElement(exports.ProofRoadmap!));
   assert.equal((html.match(/<article>/g) ?? []).length, 6);
-  assert.ok(html.includes("Not yet built"));
-  assert.ok(!/<(?:a|button|input|select|textarea)\b|role="button"|tabindex=/i.test(html));
+  assert.ok(!html.includes("Not yet built"));
+  assert.ok(html.includes("What’s ready. What’s next."));
+  assert.ok(html.includes("Live repair and dependency execution remain pending."));
+  assert.ok(html.includes("CI running · enforcement pending"));
+  assert.ok(html.includes("Offline review gate available"));
+  assert.ok(html.includes("API implemented · hosting pending"));
+  assert.ok(html.includes("Offline analyzer available"));
+  assert.ok(html.includes("Local extension available"));
+  assert.equal((html.match(/class="proof-roadmap-guide"/g) ?? []).length, 6);
+  assert.ok(!/<(?:button|input|select|textarea)\b|role="button"|tabindex=/i.test(html));
  });

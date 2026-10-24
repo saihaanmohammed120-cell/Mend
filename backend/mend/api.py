@@ -146,7 +146,7 @@ async def sse_stream(service, task_id, identity, request, after, heartbeat_secon
             await close()
 
 
-def create_app(service, settings, authenticator):
+def create_app(service, settings, authenticator, *, team_ledger=None):
     """Instantiate only with genuine FastAPI dependencies and explicit adapters."""
     from fastapi import FastAPI, Request
     from fastapi.exceptions import RequestValidationError
@@ -205,7 +205,7 @@ def create_app(service, settings, authenticator):
         result = await authenticator.authenticate(request.cookies.get(SESSION_COOKIE))
         if mutation:
             verify_csrf(result, request.headers.get('x-csrf-token'), request.cookies.get(CSRF_COOKIE))
-            if (request.url.path.startswith('/api/tasks') and settings.mode != 'local_test'
+            if (request.url.path.startswith(('/api/tasks', '/api/teams')) and settings.mode != 'local_test'
                     and not settings.database_writes_enabled):
                 raise MendError('database_write_hold', 'Database changes are on hold.', 503)
         return result
@@ -278,6 +278,39 @@ def create_app(service, settings, authenticator):
             raise MendError('unsupported_runtime', 'Only the reviewed Python contract is supported.')
         key = idempotency(request.headers.get('idempotency-key'))
         return response(await service.create(actor.user_id, prompt, key, runtime='python'), 201)
+
+    def ledger():
+        if team_ledger is None:
+            raise MendError('ledger_configuration', 'The team receipt ledger is unavailable.', 503)
+        return team_ledger
+
+    @route('/api/teams/{team_id}/receipts', ['GET'])
+    async def team_receipts(request, team_id: str):
+        actor = await identity(request)
+        query = request.query_params
+        if set(query) - {'limit', 'after'} or len(query.multi_items()) != len(query):
+            raise MendError('invalid_request', 'The ledger query fields are invalid.')
+        limit = query.get('limit', '20')
+        if not limit.isascii() or not limit.isdecimal() or not 1 <= len(limit) <= 3 or not 1 <= int(limit) <= 100:
+            raise MendError('invalid_request', 'The ledger page size must be 1–100.')
+        value = await asyncio.to_thread(ledger().list_receipts, actor.user_id, uuid_string(team_id),
+                                        limit=int(limit), cursor=query.get('after'))
+        return JSONResponse(value)
+
+    @route('/api/teams/{team_id}/receipts', ['POST'])
+    async def share_team_receipt(request, team_id: str):
+        actor = await identity(request, True)
+        body = await bounded_json(request, 1024)
+        exact_fields(body, ('receipt_id',))
+        value = await asyncio.to_thread(ledger().share, actor.user_id, uuid_string(team_id),
+                                        uuid_string(body['receipt_id']))
+        return JSONResponse(value)
+
+    @route('/api/teams/{team_id}/receipts/{receipt_id}', ['DELETE'])
+    async def unshare_team_receipt(request, team_id: str, receipt_id: str):
+        actor = await identity(request, True)
+        value = await asyncio.to_thread(ledger().unshare, actor.user_id, uuid_string(team_id), uuid_string(receipt_id))
+        return JSONResponse(value)
 
     @route('/api/tasks/{task_id}', ['GET'])
     async def get_task(request, task_id: str):

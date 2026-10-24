@@ -1,5 +1,7 @@
 # Screenshot roadmap status — 21 October 2026
 
+Latest implementation record: [24 October roadmap tools/API/IDE delivery](ROADMAP_IMPLEMENTATION_2026_10_24.md). The historical unimplemented labels below do not describe the newer bounded source tools. Hosted/live operation remains incomplete.
+
 Historical snapshot. See [24 October complete readiness and six-item status](RELEASE_READINESS_2026_10_24.md): source publication, four-job Linux/HTTP/browser/image/PostgreSQL CI and Vercel frontend deployment now work. Required branch enforcement, genuine live execution and the unbuilt roadmap capabilities remain incomplete. Earlier connection/CI blockers below are superseded.
 
 The user's screenshot lists six future capabilities. Earlier UI refinement, evidence validation and source packaging did not complete those capabilities. This record separates available code from a working public release.
