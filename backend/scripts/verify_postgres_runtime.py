@@ -1,8 +1,10 @@
 """Opt-in execution of the existing rollback fixture against an isolated database.
 
 Exit 0: fixture executed successfully; 1: fixture failed; 2: prerequisite blocked.
-The operator must inject MEND_TEST_DATABASE_DSN privately and attest isolation
-with --isolated (or MEND_TEST_DATABASE_ISOLATED=1). No migrations are applied.
+MEND_TEST_DATABASE_DSN retains its legacy name but must contain a database name.
+Supply host/user/password/TLS through standard libpq PG* environment variables.
+Attest isolation with --isolated (or MEND_TEST_DATABASE_ISOLATED=1).
+No migrations are applied by this driver.
 """
 from __future__ import annotations
 
@@ -80,6 +82,8 @@ def main(*, isolated=False, env=None, find_psql=None, run=None, fixture_runner=N
     dsn = env.get("MEND_TEST_DATABASE_DSN", "")
     if not dsn.strip():
         blockers.append("MEND_TEST_DATABASE_DSN missing")
+    elif any(character in dsn for character in ('=', ':', '/', '\\', '\n', '\r', '\x00')):
+        blockers.append("MEND_TEST_DATABASE_DSN must be a database name; use PGHOST/PGPORT/PGUSER/PGPASSWORD/PGSSLMODE for connection settings")
     psql = find_psql("psql")
     if not psql:
         blockers.append("psql unavailable")
@@ -89,8 +93,8 @@ def main(*, isolated=False, env=None, find_psql=None, run=None, fixture_runner=N
         report("PostgreSQL fixture executed: no")
         return 2
 
-    # libpq accepts a connection string in PGDATABASE. Never put it in argv or
-    # echo child output: connection errors can contain private connection data.
+    # PGDATABASE is a database name, not a conninfo string. Keep connection
+    # credentials in libpq's environment and never echo child output.
     child_env = dict(env, PGDATABASE=dsn, PGCONNECT_TIMEOUT="5", MEND_TEST_DATABASE_ISOLATED="1")
     try:
         preflight = run(

@@ -38,7 +38,7 @@ jobs:
       PGUSER: postgres
       PGPASSWORD: disposable-ci-only
       PGDATABASE: mend_ci
-      MEND_TEST_DATABASE_DSN: "host=127.0.0.1 port=5432 dbname=mend_ci user=postgres password=disposable-ci-only"
+      MEND_TEST_DATABASE_DSN: mend_ci
       MEND_TEST_DATABASE_ISOLATED: "1"
     steps:
       - uses: actions/checkout@v4

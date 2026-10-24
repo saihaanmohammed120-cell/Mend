@@ -36,6 +36,16 @@ class PostgresRuntimeDriverTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertNotIn("private-secret", output)
 
+    def test_conninfo_and_uri_values_block_without_connection_or_secret_output(self):
+        for value in ('host=private-host password=private-secret', 'postgresql://owner:private-secret@host/db'):
+            with self.subTest(kind=value.split(':')[0]):
+                process = mock.Mock(side_effect=AssertionError('Must not connect'))
+                code, output = self.verify(isolated=True, env={'MEND_TEST_DATABASE_DSN': value}, run=process)
+                self.assertEqual(code, 2)
+                self.assertIn('must be a database name', output)
+                self.assertNotIn('private-secret', output)
+                process.assert_not_called()
+
     def test_client_resolution_uses_attested_path_without_ambient_fallback(self):
         output = io.StringIO()
         with mock.patch("shutil.which", return_value=None) as lookup, \

@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "21391aef340eca0988cdfd6fcf7912fd332b02ce",
+  "observed_parent_sha": "e167d4eee29d9c2fb8ff71ab89e059d0d3579e2f",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -37,25 +37,10 @@
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    "README.md",
-    "backend/README.md",
-    "backend/docs/DEPLOYMENT.md",
-    "docs/BACKEND_INTEGRATION_2026_10_24.md",
-    "backend/.env.example",
-    "backend/mend/config.py",
-    "backend/mend/repository.py",
-    "backend/mend/bootstrap.py",
-    "backend/mend/api.py",
-    "backend/tests/test_database_initialization.py",
-    "backend/tests/test_repository.py",
-    "backend/tests/test_http.py",
-    "backend/tests/test_readiness.py",
-    "backend/tests/ci_supabase_prerequisites.sql",
-    "backend/tests/proxy_fixture_app.py",
-    "frontend/lib/backend-proxy.ts",
-    "frontend/tests/backend-proxy.test.ts",
-    "frontend/scripts/verify-backend-chain.mjs",
-    ".github/workflows/checks.yml"
+    ".github/workflows/checks.yml",
+    "backend/scripts/verify_postgres_runtime.py",
+    "backend/tests/test_postgres_runtime_driver.py",
+    "docs/BACKEND_INTEGRATION_2026_10_24.md"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -70,10 +55,10 @@
   "files": [
     {
       "path": ".github/workflows/checks.yml",
-      "bytes": 4534,
-      "sha256": "b379d3a7bff05452c33c4e5432e6faf59b36c5be3e5d0f3f0133876d1b6a1afa",
+      "bytes": 4458,
+      "sha256": "cca661c6d5e79f5452620b6e70a13dd079c95148e8b960e9897ca60de76108af",
       "encoding": "utf-8",
-      "git_blob_sha": "9073848d306bee2a195bb0eca64146dabe85849b"
+      "git_blob_sha": "835917c6e8d866a927529be8274a82dea87714de"
     },
     {
       "path": ".gitignore",
@@ -1162,10 +1147,10 @@
     },
     {
       "path": "backend/scripts/verify_postgres_runtime.py",
-      "bytes": 6159,
-      "sha256": "0c78da06077d5cb941d946d1a51cc0cd89cf6709935df279d3cf05a7a9da45e9",
+      "bytes": 6496,
+      "sha256": "3d56774f5532224fb5d8fc3d28545a99abf0338383cf568c814071f0bf32023b",
       "encoding": "utf-8",
-      "git_blob_sha": "dffeda898f45e03aa4425e7218732b733b02c65d"
+      "git_blob_sha": "0b5ee796cb85ea9c45a9b833c4d9f6aa62d28c4e"
     },
     {
       "path": "backend/scripts/verify_readiness_chain.py",
@@ -1309,10 +1294,10 @@
     },
     {
       "path": "backend/tests/test_postgres_runtime_driver.py",
-      "bytes": 10198,
-      "sha256": "e5504173c1cbf9c3beff6726cb47e4bd3ab9d43b7db6fbd36629a58f6061274d",
+      "bytes": 10859,
+      "sha256": "873b76212bd3db7e0aa723b1d7f811cfd509e71b56871aef8caaf92b633b7f63",
       "encoding": "utf-8",
-      "git_blob_sha": "6876af944d7262096d99ccb0cf6f8870158ca0ae"
+      "git_blob_sha": "4b0877ef5f6c45fcccd9774141935bd4190923ed"
     },
     {
       "path": "backend/tests/test_readiness.py",
@@ -1393,10 +1378,10 @@
     },
     {
       "path": "docs/BACKEND_INTEGRATION_2026_10_24.md",
-      "bytes": 5151,
-      "sha256": "960fa357ca36219d280f6fa443cb2b34852bcb479d8814fe05fcf9a863d57208",
+      "bytes": 5481,
+      "sha256": "02bdbf7aff6766c011231614decb162c4f3a47425ce869141d5650583895352d",
       "encoding": "utf-8",
-      "git_blob_sha": "07dcf0de49e0581c214a1f000aef922d516d71ab"
+      "git_blob_sha": "7de2a815069b25dec03d4ccea7533e7746001d48"
     },
     {
       "path": "docs/BROWSER_UI_ACCEPTANCE.md",
