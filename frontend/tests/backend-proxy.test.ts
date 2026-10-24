@@ -23,6 +23,32 @@ test("proxy rejects an unexpected cursor before forwarding", async () => {
   const response = await proxy(new Request("https://mend.test/api/tasks?after=0", { method: "POST", body: "{}" }), ["tasks"]);
   assert.equal(response.status, 400);
 });
+
+test("review transport accepts escaped source while preserving route-specific hard caps", async () => {
+  const previousURL = process.env.MEND_BACKEND_URL; const previousFetch = globalThis.fetch;
+  const sizes: number[] = [];
+  try {
+    process.env.MEND_BACKEND_URL = "http://127.0.0.1:8000";
+    globalThis.fetch = async (_url, init) => {
+      sizes.push((init!.body as ArrayBuffer).byteLength);
+      return new Response('{}', { headers: { 'Content-Type': 'application/json' } });
+    };
+    const body = JSON.stringify({ source: '\u0001'.repeat(199000) });
+    assert(Buffer.byteLength(body) > 1_000_000);
+    const response = await proxy(new Request('https://mend.test/api/bug-cases/prepare', { method: 'POST', body }), ['bug-cases', 'prepare']);
+    assert.equal(response.status, 200);
+    await response.text();
+    assert.deepEqual(sizes, [Buffer.byteLength(body)]);
+    for (const [path, limit] of [['bug-cases/prepare', 1_400_000], ['tasks', 65_536]] as const) {
+      const rejected = await proxy(new Request('https://mend.test/api/' + path, { method: 'POST', body: 'x'.repeat(limit + 1) }), path.split('/'));
+      assert.equal(rejected.status, 413);
+    }
+    assert.equal(sizes.length, 1);
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousURL === undefined) delete process.env.MEND_BACKEND_URL; else process.env.MEND_BACKEND_URL = previousURL;
+  }
+});
 test("proxy streams bytes and preserves separate sealed session cookies", async () => {
   const previousURL = process.env.MEND_BACKEND_URL; const previousFetch = globalThis.fetch;
   let forwarded: RequestInit | undefined;

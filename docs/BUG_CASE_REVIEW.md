@@ -38,7 +38,7 @@ The output must not already exist. Inputs are read as bounded UTF-8 data and nev
 }
 ```
 
-The route makes no task/store/model/runner call. It returns the prepared record through its explicit schema, rather than weakening the existing CSV-only task payload allowlist. The inherited HTTP body limit is 65,536 bytes by default; the offline source-plus-check cap is 200,000 UTF-8 bytes. An oversized HTTP body is rejected before contract preparation.
+The route makes no task/store/model/runner call. It returns the prepared record through its explicit schema, rather than weakening the existing CSV-only task payload allowlist. On 24 October, preparation HTTP/proxy bodies and CLI request/intake JSON were aligned at a 1,400,000-byte transport cap: JSON escaping can expand valid 200,000-byte combined source/test input beyond one megabyte. The source-plus-check cap remains 200,000 UTF-8 bytes and other task/session routes retain their existing limits. Oversized preparation bodies are rejected before contract preparation. Source text is not executed, so shape-valid text is not a passing Python program or a valid test oracle.
 
 ## Frozen meaning and allocation
 

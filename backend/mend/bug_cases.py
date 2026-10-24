@@ -20,6 +20,8 @@ _INTAKE_FIELDS = {"kind", "schema_version", "file_path", "reported_error", "orig
                   "expected_behavior", "evidence"}
 _NOT_RUN = {"investigation": "not_run", "execution": "not_run", "regression": "not_generated"}
 _CHECK_ID = re.compile(r"test_regression\.[A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*")
+# JSON escaping can expand 200KB of source sixfold, plus bounded review text/IDs.
+MAX_BUG_CASE_REQUEST_BYTES = 1_400_000
 
 
 def prepare_bug_case(intake, protected_test_source, required_check_ids, target_check_id):

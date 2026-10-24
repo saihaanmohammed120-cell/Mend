@@ -24,6 +24,8 @@ function error(code: string, message: string, status: number) {
 export async function proxy(request: Request, segments: string[]): Promise<Response> {
   const path = segments.join("/");
   if (!allowedRoute(path, request.method)) return error("not_found", "This API route is unavailable.", 404);
+  // Allow JSON escaping of the 200KB combined source cap without widening task/session routes.
+  const bodyLimit = path === "bug-cases/prepare" ? 1_400_000 : 65_536;
   const query = new URL(request.url).searchParams;
   if ([...query.keys()].some(key => key !== "after") || (query.has("after") &&
       (!path.endsWith("/events") || !/^[0-9]{1,19}$/.test(query.get("after")!))))
@@ -46,7 +48,7 @@ export async function proxy(request: Request, segments: string[]): Promise<Respo
       controller.signal.addEventListener("abort", cancelRead, { once: true });
       if (reader) try { if (controller.signal.aborted) { await reader.cancel(); controller.signal.throwIfAborted(); }
         while (true) { const item = await reader.read(); controller.signal.throwIfAborted(); if (item.done) break;
-        size += item.value.length; if (size > 65_536) return error("body_limit", "The request exceeds its limit.", 413); parts.push(item.value); }
+        size += item.value.length; if (size > bodyLimit) return error("body_limit", "The request exceeds its limit.", 413); parts.push(item.value); }
       } finally { controller.signal.removeEventListener("abort", cancelRead); await reader.cancel().catch(() => undefined); reader.releaseLock(); }
       const bytes = new Uint8Array(size); let offset = 0; for (const part of parts) { bytes.set(part, offset); offset += part.length; }
       body = bytes.buffer;

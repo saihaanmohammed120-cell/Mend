@@ -1,5 +1,7 @@
 # Narrated walkthrough — current plan, 22 October 2026
 
+24 October update: use the [current submission draft](HACKATHON_SUBMISSION_2026_10_24.md), [judge guide](JUDGE_GUIDE.md) and [release ledger](RELEASE_READINESS_2026_10_24.md). Public app is now https://mend-smasher.vercel.app/ ; actual source/CI have advanced beyond the historical baseline below. Record only the final verified commit and update any narrated counts from that run. Final public YouTube video and genuine provider repair remain incomplete; the 2:45 offline script does not satisfy them.
+
 This current section supersedes the dated 19 October plan retained below. Public full-stack source and baseline Linux CI now exist: commit `30279ac41162e11eb26974a8f525d3db89b447e7`, [successful run](https://github.com/saihaanmohammed120-cell/Mend/actions/runs/39730504477). No final narrated video or public YouTube URL exists in this record. The earlier 70.4-second silent UI capture is a draft, not this recording.
 
 Target: **2:45 total**, including transitions, below the official three-minute limit. Use the [submission checklist](HACKATHON_SUBMISSION_2026_10_22.md) for current requirements and unfinished fields. Keep a visible `OFFLINE DEMONSTRATION — curated patch; unsigned local evidence; no live Nebius/Nemotron run` label throughout local evidence. Both provider and database holds remain.

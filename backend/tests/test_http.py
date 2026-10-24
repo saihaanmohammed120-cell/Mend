@@ -138,6 +138,33 @@ class HttpIntegrationTests(unittest.TestCase):
         self.assertGreaterEqual(len(self.auth_requests), 6)
         self.assertEqual(self.client.get("/readyz").status_code, 503)
 
+    def test_maximum_review_source_survives_json_escaping_without_relaxing_other_limits(self):
+        import json
+        test_source = '# Proposed only\n'
+        source = '#' + '\x01' * (200000 - len(test_source.encode()) - 1)
+        body = {'intake': {'kind': 'mend_bug_intake', 'schema_version': 1,
+                'file_path': 'helper.py', 'original_source': source,
+                'reported_error': None, 'expected_behavior': 'Return one',
+                'evidence': {'investigation': 'not_run', 'execution': 'not_run', 'regression': 'not_generated'}},
+                'protected_test_source': test_source,
+                'required_check_ids': ['test_regression.Checks.test_value'],
+                'target_check_id': 'test_regression.Checks.test_value'}
+        encoded = json.dumps(body).encode()
+        self.assertGreater(len(encoded), 1000000)
+        headers = {**self.headers, 'Content-Type': 'application/json'}
+        prepared = self.client.post('/api/bug-cases/prepare', headers=headers, content=encoded)
+        self.assertEqual(prepared.status_code, 200)
+        self.assertEqual(prepared.json()['intake']['original_source'], source)
+        self.assertFalse(prepared.json()['execution_enabled'])
+        body['intake']['original_source'] += 'x'
+        oversized_source = self.client.post('/api/bug-cases/prepare', headers=headers, json=body)
+        self.assertEqual(oversized_source.status_code, 400)
+        self.assertEqual(oversized_source.json()['error']['code'], 'source_limit')
+        too_large = self.client.post('/api/bug-cases/prepare', headers=headers, content=b' ' * 1400001)
+        self.assertEqual(too_large.status_code, 413)
+        ordinary = self.client.post('/api/tasks', headers=headers, content=b' ' * 65537)
+        self.assertEqual(ordinary.status_code, 413)
+
     def test_real_http_rejects_csrf_wrong_origin_and_oversized_prompt(self):
         self.assertEqual(self.client.post("/api/tasks", headers={"Origin": "https://mend.test"},
             json={"prompt": "Clean CSV rows"}).status_code, 403)

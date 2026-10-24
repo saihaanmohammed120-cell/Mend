@@ -255,9 +255,9 @@ def create_app(service, settings, authenticator):
     @route('/api/bug-cases/prepare', ['POST'])
     async def prepare_bug_contract(request):
         await identity(request, True)
-        body = await bounded_json(request, settings.max_body_bytes)
+        from .bug_cases import MAX_BUG_CASE_REQUEST_BYTES, prepare_bug_case
+        body = await bounded_json(request, MAX_BUG_CASE_REQUEST_BYTES)
         exact_fields(body, ('intake', 'protected_test_source', 'required_check_ids', 'target_check_id'))
-        from .bug_cases import prepare_bug_case
         # This stateless review has its own explicit schema; task public_payload
         # deliberately still accepts only the reviewed live CSV contract.
         return JSONResponse(prepare_bug_case(**body))

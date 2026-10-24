@@ -91,6 +91,14 @@ try {
   const duplicate = { ...body, required_check_ids: [...body.required_check_ids, ...body.required_check_ids] };
   assert.equal((await request('bug-cases/prepare', 'POST', duplicate, headers)).status, 400);
   assert.equal((await request('bug-cases/prepare', 'GET', undefined, headers)).status, 404);
+  const large = { ...body, intake: { ...body.intake,
+    original_source: '#' + '\u0001'.repeat(200_000 - Buffer.byteLength(body.protected_test_source) - 1) } };
+  assert(Buffer.byteLength(JSON.stringify(large)) > 1_000_000);
+  const largeResult = await request('bug-cases/prepare', 'POST', large, headers);
+  assert.equal(largeResult.status, 200);
+  assert.equal((await largeResult.json()).intake.original_source, large.intake.original_source);
+  large.intake.original_source += 'x';
+  assert.equal((await request('bug-cases/prepare', 'POST', large, headers)).status, 400);
   const logout = await request('session', 'DELETE', undefined, headers);
   assert.equal(logout.status, 200);
   assert(logout.headers.getSetCookie().every(value => value.includes('Max-Age=0')));

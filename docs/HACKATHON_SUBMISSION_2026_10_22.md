@@ -1,5 +1,7 @@
 # Mend submission draft — 22 October 2026
 
+Historical draft. Use the [24 October submission draft](HACKATHON_SUBMISSION_2026_10_24.md), [current release blockers](RELEASE_READINESS_2026_10_24.md) and [judge guide](JUDGE_GUIDE.md). The older source/CI/preview fields below are not the latest release.
+
 **Status: prepared for review; not submitted and not yet an eligible live demonstration.** Both user holds remain: no live Nebius requests, discovery, jobs or cancellation experiments; no hosted database changes. This document cannot lift either hold. Publication of this draft does not establish the unfinished facts below.
 
 ## Official requirements checked today

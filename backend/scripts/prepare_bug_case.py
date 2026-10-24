@@ -3,7 +3,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from mend.bug_cases import prepare_bug_case
+from mend.bug_cases import MAX_BUG_CASE_REQUEST_BYTES, prepare_bug_case
 from mend.domain import MendError, canonical_json
 from mend.transport import strict_json
 
@@ -30,7 +30,7 @@ def main():
         if args.request:
             if any((args.checks, args.check_ids, args.target_check)):
                 parser.error("--request cannot be combined with separate check inputs.")
-            request = strict_json(read_bounded(args.request, 1_048_576))
+            request = strict_json(read_bounded(args.request, MAX_BUG_CASE_REQUEST_BYTES))
             if (not isinstance(request, dict) or set(request) != {
                     "intake", "protected_test_source", "required_check_ids", "target_check_id"}):
                 raise ValueError("Review request fields do not match the preparation contract.")
@@ -38,7 +38,7 @@ def main():
         else:
             if not all((args.checks, args.check_ids, args.target_check)):
                 parser.error("--intake requires --checks, --check and --target-check.")
-            case = prepare_bug_case(strict_json(read_bounded(args.intake, 1_048_576)),
+            case = prepare_bug_case(strict_json(read_bounded(args.intake, MAX_BUG_CASE_REQUEST_BYTES)),
                                     read_bounded(args.checks, 200000), args.check_ids, args.target_check)
         output = canonical_json(case) + b"\n"
         # Exclusive creation cannot truncate the input or a prior review artifact.

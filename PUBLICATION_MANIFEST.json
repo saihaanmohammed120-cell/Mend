@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "e167d4eee29d9c2fb8ff71ab89e059d0d3579e2f",
+  "observed_parent_sha": "5c0933b45528084ab1cd8a8ebad34eaa3f66e435",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,23 +24,35 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 492,
+  "packaged_file_count_excluding_manifest": 495,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Backend integration and hold enforcement, 2026-10-24",
+  "delivery": "Hackathon release ledger and preparation transport correction, 2026-10-24",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    ".github/workflows/checks.yml",
-    "backend/scripts/verify_postgres_runtime.py",
-    "backend/tests/test_postgres_runtime_driver.py",
-    "docs/BACKEND_INTEGRATION_2026_10_24.md"
+    "README.md",
+    "backend/mend/api.py",
+    "backend/mend/bug_cases.py",
+    "backend/scripts/prepare_bug_case.py",
+    "backend/tests/test_http.py",
+    "backend/tests/test_bug_case_cli.py",
+    "frontend/lib/backend-proxy.ts",
+    "frontend/tests/backend-proxy.test.ts",
+    "frontend/scripts/verify-backend-chain.mjs",
+    "docs/BUG_CASE_REVIEW.md",
+    "docs/RELEASE_READINESS_2026_10_24.md",
+    "docs/JUDGE_GUIDE.md",
+    "docs/HACKATHON_SUBMISSION_2026_10_24.md",
+    "docs/ROADMAP_STATUS_2026_10_21.md",
+    "docs/HACKATHON_SUBMISSION_2026_10_22.md",
+    "docs/WALKTHROUGH.md"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -867,10 +879,10 @@
     },
     {
       "path": "backend/mend/api.py",
-      "bytes": 15835,
-      "sha256": "20390d513605c3775f0226366e18c4ce42562917a89c74ba378676a6c2522a57",
+      "bytes": 15866,
+      "sha256": "55859e33a82439cbd10671404786a9c7fadb910f403f93fc3ed66fdcc672d879",
       "encoding": "utf-8",
-      "git_blob_sha": "deb9185b68bbe330148766dd4ef7df6c2fac3c56"
+      "git_blob_sha": "c9e90bb5cfed815908b1391b8b9f45f479184fdb"
     },
     {
       "path": "backend/mend/artifacts.py",
@@ -895,10 +907,10 @@
     },
     {
       "path": "backend/mend/bug_cases.py",
-      "bytes": 10814,
-      "sha256": "2e1f2010b074810f043d0803443f52f98daab0ac3b48d299ec24049036cc70fd",
+      "bytes": 10935,
+      "sha256": "460aebbf5a7a42b01630bab6eba152c3131304398b628b3b444f7e0ea1e7068b",
       "encoding": "utf-8",
-      "git_blob_sha": "f8fa983a18d8a40ff640a1e4c37a31972be11960"
+      "git_blob_sha": "dbb9e31903a2a2368c2bebc0d9032fbbc08b9e95"
     },
     {
       "path": "backend/mend/check_history.py",
@@ -1119,10 +1131,10 @@
     },
     {
       "path": "backend/scripts/prepare_bug_case.py",
-      "bytes": 2741,
-      "sha256": "13ef3bd490fd84965c20262a6fb67d30c3c6af26f46295ef30a74bf33429f18a",
+      "bytes": 2803,
+      "sha256": "6b263643e9c2e668c6421c8cc2bca8d34957c0feb3e3a887bf0a2dd5b61a4e20",
       "encoding": "utf-8",
-      "git_blob_sha": "5fca36e643a901a5901196714a7fca8d0a41be90"
+      "git_blob_sha": "ff2fa254bd07012259816cfcf79fed6cfccc89e3"
     },
     {
       "path": "backend/scripts/verify_app_database.py",
@@ -1196,10 +1208,10 @@
     },
     {
       "path": "backend/tests/test_bug_case_cli.py",
-      "bytes": 5194,
-      "sha256": "0ac97e5682aee5873b0995b184b8abe382a9ee08ebdd389c7d72406657394a5e",
+      "bytes": 6991,
+      "sha256": "4d5fc5ffafc2e66bd2b8af68b97cf720593550afaf2b652bc87a88bcf62ab290",
       "encoding": "utf-8",
-      "git_blob_sha": "e49d4c9c01d12e967aeef65742c6dc9ad03a7943"
+      "git_blob_sha": "8a4f391f6bd82cde7eebac8037455baebd351490"
     },
     {
       "path": "backend/tests/test_bug_cases.py",
@@ -1252,10 +1264,10 @@
     },
     {
       "path": "backend/tests/test_http.py",
-      "bytes": 12027,
-      "sha256": "06ed13aabd92d7076d53ee88947ec1f8afd7172f2a9b9fd68704908635cb9472",
+      "bytes": 13837,
+      "sha256": "e2ee68847ada3820ae4921a50b328e7549293e5bdcfd056516f2087b83c1df3f",
       "encoding": "utf-8",
-      "git_blob_sha": "9fabf3ca65ab13176c2aedca52de2f9c6a45f884"
+      "git_blob_sha": "b7fb380e3af8fc28f25966bafce6a5ced9f3b001"
     },
     {
       "path": "backend/tests/test_http_preflight.py",
@@ -1392,10 +1404,10 @@
     },
     {
       "path": "docs/BUG_CASE_REVIEW.md",
-      "bytes": 7140,
-      "sha256": "6d2b5020fc243829a65741fea2b84712cf384a61e9558f8a31a081de2accb34c",
+      "bytes": 7463,
+      "sha256": "1df38fdd77b2238665b9344338c222eec099279d0e8724ad9b142cce7cf12e3e",
       "encoding": "utf-8",
-      "git_blob_sha": "87effb4f8beb3f151c27d1d9410f87199d97a7ba"
+      "git_blob_sha": "0c5d6797516d62bd7a599d16e9ab040991b724ad"
     },
     {
       "path": "docs/BUG_FIX_WORKFLOW_DELTA.md",
@@ -1483,10 +1495,17 @@
     },
     {
       "path": "docs/HACKATHON_SUBMISSION_2026_10_22.md",
-      "bytes": 10774,
-      "sha256": "7e67b5152698f71f9356780e5831568bc312b7ed81835023ebbd531573bffa48",
+      "bytes": 11032,
+      "sha256": "0fe0f8c7aa5f72deaeb40a6daffc136f576f8925fdec8a6ca73319a0aac70406",
       "encoding": "utf-8",
-      "git_blob_sha": "1228c05dc3499eef660b69956788ff0e98b0c9c0"
+      "git_blob_sha": "2badd7c472e382abf16a1e262801150f22bbad4d"
+    },
+    {
+      "path": "docs/HACKATHON_SUBMISSION_2026_10_24.md",
+      "bytes": 4893,
+      "sha256": "edaa4c198caf46fba2c415be834251274916ad22be1094b7c920a0a6a4e692e9",
+      "encoding": "utf-8",
+      "git_blob_sha": "fd665960572d93b96cad796f20270e4c9c39c972"
     },
     {
       "path": "docs/HERO_POLISH_REVIEW.md",
@@ -1559,6 +1578,13 @@
       "git_blob_sha": "1f804f5c1c91c4593f03e04ebd129de9eb9432fb"
     },
     {
+      "path": "docs/JUDGE_GUIDE.md",
+      "bytes": 3824,
+      "sha256": "23193a6f57852f76dae7aaab2f55203f0b7f00a56aaeff2cfca7ef50cb62de09",
+      "encoding": "utf-8",
+      "git_blob_sha": "55e94e7089619559fe92ebfaaeca325accabfcce"
+    },
+    {
       "path": "docs/NEXT_MILESTONE_CHECKPOINT.md",
       "bytes": 9540,
       "sha256": "98d5388ba0c98d227a38bf13016fe8b4832cc98cd7e2484bf7b91b6e64b1218e",
@@ -1615,6 +1641,13 @@
       "git_blob_sha": "d65af1968f82397ee7f7d8952a0894a907af8edd"
     },
     {
+      "path": "docs/RELEASE_READINESS_2026_10_24.md",
+      "bytes": 9609,
+      "sha256": "c0e7b1baf3560eaeccc77a6579e39d09482ad673200ecf646a06c0bf98f94f80",
+      "encoding": "utf-8",
+      "git_blob_sha": "dcef32a905a8221ccb954a213e0e6275b05ba0e9"
+    },
+    {
       "path": "docs/research/reference-catalog.csv",
       "bytes": 46006,
       "sha256": "519a3d23388a07b0e1e96ff4c61e937dcc6fc35e2eaf3a77a600a0a6d8c95e3d",
@@ -1651,10 +1684,10 @@
     },
     {
       "path": "docs/ROADMAP_STATUS_2026_10_21.md",
-      "bytes": 4048,
-      "sha256": "b01ffa23cb4e7e0356d8855b07521232621e757a4fbde63a839795c75cdbb39c",
+      "bytes": 4430,
+      "sha256": "65282697e6aa3af63e7d6e457b14a55008d0e82a638f75b32c291f486ff30960",
       "encoding": "utf-8",
-      "git_blob_sha": "8924071987a35f05c64add79a49f59e6accbcede"
+      "git_blob_sha": "cb4459e535d773cc1f12addb40cdfac0abf17130"
     },
     {
       "path": "docs/SCALING_AND_DEPLOYMENT_DELTA.md",
@@ -2575,10 +2608,10 @@
     },
     {
       "path": "docs/WALKTHROUGH.md",
-      "bytes": 11455,
-      "sha256": "cdbf8d052d434f57a31aa16c8517c15279a51dd2a02543fb696c2298b1a42c07",
+      "bytes": 11959,
+      "sha256": "dc2ee365486d755d3394252f94544c502be4ed790995f636dd6cce6ac31882f4",
       "encoding": "utf-8",
-      "git_blob_sha": "8dd1887ca2d755404a9fc30fdf17ade73925cb7c"
+      "git_blob_sha": "4a4e9492787323a36def2e5fa7036f49d66d31f3"
     },
     {
       "path": "frontend/.env.example",
@@ -2904,10 +2937,10 @@
     },
     {
       "path": "frontend/lib/backend-proxy.ts",
-      "bytes": 5363,
-      "sha256": "a141c6eae71f7e31061c2d1e33ea937e79d281c30131f129e1a7d847e43ed551",
+      "bytes": 5533,
+      "sha256": "260be7a38a642c9f857d6aad9dcdbe22c0b63b917163ba82d56b42e61b7ce44d",
       "encoding": "utf-8",
-      "git_blob_sha": "148f2b19b9856e74800c5a55a7db5bc087abe654"
+      "git_blob_sha": "9424123b3d5bbf12938394f2e29eeffacbe50902"
     },
     {
       "path": "frontend/lib/bug-intake.ts",
@@ -3247,10 +3280,10 @@
     },
     {
       "path": "frontend/scripts/verify-backend-chain.mjs",
-      "bytes": 6368,
-      "sha256": "d9db88c0723c22fd1c6f5273e3a70a9dd282d3538c605d48074ae651dca8dfc4",
+      "bytes": 6943,
+      "sha256": "74501112aba0e30a2f1c475680f6ebf10c0e14f6aed6a1549f7fe955a26ab4ee",
       "encoding": "utf-8",
-      "git_blob_sha": "1c907f6030021fea0e5f53ea91dceeee238c271d"
+      "git_blob_sha": "a0f18468d6e23491777a209e0246953b02d18eaa"
     },
     {
       "path": "frontend/tailwind.config.ts",
@@ -3275,10 +3308,10 @@
     },
     {
       "path": "frontend/tests/backend-proxy.test.ts",
-      "bytes": 5373,
-      "sha256": "0dc6e42d281fb8113a16e1d565129fddb236c9572a079fbabead5be52627e25c",
+      "bytes": 6760,
+      "sha256": "3bfdd8b6abf2970b92454800efb968a672505c4691b728c7b1cc0e4f3b0c11aa",
       "encoding": "utf-8",
-      "git_blob_sha": "ff7a9deedacb5efad701f4a85a7c56fc8267307e"
+      "git_blob_sha": "99ca445b0a94e42888f142dbd4f3223f9814016d"
     },
     {
       "path": "frontend/tests/bug-desk.test.ts",
@@ -3492,10 +3525,10 @@
     },
     {
       "path": "README.md",
-      "bytes": 12393,
-      "sha256": "374655e1dca515e43a2961a653f2130d4e3a3a1566edb7321dde882a05d68ff0",
+      "bytes": 13089,
+      "sha256": "d0a11544dbd3745edd3ef85a2fb36cc76c71eec64999cabda73f07c376a1da20",
       "encoding": "utf-8",
-      "git_blob_sha": "00ff4f0335bad0b56460b98992dacb799ac42841"
+      "git_blob_sha": "e0086897fe7270ecb1b170ad4597b9ca2fb642c3"
     }
   ],
   "holds": {

@@ -11,6 +11,32 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "prepare_bug_case.py"
 
 
 class BugCaseCliTests(unittest.TestCase):
+    def test_escaped_source_at_combined_cap_prepares_through_both_cli_inputs(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            intake = {'kind': 'mend_bug_intake', 'schema_version': 1, 'file_path': 'helper.py',
+                      'original_source': '#' + '\x01' * 199998, 'reported_error': None,
+                      'expected_behavior': 'Return one',
+                      'evidence': {'investigation': 'not_run', 'execution': 'not_run', 'regression': 'not_generated'}}
+            request = {'intake': intake, 'protected_test_source': '#',
+                       'required_check_ids': ['test_regression.Checks.test_value'],
+                       'target_check_id': 'test_regression.Checks.test_value'}
+            checks = root / 'checks.py'
+            checks.write_text('#')
+            for mode in ('request', 'intake'):
+                source, output = root / f'{mode}.json', root / f'{mode}-prepared.json'
+                source.write_text(json.dumps(request if mode == 'request' else intake), encoding='utf-8')
+                self.assertGreater(source.stat().st_size, 1048576)
+                args = [sys.executable, str(SCRIPT), '--' + mode, str(source), '--output', str(output)]
+                if mode == 'intake':
+                    args += ['--checks', str(checks), '--check', request['target_check_id'],
+                             '--target-check', request['target_check_id']]
+                run = subprocess.run(args, capture_output=True, text=True, timeout=10)
+                self.assertEqual(run.returncode, 0, run.stderr)
+                prepared = json.loads(output.read_bytes())
+                self.assertEqual(prepared['intake'], intake)
+                self.assertFalse(prepared['execution_enabled'])
+
     def test_browser_review_request_prepares_exact_sources_without_execution(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
