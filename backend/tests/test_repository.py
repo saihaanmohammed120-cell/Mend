@@ -17,6 +17,21 @@ class Response(io.BytesIO):
 
 
 class RepositoryTests(unittest.TestCase):
+    def test_read_only_rejects_every_mutating_action_before_transport(self):
+        calls = []
+        def open_request(request, timeout):
+            calls.append(request)
+            return Response(b'{}')
+        repo = SupabaseRepository('https://example.supabase.co', 'fixture', read_only=True, opener=open_request)
+        for action in ACTIONS - {'get_task', 'events'}:
+            with self.subTest(action=action), self.assertRaises(MendError) as caught:
+                repo.call(action, {})
+            self.assertEqual(caught.exception.code, 'database_write_hold')
+        self.assertEqual(calls, [])
+        for action in ('get_task', 'events'):
+            self.assertEqual(repo.call(action, {}), {})
+        self.assertEqual(len(calls), 2)
+
     def test_exact_rpc_headers_and_envelope(self):
         seen = []
         def open_request(request, timeout):

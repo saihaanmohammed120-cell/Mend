@@ -1,5 +1,7 @@
 # Mend deployment preparation
 
+Current integration and Render settings: [24 October backend continuation](../../docs/BACKEND_INTEGRATION_2026_10_24.md). `MEND_DATABASE_WRITES_ENABLED=false` now independently enforces the hosted database hold at both HTTP and repository boundaries. Authentication and stateless bug-contract review remain available when private server configuration is supplied. Do not turn this flag on without lifting the existing database hold; provider release remains independently blocked.
+
 This is a configuration preparation guide, not an authenticated application deployment report. The public MIT source and static Site exist; the provider-backed full-stack workflow remains gated. On 22 October, missing API/runner/spike Dockerfiles were restored and packaging regression checks added. The offline CI now builds all three images against a verified digest-pinned official Python base and checks non-root imports/readability without running services, generated code, timing probes or provider calls. Consult the exact commit's Actions result before treating those image checks as passed.
 
 ## 1. Local baseline

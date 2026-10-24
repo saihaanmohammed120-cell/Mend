@@ -67,7 +67,7 @@ class ReadinessTests(unittest.TestCase):
         asyncio.run(exercise())
         self.assertFalse(repo._probe_inflight.locked())
 
-    def client(self, result=None, *, mode="database_only", live=False, fail=False):
+    def client(self, result=None, *, mode="database_only", live=False, fail=False, writes=False):
         self.calls = []
         def request(req, timeout):
             self.calls.append((req, timeout))
@@ -77,7 +77,7 @@ class ReadinessTests(unittest.TestCase):
         repo = SupabaseRepository("https://example.supabase.co", "fixture-private-key", opener=request)
         settings = Settings(mode=mode, public_origin="https://mend.test", allowed_origins=("https://mend.test",),
             supabase_url="https://example.supabase.co", supabase_service_role_key="fixture-private-key",
-            session_seal_key=base64.urlsafe_b64encode(b"s"*32).decode(), live_enabled=live,
+            session_seal_key=base64.urlsafe_b64encode(b"s"*32).decode(), live_enabled=live, database_writes_enabled=writes,
             token_factory_key="fixture", nebius_iam_token="fixture", nebius_project_id="fixture",
             runner_image_digest="registry.example/image@sha256:"+"a"*64)
         service = TaskService(repo, None, None, LocalArtifacts())
@@ -130,9 +130,15 @@ class ReadinessTests(unittest.TestCase):
         self.assertEqual(body.get("database",{}).get("status"),"not_checked")
 
     def test_consistent_gates_can_be_ready_without_claiming_provider_verification(self):
-        with self.client({"schema_version":1,"gate_present":True,"live_execution_enabled":True},mode="live",live=True) as client:
+        with self.client({"schema_version":1,"gate_present":True,"live_execution_enabled":True},mode="live",live=True,writes=True) as client:
             response=client.get("/readyz")
         self.assertEqual(response.status_code,200)
         self.assertTrue(response.json()["ready"])
         self.assertEqual(response.json()["provider_verification"],"not_established_by_this_endpoint")
         self.assertEqual(response.headers["cache-control"],"no-store")
+
+    def test_database_write_hold_blocks_readiness_even_when_other_flags_agree(self):
+        with self.client({"schema_version":1,"gate_present":True,"live_execution_enabled":True},mode="live",live=True) as client:
+            response=client.get('/readyz')
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.json()['blockers'], ['database_write_hold'])

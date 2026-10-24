@@ -162,7 +162,11 @@ class Runtime:
 def database_repository_from_env(env=None):
     """Build the real RPC adapter without provider or browser-session dependencies."""
     e = os.environ if env is None else env
-    return SupabaseRepository(e.get("SUPABASE_URL", ""), e.get("SUPABASE_SERVICE_ROLE_KEY", ""))
+    writes = e.get("MEND_DATABASE_WRITES_ENABLED", "false")
+    if writes not in ("true", "false"):
+        raise MendError("invalid_configuration", "Database write setting must be true or false.", 503)
+    return SupabaseRepository(e.get("SUPABASE_URL", ""), e.get("SUPABASE_SERVICE_ROLE_KEY", ""),
+                              read_only=writes != "true")
 
 
 def build_runtime(env=None):
@@ -192,7 +196,7 @@ def build_runtime(env=None):
             config = {"live_enabled": False}
         else:
             settings.validate_auth()
-            store = SupabaseRepository(settings.supabase_url, settings.supabase_service_role_key)
+            store = database_repository_from_env(e)
             artifacts = ArtifactStore(settings.supabase_url, settings.supabase_service_role_key)
             endpoint = settings.token_factory_url.rstrip("/")
             if endpoint == "https://api.tokenfactory.nebius.com":

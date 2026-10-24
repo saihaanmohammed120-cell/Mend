@@ -2,6 +2,7 @@
 const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 export function allowedRoute(path: string, method: string): boolean {
   if (path === "session") return ["GET", "POST", "DELETE"].includes(method);
+  if (path === "bug-cases/prepare") return method === "POST";
   if (path === "tasks") return method === "POST";
   if (new RegExp(`^tasks/${UUID}$`).test(path)) return method === "GET";
   if (new RegExp(`^tasks/${UUID}/contract$`).test(path)) return method === "PATCH";

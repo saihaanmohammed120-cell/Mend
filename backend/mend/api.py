@@ -205,6 +205,9 @@ def create_app(service, settings, authenticator):
         result = await authenticator.authenticate(request.cookies.get(SESSION_COOKIE))
         if mutation:
             verify_csrf(result, request.headers.get('x-csrf-token'), request.cookies.get(CSRF_COOKIE))
+            if (request.url.path.startswith('/api/tasks') and settings.mode != 'local_test'
+                    and not settings.database_writes_enabled):
+                raise MendError('database_write_hold', 'Database changes are on hold.', 503)
         return result
 
     def response(value, status=200):

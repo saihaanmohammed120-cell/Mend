@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "cd42278ccc6bb0ab282b8ce9075189626d045c81",
+  "observed_parent_sha": "21391aef340eca0988cdfd6fcf7912fd332b02ce",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,22 +24,38 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 488,
+  "packaged_file_count_excluding_manifest": 492,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Public Vercel frontend, 2026-10-22",
+  "delivery": "Backend integration and hold enforcement, 2026-10-24",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
     "README.md",
-    "docs/VERCEL_DEPLOYMENT.md",
-    "frontend/app/layout.tsx"
+    "backend/README.md",
+    "backend/docs/DEPLOYMENT.md",
+    "docs/BACKEND_INTEGRATION_2026_10_24.md",
+    "backend/.env.example",
+    "backend/mend/config.py",
+    "backend/mend/repository.py",
+    "backend/mend/bootstrap.py",
+    "backend/mend/api.py",
+    "backend/tests/test_database_initialization.py",
+    "backend/tests/test_repository.py",
+    "backend/tests/test_http.py",
+    "backend/tests/test_readiness.py",
+    "backend/tests/ci_supabase_prerequisites.sql",
+    "backend/tests/proxy_fixture_app.py",
+    "frontend/lib/backend-proxy.ts",
+    "frontend/tests/backend-proxy.test.ts",
+    "frontend/scripts/verify-backend-chain.mjs",
+    ".github/workflows/checks.yml"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -54,10 +70,10 @@
   "files": [
     {
       "path": ".github/workflows/checks.yml",
-      "bytes": 2814,
-      "sha256": "8aec51cd78e4a4e69fc2e79d3428d2b7365e332d622e59db3b15b3d583248432",
+      "bytes": 4534,
+      "sha256": "b379d3a7bff05452c33c4e5432e6faf59b36c5be3e5d0f3f0133876d1b6a1afa",
       "encoding": "utf-8",
-      "git_blob_sha": "1fa72fcc1aaeea8ebb74eb1e482d2a600de0385b"
+      "git_blob_sha": "9073848d306bee2a195bb0eca64146dabe85849b"
     },
     {
       "path": ".gitignore",
@@ -75,10 +91,10 @@
     },
     {
       "path": "backend/.env.example",
-      "bytes": 1546,
-      "sha256": "eecf2bb84062f4930c10b9cc3fe6118a0034ec4954c49c2d3d9614770b47202c",
+      "bytes": 1664,
+      "sha256": "ffbd28119724e8e0c9f45133c8ae387f31bd88a2890f6ec4403efda976ffbfad",
       "encoding": "utf-8",
-      "git_blob_sha": "6c8855e15926af9a0eefac7cc8bf610b7abe940b"
+      "git_blob_sha": "195c45b52b73649a15d9c82c40704c02662efe6f"
     },
     {
       "path": "backend/.github/workflows/checks.yml",
@@ -327,10 +343,10 @@
     },
     {
       "path": "backend/docs/DEPLOYMENT.md",
-      "bytes": 14293,
-      "sha256": "205d7a9c1b1f6156b2d1fa7e31b002177831b89b21a74048ad905e3979735b47",
+      "bytes": 14775,
+      "sha256": "f381f4e78f47ff5b58b41c59ccbbdc2ee06955cb598de56902d70a1e8805f58c",
       "encoding": "utf-8",
-      "git_blob_sha": "1fa638a1a0306fa52dd519635396f7bd4b7a01f8"
+      "git_blob_sha": "57af07bf2561014fe3d2df09a5b6b92e098d5e4e"
     },
     {
       "path": "backend/docs/FRONTEND_ACCEPTANCE.md",
@@ -866,10 +882,10 @@
     },
     {
       "path": "backend/mend/api.py",
-      "bytes": 15587,
-      "sha256": "f68029c9bb162ee310de35161c907f942f9af28374dca3bdf0028fd6e8fe466e",
+      "bytes": 15835,
+      "sha256": "20390d513605c3775f0226366e18c4ce42562917a89c74ba378676a6c2522a57",
       "encoding": "utf-8",
-      "git_blob_sha": "80999a8c02e7dea315cbf977bf7a5fff0362db93"
+      "git_blob_sha": "deb9185b68bbe330148766dd4ef7df6c2fac3c56"
     },
     {
       "path": "backend/mend/artifacts.py",
@@ -887,10 +903,10 @@
     },
     {
       "path": "backend/mend/bootstrap.py",
-      "bytes": 10522,
-      "sha256": "b25e804d5b96fae34bf6deeb7fbe6b3bf8a364e12e1cce806553341f0be46de9",
+      "bytes": 10737,
+      "sha256": "0529d5868afbd5e4713adfdc28480d160938110d6911d6e2d39abfc488227942",
       "encoding": "utf-8",
-      "git_blob_sha": "c1b2a6f47620822a35373b714c9eca0c64466bd4"
+      "git_blob_sha": "0af1603cfd1b118cac791ccd368b4b90e1efdd53"
     },
     {
       "path": "backend/mend/bug_cases.py",
@@ -908,10 +924,10 @@
     },
     {
       "path": "backend/mend/config.py",
-      "bytes": 6555,
-      "sha256": "401444cac80291009688ec8a16f8ee30308f6065b542d8fc062ca4101cac73a2",
+      "bytes": 7095,
+      "sha256": "c304143eed4e0bdee9fead592038dc0230fba7090a65afdd2ad7885cb0fa3fb5",
       "encoding": "utf-8",
-      "git_blob_sha": "ab3a7719de6bf57ed062487b4cc80a3ba0369b6f"
+      "git_blob_sha": "f1f2731f2d8d6139b97208ffcf8817c59f71b2ec"
     },
     {
       "path": "backend/mend/domain.py",
@@ -964,10 +980,10 @@
     },
     {
       "path": "backend/mend/repository.py",
-      "bytes": 7687,
-      "sha256": "bb95587f6e78df10bf4a0f8b574f1c65c792317e57ac1e8266b06e1854fd85ea",
+      "bytes": 8043,
+      "sha256": "ff2f595b0f3ffa8a928a1815dc847c6658e58fefc69cbc9b0131a8eebb0435c2",
       "encoding": "utf-8",
-      "git_blob_sha": "914fa64c36b10016cfdb7691117a6e147a7a8bbb"
+      "git_blob_sha": "775726790f85388e8fa2d761d87686a3ad7f98f6"
     },
     {
       "path": "backend/mend/retention.py",
@@ -1069,10 +1085,10 @@
     },
     {
       "path": "backend/README.md",
-      "bytes": 8688,
-      "sha256": "0a6057b550326e7c1a1e40aa71199b2085867d925b98c0b0f01ccc633ae9ff7f",
+      "bytes": 9268,
+      "sha256": "c79eecf070d79c6da18b22b3298524e8441acd6af4f564777e2da4e4ad6061ef",
       "encoding": "utf-8",
-      "git_blob_sha": "cedf95a567d68585ac421f7fc29d3e5abbb55387"
+      "git_blob_sha": "37337e338c9604b062a0a90adbc486a4e06db3e8"
     },
     {
       "path": "backend/requirements.runtime.lock",
@@ -1159,6 +1175,20 @@
       "git_blob_sha": "91448f76e1269858882eb4de58a684f9dee8c641"
     },
     {
+      "path": "backend/tests/ci_supabase_prerequisites.sql",
+      "bytes": 991,
+      "sha256": "2f2f072081729983b469388a14f266b40942c47a855f0a54d6095ec6f65b5ac9",
+      "encoding": "utf-8",
+      "git_blob_sha": "6341029a8db832e6d85bbfd65d870c4ad774810f"
+    },
+    {
+      "path": "backend/tests/proxy_fixture_app.py",
+      "bytes": 1518,
+      "sha256": "ecfa6afee8835e4c84f8b4a6a19f27876fa66be7fc01ee1a874da74890b4f6e0",
+      "encoding": "utf-8",
+      "git_blob_sha": "f25c7cbcd582b04dce87d3b9ff108dcdc023a4bf"
+    },
+    {
       "path": "backend/tests/test_auth.py",
       "bytes": 17165,
       "sha256": "71fcd9ac260c2076d3bb5b9313f2127fabcee890d1f4271208bef5065e84ca80",
@@ -1216,10 +1246,10 @@
     },
     {
       "path": "backend/tests/test_database_initialization.py",
-      "bytes": 3347,
-      "sha256": "b6d39f709ff5e4e8a894bd3d3ee6f8abccc1cea5b8c8a77cacfda6f663d266b2",
+      "bytes": 4491,
+      "sha256": "6129fd965d86e48f7b61b8a6359cb5be1ff36ef0687c0f90962610ef3daa2935",
       "encoding": "utf-8",
-      "git_blob_sha": "11c22ede90539038dcc5671373836fff357e51a3"
+      "git_blob_sha": "5b2517d891be31519a12d99f42a92d477563afb9"
     },
     {
       "path": "backend/tests/test_deployment.py",
@@ -1237,10 +1267,10 @@
     },
     {
       "path": "backend/tests/test_http.py",
-      "bytes": 9760,
-      "sha256": "d09133f83b100a310130989ecbe839d4cb309365c2db4fcfc4b93e535c79df3b",
+      "bytes": 12027,
+      "sha256": "06ed13aabd92d7076d53ee88947ec1f8afd7172f2a9b9fd68704908635cb9472",
       "encoding": "utf-8",
-      "git_blob_sha": "10ae6727621471052da0a4b94f83331e3aa03364"
+      "git_blob_sha": "9fabf3ca65ab13176c2aedca52de2f9c6a45f884"
     },
     {
       "path": "backend/tests/test_http_preflight.py",
@@ -1286,17 +1316,17 @@
     },
     {
       "path": "backend/tests/test_readiness.py",
-      "bytes": 7032,
-      "sha256": "a91041ceb2829276054026ed733d33910c706b28ef5516c2c083ba1579e6a964",
+      "bytes": 7480,
+      "sha256": "2d26e84cbfa849f88960b3db2d49e6a9e71cbd243c366ef06feec30c1aef00f9",
       "encoding": "utf-8",
-      "git_blob_sha": "ccb9ce8a71fc659a745cd05eed97b9cd06c1e5c0"
+      "git_blob_sha": "5465ce9fd5919e9bd50116a8bf5e31fd140f919a"
     },
     {
       "path": "backend/tests/test_repository.py",
-      "bytes": 17318,
-      "sha256": "5c9539243b39bd1c5b0fe6787397fd89aa78e0f95e724a4a94ab8a91fb6e449d",
+      "bytes": 18074,
+      "sha256": "a58b38ad8656f824d805f06a123edaff64a299c2f2200837a907ddd1cf916acc",
       "encoding": "utf-8",
-      "git_blob_sha": "dd0e10a33975f9aeb2451f55e7c82d36708e1ebc"
+      "git_blob_sha": "20d29fcc4f502eac2eeb465235b0e4b1c3b8863f"
     },
     {
       "path": "backend/tests/test_retention.py",
@@ -1360,6 +1390,13 @@
       "sha256": "9dd3eda9339e4c9abc510295aa245d1689c7979b456f1405ad780590ec6d9c4b",
       "encoding": "utf-8",
       "git_blob_sha": "c30607af8bf9938809173ef918febb1934b8acb6"
+    },
+    {
+      "path": "docs/BACKEND_INTEGRATION_2026_10_24.md",
+      "bytes": 5151,
+      "sha256": "960fa357ca36219d280f6fa443cb2b34852bcb479d8814fe05fcf9a863d57208",
+      "encoding": "utf-8",
+      "git_blob_sha": "07dcf0de49e0581c214a1f000aef922d516d71ab"
     },
     {
       "path": "docs/BROWSER_UI_ACCEPTANCE.md",
@@ -2882,10 +2919,10 @@
     },
     {
       "path": "frontend/lib/backend-proxy.ts",
-      "bytes": 5301,
-      "sha256": "f150e0ee677cce9acbf2fa1757cdfa74dcd27b67d233751d197df011e1bc5046",
+      "bytes": 5363,
+      "sha256": "a141c6eae71f7e31061c2d1e33ea937e79d281c30131f129e1a7d847e43ed551",
       "encoding": "utf-8",
-      "git_blob_sha": "f805845d63a8731ffcb5bdb439e037f2ff56e912"
+      "git_blob_sha": "148f2b19b9856e74800c5a55a7db5bc087abe654"
     },
     {
       "path": "frontend/lib/bug-intake.ts",
@@ -3224,6 +3261,13 @@
       "git_blob_sha": "c3520c867beae06bd54f9b183dcfd53a7b632a6d"
     },
     {
+      "path": "frontend/scripts/verify-backend-chain.mjs",
+      "bytes": 6368,
+      "sha256": "d9db88c0723c22fd1c6f5273e3a70a9dd282d3538c605d48074ae651dca8dfc4",
+      "encoding": "utf-8",
+      "git_blob_sha": "1c907f6030021fea0e5f53ea91dceeee238c271d"
+    },
+    {
       "path": "frontend/tailwind.config.ts",
       "bytes": 846,
       "sha256": "62ceff92d9c79524f425b4c631673b0f2727e9a1437e0145790e41919e36ec79",
@@ -3246,10 +3290,10 @@
     },
     {
       "path": "frontend/tests/backend-proxy.test.ts",
-      "bytes": 5171,
-      "sha256": "55cb438632e527a7605d3d0ad58f365b11972db25535d076c29ca8432369c23d",
+      "bytes": 5373,
+      "sha256": "0dc6e42d281fb8113a16e1d565129fddb236c9572a079fbabead5be52627e25c",
       "encoding": "utf-8",
-      "git_blob_sha": "02cd29f39edfcdefaa704277226ab36bbe573503"
+      "git_blob_sha": "ff7a9deedacb5efad701f4a85a7c56fc8267307e"
     },
     {
       "path": "frontend/tests/bug-desk.test.ts",
@@ -3463,15 +3507,16 @@
     },
     {
       "path": "README.md",
-      "bytes": 11753,
-      "sha256": "c41ecc35d8b13fbc60d948e88f3961ec14946335b8ae09b7ede67b7566fa9ca0",
+      "bytes": 12393,
+      "sha256": "374655e1dca515e43a2961a653f2130d4e3a3a1566edb7321dde882a05d68ff0",
       "encoding": "utf-8",
-      "git_blob_sha": "89068f3df13ef9ba4cbc23bbf79df9aeca68fe40"
+      "git_blob_sha": "00ff4f0335bad0b56460b98992dacb799ac42841"
     }
   ],
   "holds": {
     "live_nebius": "kept explicitly by user",
     "hosted_database_changes": "kept explicitly by user"
   },
-  "vercel_deployment": "https://mend-smasher.vercel.app; frontend-only, backend remains gated"
+  "vercel_deployment": "https://mend-smasher.vercel.app; frontend-only, backend remains gated",
+  "backend_deployment": "Private server credential unavailable; no hosted backend deployment claimed"
 }

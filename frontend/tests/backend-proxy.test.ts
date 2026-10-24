@@ -7,6 +7,9 @@ test("proxy exposes existing routes and excludes missing history/source APIs", (
   assert.equal(allowedRoute(`tasks/${id}/history`, "GET"), false);
   assert.equal(allowedRoute("tasks", "GET"), false);
   assert.equal(allowedRoute("tasks/../../session", "POST"), false);
+  assert.equal(allowedRoute("bug-cases/prepare", "POST"), true);
+  assert.equal(allowedRoute("bug-cases/prepare", "GET"), false);
+  assert.equal(allowedRoute("bug-cases/prepare/extra", "POST"), false);
 });
 test("proxy refuses credential-bearing or unencrypted remote destinations", () => {
   const previous = process.env.MEND_BACKEND_URL;

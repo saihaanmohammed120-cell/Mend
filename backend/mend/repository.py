@@ -32,7 +32,7 @@ class SupabaseRepository:
     """No retries: a transport timeout may follow a committed transaction."""
 
     def __init__(self, url: str, service_role_key: str, *, timeout: float = 10.0,
-                 opener: Callable | None = None):
+                 opener: Callable | None = None, read_only: bool = False):
         try:
             parsed = urllib.parse.urlsplit(url)
             host = parsed.hostname
@@ -52,10 +52,15 @@ class SupabaseRepository:
         self._timeout = timeout
         self._open = opener or urllib.request.build_opener(_NoRedirect()).open
         self._probe_inflight = threading.Lock()
+        if type(read_only) is not bool:
+            raise MendError('configuration', 'Database read-only setting must be a boolean.', 503)
+        self.read_only = read_only
 
     def call(self, action: str, payload: dict) -> dict | list:
         if not isinstance(action, str) or action not in ACTIONS or not isinstance(payload, dict):
             raise MendError('invalid_command', 'Invalid database command.')
+        if self.read_only and action not in ('get_task', 'events'):
+            raise MendError('database_write_hold', 'Database changes are on hold.', 503)
         try:
             data = json.dumps({'p_action': action, 'p_payload': payload},
                               separators=(',', ':'), allow_nan=False).encode('utf-8')

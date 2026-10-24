@@ -57,6 +57,7 @@ class Settings:
     nebius_project_id: str = ''
     runner_image_digest: str = ''
     live_enabled: bool = False
+    database_writes_enabled: bool = False
     session_seconds: int = 900
     task_timeout_seconds: int = 600
     job_timeout_seconds: int = 60
@@ -65,6 +66,8 @@ class Settings:
     max_body_bytes: int = 65536
 
     def __post_init__(self):
+        if type(self.database_writes_enabled) is not bool:
+            raise MendError('invalid_configuration', 'Database write setting must be a boolean.', 503)
         # Browser Origin serialization has no path/default HTTPS port and uses
         # canonical host casing. Direct construction and environment loading
         # must produce the same exact CORS/CSRF allowlist.
@@ -83,7 +86,9 @@ class Settings:
         origin = e.get('MEND_PUBLIC_ORIGIN', '')
         origins = tuple(v.strip() for v in e.get('MEND_ALLOWED_ORIGINS', origin).split(',') if v.strip())
         mode = e.get('MEND_MODE', 'local_test')
-        if mode not in ('local_test', 'database_only', 'live') or e.get('MEND_LIVE_ENABLED', 'false') not in ('true', 'false'):
+        if (mode not in ('local_test', 'database_only', 'live')
+                or e.get('MEND_LIVE_ENABLED', 'false') not in ('true', 'false')
+                or e.get('MEND_DATABASE_WRITES_ENABLED', 'false') not in ('true', 'false')):
             raise MendError('invalid_configuration', 'Mode and live release settings are invalid.', 503)
         return cls(mode=mode, public_origin=origin, allowed_origins=origins,
                    supabase_url=e.get('SUPABASE_URL', ''),
@@ -95,7 +100,8 @@ class Settings:
                    nebius_iam_token=e.get('NEBIUS_IAM_TOKEN', ''),
                    nebius_project_id=e.get('NEBIUS_PROJECT_ID', ''),
                    runner_image_digest=e.get('MEND_RUNNER_IMAGE_DIGEST', ''),
-                   live_enabled=e.get('MEND_LIVE_ENABLED', 'false') == 'true')
+                   live_enabled=e.get('MEND_LIVE_ENABLED', 'false') == 'true',
+                   database_writes_enabled=e.get('MEND_DATABASE_WRITES_ENABLED', 'false') == 'true')
 
     def validate_auth(self):
         origin = https_origin(self.public_origin)
@@ -120,6 +126,8 @@ class Settings:
             blockers.append('database_only_mode' if self.mode == 'database_only' else 'local_test_mode')
         if not self.live_enabled:
             blockers.append('phase_1_release_evidence_required')
+        if self.mode != 'local_test' and not self.database_writes_enabled:
+            blockers.append('database_write_hold')
         for value, code in ((self.token_factory_key, 'token_factory_not_configured'),
                             (self.nebius_iam_token, 'cloud_iam_not_configured'),
                             (self.nebius_project_id, 'cloud_project_not_configured'),

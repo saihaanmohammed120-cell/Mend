@@ -41,6 +41,28 @@ class DatabaseInitializationTests(unittest.TestCase):
         with self.assertRaises(MendError):
             database_repository_from_env({"SUPABASE_URL": "https://supabase.test"})
 
+    def test_hosted_database_defaults_to_read_only_and_requires_exact_write_opt_in(self):
+        from mend.config import Settings
+        for flag in (None, "false", "true"):
+            env = self.environment()
+            if flag is not None:
+                env["MEND_DATABASE_WRITES_ENABLED"] = flag
+            runtime = build_runtime(env)
+            try:
+                self.assertEqual(runtime.service.store.read_only, flag != "true")
+                self.assertEqual(runtime.settings.database_writes_enabled, flag == "true")
+                self.assertEqual("database_write_hold" in runtime.settings.live_blockers(), flag != "true")
+            finally:
+                runtime.close()
+        for invalid in ("TRUE", "1", "", None):
+            env = {**self.environment(), "MEND_DATABASE_WRITES_ENABLED": invalid}
+            with self.subTest(flag=invalid), self.assertRaises(MendError):
+                Settings.from_env(env)
+            with self.assertRaises(MendError):
+                database_repository_from_env(env)
+            with self.assertRaises(MendError):
+                Settings(database_writes_enabled=invalid)
+
     def test_live_flag_cannot_enable_database_mode(self):
         with self.assertRaises(MendError) as caught:
             build_runtime({**self.environment(), "MEND_LIVE_ENABLED": "true"})

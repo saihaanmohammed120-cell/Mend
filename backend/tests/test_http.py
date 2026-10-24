@@ -63,6 +63,36 @@ class HttpIntegrationTests(unittest.TestCase):
         self.client.close()
         self.store.close()
 
+    def test_hosted_database_hold_blocks_task_mutations_but_preserves_stateless_review(self):
+        from dataclasses import replace
+        from fastapi.testclient import TestClient
+        from mend.api import create_app
+        from mend.bug_cases import prepare_bug_case
+        settings = replace(self.authenticator.settings, mode='database_only')
+        body = {'intake': {'kind': 'mend_bug_intake', 'schema_version': 1,
+                'file_path': 'helper.py', 'original_source': 'def value(): return 0\n',
+                'reported_error': None, 'expected_behavior': 'Return one',
+                'evidence': {'investigation': 'not_run', 'execution': 'not_run', 'regression': 'not_generated'}},
+                'protected_test_source': '# Proposed checks\n',
+                'required_check_ids': ['test_regression.Checks.test_value'],
+                'target_check_id': 'test_regression.Checks.test_value'}
+        with TestClient(create_app(self.service, settings, self.authenticator), base_url='https://mend.test') as client:
+            client.cookies.update(self.client.cookies)
+            with patch.object(self.store, 'call', side_effect=AssertionError('Database hold reached transport')):
+                identifier = str(uuid.uuid4())
+                for method, path in [('POST', '/api/tasks'), ('PATCH', f'/api/tasks/{identifier}/contract'),
+                                     ('POST', f'/api/tasks/{identifier}/start'), ('POST', f'/api/tasks/{identifier}/cancel')]:
+                    response = client.request(method, path, headers=self.headers, json={})
+                    self.assertEqual(response.status_code, 503)
+                    self.assertEqual(response.json()['error']['code'], 'database_write_hold')
+                prepared = client.post('/api/bug-cases/prepare', headers=self.headers, json=body)
+                self.assertEqual(prepared.status_code, 200)
+                self.assertEqual(prepared.json(), prepare_bug_case(**body))
+                self.assertEqual(client.get('/api/session').status_code, 200)
+                logout = client.delete('/api/session', headers=self.headers)
+                self.assertEqual(logout.status_code, 200)
+                self.assertEqual(client.get('/api/session').status_code, 401)
+
     def test_bug_contract_preparation_requires_csrf_and_has_no_worker_or_store_side_effect(self):
         intake = {"kind": "mend_bug_intake", "schema_version": 1, "file_path": "helper.py",
                   "original_source": "def value(): return 0\n", "reported_error": "Wrong value",
