@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "94faca480b464d4ee0b844d7a89b1ba113c50be3",
+  "observed_parent_sha": "fe11c056973ac6ba43161d7a84b1804e0c70e834",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,62 +24,31 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 522,
+  "packaged_file_count_excluding_manifest": 525,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Roadmap source tools, team ledger API and website statuses, 2026-10-24",
+  "delivery": "Offline demo reproduction and installable receipt viewer, 2026-10-25",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
+    ".gitignore",
     ".github/workflows/checks.yml",
-    ".github/mend-required-checks.json",
     "README.md",
-    "backend/mend/api.py",
-    "backend/mend/bootstrap.py",
-    "backend/mend/approval_policy.py",
-    "backend/mend/repository_case.py",
-    "backend/mend/team_ledger.py",
-    "backend/scripts/approval_policy.py",
-    "backend/scripts/repository_case.py",
-    "backend/tests/test_approval_policy.py",
-    "backend/tests/test_repository_case.py",
-    "backend/tests/test_team_ledger.py",
-    "backend/tests/test_http.py",
-    "backend/tests/proxy_fixture_app.py",
-    "backend/tests/team_receipt_ledger_fixture.sql",
-    "backend/migrations/20261024110336_team_receipt_ledger.sql",
-    "frontend/lib/backend-proxy.ts",
-    "frontend/components/proof-roadmap.tsx",
-    "frontend/components/proof-roadmap.css",
-    "frontend/tests/hero-render.test.ts",
-    "frontend/tests/backend-proxy.test.ts",
-    "frontend/scripts/verify-backend-chain.mjs",
-    "frontend/DESIGN.md",
-    "docs/APPROVAL_POLICY.md",
-    "docs/REPOSITORY_CASES.md",
-    "docs/TEAM_RECEIPT_LEDGER.md",
-    "docs/IDE_RECEIPTS.md",
-    "docs/ROADMAP_IMPLEMENTATION_2026_10_24.md",
-    "docs/RELEASE_READINESS_2026_10_24.md",
-    "docs/ROADMAP_STATUS_2026_10_21.md",
-    "docs/JUDGE_GUIDE.md",
-    "extensions/vscode-mend/.vscodeignore",
-    "extensions/vscode-mend/contract-v1.json",
-    "extensions/vscode-mend/extension.js",
-    "extensions/vscode-mend/LICENSE",
+    "backend/scripts/verify_offline_demo.py",
+    "backend/tests/test_offline_demo.py",
     "extensions/vscode-mend/package.json",
     "extensions/vscode-mend/README.md",
-    "extensions/vscode-mend/receipt.js",
-    "extensions/vscode-mend/test/export-fixture.py",
-    "extensions/vscode-mend/test/extension.test.js",
-    "extensions/vscode-mend/test/host.js",
-    "extensions/vscode-mend/test/receipt.test.js"
+    "docs/OFFLINE_DEMO.md",
+    "docs/IDE_RECEIPTS.md",
+    "docs/JUDGE_GUIDE.md",
+    "docs/ROADMAP_IMPLEMENTATION_2026_10_24.md",
+    "docs/RELEASE_READINESS_2026_10_24.md"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -101,17 +70,17 @@
     },
     {
       "path": ".github/workflows/checks.yml",
-      "bytes": 4933,
-      "sha256": "292647396a0b35cbdadd519804560c4a827e5c61846f54049867babcb291797d",
+      "bytes": 5414,
+      "sha256": "dda8154926d7b6e06428fa21a99b784fc8887036456173286d903adf87584332",
       "encoding": "utf-8",
-      "git_blob_sha": "3e69a3ffb1cc30c73ae67061a5ff6ee6748c1fc0"
+      "git_blob_sha": "dd4bf5a2f28eca0ed2f643ebdcba141694686b80"
     },
     {
       "path": ".gitignore",
-      "bytes": 524,
-      "sha256": "46bb6b807d1792d8baea05b94b084832e67c206f529560432d3173e3a3950fbb",
+      "bytes": 531,
+      "sha256": "8830cdb5c84df3402fd527aeb4407f1f0e33851dcbdcc960f599ba6e4ab94739",
       "encoding": "utf-8",
-      "git_blob_sha": "1133d1f80129cc3a91e354b8d1e5ba672e540c72"
+      "git_blob_sha": "5148c5ce6167e1387100a65ff4f398d35cce4f41"
     },
     {
       "path": "backend/.dockerignore",
@@ -1234,6 +1203,13 @@
       "git_blob_sha": "85d427a8585d2d2dc782ef9fbc7c997f938d9c36"
     },
     {
+      "path": "backend/scripts/verify_offline_demo.py",
+      "bytes": 7042,
+      "sha256": "68060058b04ec52cd9632ef15496dfae47fc4b6eae22f9a40d17be5d1feb35a9",
+      "encoding": "utf-8",
+      "git_blob_sha": "059e654dde49be6bfa56d2e3763b481b59dc0698"
+    },
+    {
       "path": "backend/scripts/verify_postgres_runtime.py",
       "bytes": 6496,
       "sha256": "3d56774f5532224fb5d8fc3d28545a99abf0338383cf568c814071f0bf32023b",
@@ -1379,6 +1355,13 @@
       "sha256": "b52ddfb1da2841cd2a2b53128ce7dd0feb3c83e407436365feee23ea885b0d15",
       "encoding": "utf-8",
       "git_blob_sha": "b3e2b40608292eb91385fbada5c61502317b415b"
+    },
+    {
+      "path": "backend/tests/test_offline_demo.py",
+      "bytes": 1603,
+      "sha256": "7ac9fe51758a92f02d4add927b43b9238cb2d5b5395eed29743c5ac42e2172a4",
+      "encoding": "utf-8",
+      "git_blob_sha": "7e660c36d62063b135f0cd6d9d0553035fca5f38"
     },
     {
       "path": "backend/tests/test_pending_dispatch.py",
@@ -1634,10 +1617,10 @@
     },
     {
       "path": "docs/IDE_RECEIPTS.md",
-      "bytes": 7804,
-      "sha256": "716d6f037be8fdf6e2869503e529d6b412db6c6f87db7ae6b55133c3ec886588",
+      "bytes": 10891,
+      "sha256": "23f69db35313195cbf6eb91f93273b02fa74eb7fc9619d84a311f9f992c6a937",
       "encoding": "utf-8",
-      "git_blob_sha": "f13bc95364239fe8263b227c7b2ce6708c007751"
+      "git_blob_sha": "45a7246a886b7c90871fbea44d7451a7c9992b78"
     },
     {
       "path": "docs/imported-handoff/Mend_Browser_UI_Acceptance.md",
@@ -1697,10 +1680,10 @@
     },
     {
       "path": "docs/JUDGE_GUIDE.md",
-      "bytes": 4254,
-      "sha256": "22348126625392098abec440e3326b191e2af4f10a21cd0d33fb8a8a382a9a25",
+      "bytes": 4711,
+      "sha256": "942a30251f7cb4851f07129568f291488a982b34b6d90554cdfbae6fc1b46b12",
       "encoding": "utf-8",
-      "git_blob_sha": "37656cacd6b4d78beaecd810b918d0a0d2136eea"
+      "git_blob_sha": "f6391f53691bc186a5fc0c8135c2166eeb2f5fc2"
     },
     {
       "path": "docs/NEXT_MILESTONE_CHECKPOINT.md",
@@ -1708,6 +1691,13 @@
       "sha256": "98d5388ba0c98d227a38bf13016fe8b4832cc98cd7e2484bf7b91b6e64b1218e",
       "encoding": "utf-8",
       "git_blob_sha": "5d2b1fac405296303566d9e0ce712a122d4ca799"
+    },
+    {
+      "path": "docs/OFFLINE_DEMO.md",
+      "bytes": 3341,
+      "sha256": "73a174b5e4a68d8432924d7f4eedbd83b2a2f176e441cdc24f1d4484791b68cf",
+      "encoding": "utf-8",
+      "git_blob_sha": "49620732d4e33199b5376edaca81a46a59562e28"
     },
     {
       "path": "docs/OFFLINE_VERIFICATION_2026_10_19.md",
@@ -1760,10 +1750,10 @@
     },
     {
       "path": "docs/RELEASE_READINESS_2026_10_24.md",
-      "bytes": 10204,
-      "sha256": "5b689d86703b22311f9a2a49eeafa4ae3f85ff1b534c064adf34ba1ec32b7a0c",
+      "bytes": 10713,
+      "sha256": "4567217daaec7b5c4e9a9d809d35306151246d3b327c761c81e5deeaffd2fc7b",
       "encoding": "utf-8",
-      "git_blob_sha": "48dd045b05f1604d7228ab64cf6333e0c8ef5f4a"
+      "git_blob_sha": "c809dacb15608ec6d79066727c90c66576c5f36d"
     },
     {
       "path": "docs/REPOSITORY_CASES.md",
@@ -1809,10 +1799,10 @@
     },
     {
       "path": "docs/ROADMAP_IMPLEMENTATION_2026_10_24.md",
-      "bytes": 4941,
-      "sha256": "329d8f92c4db296605b27d6c9758e37d55b37f4cb799393c4f5b535f66136f89",
+      "bytes": 5061,
+      "sha256": "b9dc4ac5e9200f816f27d16c0f6288e43a87babdfdb3c07a02d5df801178491c",
       "encoding": "utf-8",
-      "git_blob_sha": "e5a6f620df7f9df21dd56630e0c0b8919593413f"
+      "git_blob_sha": "3fdc0cd371a7a0d2851e69cf7d627ca40268b47a"
     },
     {
       "path": "docs/ROADMAP_STATUS_2026_10_21.md",
@@ -2782,17 +2772,17 @@
     },
     {
       "path": "extensions/vscode-mend/package.json",
-      "bytes": 666,
-      "sha256": "177b8b406e4ad223eae15bddb5bfea9b68dca5c37f0db939d47f84fcb14f2474",
+      "bytes": 802,
+      "sha256": "7eebf7f8cd8d527b4480d73a2044edb4b19fb4b145d5bcc341aee9167bf47257",
       "encoding": "utf-8",
-      "git_blob_sha": "2eba24d4295b6ae26860dae283341381d05aebfc"
+      "git_blob_sha": "6fe362da871ed5a8576a692b8d855da7d89414ce"
     },
     {
       "path": "extensions/vscode-mend/README.md",
-      "bytes": 1516,
-      "sha256": "39e2e18011e9876c3555ade5c85c320e41daeeef0ba0c153e7551e5cd952ca86",
+      "bytes": 2320,
+      "sha256": "8797d804c12b5539f215e5cef6d26ddec6235ca1ca308565094cd8ac9a6a41bf",
       "encoding": "utf-8",
-      "git_blob_sha": "5a3ecf7e7bc9d70dde421d98a0ccc54752acd4bb"
+      "git_blob_sha": "aaa6e3f15d69e7e65bc4ffeb80c883a713ac5912"
     },
     {
       "path": "extensions/vscode-mend/receipt.js",
@@ -3741,10 +3731,10 @@
     },
     {
       "path": "README.md",
-      "bytes": 13690,
-      "sha256": "e317cdf9ec6bb87a2b314c51543a9de90bb5671751a4bcd3a6acb423850b137c",
+      "bytes": 14300,
+      "sha256": "d8e3e6ace065ee9614523207a9d91600305a48fcc8d81dddb387f01030bcd649",
       "encoding": "utf-8",
-      "git_blob_sha": "783e8beaffd1bf2132cd98bccad1adbf982e86e4"
+      "git_blob_sha": "fac2b52dc41911c759f5f6434b98cc58bfcc8a1a"
     }
   ],
   "holds": {

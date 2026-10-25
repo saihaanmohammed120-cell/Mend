@@ -2,6 +2,8 @@
 
 Roadmap implementation update: [six-item source/tooling status](ROADMAP_IMPLEMENTATION_2026_10_24.md). Repository review, an offline policy gate, team-ledger API/SQL and a local VS Code receipt viewer are now implemented as bounded slices. The website shows individual statuses. Hosted/live operation remains blocked as described below.
 
+25 October continuation: [one-command offline reproduction](OFFLINE_DEMO.md) now exercises five connected checks with inspectable artifacts and no-overwrite protection. The [IDE viewer](IDE_RECEIPTS.md#install-a-local-vsix) is locally packageable/installable as a VSIX; an actual isolated installed-extension host passed its eight automated checks. CI packages the viewer as an artifact. The credential, live execution/evidence, hosted database and final submission blockers below remain.
+
 **Decision: not ready for a provider-backed hackathon submission.** Public source, frontend and offline verification are available; the working model repair and its evidence still need implementation/infrastructure and real validation. A Token Factory key does not complete the other prerequisites. Both explicit holds remain: no live Nebius/model/discovery/job/cancellation experiments and no hosted database writes or migrations.
 
 ## Deadline and minimum submission
@@ -47,7 +49,7 @@ These are target work windows, not promises that unknown infrastructure or evide
 | Policy-as-code approval | Offline source-bound policy gate implemented with authenticated comparison/history inputs. | Review approval only; production execution/merge authority and trusted real inputs remain outside it. |
 | Team receipt ledger | Membership/ownership-aware API, safe summary adapter and service-only migration source implemented. | Hosted migration, trusted team provisioning, real auth and team UI are pending. |
 | Flaky-test detection | Offline signed-history consistency analyzer/CLI/comparative integration exists. | Trusted complete history and quarantine lifecycle/UI remain. |
-| IDE receipts | Local VS Code receipt viewer implemented and checked in an isolated editor host. | Current curated contract only; public signatures, arbitrary-repository receipts and packaged installation remain. |
+| IDE receipts | Local VS Code receipt viewer, VSIX packaging and isolated installed-extension host checks passed. | Current curated contract only; public signatures, arbitrary-repository receipts and Marketplace publication remain. |
 
 ## Private configuration and release limits
 

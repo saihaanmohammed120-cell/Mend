@@ -4,6 +4,7 @@
   "description": "Inspect a local Mend receipt and compare its source hash with selected workspace files.",
   "version": "0.1.0",
   "publisher": "mend-local",
+  "repository": { "type": "git", "url": "https://github.com/saihaanmohammed120-cell/Mend.git", "directory": "extensions/vscode-mend" },
   "license": "MIT",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Other"],

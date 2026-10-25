@@ -10,6 +10,8 @@ The evidence panel names its source, displays captured source/check identities a
 
 ## Reproduce the captured example locally
 
+For a single command covering the captured Python example, protected multi-file diff rejection and actual simulated-service receipt/viewer binding, follow [the offline demo guide](OFFLINE_DEMO.md). It writes inspectable outputs to a new directory without credentials or cloud calls. The [VS Code viewer](IDE_RECEIPTS.md#install-a-local-vsix) can be installed from a locally built VSIX or the exact-commit CI artifact. These remain offline/unsigned checks.
+
 Use Python 3.12 and a fresh [public checkout](https://github.com/saihaanmohammed120-cell/Mend). From the repository root:
 
 ```bash

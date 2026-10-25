@@ -26,6 +26,14 @@ jobs:
           node-version: "24"
       - run: npm test
         working-directory: extensions/vscode-mend
+      - name: Package the dependency-free receipt viewer
+        run: npx --yes @vscode/vsce@4.0.0 package --no-dependencies --out mend-receipts.vsix --baseContentUrl https://github.com/saihaanmohammed120-cell/Mend/blob/main/extensions/vscode-mend
+        working-directory: extensions/vscode-mend
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mend-receipts-vsix
+          path: extensions/vscode-mend/mend-receipts.vsix
+          if-no-files-found: error
   postgres:
     runs-on: ubuntu-24.04
     timeout-minutes: 10

@@ -18,6 +18,25 @@ Every report says **UNSIGNED / UNAUTHENTICATED**. Neither `source: live`, `live_
 
 The extension reads files only when invoked. It runs in untrusted local workspaces because it evaluates neither workspace code nor configuration. It makes no network requests, adds no telemetry, writes no workspace files and never invokes a reproduction command. VS Code's own networking/telemetry settings are separate. Reads are a momentary comparison, not an atomic filesystem snapshot or protection against a process concurrently replacing directories; rerun inspection after edits. Unsaved editor buffers do not enter the comparison. A mismatch is displayed as a mismatch, never an approval.
 
+## Install a local VSIX
+
+Build an installable VSIX from `extensions/vscode-mend`, with Node.js 24 and npm:
+
+```sh
+npx --yes @vscode/vsce@4.0.0 package --no-dependencies --out mend-receipts.vsix --baseContentUrl https://github.com/saihaanmohammed120-cell/Mend/blob/main/extensions/vscode-mend
+```
+
+The first invocation downloads the pinned official packaging tool and its dependencies. The extension itself remains dependency-free. CI's `roadmap_tools` job tests, builds and uploads `mend-receipts-vsix` on success. Select the exact reviewed commit in [GitHub Actions](https://github.com/saihaanmohammed120-cell/Mend/actions); artifact download may require GitHub sign-in and is subject to artifact retention. Local packaging needs no Marketplace account. Source, tests and the MIT license stay public.
+
+Run **Extensions: Install from VSIX…**, select the package and reload if prompted. To use isolated directories instead of changing an everyday profile:
+
+```sh
+code --user-data-dir /NEW/mend-profile --extensions-dir /NEW/mend-extensions --install-extension /PATH/mend-receipts.vsix
+code --new-window --user-data-dir /NEW/mend-profile --extensions-dir /NEW/mend-extensions /PATH/ide-fixture/workspace
+```
+
+Replace placeholders with actual paths; quote paths containing spaces. Run **Mend: Inspect Local Receipt** and select the matching receipt. The [offline demo command](OFFLINE_DEMO.md) exports a simulated-service receipt and workspace. The package is unsigned; `mend-local` is a local identity, not a verified Marketplace publisher. Packaging adds no receipt-signing authority. No Marketplace publication or everyday-profile installation is automatic. The 24 October record below predates this packaging work.
+
 ## Development and checks
 
 Requirements: VS Code 1.85 or later and its built-in Node runtime. Unit tests use Node 18 or later. There are no extension dependencies to install and no build step. From the repository root:
@@ -42,3 +61,9 @@ Use new isolated profile/extension directories; do not point these paths at an e
 All 13 Node tests passed on Node 24.19.0, including native API mocks for picker selection, multi-root selection, cancellation/stale-output clearing and safe failure messages. An actual installed VS Code 1.140.0 extension development host passed the eight automated checks above against a fresh backend-exported `local_test` receipt. It used isolated profile/extension directories outside the public source and exited after completion. The initial host harness compared Windows drive-letter casing literally; it was corrected to normalize platform paths, then rerun successfully. No provider request, generated-code execution, hosted database change or everyday VS Code profile change occurred.
 
 Workspace evidence: `outputs/Mend_IDE_Fixture_20261024/host-result.json` outside the canonical source. This is local fixture evidence, not evidence of a live repair. Manual desktop file-picker accessibility/screen-reader interaction, minimum-version VS Code, remote/virtual workspaces, public signature verification and Marketplace installation/publication were not verified. The extension remains a local development integration with the current two-file contract.
+
+## Packaged installation verification on 25 October 2026
+
+The official `vsce` 4.0.0 tool produced a VSIX containing only the generated manifest/content-type metadata and six extension payload files. It was installed with VS Code's CLI into new isolated profile/extension directories. A separate, empty development-test harness then found `mend-local.mend-receipts` **at its installed extension path**, not the source development directory. The installed VSIX passed the same eight actual VS Code 1.140.0 host checks listed above against the new offline demo's backend-exported receipt and restored the fixture after its mismatch check. The 13 Node tests and the complete offline demo/no-overwrite regression also passed locally. No everyday profile changed. VS Code emitted its own deprecation/agent-host channel messages; the host exited successfully and produced the passing result.
+
+This establishes local packaging, isolated installation and automated command behavior. Manual file-picker/screen-reader interaction, minimum-version VS Code, remote workspaces, Marketplace publication, public signatures and live execution remain unverified. The package is unsigned and the simulated receipt is unsigned. See [official VS Code installation guidance](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace) for managing installed extensions.
