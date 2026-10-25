@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "bf6f70f25c46d9d21bde63ba3df89e4237e57b61",
+  "observed_parent_sha": "95d60c6ad7550431f4ea64187425f945a1acd983",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -37,7 +37,7 @@
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    "frontend/components/command-copy.css"
+    "frontend/components/landing.css"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -2950,10 +2950,10 @@
     },
     {
       "path": "frontend/components/landing.css",
-      "bytes": 10504,
-      "sha256": "bf03cd1b2fc0d18f7a7e9d0911ac61dba694d39ca95425676e4194afad00449d",
+      "bytes": 10557,
+      "sha256": "3b5ad8adca56b4d05df1ce9fa03494ca6464bd3c9486cb96f616fe6aafe1b9da",
       "encoding": "utf-8",
-      "git_blob_sha": "30909e1253cb74b2a18650c4faa619bc83628ef9"
+      "git_blob_sha": "771a7a98c1da71d3b5f737edb58a0427280ac769"
     },
     {
       "path": "frontend/components/landing.tsx",

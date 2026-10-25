@@ -11,6 +11,7 @@
 .landing-outline,.landing-button{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:52px;padding:12px 22px;border:1px solid var(--mend-control);border-radius:8px;text-decoration:none;font-weight:500}
 .landing-button{background:var(--mend-accent);color:#18201B;border-color:transparent}
 .mend-landing .mend-proof-hero{display:block;padding:64px 0 48px;background-image:none}
+.mend-landing .mend-proof-hero::before{content:none}
 .mend-landing .proof-copy{padding:0}
 .mend-landing .proof-kicker{font:500 14px/24px "Mend Archivo",Arial,sans-serif;letter-spacing:0}
 .mend-landing .mend-proof-hero h1{font-size:clamp(48px,8.2vw,112px);line-height:1.04;letter-spacing:-.05em;margin:24px 0 36px}
