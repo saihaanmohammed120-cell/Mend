@@ -14,6 +14,7 @@ import { SPRING } from "../lib/motion";
 import * as inspector from "../lib/captured-inspector";
 import * as motionPreference from "../lib/use-motion-preference";
 import * as artifactIntegrity from "../lib/artifact-integrity";
+import { TrustBadge } from "../components/trust-badge";
 import type { JsonObject, Task } from "../lib/mend-client";
 
 const require = createRequire(import.meta.url);
@@ -23,6 +24,7 @@ const integrityOutput = ts.transpileModule(readFileSync(new URL("../components/a
 const integrityExports: { ArtifactIntegrityCheck?: React.ComponentType } = {};
 vm.runInNewContext(integrityOutput, { exports: integrityExports, require(id: string) {
   if (id === "../lib/artifact-integrity") return artifactIntegrity;
+  if (id === "./trust-badge") return { TrustBadge };
   return require(id);
 } });
 const provenanceOutput = ts.transpileModule(readFileSync(new URL("../components/provenance-receipt.tsx", import.meta.url), "utf8"), {

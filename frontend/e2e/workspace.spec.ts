@@ -9,7 +9,7 @@ const loopbackOrigin = "http://127.0.0.1:4173";
 // It proxies production pages/assets to loopback HTTP; actual TLS needs separate smoke coverage.
 test.use({ baseURL: fixtureOrigin });
 
-async function isolateWorkspace(page: Page, signedIn = false) {
+async function isolateWorkspace(page: Page, signedIn = false, attempts = false) {
   const unexpected: string[] = [];
   page.on("pageerror", error => unexpected.push(`Browser error: ${error.message}`));
   page.on("requestfailed", request => {
@@ -31,6 +31,25 @@ async function isolateWorkspace(page: Page, signedIn = false) {
       await route.fulfill({ json: { ready: false, mode: "browser_test", blockers: ["Execution disabled in this test."] } });
     } else if (request.method() === "GET" && path === "/api/session") {
       await route.fulfill(signedIn ? { json: { user_id: taskId, csrf_token: "a".repeat(32), expires_at: Math.floor(Date.now() / 1000) + 3600 } } : { status: 401, json: { error: { code: "unauthorized", message: "Sign in required." } } });
+    } else if (request.method() === "GET" && path === `/api/tasks/${taskId}` && attempts) {
+      await route.fulfill({ json: { id: taskId, status: "needs_help", source: "local_test", live_verification: false,
+        prompt: "Browser fixture only", contract_version: 2, next_sequence: 6,
+        contract: { editable_paths: ["csv_tools.py"], protected_files: { "test_csv_tools.py": "fixture source" },
+          required_check_ids: ["fixture.empty_input"], limits: { job_timeout_seconds: 60, max_repairs: 3, max_executions: 4 } } } });
+    } else if (request.method() === "GET" && path === `/api/tasks/${taskId}/events` && attempts) {
+      // Synthetic transport records test presentation only; never a live/provider run.
+      const records = [1, 2].flatMap(ordinal => [false, true].map(resolved => ({
+        task_id: taskId, attempt_id: ordinal === 1 ? "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb" : "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+        event_type: "log", stream: "system", payload: { schema_version: 1,
+          code: resolved ? "attempt_resolved" : "attempt_reserved", ordinal,
+          attempt_status: resolved ? ordinal === 1 ? "failed" : "passed" : "reserved",
+          snapshot_sha256: String(ordinal).repeat(64), model_id: "browser-fixture-only",
+          checks: resolved ? { total: 1, passed: ordinal === 2 ? 1 : 0, failed: ordinal === 1 ? 1 : 0, skipped: 0,
+            results: [{ check_id: "fixture.empty_input", status: ordinal === 1 ? "failed" : "passed" }] } : null },
+      })));
+      const body = records.map((data, index) => `id: ${index + 1}\nevent: log\ndata: ${JSON.stringify({ ...data, sequence: index + 1 })}\n\n`).join("") +
+        `id: 5\nevent: state\ndata: ${JSON.stringify({ task_id: taskId, event_type: "state", sequence: 5, payload: { status: "needs_help" } })}\n\n`;
+      await route.fulfill({ contentType: "text/event-stream", body });
     } else if (request.method() === "GET" && path === `/api/tasks/${taskId}` && signedIn) {
       await route.fulfill({ status: 404, json: { error: { code: "not_found", message: "Task not found." } } });
     } else if (!path.startsWith("/api/") && path !== "/api" && request.method() === "GET") {
@@ -87,3 +106,37 @@ test("a private or missing task stays in its compact view and shows the owner-au
   await expect(page.getByText("No verified receipt is available.", { exact: true })).toBeVisible();
   expect(unexpected).toEqual([]);
 });
+
+for (const width of [390, 1440]) {
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Fixture attempts and locked paths remain honest at ${width}px in ${colorScheme}`, async ({ page }, testInfo) => {
+      const unexpected = await isolateWorkspace(page, true, true);
+      await page.setViewportSize({ width, height: 1000 });
+      await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+      await page.goto(`/tasks/${taskId}`);
+      const timeline = page.getByTestId("attempt-timeline");
+      await expect(timeline.locator("[data-attempt]")).toHaveCount(2);
+      await expect(timeline).toContainText("Fixture records — not live execution.");
+      await expect(timeline.locator('[data-attempt="1"]')).toContainText("Reported failed");
+      await expect(timeline.locator('[data-attempt="2"]')).toContainText("Reported passed");
+      await expect(timeline.locator('[data-attempt="1"]')).toContainText("fixture.empty_input — failed");
+      await expect(timeline).toContainText("Not recorded.");
+      const details = timeline.locator("summary").first();
+      await details.focus(); await details.press("Enter");
+      await expect(timeline.locator("details").first()).toHaveAttribute("open", "");
+      await expect(details).toBeFocused();
+      await expect(page.getByTestId("editable-files")).toContainText("Unlocked · agent may edit");
+      await expect(page.getByTestId("editable-files")).toContainText("csv_tools.py");
+      await expect(page.getByTestId("protected-files")).toContainText("Locked · agent cannot edit");
+      await expect(page.getByTestId("protected-files")).toContainText("test_csv_tools.py");
+      const badge = page.getByTestId("trust-badge");
+      await expect(badge.locator('[data-trust="unavailable"]')).toHaveCount(4);
+      await badge.locator("summary").focus(); await badge.locator("summary").press("Space");
+      await expect(badge).toContainText("A stop request or task status alone is insufficient.");
+      await expect(page.getByRole("button", { name: "Start locked — provider gates pending" })).toBeDisabled();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.screenshot({ path: testInfo.outputPath("fixture-workspace.png"), fullPage: true });
+      expect(unexpected).toEqual([]);
+    });
+  }
+}

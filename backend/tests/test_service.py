@@ -445,9 +445,12 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         records = self.store.call("events", {"task_id": task["id"], "user_id": self.user})
         raw = self.store.call("get_task", {"task_id": task["id"], "user_id": self.user})
         self.assertEqual(raw["next_sequence"], records[-1]["sequence"] + 1)
-        logs = [event for event in records if event["event_type"] == "log"]
+        logs = [event for event in records if event["event_type"] == "log" and event["stream"] in {"stdout", "stderr"}]
         self.assertTrue(logs)
         self.assertTrue(all(event["payload"]["provider_stream"] == "unattributed" for event in logs))
+        observations = [event for event in records if event["payload"].get("code") in {"attempt_reserved", "attempt_resolved"}]
+        self.assertEqual(len(observations), 4)
+        self.assertTrue(all("provider_stream" not in event["payload"] for event in observations))
 
     async def interrupt_after_bundle_write(self):
         original_put = self.artifact_store.put

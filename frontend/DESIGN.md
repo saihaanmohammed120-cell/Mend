@@ -1,5 +1,11 @@
 # Mend application screens
 
+## Attempt and trust polish, 25 October 2026
+
+Keep the existing Paper and Proof framed sheet, fonts and colors. The task view answers **Which recorded attempt failed which check, and what evidence is still missing?** Explicit persisted attempt observations form a compact ordered list; raw diagnostic output stays in a keyboard-accessible disclosure. No approach or rationale is inferred from logs. Missing and conflicting records remain visible as gaps, and fixture observations never become live evidence. Long identities wrap within the sheet.
+
+The existing contract paths become paired unlocked/locked file groups using Lucide icons already installed. Protected paths have a quiet grey ground without reducing text opacity. These groups describe permissions, not an actual source diff or proof of unchanged tests. The four trust slots use text statuses independently, with a disclosure explaining each evidence boundary. Only the captured example's actual browser hash result can populate its own hash slot; it cannot certify a task. No new imagery, animation, dependency, global seal or fabricated signal is added. Both holds remain active. Browser acceptance must cover390/1440px, light/dark, keyboard disclosure operation, reduced motion, empty evidence and actual hash match/mismatch.
+
 ## Readability and public entry, 25 October 2026
 
 The user called out tiny, crowded UI and unclear controls. The public home now answers **Where do I start with my bug?** It uses a standalone server-composed Landing rather than mounting the authenticated Workbench. No session/task bootstrap belongs on this public page; authentication remains on `/sign-in` and owned task routes. This removes the public page's guaranteed unconfigured-session error and its duplicated, disabled task panels without suppressing errors in the workspace.

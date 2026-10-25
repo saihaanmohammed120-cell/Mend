@@ -233,6 +233,9 @@ BEGIN
   'snapshot_sha256',repeat('c',64),'snapshot_storage_key',owner_a::text||'/'||task_id::text||'/snapshots/fixture.zip',
   'source_file_count',1,'source_bytes',100,'image_digest','sha256:'||repeat('d',64)));
  fixture_attempt:=(result->>'id')::uuid;
+ IF (SELECT count(*) FROM public.logs l WHERE l.attempt_id=fixture_attempt
+  AND l.payload @> '{"schema_version":1,"code":"attempt_reserved","ordinal":1,"attempt_status":"reserved","checks":null}'::jsonb)<>1 THEN
+  RAISE EXCEPTION 'attempt reservation observation missing'; END IF;
  result:=public.mend_command('output',jsonb_build_object('task_id',task_id,'attempt_id',fixture_attempt,
   'worker_id',worker,'stream','stdout','message','fixture diagnostic','provider_stream','unattributed'));
  result:=public.mend_command('output',jsonb_build_object('task_id',task_id,'attempt_id',fixture_attempt,
@@ -269,6 +272,12 @@ BEGIN
  PERFORM public.mend_command('resolve_attempt',jsonb_build_object('task_id',task_id,
   'attempt_id',fixture_attempt,'worker_id',worker,'status','cancelled',
   'resolution_evidence',jsonb_build_object('kind','never_dispatched','reference','fixture:dispatch-null')));
+ PERFORM public.mend_command('resolve_attempt',jsonb_build_object('task_id',task_id,
+  'attempt_id',fixture_attempt,'worker_id',worker,'status','cancelled',
+  'resolution_evidence',jsonb_build_object('kind','never_dispatched','reference','fixture:dispatch-null')));
+ IF (SELECT count(*) FROM public.logs l WHERE l.attempt_id=fixture_attempt
+  AND l.payload @> '{"schema_version":1,"code":"attempt_resolved","ordinal":1,"attempt_status":"cancelled","checks":null}'::jsonb)<>1 THEN
+  RAISE EXCEPTION 'attempt outcome missing or duplicated'; END IF;
  PERFORM public.mend_command('finish_stop',jsonb_build_object('task_id',task_id,
   'worker_id',worker,'reason','user_cancelled'));
  result:=public.mend_command('events',jsonb_build_object('task_id',task_id,'user_id',owner_a));

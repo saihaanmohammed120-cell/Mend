@@ -124,6 +124,20 @@ class LocalTestStore:
                 self.db.rollback()
                 raise
 
+    def _attempt_event(self, task, attempt, code):
+        report = attempt.get("runner_report") or {}
+        checks = report.get("checks") if isinstance(report, dict) else None
+        summary = None
+        if isinstance(checks, dict) and isinstance(checks.get("results"), list):
+            summary = {key: checks.get(key) for key in ("total", "passed", "failed", "skipped")}
+            summary["results"] = [{"check_id": row.get("check_id", row.get("id")), "status": row.get("status")}
+                                  for row in checks["results"] if isinstance(row, dict)]
+        self._event(task, "log", "Attempt reservation recorded." if code == "attempt_reserved" else "Attempt outcome recorded.",
+                    attempt_id=attempt["id"], payload={"schema_version": 1, "code": code,
+                    "ordinal": attempt["ordinal"], "attempt_status": attempt["status"],
+                    "snapshot_sha256": attempt["snapshot_sha256"], "model_id": attempt["model_id"],
+                    "job_id": attempt.get("job_id"), "checks": summary})
+
     def _call(self, action, p):
         now = self.clock()
         if action == "create_task":
@@ -309,6 +323,7 @@ class LocalTestStore:
             attempt.update(id=str(uuid.uuid4()), task_id=task["id"], ordinal=task["execution_count"], status="reserved", job_id=None,
                            created_at=stamp(now), resolved_at=None)
             task["attempts"].append(attempt)
+            self._attempt_event(task, attempt, "attempt_reserved")
             self._save(task)
             return attempt
         elif action in {"dispatch", "attach_job", "resolve_attempt", "output"}:
@@ -347,6 +362,7 @@ class LocalTestStore:
                     raise MendError("invalid_evidence", "A dispatched attempt cannot claim it was never submitted.", 409)
                 attempt.update({k: v for k, v in p.items() if k not in {"task_id", "attempt_id", "worker_id"}})
                 attempt["resolved_at"] = stamp(now)
+                self._attempt_event(task, attempt, "attempt_resolved")
             else:
                 attribution = p.get("provider_stream")
                 if attribution is not None and attribution not in {"unattributed", "stdout", "stderr"}:

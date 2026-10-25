@@ -174,7 +174,7 @@ def protected_checks_sha256(contract: dict) -> str:
 
 
 # Database-shaped records are serialized using explicit fields, not a denylist.
-_PUBLIC_KEYS = frozenset('''id receipt_id task_id user_id parent_task_id prompt runtime status
+_PUBLIC_KEYS = frozenset('''id receipt_id task_id attempt_id attempt_status user_id parent_task_id prompt runtime status
 contract contract_version contract_frozen_at contract_sha256 protected_checks_sha256 max_repairs
 job_timeout_seconds repair_count execution_count usage stop_reason cancel_requested_at task_deadline_at
 created_at updated_at completed_at expires_at source live_verification attempts receipt ordinal

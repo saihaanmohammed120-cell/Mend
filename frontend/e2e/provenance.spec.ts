@@ -42,8 +42,11 @@ for (const width of [390, 1440]) {
       await expect(document.getByRole("link", { name: "Raw local capture" })).toHaveAttribute("href", "/example/captured-run.json");
       await expect(document.getByRole("link", { name: "Complete example ZIP" })).toHaveAttribute("href", "/example/mend-example.zip");
       const integrity = document.getByTestId("artifact-integrity");
+      await expect(integrity.locator('[data-trust="unavailable"]')).toHaveCount(4);
       await integrity.getByRole("button", { name: "Check file hashes", exact: true }).click();
       await expect(integrity.getByRole("status")).toContainText("The fetched files match");
+      await expect(integrity.locator('[data-signal="File hashes"]')).toHaveAttribute("data-trust", "pass");
+      await expect(integrity.locator('[data-trust="unavailable"]')).toHaveCount(3);
       await expect(integrity).toHaveAttribute("aria-busy", "false");
       await expect(document).toHaveAttribute("data-signature-state", "unsigned");
       await expect(document).toContainText("not authenticate the publisher");
@@ -62,6 +65,8 @@ test("Evidence file mismatch stays explicit and never changes the unsigned verdi
   const document = page.locator(".proof-provenance");
   await document.getByRole("button", { name: "Check file hashes", exact: true }).click();
   await expect(document.getByRole("status")).toContainText("A file differs");
+  await expect(document.locator('[data-signal="File hashes"]')).toHaveAttribute("data-trust", "fail");
+  await expect(document.locator('[data-trust="unavailable"]')).toHaveCount(3);
   await expect(document.locator('[data-integrity="mismatch"]')).toHaveCount(1);
   await expect(document).toContainText("A real record. No signature.");
   await expect(document).toHaveAttribute("data-signature-state", "unsigned");

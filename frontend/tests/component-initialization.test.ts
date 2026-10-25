@@ -77,6 +77,8 @@ function component(name: "RepairPreview" | "Workbench", saved = new Map<string, 
       if (id === "./proof-roadmap") return { ProofRoadmap: "ProofRoadmap" };
       if (id === "./repair-case") return { RepairCase: "RepairCase" };
       if (id === "./runtime-connection") return { RuntimeConnection: "RuntimeConnection" };
+      if (id === "./attempt-timeline") return { AttemptTimeline: "AttemptTimeline" };
+      if (id === "./trust-badge") return { TrustBadge: "TrustBadge" };
       if (id === "next/link") return { default: "a" };
       throw new Error(`Unexpected component dependency: ${id}`);
     },
