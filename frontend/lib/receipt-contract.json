@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "template_id": "csv-cleaner-v1",
+  "runtime": "python",
+  "entry_point": "csv_tools.py",
+  "editable_paths": [
+    "csv_tools.py"
+  ],
+  "protected_files": {
+    "test_csv_tools.py": "import unittest\nfrom csv_tools import clean_rows\n\n\nclass CsvChecks(unittest.TestCase):\n    def test_empty_input(self):\n        self.assertEqual(clean_rows([]), ([], 0))\n\n    def test_duplicate_rows(self):\n        row = {\"name\": \"Mira\", \"age\": \"20\"}\n        self.assertEqual(clean_rows([row, dict(row)]), ([row], 0))\n\n    def test_missing_values(self):\n        rows = [{\"name\": \"\", \"age\": \"20\"}, {\"name\": \"Mira\", \"age\": None}]\n        self.assertEqual(clean_rows(rows), (rows, 2))\n\n    def test_field_order(self):\n        rows = [{\"name\": \"Mira\", \"age\": \"20\"}, {\"name\": \"Ravi\", \"age\": \"21\"}]\n        cleaned, _ = clean_rows(rows)\n        self.assertEqual([tuple(row) for row in cleaned], [(\"name\", \"age\"), (\"name\", \"age\")])\n        with self.assertRaises(ValueError):\n            clean_rows([rows[0], {\"age\": \"20\", \"name\": \"Mira\"}])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+  },
+  "required_command_ids": [
+    "unit-tests"
+  ],
+  "commands": [
+    {
+      "id": "unit-tests",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "-v",
+        "test_csv_tools"
+      ]
+    }
+  ],
+  "required_check_ids": [
+    "test_csv_tools.CsvChecks.test_empty_input",
+    "test_csv_tools.CsvChecks.test_duplicate_rows",
+    "test_csv_tools.CsvChecks.test_missing_values",
+    "test_csv_tools.CsvChecks.test_field_order"
+  ],
+  "limits": {
+    "max_repairs": 3,
+    "max_executions": 4,
+    "job_timeout_seconds": 60,
+    "task_timeout_seconds": 600,
+    "max_tokens": 30000,
+    "max_files": 20,
+    "max_source_bytes": 200000,
+    "max_log_bytes": 256000
+  },
+  "omitted_checks": [
+    "Arbitrary repositories, dependencies, and production readiness are outside this curated contract."
+  ]
+}

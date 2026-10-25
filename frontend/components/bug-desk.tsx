@@ -107,9 +107,9 @@ export function BugDesk() {
   const stage = !packet ? 0 : downloadState === "requested" ? 2 : 1;
 
   return <main className="mend-bug-desk" data-testid="bug-desk">
-    <header className="bug-topbar">
+    <header className="bug-topbar flex-wrap">
       <Link href="/" className="bug-brand" aria-label="Mend home"><span className="bug-brand-mark" aria-hidden="true" /><span>mend</span><span className="bug-brand-note">Paper &amp; proof.</span></Link>
-      <Link href="/sign-in" className="bug-button bug-secondary"><ArrowLeft size={15} aria-hidden="true" /> Workbench</Link>
+      <nav aria-label="Bug desk navigation" className="flex flex-wrap gap-3"><Link href="/tools" className="bug-button bug-secondary">Local tools</Link><Link href="/sign-in" className="bug-button bug-secondary"><ArrowLeft size={15} aria-hidden="true" /> Workbench</Link></nav>
     </header>
     <div className="bug-canvas">
       <div className="bug-title-row"><div><h1>Bug intake</h1><p>Keep the original failure. Review what leaves your desk.</p></div><p className="bug-local"><LockKeyhole size={15} aria-hidden="true" /> Local only · nothing uploaded</p></div>

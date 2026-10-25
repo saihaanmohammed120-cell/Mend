@@ -25,6 +25,8 @@ export function ProvenanceReceipt() {
       <div><dt>PUBLIC TRANSPARENCY LOG</dt><dd>No entry issued</dd></div>
     </dl></details>
     <p className="proof-provenance-scope">The document format does not certify a SLSA security level.</p>
+    <details className="proof-output-disclosure"><summary>Read full provenance JSON here</summary><pre tabIndex={0} role="region" aria-label="Full unsigned provenance JSON">{JSON.stringify(provenance, null, 2)}</pre></details>
+    <p className="proof-provenance-scope"><a href="/tools#receipt">Inspect this record against source files inside Mend →</a></p>
     <div className="proof-document-downloads" aria-label="Keep the evidence"><a className="proof-provenance-download" href="/example/provenance.json" download>Download in-toto provenance JSON <span aria-hidden="true">↓</span></a><div><a href="/example/captured-run.json" download>Raw local capture <span aria-hidden="true">↓</span></a><a href="/example/mend-example.zip" download>Complete example ZIP <span aria-hidden="true">↓</span></a></div></div>
     <ArtifactIntegrityCheck />
   </article>;

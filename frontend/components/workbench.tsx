@@ -132,6 +132,7 @@ export function Workbench({ initialTaskId, view = "landing" }: { initialTaskId?:
             <span className="proof-wordmark">mend<span className="ml-3 hidden font-mono text-xs font-normal leading-[18px] tracking-normal text-muted sm:inline">Paper &amp; proof.</span></span>
           </Link>
           <nav aria-label="Workbench navigation" className="flex flex-wrap items-center gap-3">
+            <Link href="/tools" className={SECONDARY}>Local tools</Link><Link href="/help" className={SECONDARY}>Guides</Link>
             {view === "landing" || initialTaskId ? <Link href="/sign-in" className={PRIMARY}>{initialTaskId ? "New task" : "Open workspace"}<ArrowRight size={16} aria-hidden="true" /></Link> : null}
             <Link href="/fix" className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm underline decoration-ink/40 underline-offset-4">Bug intake · local draft <FileCode2 size={15} aria-hidden="true" /></Link>
             <Link href="/sample" className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm underline decoration-ink/40 underline-offset-4">Simulated sample <ArrowUpRight size={15} aria-hidden="true" /></Link>

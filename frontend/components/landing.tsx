@@ -13,7 +13,8 @@ export function Landing() {
       <Link href="/" aria-label="Mend home" className="landing-brand"><span className="proof-wordmark-mark" aria-hidden="true" /><span>mend</span></Link>
       <nav aria-label="Main navigation">
         <a href="#worked-example">Explore the example</a>
-        <a href="https://github.com/saihaanmohammed120-cell/Mend">Source</a>
+        <Link href="/tools">Local tools</Link>
+        <Link href="/help#source">Source</Link>
         <Link href="/sign-in" className="landing-outline">Open workspace <span aria-hidden="true">↗</span></Link>
       </nav>
     </header>
@@ -30,6 +31,6 @@ export function Landing() {
         <Link href="/fix" className="landing-button">Prepare a bug <span aria-hidden="true">→</span></Link>
       </section>
     </main>
-    <footer className="landing-footer"><p>mend <span>Paper &amp; proof.</span></p><nav aria-label="Project links"><a href="https://github.com/saihaanmohammed120-cell/Mend/blob/main/docs/JUDGE_GUIDE.md">Testing guide</a><Link href="/sample">Simulated sample</Link><a href="https://github.com/saihaanmohammed120-cell/Mend/blob/main/LICENSE">MIT license</a></nav></footer>
+    <footer className="landing-footer"><p>mend <span>Paper &amp; proof.</span></p><nav aria-label="Project links"><Link href="/help#testing">Testing guide</Link><Link href="/sample">Simulated sample</Link><Link href="/help#license">MIT license</Link></nav></footer>
   </div>;
 }

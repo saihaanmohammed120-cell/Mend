@@ -41,6 +41,9 @@ for (const width of [390, 1440]) {
       expect(JSON.parse(await readFile(file!, "utf-8"))).toEqual(provenance);
       await expect(document.getByRole("link", { name: "Raw local capture" })).toHaveAttribute("href", "/example/captured-run.json");
       await expect(document.getByRole("link", { name: "Complete example ZIP" })).toHaveAttribute("href", "/example/mend-example.zip");
+      const fullRecord = document.getByText("Read full provenance JSON here", { exact: true });
+      await fullRecord.focus(); await fullRecord.press("Enter");
+      expect(JSON.parse(await document.getByRole("region", { name: "Full unsigned provenance JSON", exact: true }).innerText())).toEqual(provenance);
       const integrity = document.getByTestId("artifact-integrity");
       await expect(integrity.locator('[data-trust="unavailable"]')).toHaveCount(4);
       await integrity.getByRole("button", { name: "Check file hashes", exact: true }).click();

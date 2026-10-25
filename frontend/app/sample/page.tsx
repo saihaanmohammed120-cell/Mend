@@ -312,14 +312,12 @@ export default function MainWorkbench() {
         >
           <span>Mend · Built for the small things that slow you down.</span>
           <motion.a
-            href="https://nebiusglobalaihackathon.devpost.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/help#execution"
             whileHover={reduced ? undefined : { y: -2 }}
             transition={SPRING}
             className="focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-xs font-semibold text-ink"
           >
-            Nebius × NVIDIA Hackathon{" "}
+            Evidence and execution limits{" "}
             <ArrowUpRight size={14} aria-hidden="true" />
           </motion.a>
         </motion.footer>

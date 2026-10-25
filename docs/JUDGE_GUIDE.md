@@ -2,6 +2,10 @@
 
 ## Without installing anything
 
+The [local tools desk](https://mend-smasher.vercel.app/tools) now performs repository snapshot comparison, a policy-threshold preview and receipt/source inspection inside Mend. No download, CLI or external website is required for those browser reviews. Select Python files or paste bounded path-to-source JSON maps, compare, then preview your chosen thresholds. The policy result remains unapproved without authenticated regression/history and private signing authority. Test modules are always protected; changed tests are reported as blocked.
+
+For receipt inspection, load the captured unsigned SLSA statement or select a supported backend receipt. Supply the matching source files for a real browser SHA-256 comparison. Uploaded live labels are untrusted, and a content match establishes neither execution nor signing/stop authority. Inputs remain only in page memory; Clear/reload/leaving retires them. The [in-app reader](https://mend-smasher.vercel.app/help) contains testing steps, all six roadmap references, selected source and MIT notices. The homepage and roadmap guide navigation remain inside Mend. Optional evidence downloads still retain copies.
+
 Open [Mend](https://mend-smasher.vercel.app/), then [the bug desk](https://mend-smasher.vercel.app/fix). The public build supports local input/review/download and captured evidence inspection. [Sample playback](https://mend-smasher.vercel.app/sample) is explicitly simulated. Hosted authentication and live repair are not available yet; no judge credentials or provider-backed demonstration are claimed.
 
 On the bug desk, load the captured input or paste a small Python module. Enter the expected behavior and review the intake. Editing invalidates review. Clear/Undo restores inputs and requires fresh review. Download the intake JSON. To prepare a full proposed-check request, expand the optional checks editor, supply `test_regression.py`, unique required unittest IDs and a target from that list, review, then download the request. No export starts a job or approves the checks. Inputs stay in page memory; keep private code out of public demonstrations.
