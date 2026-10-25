@@ -109,14 +109,14 @@ export function BugDesk() {
   return <main className="mend-bug-desk" data-testid="bug-desk">
     <header className="bug-topbar">
       <Link href="/" className="bug-brand" aria-label="Mend home"><span className="bug-brand-mark" aria-hidden="true" /><span>mend</span><span className="bug-brand-note">Paper &amp; proof.</span></Link>
-      <Link href="/sign-in" className="bug-text-action"><ArrowLeft size={15} aria-hidden="true" /> Workbench</Link>
+      <Link href="/sign-in" className="bug-button bug-secondary"><ArrowLeft size={15} aria-hidden="true" /> Workbench</Link>
     </header>
     <div className="bug-canvas">
       <div className="bug-title-row"><div><h1>Bug intake</h1><p>Keep the original failure. Review what leaves your desk.</p></div><p className="bug-local"><LockKeyhole size={15} aria-hidden="true" /> Local only · nothing uploaded</p></div>
       <ol className="bug-steps" aria-label="Local intake progress">{["Describe", "Review", "Export"].map((label, index) => <li key={label} aria-current={stage === index ? "step" : undefined} data-step-state={index < stage ? "complete" : index === stage ? "current" : "upcoming"}><strong>{label}</strong><span>{index < stage ? "Complete" : index === stage ? index === 2 ? "Download requested" : "Current step" : "Next"}</span></li>)}</ol>
       <div className="bug-sheet">
         <section className="bug-editor" aria-labelledby="bug-editor-title">
-          <div className="bug-section-heading"><h2 id="bug-editor-title">The original failure</h2>{empty ? <button type="button" className="bug-text-action" onClick={useExample}>Load captured input <ArrowRight size={14} aria-hidden="true" /></button> : null}</div>
+          <div className="bug-section-heading"><h2 id="bug-editor-title">The original failure</h2>{empty ? <button type="button" className="bug-button bug-secondary" onClick={useExample}>Load captured input <ArrowRight size={14} aria-hidden="true" /></button> : null}</div>
           <p className="bug-help">Add an error or one Python module. A reported error has not been reproduced yet.</p>
           <div role="form" aria-label="Prepare a local bug intake" className="bug-fields">
             {issueEntries.length ? <div ref={errors} className="bug-errors" role="alert" tabIndex={-1}><h3>Check the intake</h3><ul>{issueEntries.map(field => <li key={field}><a href={`#bug-${field}`} onClick={event => { event.preventDefault(); focusField(field); }}>{issues[field]}</a></li>)}</ul></div> : null}

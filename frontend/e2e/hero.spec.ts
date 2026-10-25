@@ -17,7 +17,7 @@ for (const colorScheme of ["light", "dark"] as const) {
     await expect(page.locator("#evidence-local")).toContainText("Real local checks.");
     await expect(page.locator("#evidence-provenance")).toContainText("Real document. Unsigned.");
     await expect(page.locator("#evidence-nebius")).toContainText("Not yet connected.");
-    await expect(primary).toHaveAttribute("href", "#worked-example");
+    await expect(primary).toHaveAttribute("href", "/fix");
     const bounds = await primary.boundingBox();
     expect(bounds?.height).toBeGreaterThanOrEqual(44);
     const summary = hero.locator(".proof-boundaries > summary");
@@ -26,7 +26,7 @@ for (const colorScheme of ["light", "dark"] as const) {
     const focus = await primary.evaluate(node => { const s = getComputedStyle(node); return { width: s.outlineWidth, offset: s.outlineOffset, style: s.outlineStyle }; });
     expect(focus).toEqual({ width: "3px", offset: "3px", style: "solid" });
     await expect(primary).toBeFocused();
-    await primary.click();
+    await hero.getByRole("link", { name: "Explore the checked example", exact: true }).click();
     await expect(page.locator("#worked-example")).toBeInViewport();
     await expect(hero.locator(".proof-live-slot")).not.toHaveAttribute("open", "");
     const tabs = hero.getByRole("tablist", { name: "Inspect captured repair evidence" });
@@ -94,6 +94,8 @@ for (const colorScheme of ["light", "dark"] as const) {
 test("Local case preparation preserves input, exports a packet and invalidates review after edits", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/#prepare-case");
+  const intakeDisclosure = page.locator(".landing-quick-intake");
+  if (!await intakeDisclosure.evaluate(node => (node as HTMLDetailsElement).open)) await intakeDisclosure.locator("summary").first().click();
   const local = page.getByTestId("repair-case");
   const currentStep = local.locator('.case-steps [aria-current="step"]');
   await expect(currentStep).toContainText("Describe");
@@ -137,23 +139,16 @@ test("Local case preparation preserves input, exports a packet and invalidates r
 });
 
 
-test("Workbench pointer depth works without opening an authenticated task", async ({ page }) => {
+test("Public landing stays still and readable without exposing an unconnected task form", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/");
-  const card = page.locator(".panel").filter({ has: page.getByRole("heading", { name: "Start with the outcome.", exact: true }) });
-  await card.scrollIntoViewIfNeeded();
-  await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
-  await page.mouse.move(4, 4);
-  const box = await card.boundingBox();
-  const viewport = page.viewportSize();
-  if (!box || !viewport) throw new Error("Workbench task card has no rendered bounds");
-  await page.mouse.move(Math.min(viewport.width - 24, box.x + box.width * 0.85), Math.max(24, box.y + 70));
-  await expect.poll(() => card.evaluate(node => {
-    const match = (node as HTMLElement).style.transform.match(/rotateX\(([-.\d]+)deg\) rotateY\(([-.\d]+)deg\)/);
-    return match ? Math.max(Math.abs(Number(match[1])), Math.abs(Number(match[2]))) : 0;
-  })).toBeGreaterThan(0.1);
+  await expect(page.locator("#task-prompt")).toHaveCount(0);
+  const example = page.locator("#worked-example");
+  await example.scrollIntoViewIfNeeded();
+  await page.mouse.move(300, 400);
+  expect(await example.evaluate(node => getComputedStyle(node).transform)).toBe("none");
   expect(errors).toEqual([]);
 });
 

@@ -77,14 +77,15 @@ const receipt: JsonObject = { receipt_id: "receipt-test", task_id: task.id, stat
   created_at: "2026-10-15T15:00:00Z", snapshot_sha256: "a".repeat(64), bundle_verified_sha256: "a".repeat(64),
   checks: { total: 1, passed: 1, failed: 0, skipped: 0, results: [{ check_id: "empty_input", status: "passed" }] } };
 
-test("Hero server render has one primary CTA to captured evidence before an honest collapsed live slot", () => {
+test("Hero server render prioritizes local intake and retains honest captured and live evidence", () => {
   const html = render();
   assert.equal((html.match(/data-primary-cta="true"/g) ?? []).length, 1);
   assert.ok(html.includes('href="#worked-example"'));
   assert.ok(html.indexOf('id="worked-example"') < html.indexOf('data-testid="live-run-slot"'));
   assert.ok(!html.includes('class="proof-live-slot" open=""'));
-  assert.ok(html.includes('See a real repair, start to finish'));
-  assert.match(html, /Captured CSV-cleaner example<\/p><p class="proof-authorship">This is a curated patch, not a model-generated repair\.<\/p>/);
+  assert.ok(html.includes('Prepare a bug'));
+  assert.ok(html.includes('href="/fix"'));
+  assert.match(html, /class="proof-authorship">This is a curated patch, not a model-generated repair\.<\/p>/);
   assert.equal(html.split("This is a curated patch, not a model-generated repair.").length - 1, 1);
   assert.ok(html.indexOf('class="proof-authorship"') < html.indexOf('role="tablist"'));
   assert.match(html, /<\/section><aside class="proof-evidence-legend"/);

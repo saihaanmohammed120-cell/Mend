@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "fe11c056973ac6ba43161d7a84b1804e0c70e834",
+  "observed_parent_sha": "40e0b61505d1559a9be3740ff918c0ec11735523",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -24,31 +24,33 @@
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
   "date": "2026-10-21",
   "previous_payload_count": 470,
-  "packaged_file_count_excluding_manifest": 525,
+  "packaged_file_count_excluding_manifest": 529,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "Offline demo reproduction and installable receipt viewer, 2026-10-25",
+  "delivery": "Readable public entry and local review controls, 2026-10-25",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    ".gitignore",
-    ".github/workflows/checks.yml",
     "README.md",
-    "backend/scripts/verify_offline_demo.py",
-    "backend/tests/test_offline_demo.py",
-    "extensions/vscode-mend/package.json",
-    "extensions/vscode-mend/README.md",
-    "docs/OFFLINE_DEMO.md",
-    "docs/IDE_RECEIPTS.md",
-    "docs/JUDGE_GUIDE.md",
-    "docs/ROADMAP_IMPLEMENTATION_2026_10_24.md",
-    "docs/RELEASE_READINESS_2026_10_24.md"
+    "frontend/app/page.tsx",
+    "frontend/components/landing.tsx",
+    "frontend/components/landing.css",
+    "frontend/components/proof-hero.tsx",
+    "frontend/components/captured-workspace.tsx",
+    "frontend/components/bug-desk.tsx",
+    "frontend/components/bug-desk.css",
+    "frontend/components/repair-case.css",
+    "frontend/e2e/hero.spec.ts",
+    "frontend/e2e/landing.spec.ts",
+    "frontend/tests/hero-render.test.ts",
+    "frontend/DESIGN.md",
+    "docs/FRONTEND_CLEANUP_2026_10_25.md"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -1574,6 +1576,13 @@
       "git_blob_sha": "49c79567f069ac46a272ee3de300ca9746cae4fb"
     },
     {
+      "path": "docs/FRONTEND_CLEANUP_2026_10_25.md",
+      "bytes": 2280,
+      "sha256": "23518054b4b383239ed1fcf45a61a21ee454057fa36c00dfb03b2f1111306275",
+      "encoding": "utf-8",
+      "git_blob_sha": "01a4020ba6e7a5b34b969cdedc5a20bab94ff904"
+    },
+    {
       "path": "docs/FRONTEND_INTEGRATION_CHECKPOINT.md",
       "bytes": 8515,
       "sha256": "19c41246432f73f122b6aa8447ea9e6af531ba39e921bbb1d6d378573b8963ab",
@@ -2884,10 +2893,10 @@
     },
     {
       "path": "frontend/app/page.tsx",
-      "bytes": 109,
-      "sha256": "07e3cbfd7c2128037b1124621e8d9c6a4914607d5e630b1703f5fa1087f9c2f9",
+      "bytes": 103,
+      "sha256": "0aef10e683bc61290e95c109d8025c34745d3f496db69048c847a0f6e372f028",
       "encoding": "utf-8",
-      "git_blob_sha": "dc05809e00b8521641181b6c9fc8f84e46ba967b"
+      "git_blob_sha": "00d62ade694f08928ab550f8d8c6e753cb2a720d"
     },
     {
       "path": "frontend/app/sample/page.tsx",
@@ -2919,17 +2928,17 @@
     },
     {
       "path": "frontend/components/bug-desk.css",
-      "bytes": 9593,
-      "sha256": "aa70e4404ec019435be49f7036c75eb9f6d29c05bf48939ff4ca536a1b7f4bf1",
+      "bytes": 9686,
+      "sha256": "18e3e40f7d23751e6b4604801c34bc6eadcb03ae3da19cdbefc7b3358a0b2a4d",
       "encoding": "utf-8",
-      "git_blob_sha": "80d724509fbd30f900ce4478f8f64612018db609"
+      "git_blob_sha": "b92daab6c4f2019f69cb279c0cb904c0eb72e4bd"
     },
     {
       "path": "frontend/components/bug-desk.tsx",
-      "bytes": 20531,
-      "sha256": "b58bc1121f6a6f564da1087ba4ddf2cfa88f2d58747899eb7b4006f7cb63a7da",
+      "bytes": 20714,
+      "sha256": "e54fc27accaa51d7054ce3a759319e03c1ac542abadf03f0821e38b89bd92df5",
       "encoding": "utf-8",
-      "git_blob_sha": "05b67a77c7f948220f0c2ca8fd896c7467959bed"
+      "git_blob_sha": "29f44cdfb8d27e37eb11a958ea246a00aa62ac85"
     },
     {
       "path": "frontend/components/captured-workspace.tsx",
@@ -2951,6 +2960,20 @@
       "sha256": "66b23b86b05ca985e9aa041e17ca032937c2ff9d8ebef0e00524e40198c204ed",
       "encoding": "utf-8",
       "git_blob_sha": "52b387c94eb4868d0287a4499801104e8528d3be"
+    },
+    {
+      "path": "frontend/components/landing.css",
+      "bytes": 10504,
+      "sha256": "bf03cd1b2fc0d18f7a7e9d0911ac61dba694d39ca95425676e4194afad00449d",
+      "encoding": "utf-8",
+      "git_blob_sha": "30909e1253cb74b2a18650c4faa619bc83628ef9"
+    },
+    {
+      "path": "frontend/components/landing.tsx",
+      "bytes": 2089,
+      "sha256": "d96b77394cb89564db78f59b2ad834de2901006ae00c5b1af22741f89e991bae",
+      "encoding": "utf-8",
+      "git_blob_sha": "dfefddc37b0403f4590e836ab7c4417bb888ff21"
     },
     {
       "path": "frontend/components/proof-flow.css",
@@ -2975,10 +2998,10 @@
     },
     {
       "path": "frontend/components/proof-hero.tsx",
-      "bytes": 9439,
-      "sha256": "16f0005b03f6111ff9540318db9eb4ced7be3b30d79eccbbd8a54c2628bd1e09",
+      "bytes": 9683,
+      "sha256": "d5a59781983799df52f71bef76aae04bc326de39520bf0eab98de9adb5e4ea25",
       "encoding": "utf-8",
-      "git_blob_sha": "0202fb99ef6446a8bb6e9e0bed993774b4806fd3"
+      "git_blob_sha": "5dec88f355755a892b5aa2cc02d9a634e26c526d"
     },
     {
       "path": "frontend/components/proof-roadmap.css",
@@ -3003,10 +3026,10 @@
     },
     {
       "path": "frontend/components/repair-case.css",
-      "bytes": 10770,
-      "sha256": "5abdfaa15303fb22e91d776f26d8786c5586fb6fabfd8bd3a08cb4ea49f60096",
+      "bytes": 10858,
+      "sha256": "49fc733db9b85db9b159c9095cac36b203fe572ad5156ce3b708578d9e05de00",
       "encoding": "utf-8",
-      "git_blob_sha": "6498dfd4edde3bb04b24d8fd71a49bdc0504936b"
+      "git_blob_sha": "b3f9768ac1036f927a512594bb331021a44abe68"
     },
     {
       "path": "frontend/components/repair-case.tsx",
@@ -3052,10 +3075,10 @@
     },
     {
       "path": "frontend/DESIGN.md",
-      "bytes": 11301,
-      "sha256": "ff39eda78f31977752447362ebfe28dd1b68e0f0738d87fb0af9d8a8b4d5336e",
+      "bytes": 14619,
+      "sha256": "c70432449d717f893c4ab87332ae8a5532c41a1f719757aa65dbc79c6f2619e9",
       "encoding": "utf-8",
-      "git_blob_sha": "845d2159fc899c527f3ce5160fedfe32833dfddb"
+      "git_blob_sha": "c6ec85201894053b5b24da81d6999e182603aadf"
     },
     {
       "path": "frontend/e2e/bug-desk.spec.ts",
@@ -3066,10 +3089,17 @@
     },
     {
       "path": "frontend/e2e/hero.spec.ts",
-      "bytes": 11888,
-      "sha256": "ef1d684846566d526c5fca7926012142010be732fc009e4aa61b0707e5b5b23d",
+      "bytes": 11777,
+      "sha256": "17ffbe94e071fe82d1c3176fb6075e7232a8b47ab434ea3bfab7fda5c8a4d764",
       "encoding": "utf-8",
-      "git_blob_sha": "9216b571c061de47855752cbf645a3d462ab3210"
+      "git_blob_sha": "fa609b4963e01c8b2bdc3d2c007e70591b821f47"
+    },
+    {
+      "path": "frontend/e2e/landing.spec.ts",
+      "bytes": 1996,
+      "sha256": "d5e682ddf82ffd964fcff49ef14bc29602fbd8525e1b3e46c0284934efd0c487",
+      "encoding": "utf-8",
+      "git_blob_sha": "fc8aae872413946aeac1638a3e7952692984d8e7"
     },
     {
       "path": "frontend/e2e/provenance.spec.ts",
@@ -3577,10 +3607,10 @@
     },
     {
       "path": "frontend/tests/hero-render.test.ts",
-      "bytes": 13355,
-      "sha256": "a0df9f878f2d614837cb490d0426fffb0d1d14c2f21737e4a617a66ace0ecee5",
+      "bytes": 13550,
+      "sha256": "79266e41f83ad285c98051442d3cf4e5033a8f01d03dc1d91b858efce9ab54eb",
       "encoding": "utf-8",
-      "git_blob_sha": "4019a90826e47d44e199b3134d86f28ff9fa594f"
+      "git_blob_sha": "78a06c4c6f963c0c5b2cc1028ca7156d6b452a08"
     },
     {
       "path": "frontend/tests/pointer-tilt.test.ts",
@@ -3731,10 +3761,10 @@
     },
     {
       "path": "README.md",
-      "bytes": 14300,
-      "sha256": "d8e3e6ace065ee9614523207a9d91600305a48fcc8d81dddb387f01030bcd649",
+      "bytes": 14875,
+      "sha256": "28f6a21e7491df5adbb354f8ce682317f8c023f8ce9a6dfd900d1184264207ae",
       "encoding": "utf-8",
-      "git_blob_sha": "fac2b52dc41911c759f5f6434b98cc58bfcc8a1a"
+      "git_blob_sha": "800d5f4257cfa61cbde448cb944528dabe0e2221"
     }
   ],
   "holds": {

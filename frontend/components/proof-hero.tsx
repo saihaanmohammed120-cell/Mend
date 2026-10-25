@@ -28,23 +28,15 @@ export function ProofHero({ task, receipt, events, runtime, connection, receiptF
       <div className="proof-copy">
         <p className="proof-kicker"><span aria-hidden="true" />MEND / PAPER AND PROOF</p>
         <h1 id="workbench-title">Code that runs.<br /><em>Proof to keep.</em></h1>
-        <p className="proof-intro">A patch can look right and still fail. Follow the actual run, then keep its verification receipt. Ship with evidence instead of taking a diff on faith.</p>
-        <a className="proof-primary" href="#worked-example" data-primary-cta="true">See a real repair, start to finish <ArrowDownRight size={20} aria-hidden="true" /></a>
-        <p className="proof-availability">Captured CSV-cleaner example</p>
-        <p className="proof-authorship">This is a curated patch, not a model-generated repair.</p>
-
-        <dl className="proof-limits">
-          <div><dt>60s / job required</dt><dd>Stop latency unverified</dd></div>
-          <div><dt>Up to 3 repairs</dt><dd>Bounded repair loop</dd></div>
-          <div><dt>Named checks</dt><dd>Specific test results</dd></div>
-        </dl>
-        <div className="proof-event">
-          <p>Built for the <strong>Nebius × NVIDIA<br />Global AI Hackathon</strong></p>
-          <p>Coding &amp; Agentic Engineering<br /><span>Submission deadline: <time dateTime="2026-10-30T10:00:00-07:00">30 Oct 2026 · 10:00 PDT</time></span></p>
+        <div className="proof-start-row">
+          <p className="proof-intro">Bring a failing Python case. Review its source and checks, then keep a handoff you can inspect.</p>
+          <div className="proof-start-actions"><a className="proof-primary" href="/fix" data-primary-cta="true">Prepare a bug <ArrowUpRight size={20} aria-hidden="true" /></a><a className="proof-secondary" href="#worked-example">Explore the checked example <ArrowDownRight size={20} aria-hidden="true" /></a></div>
         </div>
+        <p className="proof-availability">Local review works without an account. Live repair is not connected.</p>
       </div>
 
       <div className="proof-evidence-stack">
+      <p className="proof-authorship">This is a curated patch, not a model-generated repair.</p>
       <CapturedWorkspace />
       <details className="proof-live-slot" open={task !== null || recorded} data-testid="live-run-slot"><summary><span>Live execution slot</span><span>{recorded ? "Recorded task evidence" : unavailable ? "Not connected" : task ? "Current task" : "Awaiting a task"}</span><ArrowDownRight size={16} aria-hidden="true" /></summary><p className="proof-slot-note"><a className="proof-evidence-tag" href="#evidence-nebius">Nebius execution · see legend</a></p>
       <section id="live-run" tabIndex={-1} className="proof-live" aria-labelledby="proof-run-title" data-testid="live-run-panel">
@@ -80,7 +72,7 @@ export function ProofHero({ task, receipt, events, runtime, connection, receiptF
         </div>
       </section>
       </details>
-      <details className="proof-boundaries"><summary>What this build can prove <ArrowUpRight size={14} aria-hidden="true" /></summary><div><p>The captured CSV example records actual local Python checks against the included source. It does not establish model-generated repair, Nebius execution, or general coverage. Large files, streaming input, malformed CSV, and production deployment were not checked.</p><p>The 60-second job budget is a required bound, not a measured guarantee. A backend deadline worker must request cancellation; cancel-to-stop latency remains unverified. The repair loop is capped at three repair attempts. Token Factory is the intended inference layer; Serverless Jobs execute the code. Live execution requires that path and its safety evidence.</p><p>The captured example includes an unsigned in-toto/SLSA document. Keyless signing tooling is included, but signing is blocked until an OIDC identity is available. Signed provenance for live backend tasks, hallucination-checked diagnoses and tiered merge approval are not implemented in the inspected path. No automatic merge is available here. A source snapshot hash is not a Git commit or a receipt signature.</p></div></details>
+      <details className="proof-boundaries"><summary>What this build can prove <ArrowUpRight size={14} aria-hidden="true" /></summary><div><dl className="proof-limits"><div><dt>60s / job required</dt><dd>Stop latency unverified</dd></div><div><dt>Up to 3 repairs</dt><dd>Bounded repair loop</dd></div><div><dt>Named checks</dt><dd>Specific test results</dd></div></dl><div className="proof-event"><p>Built for the <strong>Nebius × NVIDIA Global AI Hackathon</strong></p><p>Coding &amp; Agentic Engineering · <time dateTime="2026-10-30T10:00:00-07:00">30 Oct 2026 · 10:00 PDT</time></p></div><p>The captured CSV example records actual local Python checks against the included source. It does not establish model-generated repair, Nebius execution, or general coverage. Large files, streaming input, malformed CSV, and production deployment were not checked.</p><p>The 60-second job budget is a required bound, not a measured guarantee. A backend deadline worker must request cancellation; cancel-to-stop latency remains unverified. The repair loop is capped at three repair attempts. Token Factory is the intended inference layer; Serverless Jobs execute the code. Live execution requires that path and its safety evidence.</p><p>The captured example includes an unsigned in-toto/SLSA document. Keyless signing tooling is included, but signing is blocked until an OIDC identity is available. Signed provenance for live backend tasks, hallucination-checked diagnoses and tiered merge approval are not implemented in the inspected path. No automatic merge is available here. A source snapshot hash is not a Git commit or a receipt signature.</p></div></details>
       </div>
     </section>
     <aside className="proof-evidence-legend" id="proof-reading" aria-labelledby="proof-reading-title">
@@ -88,7 +80,7 @@ export function ProofHero({ task, receipt, events, runtime, connection, receiptF
       <dl>
         <div id="evidence-local"><dt>Captured local example</dt><dd><strong>Real local checks.</strong><p>A curated CSV patch, checked against the same tests before and after.</p><a href="#worked-example">Inspect the example <span aria-hidden="true">↗</span></a></dd></div>
         <div id="evidence-provenance"><dt>SLSA provenance</dt><dd><strong>Real document. Unsigned.</strong><p>The source identity is recorded. No signing identity or public log entry is claimed.</p><a href="/example/provenance.json" download>Download the record <span aria-hidden="true">↓</span></a></dd></div>
-        <div id="evidence-nebius"><dt>Nebius execution</dt><dd><strong>{task || recorded ? "See the live execution slot." : "Not yet connected."}</strong><p>Local checks do not establish a live provider run or measured stop timing.</p><a href="#live-run">Inspect the live slot <span aria-hidden="true">↗</span></a></dd></div>
+        <div id="evidence-nebius"><dt>Nebius execution</dt><dd><strong>{task || recorded ? "See the live execution slot." : "Not yet connected."}</strong><p>Local checks do not establish a live provider run or measured stop timing.</p><a href="#live-run" onClick={() => document.querySelector<HTMLDetailsElement>(".proof-live-slot")?.setAttribute("open", "")}>Inspect the live slot <span aria-hidden="true">↗</span></a></dd></div>
       </dl>
     </aside></>
   );

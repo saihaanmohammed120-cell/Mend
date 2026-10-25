@@ -1,0 +1,11 @@
+# Mend: a clearer place to start
+
+The homepage previously combined a marketing introduction, a narrow evidence viewer and an unconnected authenticated workbench. Important metadata/control labels used11–13px text. A signed-out homepage request also bootstrapped `/api/session`, producing an error when the backend was unconfigured. These were real usability problems; adding more status cards did not address them.
+
+The public route now renders its own Landing. **Prepare a bug** opens the working local bug desk. **Explore the checked example** moves to a full-width evidence inspector with larger type and controls. Tabs, downloads, hashes and exact evidence retain their existing semantics. The detailed inline intake stays available in a native disclosure, while the authenticated workspace remains on its dedicated routes. Errors on those routes are still reported normally. A link to a closed live-execution disclosure now opens it before navigating.
+
+The Paper and Proof fonts/colors stay. The largest type states the product's promise; body text and actual controls are readable, source/identities have a distinct technical role, and source-guide/download actions look actionable. The bug desk has larger fields,48px controls and visible outlined editing/navigation buttons. No new runtime dependency, decorative image or invented product result was introduced. No new automatic motion is added.
+
+Regression scope includes the real public-to-local review/download journey without API requests, inline intake/undo/edit invalidation, disclosure navigation, keyboard evidence tabs, exact artifact downloads/hash failures, mobile/light/dark containment, sample playback/reduced-motion controls and authenticated fixtures. Source and browser labels remain explicit: curated local example, unsigned document, simulated sample and unavailable live provider execution. Passing fixtures do not establish real hosted authentication or cloud execution. Both existing holds remain active.
+
+Use the GitHub Actions run for the exact release commit for observed checks. The local QA report, screenshots and any Taste findings remain in the workspace, outside the published source. This change does not configure backend credentials, lift a hold, publish a video or submit the project.

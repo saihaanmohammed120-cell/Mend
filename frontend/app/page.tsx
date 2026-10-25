@@ -1,2 +1,2 @@
-import { Workbench } from "@/components/workbench";
-export default function Page() { return <Workbench />; }
+import { Landing } from "@/components/landing";
+export default function Page() { return <Landing />; }

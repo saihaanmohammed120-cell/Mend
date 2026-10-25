@@ -1,96 +1,96 @@
-.mend-bug-desk{min-height:100vh;background:var(--mend-paper);color:var(--mend-ink);font-family:"Mend Archivo",Arial,sans-serif;font-size:14px;line-height:1.5}
+.mend-bug-desk{min-height:100vh;background:var(--mend-paper);color:var(--mend-ink);font-family:"Mend Archivo",Arial,sans-serif;font-size:16px;line-height:1.5}
 .mend-bug-desk *{box-sizing:border-box;min-width:0}
 .mend-bug-desk :is(h1,h2,h3,p,ol,ul,dl,dd){margin:0}
 .mend-bug-desk :is(button,a,input,textarea,summary,[tabindex]):focus-visible,.bug-review:focus,.bug-errors:focus{outline:3px solid var(--mend-ink);outline-offset:3px}
 .mend-bug-desk :is(button,a,summary){touch-action:manipulation}
 .bug-topbar{max-width:1280px;min-height:72px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.bug-brand{display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-size:25px;font-weight:600;letter-spacing:-.04em;border-radius:4px;min-height:44px}
+.bug-brand{display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-size:25px;font-weight:600;letter-spacing:-.04em;border-radius:4px;min-height:48px}
 .bug-brand-mark{width:18px;height:22px;background:var(--mend-accent);clip-path:polygon(0 0,100% 0,100% 82%,82% 100%,0 100%);position:relative}
 .bug-brand-mark::after{content:"";position:absolute;inset:6px 4px;border-block:2px solid var(--mend-paper)}
-.bug-brand-note{margin-left:6px;letter-spacing:0;font-size:13px;font-weight:400;color:var(--mend-muted)}
+.bug-brand-note{margin-left:6px;letter-spacing:0;font-size:15px;font-weight:400;color:var(--mend-muted)}
 .bug-canvas{max-width:1280px;margin:0 auto;padding:16px 32px 32px}
 .bug-title-row{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:24px}
-.bug-title-row h1{font-size:28px;line-height:36px;letter-spacing:-.025em;font-weight:600}
-.bug-title-row p{margin-top:6px;color:var(--mend-muted);font-size:14px;line-height:22px}
-.bug-title-row .bug-local{display:flex;align-items:center;gap:8px;flex:none;font-size:12px;line-height:20px}
+.bug-title-row h1{font-size:36px;line-height:44px;letter-spacing:-.025em;font-weight:600}
+.bug-title-row p{margin-top:6px;color:var(--mend-muted);font-size:16px;line-height:22px}
+.bug-title-row .bug-local{display:flex;align-items:center;gap:8px;flex:none;font-size:14px;line-height:20px}
 .bug-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;padding:0 0 16px}
 .bug-steps li{padding:0 0 12px;border-bottom:2px solid var(--mend-line);display:flex;align-items:baseline;gap:12px;color:var(--mend-muted)}
 .bug-steps li[aria-current=step]{border-color:var(--mend-ink);color:var(--mend-ink)}
-.bug-steps strong{font-weight:500;font-size:14px}
-.bug-steps span{font-size:12px}
+.bug-steps strong{font-weight:500;font-size:16px}
+.bug-steps span{font-size:14px}
 /* Two panes close the sheet: (available width - 1px divider) split 1.15 : 1, no floating cards. */
 .bug-sheet{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid var(--mend-line);border-radius:16px;background:var(--mend-surface);overflow:clip}
 .bug-editor{padding:24px}
 .bug-review-column{border-left:1px solid var(--mend-line)}
 .bug-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .mend-bug-desk h2{font-size:17px;line-height:24px;font-weight:600;letter-spacing:-.01em}
-.mend-bug-desk h3{font-size:14px;line-height:22px;font-weight:500}
-.bug-help{font-size:13px;line-height:21px;color:var(--mend-muted)}
+.mend-bug-desk h3{font-size:16px;line-height:22px;font-weight:500}
+.bug-help{font-size:15px;line-height:21px;color:var(--mend-muted)}
 .bug-editor>.bug-help{margin-top:8px}
 .bug-fields{display:grid;gap:20px;margin-top:24px}
-.bug-field label{display:block;font-size:14px;line-height:22px;font-weight:500}
-.bug-field label span{font-size:12px;font-weight:400;color:var(--mend-muted);margin-left:5px}
+.bug-field label{display:block;font-size:16px;line-height:22px;font-weight:500}
+.bug-field label span{font-size:14px;font-weight:400;color:var(--mend-muted);margin-left:5px}
 .bug-field :is(textarea,input){display:block;width:100%;margin-top:8px;padding:10px 12px;border:1px solid var(--mend-control);border-radius:6px;background:var(--mend-surface);color:var(--mend-ink);font:400 16px/24px "Mend Archivo",Arial,sans-serif}
 .bug-field textarea{resize:vertical;min-height:92px}
-.bug-field :is([name=errorMessage],[name=source],[name=filePath]){font-family:"Mend Plex",monospace;font-size:13px;line-height:22px}
-.bug-field :is([name=protectedTestSource],[name=requiredCheckIds],[name=targetCheckId]){font-family:"Mend Plex",monospace;font-size:13px;line-height:22px}
+.bug-field :is([name=errorMessage],[name=source],[name=filePath]){font-family:"Mend Plex",monospace;font-size:15px;line-height:22px}
+.bug-field :is([name=protectedTestSource],[name=requiredCheckIds],[name=targetCheckId]){font-family:"Mend Plex",monospace;font-size:15px;line-height:22px}
 .bug-protected-review{margin-top:20px;padding-top:16px;border-top:1px solid var(--mend-line)}
 .bug-protected-review>.bug-help,.bug-export-note{margin-top:8px!important}
-.bug-field input{min-height:44px}
+.bug-field input{min-height:48px}
 .bug-field [aria-invalid=true]{border-color:var(--mend-danger)}
-.bug-field-error{color:var(--mend-danger);font-size:13px;line-height:21px;margin-top:6px!important}
+.bug-field-error{color:var(--mend-danger);font-size:15px;line-height:21px;margin-top:6px!important}
 .bug-field>.bug-help{margin-top:6px}
-.bug-byte-count{font-size:12px;line-height:20px;font-variant-numeric:tabular-nums;color:var(--mend-muted);text-align:right;margin-top:6px!important}
+.bug-byte-count{font-size:14px;line-height:20px;font-variant-numeric:tabular-nums;color:var(--mend-muted);text-align:right;margin-top:6px!important}
 .bug-source-editor{border-block:1px solid var(--mend-line)}
 .bug-protected-editor{border-block:1px solid var(--mend-line)}
-.mend-bug-desk summary{cursor:pointer;min-height:44px;padding:12px 0;font-size:13px;font-weight:500;line-height:22px}
+.mend-bug-desk summary{cursor:pointer;min-height:48px;padding:12px 0;font-size:15px;font-weight:500;line-height:22px}
 .mend-bug-desk summary span{font-weight:400;color:var(--mend-muted);margin-left:8px}
 .bug-source-fields{display:grid;gap:20px;padding:8px 0 20px}
 .bug-actions{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
-.bug-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:10px 16px;border:1px solid var(--mend-ink);border-radius:6px;font:500 14px/22px "Mend Archivo",Arial,sans-serif}
+.bug-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:48px;padding:10px 16px;border:1px solid var(--mend-ink);border-radius:6px;font:500 16px/24px "Mend Archivo",Arial,sans-serif}
 .bug-primary{background:var(--mend-accent);color:var(--mend-ink)}
 .bug-secondary{background:var(--mend-surface);color:var(--mend-ink)}
 .bug-button:active{transform:translateY(1px)}
 .bug-button:hover{filter:brightness(.96)}
-.bug-text-action{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:4px 0;background:none;border:0;border-radius:4px;color:inherit;font:400 13px/20px "Mend Archivo",Arial,sans-serif;text-decoration:underline;text-underline-offset:4px}
+.bug-text-action{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:6px 12px;background:none;border:1px solid var(--mend-line);border-radius:6px;color:inherit;font:400 15px/24px "Mend Archivo",Arial,sans-serif;text-decoration:none}
 .bug-text-action:hover{text-decoration-thickness:2px}
 .bug-text-action:disabled{cursor:default;color:var(--mend-muted);text-decoration:none}
-.bug-privacy{font-size:12px;line-height:20px;color:var(--mend-muted);max-width:64ch}
+.bug-privacy{font-size:14px;line-height:20px;color:var(--mend-muted);max-width:64ch}
 .bug-errors{padding:12px 16px;background:var(--mend-paper);border-left:3px solid var(--mend-danger);border-radius:4px}
 .bug-errors h3{color:var(--mend-danger)}
 .bug-errors ul{padding-left:16px;margin-top:6px}
-.bug-errors a{display:inline-block;padding:6px 0;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.bug-errors a{display:inline-block;padding:6px 0;font-size:15px;text-decoration:underline;text-underline-offset:3px}
 .bug-review{padding:24px;border-radius:8px}
-.bug-packet-kind{font-size:12px;line-height:20px;color:var(--mend-muted);white-space:nowrap}
-.bug-review-status{margin-top:12px!important;font-size:13px;line-height:22px;color:var(--mend-muted)}
+.bug-packet-kind{font-size:14px;line-height:20px;color:var(--mend-muted);white-space:nowrap}
+.bug-review-status{margin-top:12px!important;font-size:15px;line-height:22px;color:var(--mend-muted)}
 .bug-review-fields{margin-top:16px!important}
 .bug-review-fields>div{padding:8px 0;border-bottom:1px solid var(--mend-line)}
-.bug-review-fields dt,.bug-review-label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:500}
-.bug-review-fields dd{font-size:14px;line-height:22px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:176px;overflow:auto;padding-bottom:8px;color:var(--mend-ink)}
+.bug-review-fields dt,.bug-review-label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px;font-weight:500}
+.bug-review-fields dd{font-size:16px;line-height:22px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:176px;overflow:auto;padding-bottom:8px;color:var(--mend-ink)}
 .bug-source-review{margin-top:12px}
 .bug-disclosure{margin-top:8px;border-bottom:1px solid var(--mend-line)}
-.bug-disclosure summary{font-size:13px}
-.bug-disclosure pre{font:400 12px/21px "Mend Plex",monospace;max-height:300px;overflow:auto;padding:12px;background:var(--mend-paper);border-radius:4px;margin:0 0 12px;tab-size:4}
+.bug-disclosure summary{font-size:15px}
+.bug-disclosure pre{font:400 14px/23px "Mend Plex",monospace;max-height:300px;overflow:auto;padding:12px;background:var(--mend-paper);border-radius:4px;margin:0 0 12px;tab-size:4}
 .bug-disclosure pre>span{display:block;white-space:pre}
 .bug-line-number{display:inline-block;width:3ch;margin-right:16px;text-align:right;user-select:none;color:var(--mend-muted)}
 .bug-disclosure>.bug-help{padding-bottom:12px}
-.bug-identities>div{padding:8px 0;font-size:12px;line-height:20px}
+.bug-identities>div{padding:8px 0;font-size:14px;line-height:20px}
 .bug-identities dt{color:var(--mend-muted)}
-.bug-identities code{font:400 12px/21px "Mend Plex",monospace;overflow-wrap:anywhere;user-select:all}
+.bug-identities code{font:400 14px/23px "Mend Plex",monospace;overflow-wrap:anywhere;user-select:all}
 .bug-export{margin-top:20px;width:100%}
 .bug-review-empty{margin-top:24px}
 .bug-review-empty h3{font-size:16px;font-weight:500;line-height:24px}
-.bug-review-empty ul{padding-left:18px;margin-top:16px;font-size:14px;line-height:24px}
+.bug-review-empty ul{padding-left:18px;margin-top:16px;font-size:16px;line-height:24px}
 .bug-review-empty li+li{margin-top:8px}
-.bug-review-empty p{font-size:13px;line-height:22px;color:var(--mend-muted);margin-top:20px}
+.bug-review-empty p{font-size:15px;line-height:22px;color:var(--mend-muted);margin-top:20px}
 .bug-gate{padding:20px 24px 24px;border-top:1px solid var(--mend-line);background:color-mix(in srgb,var(--mend-paper) 55%,var(--mend-surface))}
 .bug-gate h2{font-size:15px}
 .bug-gate dl{margin-top:12px}
-.bug-gate dl>div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:13px}
+.bug-gate dl>div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:15px}
 .bug-gate dd{color:var(--mend-muted)}
-.bug-gate p{margin-top:12px;font-size:13px;line-height:22px;color:var(--mend-muted)}
-.bug-footer{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:var(--mend-muted)}
+.bug-gate p{margin-top:12px;font-size:15px;line-height:22px;color:var(--mend-muted)}
+.bug-footer{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:14px;color:var(--mend-muted)}
 @media(prefers-color-scheme:dark){.bug-primary{color:var(--mend-paper)}}
 @media(max-width:900px){.bug-sheet{grid-template-columns:minmax(0,1fr)}.bug-review-column{border-left:0;border-top:1px solid var(--mend-line)}.bug-title-row{align-items:flex-start;flex-direction:column;gap:8px}.bug-title-row .bug-local{margin-top:0}.bug-review-empty{margin-top:16px}}
-@media(max-width:600px){.bug-topbar{padding:8px 20px;min-height:64px}.bug-brand{font-size:24px}.bug-brand-note{display:none}.bug-canvas{padding:12px 16px 24px}.bug-title-row{margin-bottom:20px}.bug-title-row h1{font-size:24px;line-height:32px}.bug-title-row p{font-size:13px;line-height:21px}.bug-steps{gap:12px}.bug-steps li{flex-direction:column;gap:2px;padding-bottom:8px}.bug-steps span{font-size:11px}.bug-sheet{border-radius:12px}.bug-editor,.bug-review{padding:20px}.bug-section-heading{align-items:flex-start;flex-wrap:wrap;gap:4px}.bug-editor .bug-section-heading>.bug-text-action{margin-top:0}.bug-fields{margin-top:20px}.bug-gate{padding:20px}.bug-footer{align-items:flex-start;flex-direction:column;gap:4px}.bug-source-editor summary span{display:block;margin-left:17px}.bug-packet-kind{font-size:12px}.bug-actions{gap:12px}.bug-field label span{font-size:12px}.bug-text-action{font-size:12px}}
+@media(max-width:600px){.bug-topbar{padding:8px 20px;min-height:64px}.bug-brand{font-size:24px}.bug-brand-note{display:none}.bug-canvas{padding:12px 16px 24px}.bug-title-row{margin-bottom:20px}.bug-title-row h1{font-size:28px;line-height:36px}.bug-title-row p{font-size:15px;line-height:21px}.bug-steps{gap:12px}.bug-steps li{flex-direction:column;gap:2px;padding-bottom:8px}.bug-steps span{font-size:14px}.bug-sheet{border-radius:12px}.bug-editor,.bug-review{padding:20px}.bug-section-heading{align-items:flex-start;flex-wrap:wrap;gap:4px}.bug-editor .bug-section-heading>.bug-text-action{margin-top:0}.bug-fields{margin-top:20px}.bug-gate{padding:20px}.bug-footer{align-items:flex-start;flex-direction:column;gap:4px}.bug-source-editor summary span{display:block;margin-left:17px}.bug-packet-kind{font-size:14px}.bug-actions{gap:12px}.bug-field label span{font-size:14px}.bug-text-action{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.bug-button:active{transform:none}}
