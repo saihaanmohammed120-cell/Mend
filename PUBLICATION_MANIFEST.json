@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "40e0b61505d1559a9be3740ff918c0ec11735523",
+  "observed_parent_sha": "bf6f70f25c46d9d21bde63ba3df89e4237e57b61",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -37,20 +37,7 @@
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    "README.md",
-    "frontend/app/page.tsx",
-    "frontend/components/landing.tsx",
-    "frontend/components/landing.css",
-    "frontend/components/proof-hero.tsx",
-    "frontend/components/captured-workspace.tsx",
-    "frontend/components/bug-desk.tsx",
-    "frontend/components/bug-desk.css",
-    "frontend/components/repair-case.css",
-    "frontend/e2e/hero.spec.ts",
-    "frontend/e2e/landing.spec.ts",
-    "frontend/tests/hero-render.test.ts",
-    "frontend/DESIGN.md",
-    "docs/FRONTEND_CLEANUP_2026_10_25.md"
+    "frontend/components/command-copy.css"
   ],
   "verification": {
     "frontend_unit_pass": 115,
@@ -2950,9 +2937,9 @@
     {
       "path": "frontend/components/command-copy.css",
       "bytes": 1573,
-      "sha256": "7ed9fda2eb8a05bcf43f07e1a08530b09ca09c1270708e2462a6382575ea5715",
+      "sha256": "b3916689779b271266dfe77e78dd755d3cec9889ad04e706fc32128fd76a2553",
       "encoding": "utf-8",
-      "git_blob_sha": "933648f3d2294d2e12cbae191ca01348e0e56060"
+      "git_blob_sha": "b9cbbb22aef60079240c21b607fca17c2acf8e29"
     },
     {
       "path": "frontend/components/command-copy.tsx",
