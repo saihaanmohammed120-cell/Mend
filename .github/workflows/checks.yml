@@ -132,7 +132,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
-      - run: npx playwright install --with-deps chromium
+      # The runner's preferred Azure HTTP mirror stalled browser dependency downloads.
+      - name: Prefer the official HTTPS Ubuntu archive for browser dependencies
+        run: printf '%s\n' 'https://archive.ubuntu.com/ubuntu/' | sudo tee /etc/apt/apt-mirrors.txt
+      - name: Install Chromium and operating-system dependencies
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - uses: actions/setup-python@v5
         with:
