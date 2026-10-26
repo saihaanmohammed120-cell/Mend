@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "18b33227588f2d8b474ee9b3e7f7620c0918c3c0",
+  "observed_parent_sha": "96899c4de8b9085454d62b4471aae17886d0d342",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -1376,10 +1376,10 @@
     },
     {
       "path": "backend/tests/test_deployment.py",
-      "bytes": 4494,
-      "sha256": "8c6f32a13275453c629b7a352f7abf39af0560373a0161e3c20a67a6aa902d74",
+      "bytes": 6702,
+      "sha256": "f55e5c9aee272f3e4616f1f56434bdb4d60e5f5daae5f1aefb60f55f371ff438",
       "encoding": "utf-8",
-      "git_blob_sha": "fd0fb72fca9829852d9cec9ec98a017d16db5869"
+      "git_blob_sha": "c6be26eacb8edc732294eb5774d4a3ee187b1ebc"
     },
     {
       "path": "backend/tests/test_evidence_readers.py",
@@ -1485,6 +1485,13 @@
       "sha256": "f93f5f88bc266918e8988a459659bbb1718c4d8ed2d3cb78321505cca3c3675f",
       "git_blob_sha": "b2ac667550b709bece5eb912742ada0cefa63651",
       "encoding": "utf-8"
+    },
+    {
+      "path": "backend/tests/test_setup_deployment.py",
+      "bytes": 4494,
+      "sha256": "8c6f32a13275453c629b7a352f7abf39af0560373a0161e3c20a67a6aa902d74",
+      "encoding": "utf-8",
+      "git_blob_sha": "fd0fb72fca9829852d9cec9ec98a017d16db5869"
     },
     {
       "path": "backend/tests/test_spike.py",
