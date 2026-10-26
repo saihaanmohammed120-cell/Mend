@@ -24,14 +24,14 @@ export async function boundedReadiness(response: Response): Promise<unknown> {
 }
 
 export function normalizeReadiness(value: unknown, upstreamOK: boolean) {
-  if (!record(value) || typeof value.ready !== "boolean" || !["local_test", "database_only", "live"].includes(String(value.mode)) ||
+  if (!record(value) || typeof value.ready !== "boolean" || !["setup_only", "local_test", "database_only", "live"].includes(String(value.mode)) ||
       !Array.isArray(value.blockers) || value.blockers.length > 32 || !value.blockers.every(code => typeof code === "string" && /^[a-z0-9_]{1,64}$/.test(code)))
     return UNAVAILABLE_RUNTIME;
   const d = value.database;
   const valid = record(d) && ["verified", "unavailable", "not_checked"].includes(String(d.status)) &&
     ["supabase_rpc", "none"].includes(String(d.source)) && ["enabled", "disabled", "unknown"].includes(String(d.release_gate)) &&
     (d.status === "verified" ? d.source === "supabase_rpc" : d.source === "none" && d.release_gate === "unknown");
-  const database: DatabaseStatus = valid ? {
+  const database: DatabaseStatus = value.mode !== "setup_only" && valid ? {
     status: d.status as DatabaseStatus["status"], source: d.source as DatabaseStatus["source"],
     release_gate: d.release_gate as DatabaseStatus["release_gate"],
   } : UNAVAILABLE_RUNTIME.database;

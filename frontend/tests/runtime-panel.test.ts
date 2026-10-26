@@ -4,6 +4,19 @@ import { existsSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+test("setup connectivity does not suggest that auth, task review or database verification work", async () => {
+  const { RuntimeConnection } = await import("../components/runtime-connection");
+  const html = renderToStaticMarkup(createElement(RuntimeConnection, { checking: false, onRecheck: () => {}, runtime: {
+    ready: false, mode: "setup_only", blockers: ["backend_setup_only"], api_status: "reachable",
+    database: { status: "not_checked", source: "none", release_gate: "unknown" }, checked_at: null,
+  } }));
+  assert.match(html, /Reached/);
+  assert.match(html, /Sign-in and saved tasks are unavailable/);
+  assert.match(html, /database has not been checked; writes remain on hold/);
+  assert.match(html, /Start disabled/);
+  assert.doesNotMatch(html, /Task review can prepare a contract|Supabase responded|Execution available/);
+});
+
 test("Connection panel distinguishes API/database success from locked execution", async () => {
   assert.ok(existsSync(new URL("../components/runtime-connection.tsx", import.meta.url)), "Connection panel is missing");
   const { RuntimeConnection } = await import("../components/runtime-connection");

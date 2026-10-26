@@ -9,7 +9,7 @@ const loopbackOrigin = "http://127.0.0.1:4173";
 // It proxies production pages/assets to loopback HTTP; actual TLS needs separate smoke coverage.
 test.use({ baseURL: fixtureOrigin });
 
-async function isolateWorkspace(page: Page, signedIn = false, attempts = false) {
+async function isolateWorkspace(page: Page, signedIn = false, attempts = false, setup = false) {
   const unexpected: string[] = [];
   page.on("pageerror", error => unexpected.push(`Browser error: ${error.message}`));
   page.on("requestfailed", request => {
@@ -28,9 +28,12 @@ async function isolateWorkspace(page: Page, signedIn = false, attempts = false) 
       unexpected.push(`${request.method()} ${url.origin}${path}`);
       await route.abort("blockedbyclient");
     } else if (request.method() === "GET" && path === "/api/runtime") {
-      await route.fulfill({ json: { ready: false, mode: "browser_test", blockers: ["Execution disabled in this test."] } });
+      await route.fulfill({ json: setup ? { ready: false, mode: "setup_only", blockers: ["backend_setup_only"], api_status: "reachable",
+        database: { status: "not_checked", source: "none", release_gate: "unknown" }, checked_at: "2026-10-26T10:00:00Z" }
+        : { ready: false, mode: "browser_test", blockers: ["Execution disabled in this test."] } });
     } else if (request.method() === "GET" && path === "/api/session") {
-      await route.fulfill(signedIn ? { json: { user_id: taskId, csrf_token: "a".repeat(32), expires_at: Math.floor(Date.now() / 1000) + 3600 } } : { status: 401, json: { error: { code: "unauthorized", message: "Sign in required." } } });
+      await route.fulfill(setup ? { status: 503, json: { error: { code: "backend_setup_only", message: "Backend setup is incomplete." } } }
+        : signedIn ? { json: { user_id: taskId, csrf_token: "a".repeat(32), expires_at: Math.floor(Date.now() / 1000) + 3600 } } : { status: 401, json: { error: { code: "unauthorized", message: "Sign in required." } } });
     } else if (request.method() === "GET" && path === `/api/tasks/${taskId}` && attempts) {
       await route.fulfill({ json: { id: taskId, status: "needs_help", source: "local_test", live_verification: false,
         prompt: "Browser fixture only", contract_version: 2, next_sequence: 6,
@@ -64,6 +67,31 @@ async function isolateWorkspace(page: Page, signedIn = false, attempts = false) 
 }
 
 for (const width of [390, 1440]) {
+  test(`setup connectivity is inspectable without credential submission at ${width}px`, async ({ page }) => {
+    const unexpected = await isolateWorkspace(page, false, false, true);
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ colorScheme: width === 390 ? "dark" : "light", reducedMotion: "reduce" });
+    await page.goto("/sign-in");
+    await expect(page.getByLabel("Email", { exact: true })).toBeDisabled();
+    await expect(page.getByLabel("Password", { exact: true })).toBeInViewport();
+    await expect(page.getByRole("button", { name: "Backend setup pending" })).toBeDisabled();
+    await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
+    const details = page.locator("summary").filter({ hasText: "Backend connection details" });
+    await details.focus(); await details.press("Enter");
+    await expect(details).toBeFocused();
+    const panel = page.getByRole("region", { name: "Runtime connections" });
+    await expect(panel).toContainText("Reached");
+    await expect(panel).toContainText("Sign-in and saved tasks are unavailable");
+    await expect(panel).toContainText("Start disabled");
+    await page.getByRole("button", { name: "Recheck connections" }).click();
+    await expect(page.getByRole("button", { name: "Recheck connections" })).toBeEnabled();
+    await expect(panel).toContainText("Start disabled");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.getByRole("link", { name: "Local tools", exact: true }).click();
+    await expect(page).toHaveURL(/\/tools$/);
+    expect(unexpected).toEqual([]);
+  });
+
   test(`landing opens a compact sign-in with credentials in view at ${width}px`, async ({ page }) => {
     const unexpected = await isolateWorkspace(page);
     await page.setViewportSize({ width, height: 900 });

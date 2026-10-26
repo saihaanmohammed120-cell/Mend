@@ -1,6 +1,20 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { GET } from "../app/api/runtime/route";
+import { normalizeReadiness } from "../lib/runtime-readiness";
+
+test("setup service is reachable but cannot permit a start even with contradictory evidence", () => {
+  for (const upstreamOK of [true, false]) {
+    const report = normalizeReadiness({ ready: true, mode: "setup_only", blockers: [],
+      database: { status: "verified", source: "supabase_rpc", release_gate: "enabled" },
+      checked_at: "2026-10-26T10:00:00Z", provider_verification: "not_established_by_this_endpoint" }, upstreamOK);
+    assert.equal(report.api_status, "reachable");
+    assert.equal(report.mode, "setup_only");
+    assert.equal(report.ready, false);
+    assert.equal(report.database.status, "not_checked");
+    assert.deepEqual(report.blockers, ["runtime_not_ready"]);
+  }
+});
 
 test("contradictory upstream readiness cannot enable Start", async () => {
   const previousFetch = globalThis.fetch;

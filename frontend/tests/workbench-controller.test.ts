@@ -129,6 +129,33 @@ test("Controller retries ambiguous create with original key and blocks a changed
   assert.equal(h.value.task?.status, "ready");
   h.unmount();
 });
+
+test("Setup report prevents restoring a contradictory session and blocks authentication", async () => {
+  const h = harness(A);
+  h.setRuntime({ ready: false, mode: "setup_only", blockers: ["backend_setup_only"] });
+  await h.flush();
+  assert.equal(h.value.booting, false);
+  assert.equal(h.value.session, null);
+  assert.equal(h.value.task, null);
+  assert.equal(h.value.error, null);
+  assert.equal(h.activeWatches.length, 0);
+  await h.value.signIn("account@example.test", "fixture-password"); await h.flush();
+  assert.match(h.value.error ?? "", /Sign-in is unavailable/);
+  assert.equal(h.value.session, null);
+  h.unmount();
+});
+
+test("Rechecking a backend now in setup mode clears task evidence and closes its stream", async () => {
+  const h = harness(A); await h.flush();
+  assert.ok(h.value.session); assert.ok(h.value.task);
+  h.setRuntime({ ready: false, mode: "setup_only", blockers: ["backend_setup_only"] });
+  await h.value.refresh(); await h.flush();
+  assert.equal(h.value.session, null); assert.equal(h.value.task, null);
+  assert.equal(h.value.receipt, null); assert.equal(h.value.busy, false);
+  assert.equal(h.value.runtime?.mode, "setup_only");
+  assert.ok(h.activeWatches.every(watch => watch.closed));
+  h.unmount();
+});
 test("A failed explicit connection recheck clears the old readiness snapshot", async () => {
   const h = harness();
   await h.flush();

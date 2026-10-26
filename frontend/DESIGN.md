@@ -1,5 +1,9 @@
 # Mend application screens
 
+## Hosted setup connection, 26 October 2026
+
+Keep the existing Paper and Proof sheet, type and colors. A native connection-details disclosure follows the signed-out form, preserving the compact credential layout. In explicit setup mode the fields and submit action are disabled, and the page explains that sign-in and saved tasks are unavailable. The detail panel distinguishes a reachable setup service from an unchecked database and locked execution. Recheck is a real read-only status request. No green repair badge, source upload, invented verification, new imagery, motion or dependency is introduced. Verify keyboard disclosure/recheck, containment at390/1440px, light/dark and reduced motion; fixture browser checks do not establish hosted authentication.
+
 ## Local report copies, 26 October 2026
 
 Each completed local review has an optional native disclosure for its exact report JSON and a48px Save action using the existing download lifecycle. Preserve the current desk styles and keyboard behavior. Reports include source identities, findings and policy limits, while excluding original/candidate source and changed-span text. Receipt reports fingerprint the reviewed JSON text and retain unknown/mismatched states. All reports remain explicitly local, unsigned, unapproved and not executed; they are not backend receipts. Input edits/clear retire both the visible review and its export. Downloads say requested, with retry/manual inspection on failure. No new assets, animation, storage or network path is introduced.

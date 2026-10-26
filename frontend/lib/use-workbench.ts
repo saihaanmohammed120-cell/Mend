@@ -147,7 +147,10 @@ export function useWorkbench(initialTaskId?: string): Workbench {
           api.getSession({ signal: controller.signal }), readRuntime(controller.signal),
         ]);
         if (!alive.current || generation !== epoch.current) return;
-        if (runtimeResult.status === "fulfilled") update({ runtime: runtimeResult.value });
+        if (runtimeResult.status === "fulfilled") {
+          update({ runtime: runtimeResult.value });
+          if (runtimeResult.value.mode === "setup_only") { update({ session: null, error: null }); return; }
+        }
         else update({ error: message(runtimeResult.reason) });
         if (sessionResult.status === "fulfilled") {
           pending.current = restoreReview(window.sessionStorage, sessionResult.value.user_id);
@@ -162,6 +165,7 @@ export function useWorkbench(initialTaskId?: string): Workbench {
   }, [attach, closeWatch, initialTaskId, readRuntime, update]);
 
   const signIn = useCallback((email: string, password: string) => run(async (api, signal, generation) => {
+    if (snapshot.current.runtime?.mode === "setup_only") throw new Error("Sign-in is unavailable while backend setup is pending.");
     const accessToken = await authenticate(email, password, signal);
     const session = await api.exchangeSession(accessToken, { signal });
     if (generation !== epoch.current || !alive.current) return;
@@ -242,8 +246,9 @@ export function useWorkbench(initialTaskId?: string): Workbench {
     const runtime = await readRuntime(signal);
     if (generation !== epoch.current) return;
     update({ runtime });
+    if (runtime.mode === "setup_only") { clearOwner(); return; }
     if (snapshot.current.task) await attach(snapshot.current.task.id, generation, true);
-  }), [attach, readRuntime, run, update]);
+  }), [attach, clearOwner, readRuntime, run, update]);
   const clearError = useCallback(() => update({ error: null }), [update]);
   return { ...state, review, signIn, logout, load, start, cancel, download, refresh, clearError };
 }

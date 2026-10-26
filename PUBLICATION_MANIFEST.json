@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "676e9b297e1a330003756b3d2ecf7424df2b0ebc",
+  "observed_parent_sha": "18b33227588f2d8b474ee9b3e7f7620c0918c3c0",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -80,6 +80,13 @@
       "git_blob_sha": "5148c5ce6167e1387100a65ff4f398d35cce4f41"
     },
     {
+      "path": ".python-version",
+      "bytes": 5,
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+      "encoding": "utf-8",
+      "git_blob_sha": "e4fba2183587225f216eeada4c78dfab6b2e65f5"
+    },
+    {
       "path": "LICENSE",
       "bytes": 1075,
       "sha256": "e7cf89bd361794c7c7f1b0cc930105b9a4b865b60bdb64a98eb216e97dccb2bc",
@@ -109,10 +116,10 @@
     },
     {
       "path": "backend/.env.example",
-      "bytes": 1664,
-      "sha256": "ffbd28119724e8e0c9f45133c8ae387f31bd88a2890f6ec4403efda976ffbfad",
+      "bytes": 1770,
+      "sha256": "68c298fe35f4da2fd0208046cc04b649103d9d15c69266a418407177e53ccd58",
       "encoding": "utf-8",
-      "git_blob_sha": "195c45b52b73649a15d9c82c40704c02662efe6f"
+      "git_blob_sha": "50a7a1cdf8333d201c2947da70802eeb3df3f407"
     },
     {
       "path": "backend/.github/workflows/checks.yml",
@@ -246,6 +253,13 @@
       "sha256": "0f0c50983231c1bd886368b17c9d494e3a6bbbd7997899178095e8c63b532709",
       "encoding": "utf-8",
       "git_blob_sha": "0193dc5e57cf47c353d09113c2b57bd90cdffa1c"
+    },
+    {
+      "path": "backend/docs/SETUP_DEPLOYMENT.md",
+      "bytes": 2776,
+      "sha256": "aac791c460b60b177cbf44a523d5c1d07f8b18c7058ac93647ed98910526cbf0",
+      "encoding": "utf-8",
+      "git_blob_sha": "7cbc9911c256a5b00935b39ec60dba4e0b74cb45"
     },
     {
       "path": "backend/docs/TRUSTED_EVIDENCE_READERS.md",
@@ -969,6 +983,13 @@
       "git_blob_sha": "f1f2731f2d8d6139b97208ffcf8817c59f71b2ec"
     },
     {
+      "path": "backend/mend/deployment.py",
+      "bytes": 2211,
+      "sha256": "8d06ec188968efd7fff2c7c0d93f47e84ad6bda0aa2f591785257c370b885024",
+      "encoding": "utf-8",
+      "git_blob_sha": "cb553e0b2f3529f00f46cb7c35759ddb5e7d13ea"
+    },
+    {
       "path": "backend/mend/domain.py",
       "bytes": 9947,
       "sha256": "cae7b516deb70fb87f1dd38deb17298aa0888a2f73dd3e84413839fd68c5c532",
@@ -1355,10 +1376,10 @@
     },
     {
       "path": "backend/tests/test_deployment.py",
-      "bytes": 6702,
-      "sha256": "f55e5c9aee272f3e4616f1f56434bdb4d60e5f5daae5f1aefb60f55f371ff438",
+      "bytes": 4494,
+      "sha256": "8c6f32a13275453c629b7a352f7abf39af0560373a0161e3c20a67a6aa902d74",
       "encoding": "utf-8",
-      "git_blob_sha": "c6be26eacb8edc732294eb5774d4a3ee187b1ebc"
+      "git_blob_sha": "fd0fb72fca9829852d9cec9ec98a017d16db5869"
     },
     {
       "path": "backend/tests/test_evidence_readers.py",
@@ -2895,10 +2916,10 @@
     },
     {
       "path": "frontend/DESIGN.md",
-      "bytes": 18970,
-      "sha256": "2a47fd86d5d67f1cb35c554ad9ab0adcab5a6a42f4919253bcea19da35047baa",
-      "git_blob_sha": "7f9ead37f7afb1aa6745f026b6c9e7ba5024d59c",
-      "encoding": "utf-8"
+      "bytes": 19734,
+      "sha256": "3b189a3596e94ee78cbf1ec15e299399e7a97bab43ec77d5613821174015875d",
+      "encoding": "utf-8",
+      "git_blob_sha": "b70c1f524c9bd867b06c8c5dd14e87d77ce94758"
     },
     {
       "path": "frontend/README.md",
@@ -3154,10 +3175,10 @@
     },
     {
       "path": "frontend/components/runtime-connection.tsx",
-      "bytes": 2274,
-      "sha256": "d952cd7e67b26b95197f525e0fe609e513d7478dfddaf592d4d8bebc919d9da1",
+      "bytes": 2781,
+      "sha256": "261ddc7fac09d203faa00202504d9ab7df7276f6fe6dca92f15833026001483f",
       "encoding": "utf-8",
-      "git_blob_sha": "ffcc0ea5aa3c901d9727ebb81a7a15e1f67a2587"
+      "git_blob_sha": "20943e9e238fba4e917e243d211e6bd4b08adcc7"
     },
     {
       "path": "frontend/components/success-receipt.tsx",
@@ -3182,10 +3203,10 @@
     },
     {
       "path": "frontend/components/workbench.tsx",
-      "bytes": 28162,
-      "sha256": "04aee67c452ec440caf8070b1c45f3582a29098706d1160b34edfd7cfdbaf7b9",
-      "git_blob_sha": "c22e31a256e93cf1a106a23c9f73ff63c5f3208a",
-      "encoding": "utf-8"
+      "bytes": 28925,
+      "sha256": "216efa2a0680eb166e8db96f0a1c0d56a6ff329ab04a709b170c5d45eae6bf18",
+      "encoding": "utf-8",
+      "git_blob_sha": "7a4844f0ba688bee0a30981ef735010ed02939aa"
     },
     {
       "path": "frontend/e2e/README.md",
@@ -3238,10 +3259,10 @@
     },
     {
       "path": "frontend/e2e/workspace.spec.ts",
-      "bytes": 9331,
-      "sha256": "ae0af979cac4f4ef474b61788151b0ba048d0c789bbe0c249e7f134aa9e12d22",
-      "git_blob_sha": "ba205bb74e62152b28527fa3325aacf9fe1cff54",
-      "encoding": "utf-8"
+      "bytes": 11365,
+      "sha256": "94f24682eccc1f4eddc96b1b617651d2b1be6c71d1ec863c0026f83e1a447f14",
+      "encoding": "utf-8",
+      "git_blob_sha": "c687012fea60ae8555b12832c6e51126dd3957f7"
     },
     {
       "path": "frontend/eslint.config.mjs",
@@ -3399,10 +3420,10 @@
     },
     {
       "path": "frontend/lib/runtime-readiness.ts",
-      "bytes": 3329,
-      "sha256": "9796e88805486995db990e05e023d3b80d918d62d766a2d119974fb0701859c6",
+      "bytes": 3374,
+      "sha256": "8cd90027fc1e4ff06f029dd19d199eae58e13bbf5acba7b037dbf44c6e5e3391",
       "encoding": "utf-8",
-      "git_blob_sha": "ec15812622b712d25b8c4c85bf625a0e2c5f2697"
+      "git_blob_sha": "05718384e362198d0c51db0ebd1e5e4a9929586d"
     },
     {
       "path": "frontend/lib/sample-repair.ts",
@@ -3427,10 +3448,10 @@
     },
     {
       "path": "frontend/lib/use-workbench.ts",
-      "bytes": 16186,
-      "sha256": "563d385631bb2b8f718a2d6c0559d8a6d12501f9ee581b6cee712cd9e71cba7f",
+      "bytes": 16526,
+      "sha256": "fb7e61f89022489317dcb2c3e66099fa810af849803e3d54c9719b8af9da5cba",
       "encoding": "utf-8",
-      "git_blob_sha": "a556924cc52042442ba74a9d28263979d243b14c"
+      "git_blob_sha": "8966fbcd2a5de84e11bd01f7fff7296b48882a29"
     },
     {
       "path": "frontend/next-env.d.ts",
@@ -3791,17 +3812,17 @@
     },
     {
       "path": "frontend/tests/runtime-panel.test.ts",
-      "bytes": 1755,
-      "sha256": "581064d4655afe1b022f521e61bea703acb6ece2442264f2053bafb908836f64",
+      "bytes": 2601,
+      "sha256": "4c7a96741c87263fca957ae46b261db87faa0ca39fe313c32fba976b27130388",
       "encoding": "utf-8",
-      "git_blob_sha": "448c755679cf63b8185812d1404b026767808733"
+      "git_blob_sha": "0ec1fbb29398d1cfea91b56b5ac2b17ccfdebd5e"
     },
     {
       "path": "frontend/tests/runtime-readiness.test.ts",
-      "bytes": 4907,
-      "sha256": "d20e1da3051e3964047d3f0a227c32c754daee23de2017d5f94d73ce62dd5a6e",
+      "bytes": 5670,
+      "sha256": "30ec86b8339d34580d9817b898ac3a4571d89e6b7b20e75498fa70f2371d8606",
       "encoding": "utf-8",
-      "git_blob_sha": "9bfb1d6b147ba2bc9282f8bba8c4bc3afe631ef2"
+      "git_blob_sha": "d55848dbaf16a4c1309105871453bfb96f2ecd81"
     },
     {
       "path": "frontend/tests/sample-repair.test.ts",
@@ -3819,10 +3840,10 @@
     },
     {
       "path": "frontend/tests/workbench-controller.test.ts",
-      "bytes": 13001,
-      "sha256": "3674feda796f7f29341f90241908ecbe61819d9d00f4445e37bb64d621962fa0",
+      "bytes": 14249,
+      "sha256": "7df2dd33259a42dbaad85c17ca5a821fafae2e4cf666cb00702c2d14429c1ffc",
       "encoding": "utf-8",
-      "git_blob_sha": "e717046ca8a974f9bd71baeb514d4d7f0e631367"
+      "git_blob_sha": "d1b2adcccd027c12748a694c4693d23dea2f46df"
     },
     {
       "path": "frontend/tsconfig.json",
@@ -3914,5 +3935,5 @@
     "hosted_database_changes": "kept explicitly by user"
   },
   "vercel_deployment": "https://mend-smasher.vercel.app; frontend-only, backend remains gated",
-  "backend_deployment": "Private server credential unavailable; no hosted backend deployment claimed"
+  "backend_deployment": "Explicit setup-only entrypoint available; deployment and readback recorded separately. No authenticated runtime, database or provider verification claimed."
 }
