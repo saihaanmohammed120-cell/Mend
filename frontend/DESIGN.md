@@ -1,5 +1,9 @@
 # Mend application screens
 
+## Local report copies, 26 October 2026
+
+Each completed local review has an optional native disclosure for its exact report JSON and a48px Save action using the existing download lifecycle. Preserve the current desk styles and keyboard behavior. Reports include source identities, findings and policy limits, while excluding original/candidate source and changed-span text. Receipt reports fingerprint the reviewed JSON text and retain unknown/mismatched states. All reports remain explicitly local, unsigned, unapproved and not executed; they are not backend receipts. Input edits/clear retire both the visible review and its export. Downloads say requested, with retry/manual inspection on failure. No new assets, animation, storage or network path is introduced.
+
 ## In-app local tools and reference reader, 25 October 2026
 
 The owner requested both internal navigation and working web screens for the offline tools. Retain the existing Paper and Proof framed-sheet direction, cream/forest ground, Archivo controls, Fraunces page title and Plex source identities. The local desk answers **What changed, and what can this evidence establish?** One active workspace holds repository comparison, policy preview and receipt inspection; inputs survive switching between these views but clear on leaving/reload or explicit Clear. Source inputs stay entirely in browser memory. File selection and readable JSON maps are alternative inputs, not uploads. Use flat surfaces,16px body/48px controls, two input columns on desktop and one on mobile, wrapped identities and native disclosures. No decorative assets or animation are needed: actual selected code, source hashes and differences are the product material.

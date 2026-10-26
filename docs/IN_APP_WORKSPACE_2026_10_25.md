@@ -1,5 +1,7 @@
 # Review inside Mend
 
+Update,26October2026: each completed repository, policy or receipt inspection can be retained as optional `mend-*-review.json`. Inspect its exact JSON inside the app before saving. These are `mend_local_review_report` documents, explicitly unsigned/unapproved/not-run, with no original/candidate source or changed-span contents. Policy reports bind both source identities and the chosen limits; receipt reports identify the reviewed JSON text using SHA-256. Editing/clearing inputs removes the old report along with the review. This is not automatic persistence or a backend receipt import/export protocol.
+
 The owner requested both in-app navigation and working screens for local repository, policy and receipt tools. The implementation stays in the existing frontend. Both live-provider and hosted-database holds remain active; no backend, auth, budget, execution or hosted schema change is included.
 
 - `/tools#repository`: select bounded Python files or provide exact JSON source maps. Compare the same path set, inspect original/candidate SHA-256 identities and conservative changed spans, and flag changed protected files. Test modules and the tests package are always locked. Comparison is not Python parsing, dependency resolution, a backend frozen contract or executed regression evidence.

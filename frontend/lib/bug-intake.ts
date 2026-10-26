@@ -156,14 +156,14 @@ export interface BugDownloadEnvironment {
 
 /** On success the caller owns the URL; failures release every acquired resource. */
 export function beginBugIntakeDownload(packet: BugIntake, browser: BugDownloadEnvironment): string {
-  return beginBugDownload(serializeBugIntake(packet), "mend-bug-intake.json", browser);
+  return beginJsonDownload(serializeBugIntake(packet), "mend-bug-intake.json", browser);
 }
 
 export function beginBugReviewRequestDownload(request: BugReviewRequest, browser: BugDownloadEnvironment): string {
-  return beginBugDownload(serializeBugReviewRequest(request), "mend-bug-review-request.json", browser);
+  return beginJsonDownload(serializeBugReviewRequest(request), "mend-bug-review-request.json", browser);
 }
 
-function beginBugDownload(json: string, filename: string, browser: BugDownloadEnvironment): string {
+export function beginJsonDownload(json: string, filename: string, browser: BugDownloadEnvironment): string {
   const url = browser.createObjectURL(new Blob([json], { type: "application/json" }));
   let anchor: ReturnType<BugDownloadEnvironment["createAnchor"]> | null = null;
   let handedOff = false;

@@ -3,7 +3,7 @@
   "original_zip_sha256": "054cecc80f4fb77fac57db7b01adf509b7f47d472d70524eb7b5648e839e956b",
   "repository": "saihaanmohammed120-cell/Mend",
   "branch": "main",
-  "observed_parent_sha": "88a0383e1677005cb501e509412d195fef7043a1",
+  "observed_parent_sha": "676e9b297e1a330003756b3d2ecf7424df2b0ebc",
   "publication_status": "Publication readback and CI results are recorded separately for the exact Git commit",
   "live_provider_calls": "not authorized; none performed",
   "original_file_count": 420,
@@ -22,48 +22,39 @@
     "unredacted newly generated local logs"
   ],
   "secret_scan": "No matches for selected high-confidence patterns; not a security certification",
-  "date": "2026-10-25",
-  "previous_payload_count": 537,
-  "packaged_file_count_excluding_manifest": 547,
+  "date": "2026-10-26",
+  "previous_payload_count": 547,
+  "packaged_file_count_excluding_manifest": 550,
   "database_changes": "on hold; none performed",
   "captured_evidence_export": {
     "trace_paths_redacted": true,
     "newlines": "LF",
     "original_artifact_sha256": "000b94542040f0e3fa5e15a758e4ad3ec007ed4c9caa8ceba874c825bccbceb0"
   },
-  "delivery": "In-app local tools, guides, source and evidence inspection",
+  "delivery": "Optional source-bound local review report downloads",
   "roadmap_complete": false,
   "site_changed": true,
   "site_version": 20,
   "site_source_commit": "ad15a2ee4925f19130b0ccf1ff91211c57f539a3",
   "updated_or_added_since_previous": [
-    "frontend/lib/local-review.ts",
-    "frontend/lib/receipt-contract.json",
+    "frontend/lib/bug-intake.ts",
+    "frontend/lib/local-report.ts",
+    "frontend/components/local-report.tsx",
     "frontend/components/local-tools.tsx",
-    "frontend/components/desk-shell.tsx",
-    "frontend/components/desk.css",
-    "frontend/app/tools/page.tsx",
-    "frontend/app/help/page.tsx",
-    "frontend/tests/local-review.test.ts",
+    "frontend/tests/local-report.test.ts",
     "frontend/e2e/local-tools.spec.ts",
-    "docs/IN_APP_WORKSPACE_2026_10_25.md",
-    "docs/JUDGE_GUIDE.md",
+    "frontend/app/help/page.tsx",
     "frontend/DESIGN.md",
-    "frontend/app/sample/page.tsx",
-    "frontend/components/bug-desk.tsx",
-    "frontend/components/landing.tsx",
-    "frontend/components/proof-roadmap.tsx",
-    "frontend/components/provenance-receipt.tsx",
-    "frontend/components/workbench.tsx",
-    "frontend/e2e/provenance.spec.ts"
+    "docs/IN_APP_WORKSPACE_2026_10_25.md"
   ],
   "verification": {
-    "local_frontend_unit_pass": 129,
-    "local_chrome_pass": 55,
+    "local_frontend_unit_pass": 130,
+    "local_chrome_full_pass": 55,
+    "final_download_cases_pass": 4,
     "local_lint": "0 errors; 2 inherited workstation warnings",
     "local_typecheck": "pass",
-    "local_build": "pass",
-    "backend_source": "unchanged; exact-commit CI recorded separately",
+    "local_build": "passed through production browser setup",
+    "backend_source": "unchanged",
     "linux_ci": "recorded separately for exact commit"
   },
   "files": [
@@ -1679,9 +1670,9 @@
     },
     {
       "path": "docs/IN_APP_WORKSPACE_2026_10_25.md",
-      "bytes": 4073,
-      "sha256": "2c3eac6665305234960e0fa2fe8e8b5ef3cbe4d2109b1050a7e3c690993be9ab",
-      "git_blob_sha": "1781a29e1db4966e1379d97a6ba01b2a58ead8d2",
+      "bytes": 4681,
+      "sha256": "bd8779f3414606e8b31a2579e1b0048f73c12be12c96d8d1feffc4d55f3cf35a",
+      "git_blob_sha": "b324ced90c665fe5ad84d397ef9d61b44e37d337",
       "encoding": "utf-8"
     },
     {
@@ -2904,9 +2895,9 @@
     },
     {
       "path": "frontend/DESIGN.md",
-      "bytes": 18203,
-      "sha256": "2da72f0e4bcb26700766b362d35f60f41d7bbf3899500aec7bfcd14c3363c5a9",
-      "git_blob_sha": "f42180643e42f58404b1d047e572bad2978adbfb",
+      "bytes": 18970,
+      "sha256": "2a47fd86d5d67f1cb35c554ad9ab0adcab5a6a42f4919253bcea19da35047baa",
+      "git_blob_sha": "7f9ead37f7afb1aa6745f026b6c9e7ba5024d59c",
       "encoding": "utf-8"
     },
     {
@@ -2953,9 +2944,9 @@
     },
     {
       "path": "frontend/app/help/page.tsx",
-      "bytes": 7055,
-      "sha256": "10c81bdcc3d792e49b3e6ac460a6fda0ac1c0cbf63557b66414fcb4ee3af509c",
-      "git_blob_sha": "dd104e42dc37f7da57076f02a7d219b40af32f41",
+      "bytes": 7441,
+      "sha256": "2eff241b09f8b3308194fb7a218d39a2d610c375b95e5a8764155a83de1a9755",
+      "git_blob_sha": "b9600fe32e3d9d8e7aba93318ec6ca138747907a",
       "encoding": "utf-8"
     },
     {
@@ -3078,10 +3069,17 @@
       "encoding": "utf-8"
     },
     {
+      "path": "frontend/components/local-report.tsx",
+      "bytes": 2005,
+      "sha256": "36e184c77f0465b31254399f3ced6066285538e263a666b10588f0df6aae1e91",
+      "git_blob_sha": "7265662f47c0782144cddff63efea552f8360022",
+      "encoding": "utf-8"
+    },
+    {
       "path": "frontend/components/local-tools.tsx",
-      "bytes": 16403,
-      "sha256": "a60c826af7a65afe82dde4ee7c3a5a4b54f7528aabf85bc82fbd5473de4c7564",
-      "git_blob_sha": "88f2ce1a0477f25480f7293e5ad26650fe6f8271",
+      "bytes": 16908,
+      "sha256": "d2e03a5577677d30631c3441454c539cae74999de88bd614853e64b89739da64",
+      "git_blob_sha": "b06fe5a582ea7e00edf6e1f9029e99cdf43ebd4f",
       "encoding": "utf-8"
     },
     {
@@ -3219,9 +3217,9 @@
     },
     {
       "path": "frontend/e2e/local-tools.spec.ts",
-      "bytes": 10613,
-      "sha256": "d2ba4b6e6850c36ee9a06ec4ed4ac60a65b5026b387110697c7413100a798c97",
-      "git_blob_sha": "76e8c9d19070971f30e4d3682c0743004fdaf169",
+      "bytes": 12833,
+      "sha256": "0601d62602a32d87046d4094dbeb48fa85adac112fcc5bf24c340100662ac56d",
+      "git_blob_sha": "c8515fbfc15e13453dc88439d5cc8e4bd7b2e369",
       "encoding": "utf-8"
     },
     {
@@ -3303,10 +3301,10 @@
     },
     {
       "path": "frontend/lib/bug-intake.ts",
-      "bytes": 9098,
-      "sha256": "c0c3b89b31ce6443c55182e8e7e2d0c1a7515bd0d620ddaae1f0fd216077dc66",
-      "encoding": "utf-8",
-      "git_blob_sha": "78c6b255cc79e893f1dac54fd4dc94f0c65e39c0"
+      "bytes": 9108,
+      "sha256": "3784948e06ca7e7b86cb0b4312bdc973abd53ced4ede6cfa42d4df30dd5cd547",
+      "git_blob_sha": "50c3252d30473a305c74fecfe732fbae4110201e",
+      "encoding": "utf-8"
     },
     {
       "path": "frontend/lib/captured-example.json",
@@ -3349,6 +3347,13 @@
       "sha256": "7e47d5c19de752e7198cddcf71d3bcaf159d02cdc43f57478715c910c3a3667f",
       "encoding": "utf-8",
       "git_blob_sha": "f836fd1457e584d86aa8c7591fa7903ba20f034d"
+    },
+    {
+      "path": "frontend/lib/local-report.ts",
+      "bytes": 1887,
+      "sha256": "45ff254f00d259b4078fbc6e606f8a355d07a6588973694d0e2f89a007f81178",
+      "git_blob_sha": "078b379248fce315f72545a49e7546ada22ae488",
+      "encoding": "utf-8"
     },
     {
       "path": "frontend/lib/local-review.ts",
@@ -3747,6 +3752,13 @@
       "bytes": 13443,
       "sha256": "5a1b1bbf6d8736dc24c0823efc50b119eb6a331ab9277b6f3366454969abceb1",
       "git_blob_sha": "540b50c27edef2cba003d47318650e7d197deca1",
+      "encoding": "utf-8"
+    },
+    {
+      "path": "frontend/tests/local-report.test.ts",
+      "bytes": 1808,
+      "sha256": "ef46b354fc9b5ca455bf79b368ed0d1440e9a89eb65b5a2b34675397442f3eee",
+      "git_blob_sha": "12224ff410c7ede139538a8f91e847af715ef42b",
       "encoding": "utf-8"
     },
     {
