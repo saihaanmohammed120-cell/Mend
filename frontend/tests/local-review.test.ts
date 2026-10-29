@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { parseLocalJson, sourceFiles, sourceHash, changedSpan, compareRepository, previewPolicy, inspectReceipt, sha256, canonicalJson } from "../lib/local-review";
+import { parseLocalJson, sourceFiles, sourceHash, changedSpan, compareRepository, previewPolicy, inspectReceipt, sha256, canonicalJson, readSourceMapFile, MAX_JSON_BYTES } from "../lib/local-review";
 import contract from "../lib/receipt-contract.json";
 import capture from "../lib/captured-example.json";
 import provenance from "../lib/captured-provenance.json";
@@ -23,6 +23,20 @@ test("Local JSON rejects duplicate/escaped keys, malformed Unicode, unsafe numbe
 });
 test("Source maps reject path aliases, traversal, devices, non-text and byte overflow", () => {
   for (const files of [{ "../x.py": "x" }, { "C:/x.py": "x" }, { "CON.py": "x" }, { "x.py": "\0" }, { "x.py": "\ud800" }, { "a.py": "x", "A.py": "y" }, { "x.py": "🌿".repeat(50_001) }, { "x.py": 3 }]) assert.throws(() => sourceFiles(files));
+});
+test("Source-map file import retains nested paths and exact source bytes, rejecting invalid files before replacement", async () => {
+  const sources = { "app/value.py": "\uFEFF# café 🌿\r\nx = 1\r\n", "tests/test_value.py": "# protected\n" };
+  const selected = new File(["\uFEFF", JSON.stringify(sources)], "files.json", { type: "application/json" });
+  const imported = await readSourceMapFile(selected);
+  assert.deepEqual(imported, sources);
+  assert.equal(await sourceHash(imported), await sourceHash(sources));
+  for (const text of ['{"app/value.py":"x","app/\\u0076alue.py":"y"}', '{"../value.py":"x"}', '{"schema_version":1,"files":{}}', '{"value.py":"\\ud800"}', '{"value.py":"' + "a".repeat(200_001) + '"}']) {
+    await assert.rejects(readSourceMapFile(new File([text], "invalid.json")));
+  }
+  await assert.rejects(readSourceMapFile(new File([new Uint8Array([0xff])], "invalid.json")));
+  let read = false;
+  await assert.rejects(readSourceMapFile({ size: MAX_JSON_BYTES + 1, arrayBuffer: async () => { read = true; return new ArrayBuffer(0); } } as File), /exceeds/);
+  assert.equal(read, false);
 });
 test("Repository comparison detects protected edits, path changes and exact source spans without execution", async () => {
   const review = await compareRepository(original, candidate, ["test_csv_tools.py"]);

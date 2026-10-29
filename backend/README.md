@@ -1,10 +1,12 @@
 # Mend — code, checked and repaired
 
+**Current hosted boundary, 29 October 2026:** the public Render service is deployed in explicit setup-only mode (health liveness available, readiness blocked); its existence does not establish authentication, database operations or execution. The Vercel app exposes that real setup status. Both provider and hosted-database holds remain. The latest source wires the [task inference cap](docs/TASK_BUDGET_CONFIGURATION.md) and verifies locked runtime versions in CI; see [current scope and evidence](../docs/DELIVERY_2026_10_29.md). Earlier checkpoints below retain their original dates and are historical where superseded.
+
 **Backend continuation, 24 October 2026:** the Next proxy now exposes authenticated stateless bug-contract preparation. A default-off database write setting enforces the existing hold before transport. New checks exercise production Next → real Uvicorn/FastAPI with fixture identity; CI adds a disposable PostgreSQL migration/rollback fixture. Hosted startup still needs the private Supabase server key; no hosted backend or live repair is implied. See [behavior, checks and Render configuration](../docs/BACKEND_INTEGRATION_2026_10_24.md) and the exact-commit Actions result.
 
 Mend is a bounded self-healing coding agent for the **Coding and Agentic Engineering** track of the Nebius × NVIDIA hackathon. A frozen Python task contract defines editable source, protected checks, and approved commands. The intended live loop generates code with an NVIDIA Nemotron 3 model through Nebius Token Factory, runs an isolated Nebius Job, repairs a failed check up to three times, and delivers a verified receipt plus the tested source bundle.
 
-**Status: database schema and real local backend write verified; provider execution remains blocked.** The Paper and Proof website separates a simulated `/sample` route from actual captured local CSV checks and an unsigned standards-based provenance document. Neither establishes provider execution. This repository does not turn that animation into proof of live inference or execution. Phase 2 applied the actual Supabase migrations and verified a rollback-only SQL/RPC/RLS probe. No cloud deployment, paid resource provisioning, provider cancellation measurement, or live receipt is claimed.
+**Historical Phase 2 status (17 October 2026): database schema and real local backend write verified; provider execution remained blocked.** The Paper and Proof website separates a simulated `/sample` route from actual captured local CSV checks and an unsigned standards-based provenance document. Neither establishes provider execution. This repository does not turn that animation into proof of live inference or execution. Phase 2 applied the actual Supabase migrations and verified a rollback-only SQL/RPC/RLS probe. No cloud deployment, paid resource provisioning, provider cancellation measurement, or live receipt is claimed.
 
 For database initialization without Nebius credentials, set `MEND_MODE=database_only` and keep `MEND_LIVE_ENABLED=false`. This mode uses the real Supabase repository for draft/contract operations, has no model or runner, and blocks Start and worker processes. It requires private Supabase server credentials; browser API startup additionally requires the inherited real Auth, HTTPS-origin and session-seal configuration. It is not provider release readiness. See [Phase 2 checkpoint](../docs/PHASE2_DATABASE_INITIALIZATION.md).
 
@@ -24,15 +26,22 @@ For database initialization without Nebius credentials, set `MEND_MODE=database_
 
 ## Local verification
 
-Python 3.11+ is required. Core tests use the standard library; cryptography is required for authentication tests. FastAPI and uvicorn are declared runtime dependencies. In an environment with package-network access:
+Python 3.11+ is required; the production runtime lock targets Python 3.12/Linux x86-64. Core tests use the standard library; cryptography is required for authentication tests. FastAPI and uvicorn are declared runtime dependencies. To verify the production dependency set in a fresh Python 3.12 environment with package-network access, run from `backend`:
 
 ```bash
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install '.[test]'
+python -m pip install --require-hashes -r requirements.runtime.lock
+python scripts/verify_runtime_lock.py --constraints > .venv/runtime-constraints.txt
+python -m pip install --no-build-isolation -c .venv/runtime-constraints.txt '.[test]'
+python -m pip check
+python scripts/verify_runtime_lock.py
+python scripts/verify_http_runtime.py
 python -m unittest discover -s tests -v
 python scripts/local_rehearsal.py
 ```
+
+CI uses this same hashed runtime install and version gate for the full backend/HTTP suites and the frontend-to-backend chain. Test extras resolve under exported exact runtime constraints, so installing HTTPX cannot replace a production dependency. The verifier rejects unsupported, unpinned, unhashed or duplicate lock entries and fails if any installed runtime version differs. Keep its parser aligned with this lock's pinned SHA-256 format when regenerating dependencies; no lock update is implied by a CI change. The PostgreSQL migration/rollback/team fixture remains a separate disposable CI service.
 
 The rehearsal uses dependency-injected adapters and a `local_test` store. Generated programs are not executed on the host. Its receipt is explicitly non-live and must never be presented as a successful Nebius execution. Tests containing PostgreSQL/framework prerequisites report skips when unavailable; skips are not passes. Browser bridge regressions run with `node --test web/mend-client.test.cjs` and TypeScript 5.9.3 on PATH. Detailed actual output is recorded in `docs/agent-handoffs`, with final integrated output retained by the release report.
 

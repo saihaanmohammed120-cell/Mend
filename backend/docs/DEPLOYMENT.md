@@ -88,7 +88,7 @@ A separately reviewed fixed trusted probe may use `MEND_SPIKE_IMAGE` and `MEND_S
 
 ## Audit corrections and retry boundaries
 
-`MEND_TASK_COST_CAP` is required by the optional provider spike and must be configured from an explicit spending decision; the environment example leaves it blank. It is not an invented default price or an automatic grant to use paid resources.
+`MEND_TASK_COST_CAP` supplies the assembled `TaskService` inference-reservation cap and, separately, the optional standalone provider spike's inference-reservation cap. Choose a positive finite amount through an explicit spending decision, in the same currency as the configured inference prices; the environment example leaves it blank. Missing or blank configuration blocks nonfixture service inference and prevents a live spike from starting. Neither consumer bounds runner/Cloud fees or account spending. This configuration does not lift the live release block or the provider/database holds. See [task budget configuration](TASK_BUDGET_CONFIGURATION.md) for validation and reservation behavior.
 
 The Docker context ignore file excludes private env files, databases, keys, logs, private artifacts/evidence and Git/dependency caches before uploading the build context. Keep the server-only environment injection boundary unchanged.
 

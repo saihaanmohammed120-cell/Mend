@@ -1,3 +1,7 @@
+## Source-map file import, 29 October 2026
+
+The local review desk keeps its existing Paper and Proof framed-sheet layout, fonts, colors and controls. Original, candidate and receipt source inputs now offer a labeled local JSON map picker alongside paste and Python file selection. JSON preserves relative folder paths and exact source strings; Python selection still uses filenames. Limits remain 20 files and 200,000 UTF-8 source bytes, with a separate 3,000,000-byte JSON transport bound. No new assets, animation, storage, upload or execution is introduced. Invalid input preserves current text and retires the previous review. Browser validation covers desktop/mobile, keyboard/focus, no API requests and containment; current execution evidence is recorded separately from historical sections below.
+
 # Mend application screens
 
 ## Hosted setup connection, 26 October 2026

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import math
 import os
 import ipaddress
 import re
@@ -64,10 +65,19 @@ class Settings:
     max_repairs: int = 3
     max_tokens: int = 30000
     max_body_bytes: int = 65536
+    max_task_cost: float | None = None
 
     def __post_init__(self):
         if type(self.database_writes_enabled) is not bool:
             raise MendError('invalid_configuration', 'Database write setting must be a boolean.', 503)
+        try:
+            valid_cap = self.max_task_cost is None or (
+                type(self.max_task_cost) in (int, float)
+                and math.isfinite(self.max_task_cost) and self.max_task_cost > 0)
+        except OverflowError:
+            valid_cap = False
+        if not valid_cap:
+            raise MendError('invalid_configuration', 'Task cost cap must be finite and positive.', 503)
         # Browser Origin serialization has no path/default HTTPS port and uses
         # canonical host casing. Direct construction and environment loading
         # must produce the same exact CORS/CSRF allowlist.
@@ -90,6 +100,13 @@ class Settings:
                 or e.get('MEND_LIVE_ENABLED', 'false') not in ('true', 'false')
                 or e.get('MEND_DATABASE_WRITES_ENABLED', 'false') not in ('true', 'false')):
             raise MendError('invalid_configuration', 'Mode and live release settings are invalid.', 503)
+        cost_cap = e.get('MEND_TASK_COST_CAP', '')
+        try:
+            if not isinstance(cost_cap, str) or len(cost_cap) > 128:
+                raise ValueError()
+            max_task_cost = None if cost_cap == '' else float(cost_cap)
+        except (ValueError, OverflowError):
+            raise MendError('invalid_configuration', 'Task cost cap must be a bounded positive number.', 503) from None
         return cls(mode=mode, public_origin=origin, allowed_origins=origins,
                    supabase_url=e.get('SUPABASE_URL', ''),
                    supabase_service_role_key=e.get('SUPABASE_SERVICE_ROLE_KEY', ''),
@@ -100,6 +117,7 @@ class Settings:
                    nebius_iam_token=e.get('NEBIUS_IAM_TOKEN', ''),
                    nebius_project_id=e.get('NEBIUS_PROJECT_ID', ''),
                    runner_image_digest=e.get('MEND_RUNNER_IMAGE_DIGEST', ''),
+                   max_task_cost=max_task_cost,
                    live_enabled=e.get('MEND_LIVE_ENABLED', 'false') == 'true',
                    database_writes_enabled=e.get('MEND_DATABASE_WRITES_ENABLED', 'false') == 'true')
 

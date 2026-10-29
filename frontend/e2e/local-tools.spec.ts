@@ -130,6 +130,154 @@ test("File selectors read exact local bytes, protect tests, reject duplicate JSO
   expect(failures).toEqual([]);
 });
 
+for (const width of [390, 1440]) test(`Source-map files preserve nested paths and reject invalid replacements locally at ${width}px`, async ({ page }) => {
+  const failures = await keepLocal(page);
+  await page.setViewportSize({ width, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/tools");
+  const original = { "app/value.py": "\uFEFF# café 🌿\r\nx = 1\r\n", "tests/test_value.py": "# protected\n" };
+  const candidate = { ...original, "app/value.py": "\uFEFF# café 🌿\r\nx = 2\r\n" };
+  const file = (sources: unknown) => ({ name: "source-map.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(sources)) });
+  await page.getByLabel("Select original snapshot json source-map file", { exact: true }).setInputFiles(file(original));
+  await expect(page.getByLabel("Original snapshot JSON", { exact: true })).toHaveValue(JSON.stringify(original, null, 2));
+  await page.getByLabel("Select candidate snapshot json source-map file", { exact: true }).setInputFiles(file(candidate));
+  await expect(page.getByLabel("Candidate snapshot JSON", { exact: true })).toHaveValue(JSON.stringify(candidate, null, 2));
+  await page.getByRole("button", { name: "Compare snapshots", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  const result = page.getByTestId("repository-result");
+  await expect(result).toBeFocused();
+  await expect(result).toContainText("app/value.py");
+  await expect(result).toContainText("Locked paths: tests/test_value.py");
+  await expect(result).toContainText("Comparison ready · not executed");
+  await page.getByLabel("Select candidate snapshot json source-map file", { exact: true }).setInputFiles({ name: "duplicate.json", mimeType: "application/json", buffer: Buffer.from('{"app/value.py":"x","app/\\u0076alue.py":"y"}') });
+  await expect(page.getByRole("main").getByRole("alert")).toBeFocused();
+  await expect(page.getByRole("main").getByRole("alert")).toContainText("Duplicate JSON keys");
+  await expect(page.getByLabel("Candidate snapshot JSON", { exact: true })).toHaveValue(JSON.stringify(candidate, null, 2));
+  await expect(result).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Save repository review JSON" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Compare snapshots", exact: true }).click();
+  await expect(result).toBeVisible();
+  await page.getByRole("navigation", { name: "Local review tools" }).getByRole("link", { name: /Receipt inspection/ }).click();
+  await page.getByLabel("Select receipt JSON file", { exact: true }).setInputFiles(file(provenance));
+  await expect(page.getByLabel("Receipt or SLSA JSON", { exact: true })).toHaveValue(/in-toto/);
+  await page.getByLabel("Select receipt source map json source-map file", { exact: true }).setInputFiles(file({ "csv_tools.py": capture.after_source }));
+  await expect(page.getByLabel("Receipt source map JSON", { exact: true })).toHaveValue(/csv_tools.py/);
+  await page.getByRole("button", { name: "Inspect record and source" }).click();
+  await expect(page.getByTestId("receipt-result").locator("dl>div").filter({ hasText: "Selected source binding" }).locator("dd")).toHaveText("Consistent");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(failures).toEqual([]);
+});
+
+test("Deferred imports keep independent targets, reject replaced reads and stay cleared", async ({ page }) => {
+  const failures = await keepLocal(page);
+  await page.goto("/tools");
+  await page.evaluate(() => {
+    const read = File.prototype.arrayBuffer;
+    const pending = new Map<string, { resume(): void; done: Promise<void> }>();
+    const state = window as typeof window & { deferredImports: { waiting(name: string): boolean; release(name: string): Promise<void> } };
+    state.deferredImports = {
+      waiting: name => pending.has(name),
+      release: async name => {
+        const deferred = pending.get(name); if (!deferred) throw new Error(`No deferred read: ${name}`);
+        pending.delete(name); deferred.resume();
+        await deferred.done;
+        await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+      },
+    };
+    File.prototype.arrayBuffer = async function () {
+      if (!this.name.startsWith("slow-")) return read.call(this);
+      let resume!: () => void, finish!: () => void;
+      const paused = new Promise<void>(resolve => { resume = resolve; }), done = new Promise<void>(resolve => { finish = resolve; });
+      pending.set(this.name, { resume, done });
+      await paused;
+      try { return await read.call(this); } finally { finish(); }
+    };
+  });
+  const selected = (name: string, sources: unknown) => ({ name, mimeType: "application/json", buffer: Buffer.from(JSON.stringify(sources)) });
+  const original = { "app.py": "x=1\n", "test_app.py": "# protected\n" }, candidate = { ...original, "app.py": "x=2\n" };
+  const originalInput = page.getByLabel("Original snapshot JSON", { exact: true }), candidateInput = page.getByLabel("Candidate snapshot JSON", { exact: true });
+  const originalPicker = page.getByLabel("Select original snapshot json source-map file", { exact: true }), candidatePicker = page.getByLabel("Select candidate snapshot json source-map file", { exact: true });
+  const waiting = (name: string) => page.waitForFunction(name => (window as typeof window & { deferredImports: { waiting(name: string): boolean } }).deferredImports.waiting(name), name);
+  const release = (name: string) => page.evaluate(name => (window as typeof window & { deferredImports: { release(name: string): Promise<void> } }).deferredImports.release(name), name);
+
+  await originalPicker.setInputFiles(selected("slow-original.json", original));
+  await waiting("slow-original.json");
+  await candidatePicker.setInputFiles(selected("slow-candidate.json", candidate));
+  await waiting("slow-candidate.json");
+  await release("slow-candidate.json");
+  await expect(candidateInput).toHaveValue(JSON.stringify(candidate, null, 2));
+  await expect(page.getByRole("button", { name: "Compare snapshots", exact: true })).toBeDisabled();
+  await release("slow-original.json");
+  await expect(originalInput).toHaveValue(JSON.stringify(original, null, 2));
+  await page.getByRole("button", { name: "Compare snapshots", exact: true }).click();
+  await expect(page.getByTestId("repository-result")).toContainText("Comparison ready · not executed");
+
+  await originalPicker.setInputFiles(selected("slow-invalid-original.json", { "../app.py": "x" }));
+  await waiting("slow-invalid-original.json");
+  await candidatePicker.setInputFiles(selected("slow-valid-candidate.json", candidate));
+  await waiting("slow-valid-candidate.json");
+  await release("slow-invalid-original.json");
+  await expect(page.getByRole("main").getByRole("alert")).toContainText("Original snapshot: Use relative .py paths");
+  await expect(originalInput).toHaveValue(JSON.stringify(original, null, 2));
+  await release("slow-valid-candidate.json");
+  await expect(candidateInput).toHaveValue(JSON.stringify(candidate, null, 2));
+  await expect(page.getByRole("main").getByRole("alert")).toContainText("Original snapshot: Use relative .py paths");
+  await expect(originalInput).toHaveValue(JSON.stringify(original, null, 2));
+  await originalInput.fill(JSON.stringify(original));
+  await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
+
+  await originalPicker.setInputFiles(selected("slow-replaced.json", candidate));
+  await waiting("slow-replaced.json");
+  await originalPicker.setInputFiles(selected("replacement.json", original));
+  await expect(originalInput).toHaveValue(JSON.stringify(original, null, 2));
+  await page.getByRole("button", { name: "Compare snapshots", exact: true }).click();
+  await expect(page.getByTestId("repository-result")).toBeVisible();
+  await release("slow-replaced.json");
+  await expect(originalInput).toHaveValue(JSON.stringify(original, null, 2));
+  await expect(page.getByTestId("repository-result")).toBeVisible();
+
+  await originalPicker.setInputFiles(selected("slow-edited.json", candidate));
+  await waiting("slow-edited.json");
+  await originalInput.fill(JSON.stringify(original));
+  await release("slow-edited.json");
+  await expect(originalInput).toHaveValue(JSON.stringify(original));
+
+  await originalPicker.setInputFiles(selected("slow-cleared-original.json", original));
+  await waiting("slow-cleared-original.json");
+  await candidatePicker.setInputFiles(selected("slow-cleared-candidate.json", candidate));
+  await waiting("slow-cleared-candidate.json");
+  await page.getByRole("button", { name: "Clear local inputs" }).click();
+  await release("slow-cleared-candidate.json");
+  await release("slow-cleared-original.json");
+  await expect(originalInput).toHaveValue("");
+  await expect(candidateInput).toHaveValue("");
+  await expect(page.getByTestId("repository-result")).toHaveCount(0);
+  await expect(page.getByRole("status")).toContainText("Local only");
+
+  await originalPicker.setInputFiles(selected("slow-captured.json", original));
+  await waiting("slow-captured.json");
+  await page.getByRole("button", { name: "Load captured comparison" }).click();
+  await page.getByRole("button", { name: "Compare snapshots", exact: true }).click();
+  await expect(page.getByTestId("repository-result")).toContainText("csv_tools.py");
+  await release("slow-captured.json");
+  await expect(originalInput).toHaveValue(/csv_tools.py/);
+  await expect(page.getByTestId("repository-result")).toContainText("csv_tools.py");
+
+  await page.getByRole("navigation", { name: "Local review tools" }).getByRole("link", { name: /Receipt inspection/ }).click();
+  await page.getByLabel("Select receipt JSON file", { exact: true }).setInputFiles(selected("slow-record.json", provenance));
+  await waiting("slow-record.json");
+  await page.getByLabel("Select receipt source map json source-map file", { exact: true }).setInputFiles(selected("slow-sources.json", { "csv_tools.py": capture.after_source }));
+  await waiting("slow-sources.json");
+  await release("slow-sources.json");
+  await expect(page.getByLabel("Receipt source map JSON", { exact: true })).toHaveValue(/csv_tools.py/);
+  await expect(page.getByRole("button", { name: "Inspect record and source" })).toBeDisabled();
+  await release("slow-record.json");
+  await expect(page.getByLabel("Receipt or SLSA JSON", { exact: true })).toHaveValue(/in-toto/);
+  await page.getByRole("button", { name: "Inspect record and source" }).click();
+  await expect(page.getByTestId("receipt-result").locator("dl>div").filter({ hasText: "Selected source binding" }).locator("dd")).toHaveText("Consistent");
+  expect(failures).toEqual([]);
+});
+
 test("Guides, roadmap, source and license navigation stay inside Mend", async ({ page }) => {
   const failures = await keepLocal(page);
   await page.goto("/");

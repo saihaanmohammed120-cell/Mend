@@ -212,6 +212,7 @@ def build_runtime(env=None):
                 release_enabled=False, report_reader=None)
             resources.append(runner)
             config = {"live_enabled": False}
+        config["max_task_cost"] = settings.max_task_cost
         return Runtime(settings, TaskService(store, model, runner, artifacts, config), resources)
     except BaseException:
         for resource in reversed(resources):

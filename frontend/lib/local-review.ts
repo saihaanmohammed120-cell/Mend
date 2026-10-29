@@ -157,6 +157,13 @@ export async function inspectReceipt(value: unknown, sources: Files | null): Pro
     sourceMatches: computedSnapshot === null ? null : computedSnapshot === receipt.snapshot_sha256, protectedMatches, expectedSnapshot: String(receipt.snapshot_sha256), computedSnapshot, files: [] };
 }
 
+/** Validate selected source-map JSON before replacing any current source input. */
+export async function readSourceMapFile(file: File): Promise<Files> {
+  requireValue(file.size <= MAX_JSON_BYTES, "Source-map JSON exceeds 3,000,000 bytes.");
+  const text = new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer());
+  return sourceFiles(parseLocalJson(text));
+}
+
 /** File selection stays local and exact UTF-8 bytes (including a BOM) are preserved. */
 export async function readSourceFiles(files: File[]): Promise<Files> {
   requireValue(files.length >= 1 && files.length <= MAX_FILES && files.reduce((sum, file) => sum + file.size, 0) <= MAX_SOURCE_BYTES, "Select 1–20 Python files, up to 200,000 bytes combined.");

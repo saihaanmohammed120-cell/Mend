@@ -39,7 +39,9 @@ Inject credentials through the operator's environment or deployment secret manag
 | `MEND_TASK_COST_CAP` | Positive cap on conservative inference reservations, in the same configured price currency |
 | `NEBIUS_MODEL_ID` | Optional explicit NVIDIA Nemotron identifier; default `nvidia/nemotron-3-super-120b-a12b` |
 
-The inference monetary cap is not a verified bound on Cloud compute charges. Job pricing remains unmeasured; the operator must review the selected Cloud resources/billing before authorizing a paid probe. Unknown cancellation may require manual provider cleanup and must not be treated as a stopped resource.
+The standalone spike applies `MEND_TASK_COST_CAP` to its own accumulated inference reservations. Application assembly separately forwards the same setting to the per-task `TaskService` inference gate; neither consumer shares an account-wide spending ledger. Missing or blank configuration prevents a live spike from starting and blocks nonfixture service inference. See [task budget configuration](TASK_BUDGET_CONFIGURATION.md).
+
+The inference monetary cap is not a verified bound on Cloud compute charges. Job pricing remains unmeasured; the operator must review the selected Cloud resources/billing before authorizing a paid probe. Unknown cancellation may require manual provider cleanup and must not be treated as a stopped resource. Configuring the cap does not lift the live release block or the provider/database holds.
 
 ```bash
 python3 scripts/phase1_spike.py --run-live --generation-calls 1 --output var/phase1-observations.json

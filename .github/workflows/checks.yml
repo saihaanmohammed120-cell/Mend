@@ -107,7 +107,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install '.[test]'
+      - name: Install the production runtime lock and constrained test extras
+        run: |
+          python -m pip install --require-hashes -r requirements.runtime.lock
+          python scripts/verify_runtime_lock.py --constraints > "$RUNNER_TEMP/mend-runtime-constraints.txt"
+          python -m pip install --no-build-isolation -c "$RUNNER_TEMP/mend-runtime-constraints.txt" '.[test]'
+          python -m pip check
+          python scripts/verify_runtime_lock.py
       - run: python -m compileall -q mend scripts tests
       - run: python scripts/verify_http_runtime.py
       - run: python -m unittest discover -s tests -v
@@ -142,7 +148,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install './backend[test]'
-        working-directory: .
+      - name: Install the same locked backend runtime for the frontend HTTP chain
+        run: |
+          python -m pip install --require-hashes -r requirements.runtime.lock
+          python scripts/verify_runtime_lock.py --constraints > "$RUNNER_TEMP/mend-runtime-constraints.txt"
+          python -m pip install --no-build-isolation -c "$RUNNER_TEMP/mend-runtime-constraints.txt" '.[test]'
+          python -m pip check
+          python scripts/verify_runtime_lock.py
+        working-directory: backend
       - name: Production frontend to real HTTP backend chain (fixture identity)
         run: MEND_TEST_PYTHON="$(command -v python)" node scripts/verify-backend-chain.mjs
