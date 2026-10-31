@@ -1,10 +1,10 @@
-# Mend — Code that runs. Proof to keep.
+# Mend: Code that runs. Proof to keep.
 
-Mend is an AI code-repair agent: it fixes bugs in your code and hands you a verification receipt showing exactly what changed and why — so you never have to blindly trust the AI.
+Mend is an AI code-repair agent: it fixes bugs in your code and hands you a verification receipt showing exactly what changed and why, so you never have to blindly trust the AI.
 
 **[Live demo](https://mend-smasher.vercel.app/)** · Python · FastAPI · Next.js · 150+ tests · CI
 
-I originally built Mend aiming for the Nebius × NVIDIA hackathon, but didn't submit in the end — so it became my portfolio centerpiece instead. The Nebius Token Factory client code is real (it calls NVIDIA's Nemotron model with credential redaction and no blind retries); live provider runs stay behind safety gates by design.
+I originally built Mend aiming for the Nebius × NVIDIA hackathon, but didn't submit in the end, so it became my portfolio centerpiece instead. The Nebius Token Factory client code is real (it calls NVIDIA's Nemotron model with credential redaction and no blind retries); live provider runs stay behind safety gates by design.
 
 ## Current status (31 Oct 2026)
 
