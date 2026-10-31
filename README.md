@@ -4,6 +4,8 @@ Mend is an AI code-repair agent: it fixes bugs in your code and hands you a veri
 
 **[Live demo](https://mend-smasher.vercel.app/)** · Python · FastAPI · Next.js · 150+ tests · CI
 
+![Mend homepage](docs/demo.png)
+
 I originally built Mend aiming for the Nebius × NVIDIA hackathon, but didn't submit in the end, so it became my portfolio centerpiece instead. The Nebius Token Factory client code is real (it calls NVIDIA's Nemotron model with credential redaction and no blind retries); live provider runs stay behind safety gates by design.
 
 ## Current status (31 Oct 2026)
