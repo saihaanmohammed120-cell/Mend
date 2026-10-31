@@ -1,6 +1,21 @@
-# Mend — Paper and Proof
+# Mend — Code that runs. Proof to keep.
 
-Mend is a bounded self-healing coding agent for the Coding and Agentic Engineering hackathon track. The intended workflow writes Python with NVIDIA Nemotron 3 through Nebius Token Factory, runs protected checks in an isolated Nebius job, repairs failed checks up to three times, and delivers code with a source-linked receipt.
+Mend is an AI code-repair agent: it fixes bugs in your code and hands you a verification receipt showing exactly what changed and why — so you never have to blindly trust the AI.
+
+**[Live demo](https://mend-smasher.vercel.app/)** · Python · FastAPI · Next.js · 150+ tests · CI
+
+I originally built Mend aiming for the Nebius × NVIDIA hackathon, but didn't submit in the end — so it became my portfolio centerpiece instead. The Nebius Token Factory client code is real (it calls NVIDIA's Nemotron model with credential redaction and no blind retries); live provider runs stay behind safety gates by design.
+
+## Current status (31 Oct 2026)
+
+- Full source is public in this repository (MIT), CI running
+- Live demo site working: [mend-smasher.vercel.app](https://mend-smasher.vercel.app/)
+- 150+ tests, offline verification receipts, local bug-review flow
+- Live Nebius/Nemotron execution stays gated behind safety checks — by design, not by accident
+
+## Build history
+
+The dated log below is the real day-by-day build history — kept as-is for transparency.
 
 ## Current integration status
 
