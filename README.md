@@ -2,7 +2,7 @@
 
 Mend is an AI code-repair agent: it fixes bugs in your code and hands you a verification receipt showing exactly what changed and why, so you never have to blindly trust the AI.
 
-**[Live demo](https://mend-smasher.vercel.app/)** · Python · FastAPI · Next.js · 150+ tests · CI
+**[Live demo](https://mend-smasher.vercel.app/)** · Python · FastAPI · Next.js · 550+ tests · CI
 
 ![Mend homepage](docs/demo.png)
 
@@ -12,7 +12,7 @@ I originally built Mend aiming for the Nebius × NVIDIA hackathon, but didn't su
 
 - Full source is public in this repository (MIT), CI running
 - Live demo site working: [mend-smasher.vercel.app](https://mend-smasher.vercel.app/)
-- 150+ tests, offline verification receipts, local bug-review flow
+- 550+ tests, offline verification receipts, local bug-review flow
 - Live Nebius/Nemotron execution stays gated behind safety checks — by design, not by accident
 
 ## Build history
