@@ -43,7 +43,7 @@ export function CapturedWorkspace() {
   return <section id="worked-example" tabIndex={-1} className="proof-capture" aria-labelledby="capture-title" data-evidence-source="captured_local">
     <div className="proof-toolbar"><span><span className="proof-status-dot" aria-hidden="true" />CAPTURED EXAMPLE / PYTHON</span><span className="proof-status">Actual local output</span></div>
     <div className="proof-run-heading"><div><p className="proof-small-label">CSV CLEANER / EMPTY INPUT</p><h2 id="capture-title">One failure. A checked fix.</h2></div><FileCheck2 size={30} strokeWidth={1.35} aria-hidden="true" /></div>
-    <p className="proof-capture-note"><a className="proof-evidence-tag" href="#evidence-local">Captured local,</s>{" "}sn>Same checks, before and after the guard.</span></p>
+    <p className="proof-capture-note"><a className="proof-evidence-tag" href="#evidence-local">Captured local,</a>{" "}<span>same checks, before and after the guard.</span></p>
     <dl className="proof-case-summary" aria-label="Captured result summary">
       <div><dt>BEFORE / EXIT {capture.before.returncode}</dt><dd>{capture.before.checks.passed} / {capture.before.checks.total} passed</dd></div>
       <div className="proof-case-passed"><dt>AFTER / EXIT {capture.after.returncode}</dt><dd><Check size={14} aria-hidden="true" />{capture.after.checks.passed} of {capture.after.checks.total} checks passed</dd></div>
