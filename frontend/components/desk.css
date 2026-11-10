@@ -23,5 +23,9 @@
 @media(max-width:800px){.mend-local-desk{padding:20px 24px 32px}.desk-header{align-items:flex-start}.desk-header nav{gap:4px 18px;justify-content:flex-end}.desk-fields{grid-template-columns:1fr;gap:0}.desk-title h1{font-size:32px}.desk-sheet{padding:24px}.desk-result dl{grid-template-columns:1fr}}
 @media(max-width:520px){.mend-local-desk{padding-inline:20px}.desk-header{display:block}.desk-header nav{justify-content:flex-start;margin-top:16px;font-size:15px}.desk-title{padding-top:28px}.desk-title p{font-size:17px}.desk-sheet{padding:20px}.desk-tool-nav{display:grid;grid-template-columns:1fr;width:100%;gap:8px}.desk-tool-nav a{justify-content:flex-start}.desk-actions{align-items:stretch;flex-direction:column;gap:12px}.desk-footer{gap:8px 20px}.desk-footer p{width:100%}}
 
+/* Astryx TopNav centre links: JSX collapses the whitespace between the
+   links, so without a gap they render as one unbroken phrase (0px between
+   them). Flex + gap restores the spacing the native header had. */
+.desk-nav-links{display:inline-flex;gap:24px;align-items:center}
 /* Responsive: Astryx TopNav has no mobile collapse, so hide the centre links below 768px. Brand stays; the same links exist in the footer. */
 @media(max-width:767px){.desk-nav-links{display:none}}
