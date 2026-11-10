@@ -7,6 +7,32 @@ import * as intake from "../lib/bug-intake";
 import capture from "../lib/captured-example.json";
 
 type Element = { type: unknown; props: Record<string, unknown> };
+
+// Astryx components render as plain host elements in this harness: the
+// component's own props (label, value, onChange, activeStep) stay visible
+// to the tree walkers, while Astryx's internal styling never runs.
+const ASTRYX_MODULES: Record<string, Record<string, string>> = {
+  Button: { Button: "button" },
+  Text: { Text: "span" },
+  Heading: { Heading: "h2" },
+  Badge: { Badge: "span" },
+  TextArea: { TextArea: "textarea" },
+  TextInput: { TextInput: "input" },
+  Link: { Link: "a" },
+  Card: { Card: "div" },
+  Grid: { Grid: "div" },
+  Stepper: { Stepper: "ol", Step: "li" },
+  TabList: { TabList: "div", Tab: "button", TabMenu: "div" },
+  Banner: { Banner: "div" },
+  CodeBlock: { CodeBlock: "pre" },
+  Collapsible: { Collapsible: "details" },
+  TopNav: { TopNav: "header" },
+};
+const astryxStub = (id: string) => {
+  if (!id.startsWith("@astryxdesign/core/")) return null;
+  return ASTRYX_MODULES[id.slice("@astryxdesign/core/".length)] ?? null;
+};
+
 function caseWorkflow() {
   const cells: unknown[] = [];
   let index = 0, tree: Element, focused = "", clicked = 0, removed = 0, failDownload = false;
@@ -41,6 +67,8 @@ function caseWorkflow() {
       if (id === "../lib/captured-example.json") return { default: capture };
       if (id === "./repair-case.css") return {};
       if (id === "lucide-react") return new Proxy({}, { get: (_, key) => key });
+      const astryx = astryxStub(id);
+      if (astryx) return astryx;
       throw new Error(`Unexpected dependency ${id}`);
     },
   });
@@ -50,11 +78,29 @@ function caseWorkflow() {
     const element = node as Element;
     return [element, ...nodes(element.props.children ?? null)];
   };
-  const text = (node: unknown): string => Array.isArray(node) ? node.map(text).join("") : typeof node === "string" ? node : node && typeof node === "object" && "props" in node ? text((node as Element).props.children) : "";
+  // Astryx puts visible text in props (label, code, description, trigger)
+  // instead of children; include those so the tree text stays complete.
+  const text = (node: unknown): string => {
+    if (Array.isArray(node)) return node.map(text).join("");
+    if (typeof node === "string") return node;
+    if (node && typeof node === "object" && "props" in node) {
+      const props = (node as Element).props;
+      const extra = [props.label, props.code, props.description].filter(value => typeof value === "string").join("");
+      return extra + text(props.trigger ?? null) + text(props.children ?? null);
+    }
+    return "";
+  };
   function render() {
     index = 0; effects = []; tree = exports.RepairCase!();
     for (const node of nodes()) {
-      const target = { focus: () => { focused = String(node.props.name ?? node.props.className); }, closest: () => node.props.name === "source" ? sourceDisclosure : null };
+      // Astryx fields carry the field name in their id (…-errorMessage), not
+      // in a name prop; derive it the same way for focus and disclosure.
+      const fieldName = (props: Record<string, unknown>) => {
+        if (typeof props.name === "string") return props.name;
+        if (typeof props.id === "string" && props.id.includes("-")) return props.id.slice(props.id.lastIndexOf("-") + 1);
+        return undefined;
+      };
+      const target = { focus: () => { focused = String(fieldName(node.props) ?? node.props.className); }, closest: () => fieldName(node.props) === "source" ? sourceDisclosure : null };
       if (typeof node.props.ref === "function") node.props.ref(target);
       else if (node.props.ref && typeof node.props.ref === "object") (node.props.ref as { current: unknown }).current = target;
     }
@@ -65,8 +111,12 @@ function caseWorkflow() {
     assert.ok(found, `Missing button ${label}`); return found;
   }
   function change(name: keyof intake.BugDraft, value: string) {
-    const field = nodes().find(node => node.props.name === name)!;
-    (field.props.onChange as (event: unknown) => void)({ target: { value } }); render();
+    const field = nodes().find(node => node.props.name === name || (typeof node.props.id === "string" && node.props.id.endsWith(`-${name}`)))!;
+    const onChange = field.props.onChange as (arg: unknown) => void;
+    // Native inputs take an event; Astryx fields take the value directly.
+    if (field.props.name !== undefined) onChange({ target: { value } });
+    else onChange(value);
+    render();
   }
   function click(label: string) { (button(label).props.onClick as () => void)(); render(); }
   function prepare() { click("Review the case"); }
@@ -124,7 +174,7 @@ test("Undo clear restores exact draft inputs without restoring an old validated 
   assert.ok(h.text().includes("Undo clear"));
   assert.ok(!h.text().includes("Download case JSON"));
   h.click("Undo clear");
-  const source = h.nodes().find(node => node.props.name === "source")!;
+  const source = h.nodes().find(node => node.props.name === "source" || (typeof node.props.id === "string" && node.props.id.endsWith("-source")))!;
   assert.equal(source.props.value, capture.before_source);
   assert.ok(!h.text().includes("Download case JSON"));
   h.prepare(); h.click("Download case JSON");
@@ -148,10 +198,14 @@ test("New input retires undo and field-specific review actions target the intend
 test("Case progress advances only after validation and a requested download, then resets after edits", () => {
   const h = caseWorkflow();
   const expectStep = (number: number, states: string[]) => {
-    const steps = h.nodes().filter(node => node.props["data-step-state"]);
-    assert.deepEqual(steps.map(node => node.props["data-step-state"]), states);
-    assert.equal(steps.filter(node => node.props["aria-current"] === "step").length, 1);
-    assert.equal(steps[number].props["aria-current"], "step");
+    // The Astryx Stepper reports progress through its activeStep prop and
+    // each Step's status prop, not through data-step-state / aria-current.
+    const stepper = h.nodes().find(node => typeof node.props.activeStep === "number")!;
+    const activeStep = stepper.props.activeStep as number;
+    const steps = h.nodes().filter(node => node.type === "li" && typeof node.props.step === "number");
+    assert.deepEqual(steps.map(node => (node.props.step as number) < activeStep ? "complete" : (node.props.step as number) === activeStep ? "current" : "upcoming"), states);
+    assert.equal(activeStep, number);
+    assert.equal(steps.filter(node => (node.props.step as number) < activeStep).every(node => node.props.status === "success"), true);
   };
   expectStep(0, ["current", "upcoming", "upcoming"]);
   h.prepare(); expectStep(0, ["current", "upcoming", "upcoming"]);

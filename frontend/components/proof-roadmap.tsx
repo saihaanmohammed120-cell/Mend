@@ -1,3 +1,5 @@
+import { Heading } from "@astryxdesign/core/Heading";
+import { Text } from "@astryxdesign/core/Text";
 import "./proof-roadmap.css";
 
 const roadmap = [
@@ -11,8 +13,8 @@ const roadmap = [
 
 export function ProofRoadmap() {
   return <section className="mend-proof-roadmap" aria-labelledby="roadmap-title" data-testid="proof-roadmap">
-    <div className="proof-roadmap-overview"><div className="proof-roadmap-heading"><div><p className="proof-roadmap-eyebrow">IMPLEMENTATION STATUS / ROADMAP</p><h2 id="roadmap-title">What’s ready. What’s next.</h2></div><span className="proof-roadmap-label">Available tools and remaining work</span></div>
-    <p className="proof-roadmap-intro">Each capability has its own status and source guide. Local tools and tested backend code do not establish a live repair or a hosted team workflow.</p>
-    </div><div className="proof-roadmap-grid">{roadmap.map(([title, status, description, guide, label], index) => <article key={title}><span className="proof-roadmap-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p className="proof-roadmap-status">{status}</p><p>{description}</p><a className="proof-roadmap-guide" href={`/help#${guide}`}>{label}<span aria-hidden="true"> →</span></a></div></article>)}</div>
+    <div className="proof-roadmap-overview"><div className="proof-roadmap-heading"><div><Text type="label">IMPLEMENTATION STATUS / ROADMAP</Text><div id="roadmap-title"><Heading level={2}>What’s ready. What’s next.</Heading></div></div><Text type="label">Available tools and remaining work</Text></div>
+    <Text type="body" as="p">Each capability has its own status and source guide. Local tools and tested backend code do not establish a live repair or a hosted team workflow.</Text>
+    </div><div className="proof-roadmap-grid">{roadmap.map(([title, status, description, guide, label], index) => <article key={title}><span className="proof-roadmap-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><div><Heading level={3}>{title}</Heading><Text type="label">{status}</Text><Text type="body" as="p">{description}</Text><a className="proof-roadmap-guide" href={`/help#${guide}`}>{label}<span aria-hidden="true"> →</span></a></div></article>)}</div>
   </section>;
 }

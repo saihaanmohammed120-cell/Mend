@@ -8,6 +8,11 @@ import { entrance, SPRING } from "@/lib/motion";
 import { createPointerTilt } from "@/lib/pointer-tilt";
 import { createSampleBundle, numberedSource, SAMPLE_CHECKS, SAMPLE_PHASES } from "@/lib/sample-repair";
 
+import { Text } from "@astryxdesign/core/Text";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Badge } from "@astryxdesign/core/Badge";
+import { Stepper, Step } from "@astryxdesign/core/Stepper";
+
 const subscribeHydration = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
@@ -118,25 +123,23 @@ export function RepairPreview() {
         <div className="p-5 sm:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="label text-muted">A repair, in plain sight</p>
-              <h2 id="repair-preview-heading" className="mt-2 text-[18px] font-semibold leading-6 tracking-tight">Demo — simulated evidence</h2>
+              <Text type="label" color="secondary">A repair, in plain sight</Text>
+              <div id="repair-preview-heading"><Heading level={2}>Demo — simulated evidence</Heading></div>
             </div>
-            <span className="label rounded-full border border-ink px-3 py-2">Sample only</span>
+            <Badge variant="neutral" label="Sample only" />
           </div>
-          <p className="mt-4 text-sm leading-5 text-muted">A fixed Python example, played silently. No model call, isolated job, or live test is running.</p>
-          <ol className="my-6 grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Illustrated repair sequence">
+          <Text type="body" as="p">A fixed Python example, played silently. No model call, isolated job, or live test is running.</Text>
+          <Stepper activeStep={phaseIndex} label="Illustrated repair sequence">
             {SAMPLE_PHASES.map((step, index) => (
-              <li key={step.label} aria-current={index === phaseIndex ? "step" : undefined} className={`rounded-xl border px-3 py-3 text-xs leading-[18px] ${index === phaseIndex ? "border-ink bg-paper font-semibold" : "border-line bg-white text-muted"}`}>
-                <span className="mb-1 block font-mono">0{index + 1}</span>{step.label}
-              </li>
+              <Step key={step.label} step={index} label={step.label} status={index < phaseIndex ? "success" : undefined} />
             ))}
-          </ol>
+          </Stepper>
           <div aria-live={playing ? "off" : "polite"} aria-atomic="true" className="min-h-[84px]">
             <p data-testid="repair-phase" data-phase={["fail", "patch", "pass", "receipt"][phaseIndex]} className="flex items-center gap-2 text-base font-semibold leading-6">
               {phaseIndex === 0 ? <X size={18} aria-hidden="true" /> : phaseIndex === 1 ? <Wrench size={18} aria-hidden="true" /> : phaseIndex === 2 ? <Check size={18} aria-hidden="true" /> : <Receipt size={18} aria-hidden="true" />}
               {phase.label}
             </p>
-            <p className="mt-2 text-sm leading-5 text-muted">{phase.detail}</p>
+            <Text type="body" as="p">{phase.detail}</Text>
           </div>
           <div className="grid min-w-0 gap-5 sm:grid-cols-2">
           <div className="min-w-0">
@@ -146,7 +149,7 @@ export function RepairPreview() {
               <span>Illustrative source</span>
             </div>
             <pre data-testid="sample-code" aria-label={phaseIndex === 0 ? "Original sample Python source" : "Patched sample Python source"} className="overflow-x-auto py-4 font-mono text-[13px] leading-6"><code>{numberedSource(phase.code).map((line) => (
-              <span key={line.number} data-line={line.number} className={`flex min-w-max pr-4 ${phaseIndex > 0 && (line.number === 2 || line.number === 3) ? "bg-paper" : ""}`}><span aria-hidden="true" className="w-10 shrink-0 select-none pr-3 text-right text-muted">{line.number}</span><span>{line.text || "\u00a0"}</span>{"\n"}</span>
+              <span key={line.number} data-line={line.number} className={`flex min-w-max pr-4 ${phaseIndex > 0 && (line.number === 2 || line.number === 3) ? "bg-paper" : ""}`}><span aria-hidden="true" className="w-10 shrink-0 select-none pr-3 text-right text-muted">{line.number}</span><span>{line.text || " "}</span>{"\n"}</span>
             ))}</code></pre>
           </div>
           <pre className="mt-4 min-h-[92px] overflow-x-auto rounded-xl border border-line bg-white p-4 font-mono text-xs leading-[18px] text-muted" aria-label="Illustrative output">{phase.log}</pre>

@@ -6,6 +6,32 @@ import vm from "node:vm";
 import ts from "typescript";
 
 type Element = { type: unknown; props: Record<string, unknown> };
+
+// Astryx components render as plain host elements in this harness: the
+// component's own props (label, value, onChange, activeStep) stay visible
+// to the tree walkers, while Astryx's internal styling never runs.
+const ASTRYX_MODULES: Record<string, Record<string, string>> = {
+  Button: { Button: "button" },
+  Text: { Text: "span" },
+  Heading: { Heading: "h2" },
+  Badge: { Badge: "span" },
+  TextArea: { TextArea: "textarea" },
+  TextInput: { TextInput: "input" },
+  Link: { Link: "a" },
+  Card: { Card: "div" },
+  Grid: { Grid: "div" },
+  Stepper: { Stepper: "ol", Step: "li" },
+  TabList: { TabList: "div", Tab: "button", TabMenu: "div" },
+  Banner: { Banner: "div" },
+  CodeBlock: { CodeBlock: "pre" },
+  Collapsible: { Collapsible: "details" },
+  TopNav: { TopNav: "header" },
+};
+const astryxStub = (id: string) => {
+  if (!id.startsWith("@astryxdesign/core/")) return null;
+  return ASTRYX_MODULES[id.slice("@astryxdesign/core/".length)] ?? null;
+};
+
 function commandControl(writeText?: (value: string) => Promise<void>) {
   const cells: unknown[] = [];
   let index = 0, mounted = false, tree: Element, stateWrites = 0;
@@ -22,6 +48,8 @@ function commandControl(writeText?: (value: string) => Promise<void>) {
     if (id === "react/jsx-runtime") return { jsx: (type: unknown, props: Record<string, unknown>) => ({ type, props }), jsxs: (type: unknown, props: Record<string, unknown>) => ({ type, props }) };
     if (id === "./command-copy.css") return {};
     if (id === "lucide-react") return new Proxy({}, { get: (_, key) => key });
+    const astryx = astryxStub(id);
+    if (astryx) return astryx;
     throw new Error(`Unexpected dependency ${id}`);
   } });
   const nodes = (node: unknown = tree): Element[] => {

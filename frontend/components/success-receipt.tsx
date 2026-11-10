@@ -2,9 +2,13 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useMotionPreference } from "@/lib/use-motion-preference";
-import { ArrowDownToLine, Check, Printer } from "lucide-react";
+import { ArrowDownToLine, Printer } from "lucide-react";
 import type { Receipt } from "@/lib/protocol";
 import { entrance, SPRING } from "@/lib/motion";
+import { Button } from "@astryxdesign/core/Button";
+import { Text } from "@astryxdesign/core/Text";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Badge } from "@astryxdesign/core/Badge";
 
 export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
   const reduced = useMotionPreference();
@@ -30,13 +34,8 @@ export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
       className="mt-9"
     >
       <div className="mb-4 flex items-center justify-between">
-        <h2
-          id="receipt-heading"
-          className="label inline-flex items-center gap-2"
-        >
-          <Printer size={16} aria-hidden="true" /> The paper trail
-        </h2>
-        <span className="label text-muted">Keep the evidence</span>
+        <div id="receipt-heading"><Heading level={2}><Printer size={16} aria-hidden="true" /> The paper trail</Heading></div>
+        <Text type="label" color="secondary">Keep the evidence</Text>
       </div>
       <div className="panel relative p-4 pb-0">
         {/* Slot sits in front of the clipped paper; paper emerges downward from here. */}
@@ -60,18 +59,14 @@ export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
               >
                 <div className="mb-5 flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-lg font-semibold leading-6 tracking-tight">
-                      mend / receipt
-                    </p>
-                    <p className="mt-1 text-xs leading-[18px] text-muted">
+                    <Text type="body" as="p">mend / receipt</Text>
+                    <Text type="supporting">
                       {receipt.source === "demo"
                         ? "Sample evidence only"
                         : "Verification record"}
-                    </p>
+                    </Text>
                   </div>
-                  <span className="rounded-full border-2 border-forest p-1.5 text-forest">
-                    <Check size={18} aria-hidden="true" />
-                  </span>
+                  <Badge variant="success" label="Passed" />
                 </div>
                 <div className="border-y border-dashed border-ink/40 py-4 text-sm leading-5">
                   <div className="flex justify-between gap-3">
@@ -89,26 +84,18 @@ export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
                     <strong>{(receipt.duration_ms / 1000).toFixed(1)}s</strong>
                   </div>
                 </div>
-                <p className="mt-4 text-sm font-medium leading-5 text-forest">
-                  PASSED THE LISTED CHECKS
-                </p>
-                <p className="mt-3 break-all text-xs leading-[18px] text-muted">
+                <Badge variant="success" label="PASSED THE LISTED CHECKS" />
+                <Text type="code" as="p">
                   JOB {receipt.job_id}
                   <br />
                   SHA256 {receipt.snapshot_sha256}
-                </p>
-                <p className="mt-4 text-xs leading-[18px]">
+                </Text>
+                <Text type="supporting" as="p">
                   {receipt.source === "demo"
                     ? "Illustrative sample. No real provider execution or database storage."
                     : "Covers the checks recorded by the backend. Review the change before using it."}
-                </p>
-                <button
-                  type="button"
-                  onClick={download}
-                  className="focus-ring mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl border border-ink bg-paper px-3 text-sm font-medium leading-5"
-                >
-                  <ArrowDownToLine size={15} aria-hidden="true" /> Download JSON
-                </button>
+                </Text>
+                <Button label="Download JSON" variant="secondary" onClick={download} icon={<ArrowDownToLine size={15} aria-hidden="true" />} />
               </motion.article>
             ) : (
               <motion.div
@@ -118,12 +105,8 @@ export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
                 animate="visible"
                 className="flex min-h-36 flex-col items-center justify-center px-3 pb-6 pt-9 text-center"
               >
-                <p className="text-sm font-bold">
-                  A receipt is worth waiting for.
-                </p>
-                <p className="mt-2 max-w-xs text-sm leading-5 text-muted">
-                  It prints only after the listed checks pass.
-                </p>
+                <Text type="body" as="p">A receipt is worth waiting for.</Text>
+                <Text type="body" as="p">It prints only after the listed checks pass.</Text>
               </motion.div>
             )}
           </AnimatePresence>

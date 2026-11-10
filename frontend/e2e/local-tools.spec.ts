@@ -119,7 +119,7 @@ test("File selectors read exact local bytes, protect tests, reject duplicate JSO
   });
   await page.getByRole("button", { name: "Compare snapshots", exact: true }).click();
   await page.getByLabel("Candidate snapshot JSON", { exact: true }).fill("{}");
-  await expect(page.getByRole("status")).toContainText("Local only");
+  await expect(page.getByRole("status").filter({ hasText: "Local only" })).toContainText("Local only");
   await page.waitForTimeout(350);
   await expect(page.getByTestId("repository-result")).toHaveCount(0);
   await page.goto("/tools#receipt");
@@ -252,7 +252,7 @@ test("Deferred imports keep independent targets, reject replaced reads and stay 
   await expect(originalInput).toHaveValue("");
   await expect(candidateInput).toHaveValue("");
   await expect(page.getByTestId("repository-result")).toHaveCount(0);
-  await expect(page.getByRole("status")).toContainText("Local only");
+  await expect(page.getByRole("status").filter({ hasText: "Local only" })).toContainText("Local only");
 
   await originalPicker.setInputFiles(selected("slow-captured.json", original));
   await waiting("slow-captured.json");

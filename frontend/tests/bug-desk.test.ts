@@ -7,6 +7,32 @@ import * as intake from "../lib/bug-intake";
 import capture from "../lib/captured-example.json";
 
 type Element = { type: unknown; props: Record<string, unknown> };
+
+// Astryx components render as plain host elements in this harness: the
+// component's own props (label, value, onChange, activeStep) stay visible
+// to the tree walkers, while Astryx's internal styling never runs.
+const ASTRYX_MODULES: Record<string, Record<string, string>> = {
+  Button: { Button: "button" },
+  Text: { Text: "span" },
+  Heading: { Heading: "h2" },
+  Badge: { Badge: "span" },
+  TextArea: { TextArea: "textarea" },
+  TextInput: { TextInput: "input" },
+  Link: { Link: "a" },
+  Card: { Card: "div" },
+  Grid: { Grid: "div" },
+  Stepper: { Stepper: "ol", Step: "li" },
+  TabList: { TabList: "div", Tab: "button", TabMenu: "div" },
+  Banner: { Banner: "div" },
+  CodeBlock: { CodeBlock: "pre" },
+  Collapsible: { Collapsible: "details" },
+  TopNav: { TopNav: "header" },
+};
+const astryxStub = (id: string) => {
+  if (!id.startsWith("@astryxdesign/core/")) return null;
+  return ASTRYX_MODULES[id.slice("@astryxdesign/core/".length)] ?? null;
+};
+
 const identity: intake.BugInputIdentity = { intake_json_sha256: "b".repeat(64), original_source_sha256: "a".repeat(64) };
 
 function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInputIdentity> = async () => identity) {
@@ -46,7 +72,10 @@ function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInput
       if (id === "../lib/captured-example.json") return { default: capture };
       if (id === "./bug-desk.css") return {};
       if (id === "next/link") return { default: "a" };
+      if (id === "./mend-link") return { MendLink: "a", MendButtonLink: "a" };
       if (id === "lucide-react") return new Proxy({}, { get: (_, key) => key });
+      const astryx = astryxStub(id);
+      if (astryx) return astryx;
       throw new Error(`Unexpected dependency ${id}`);
     },
   });
@@ -56,11 +85,29 @@ function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInput
     const element = node as Element;
     return [element, ...nodes(element.props.children ?? null)];
   };
-  const text = (node: unknown): string => Array.isArray(node) ? node.map(text).join("") : typeof node === "string" || typeof node === "number" ? String(node) : node && typeof node === "object" && "props" in node ? text((node as Element).props.children) : "";
+  // Astryx puts visible text in props (label, code, description, trigger)
+  // instead of children; include those so the tree text stays complete.
+  const text = (node: unknown): string => {
+    if (Array.isArray(node)) return node.map(text).join("");
+    if (typeof node === "string" || typeof node === "number") return String(node);
+    if (node && typeof node === "object" && "props" in node) {
+      const props = (node as Element).props;
+      const extra = [props.label, props.code, props.description].filter(value => typeof value === "string").join("");
+      return extra + text(props.trigger ?? null) + text(props.children ?? null);
+    }
+    return "";
+  };
   function render() {
     index = 0; effects = []; tree = exports.BugDesk!();
     for (const node of nodes()) {
-      const target = { focus: () => { focused = String(node.props.name ?? node.props.className); }, closest: () => ["source", "filePath", "protectedTestSource", "requiredCheckIds", "targetCheckId"].includes(String(node.props.name)) ? disclosure : null };
+      // Astryx fields carry the field name in their id (bug-errorMessage),
+      // not in a name prop; derive it the same way for focus and disclosure.
+      const fieldName = (props: Record<string, unknown>) => {
+        if (typeof props.name === "string") return props.name;
+        if (typeof props.id === "string" && props.id.includes("-")) return props.id.slice(props.id.lastIndexOf("-") + 1);
+        return undefined;
+      };
+      const target = { focus: () => { focused = String(fieldName(node.props) ?? node.props.className); }, closest: () => ["source", "filePath", "protectedTestSource", "requiredCheckIds", "targetCheckId"].includes(String(fieldName(node.props))) ? disclosure : null };
       if (typeof node.props.ref === "function") node.props.ref(target);
       else if (node.props.ref && typeof node.props.ref === "object") (node.props.ref as { current: unknown }).current = target;
     }
@@ -71,8 +118,12 @@ function desk(fingerprint: (packet: intake.BugIntake) => Promise<intake.BugInput
     assert.ok(button, `Missing button ${label}`); (button.props.onClick as () => void)(); render();
   }
   function change(field: keyof intake.BugReviewDraft, value: string) {
-    const node = nodes().find(node => node.props.name === field)!;
-    (node.props.onChange as (event: unknown) => void)({ target: { value } }); render();
+    const node = nodes().find(node => node.props.name === field || (typeof node.props.id === "string" && node.props.id.endsWith(`-${field}`)))!;
+    const onChange = node.props.onChange as (arg: unknown) => void;
+    // Native inputs take an event; Astryx fields take the value directly.
+    if (node.props.name !== undefined) onChange({ target: { value } });
+    else onChange(value);
+    render();
   }
   render();
   return { nodes, click, change, blobs, revoked, timers, disclosure, text: () => text(tree),

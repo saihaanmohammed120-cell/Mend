@@ -6,6 +6,32 @@ import ts from "typescript";
 import * as sample from "../lib/sample-repair";
 
 type Element = { type: unknown; props: Record<string, unknown> };
+
+// Astryx components render as plain host elements in this harness: the
+// component's own props (label, value, onChange, activeStep) stay visible
+// to the tree walkers, while Astryx's internal styling never runs.
+const ASTRYX_MODULES: Record<string, Record<string, string>> = {
+  Button: { Button: "button" },
+  Text: { Text: "span" },
+  Heading: { Heading: "h2" },
+  Badge: { Badge: "span" },
+  TextArea: { TextArea: "textarea" },
+  TextInput: { TextInput: "input" },
+  Link: { Link: "a" },
+  Card: { Card: "div" },
+  Grid: { Grid: "div" },
+  Stepper: { Stepper: "ol", Step: "li" },
+  TabList: { TabList: "div", Tab: "button", TabMenu: "div" },
+  Banner: { Banner: "div" },
+  CodeBlock: { CodeBlock: "pre" },
+  Collapsible: { Collapsible: "details" },
+  TopNav: { TopNav: "header" },
+};
+const astryxStub = (id: string) => {
+  if (!id.startsWith("@astryxdesign/core/")) return null;
+  return ASTRYX_MODULES[id.slice("@astryxdesign/core/".length)] ?? null;
+};
+
 const DRAFT_KEY = "mend:task-draft:v1";
 
 /** Runs the actual component with deterministic hook/storage boundaries, not a browser renderer. */
@@ -80,6 +106,9 @@ function component(name: "RepairPreview" | "Workbench", saved = new Map<string, 
       if (id === "./attempt-timeline") return { AttemptTimeline: "AttemptTimeline" };
       if (id === "./trust-badge") return { TrustBadge: "TrustBadge" };
       if (id === "next/link") return { default: "a" };
+      if (id === "./mend-link") return { MendLink: "a", MendButtonLink: "a" };
+      const astryx = astryxStub(id);
+      if (astryx) return astryx;
       throw new Error(`Unexpected component dependency: ${id}`);
     },
   });
@@ -131,7 +160,7 @@ test("compact signed-in workspace restores the editor, while a saved task view k
 
 test("manual Next stays paused when the initially unknown motion preference resolves", () => {
   const h = component("RepairPreview"); h.setReduced(null); h.render(true);
-  const next = h.find(node => node.type === "button" && Array.isArray(node.props.children) && node.props.children.includes("Next step"));
+  const next = h.find(node => node.type === "button" && (node.props.label === "Next step" || (Array.isArray(node.props.children) && node.props.children.includes("Next step"))));
   (next.props.onClick as () => void)();
   h.setReduced(false); h.render(); h.commitEffects(); h.render();
   assert.equal(h.find(node => node.props["aria-label"] === "Play demo").type, "button");
@@ -158,7 +187,8 @@ test("draft hydration restores valid storage without overwriting it or issuing e
 test("draft edits persist and clear through events; oversized UTF-8 drafts do not restore", () => {
   const h = component("Workbench", new Map([[DRAFT_KEY, "😀".repeat(2001)]])); h.render(true);
   assert.equal(h.find(node => node.props.id === "task-prompt").props.value, "");
-  const change = (value: string) => { (h.find(node => node.props.id === "task-prompt").props.onChange as (event: unknown) => void)({ target: { value } }); h.render(); };
+  // The prompt is an Astryx TextArea now, so onChange takes the value directly.
+  const change = (value: string) => { (h.find(node => node.props.id === "task-prompt").props.onChange as (next: string) => void)(value); h.render(); };
   change("Updated task"); assert.equal(h.saved.get(DRAFT_KEY), "Updated task");
   const boundary = "😀".repeat(2000);
   change(boundary); assert.equal(h.saved.get(DRAFT_KEY), boundary);

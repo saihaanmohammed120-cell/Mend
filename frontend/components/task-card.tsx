@@ -11,9 +11,15 @@ import {
   Square,
   Wrench,
 } from "lucide-react";
-import { entrance, SPRING } from "@/lib/motion";
+import { entrance } from "@/lib/motion";
 import { STATUS_LABELS, type RunMode, type RunStatus } from "@/lib/protocol";
 import { createPointerTilt } from "@/lib/pointer-tilt";
+import { Button } from "@astryxdesign/core/Button";
+import { Text } from "@astryxdesign/core/Text";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Badge } from "@astryxdesign/core/Badge";
+import { TextArea } from "@astryxdesign/core/TextArea";
+import { Grid } from "@astryxdesign/core/Grid";
 
 export interface TaskCardProps {
   mode: RunMode;
@@ -42,6 +48,7 @@ export function TaskCard({
   const reduced = useMotionPreference();
   const [prompt, setPrompt] = useState(SAMPLE_PROMPT);
   const field = useRef<HTMLTextAreaElement>(null);
+  const form = useRef<HTMLFormElement>(null);
   const host = useRef<HTMLDivElement>(null);
   const surface = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -99,50 +106,21 @@ export function TaskCard({
         style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         className="panel relative"
       >
-        <form onSubmit={submit} aria-busy={busy} className="p-5 sm:p-8">
+        <form ref={form} onSubmit={submit} aria-busy={busy} className="p-5 sm:p-8">
           <div className="mb-7 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink bg-orange">
                 <FileCode2 size={22} aria-hidden="true" />
               </span>
               <div>
-                <p className="label text-muted">Your next good idea</p>
-                <h2 className="mt-1 text-[18px] font-semibold leading-6 tracking-tight">
-                  The task card
-                </h2>
+                <Text type="label" color="secondary">Your next good idea</Text>
+                <Heading level={2}>The task card</Heading>
               </div>
             </div>
-            <span className="label rounded-full border border-ink px-3 py-1.5">
-              01
-            </span>
+            <Badge variant="neutral" label="01" />
           </div>
 
-          <label
-            htmlFor="task-prompt"
-            className="mb-3 block text-[14px] font-medium leading-5"
-          >
-            What are we making?
-          </label>
-          <textarea
-            ref={field}
-            id="task-prompt"
-            name="prompt"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            maxLength={8000}
-            required
-            disabled={busy}
-            aria-describedby="task-help prompt-count"
-            rows={6}
-            onKeyDown={(e) => {
-              if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-                e.preventDefault();
-                e.currentTarget.form?.requestSubmit();
-              }
-            }}
-            className="focus-ring min-h-[186px] w-full resize-y rounded-xl border-2 border-control bg-white p-4 text-[16px] leading-6 placeholder:text-muted disabled:opacity-70"
-            placeholder="Describe the result, the edge cases, and what should pass."
-          />
+          <div onKeyDown={(e) => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); form.current?.requestSubmit(); } }}><TextArea ref={field} id="task-prompt" label="What are we making?" value={prompt} onChange={(value) => setPrompt(value.slice(0, 8000))} maxLength={8000} isRequired isDisabled={busy} aria-describedby="task-help prompt-count" rows={6} placeholder="Describe the result, the edge cases, and what should pass." /></div>
           <div className="mt-2 flex items-center justify-between gap-3 text-xs leading-[18px] text-muted">
             <span className="inline-flex items-center gap-1.5">
               <CornerDownLeft size={13} aria-hidden="true" /> Ctrl / ⌘ + Enter
@@ -158,11 +136,12 @@ export function TaskCard({
             aria-label="Task suggestions"
           >
             {SUGGESTIONS.map((suggestion, i) => (
-              <motion.button
+              <Button
                 key={suggestion}
-                type="button"
-                disabled={busy}
-                variants={entrance(reduced)}
+                label={suggestion}
+                variant="secondary"
+                size="sm"
+                isDisabled={busy}
                 onClick={() => {
                   setPrompt(
                     i === 0
@@ -173,69 +152,56 @@ export function TaskCard({
                   );
                   field.current?.focus();
                 }}
-                whileHover={reduced || busy ? undefined : { y: -2 }}
-                whileTap={reduced || busy ? undefined : { y: 1 }}
-                transition={SPRING}
-                className="focus-ring min-h-11 rounded-full border border-ink/60 bg-white px-3.5 text-sm font-medium leading-5 disabled:opacity-40"
-              >
-                {suggestion}
-              </motion.button>
+              />
             ))}
           </div>
 
           <div className="my-6 rounded-xl border border-line bg-paper/70 p-4">
             <div className="mb-3 flex items-center gap-2">
               <Wrench size={16} aria-hidden="true" />
-              <p className="label">The working agreement</p>
+              <Text type="label">The working agreement</Text>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-sm leading-5">
+            <Grid columns={3} gap={2}>
               <div>
-                <p className="font-bold">Python</p>
-                <p className="mt-1 text-muted">Sample scenario</p>
+                <Text type="body"><strong>Python</strong></Text>
+                <Text type="supporting">Sample scenario</Text>
               </div>
               <div>
-                <p className="font-bold">60 seconds</p>
-                <p className="mt-1 text-muted">Live job target</p>
+                <Text type="body"><strong>60 seconds</strong></Text>
+                <Text type="supporting">Live job target</Text>
               </div>
               <div>
-                <p className="font-bold">3 repairs</p>
-                <p className="mt-1 text-muted">Then hand back</p>
+                <Text type="body"><strong>3 repairs</strong></Text>
+                <Text type="supporting">Then hand back</Text>
               </div>
-            </div>
+            </Grid>
           </div>
 
-          <motion.button
+          <Button
             type="submit"
-            disabled={busy || !prompt.trim()}
-            whileHover={reduced || busy || !prompt.trim() ? undefined : { x: -2, y: -2 }}
-            whileTap={reduced || busy || !prompt.trim() ? undefined : { x: 2, y: 2 }}
-            transition={SPRING}
-            className="focus-ring flex min-h-14 w-full items-center justify-between rounded-xl border-2 border-ink bg-orange px-5 py-3.5 text-base font-medium leading-6 shadow-button disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <span>
-              {busy
-                ? STATUS_LABELS[status]
-                : mode === "demo"
-                  ? "Play sample run"
-                  : "Start task"}
-            </span>
-            <ArrowUpRight size={22} aria-hidden="true" />
-          </motion.button>
+            label={busy
+              ? STATUS_LABELS[status]
+              : mode === "demo"
+                ? "Play sample run"
+                : "Start task"}
+            variant="primary"
+            isDisabled={busy || !prompt.trim()}
+            icon={<ArrowUpRight size={22} aria-hidden="true" />}
+            width="100%"
+          />
           <p id="task-help" className="mt-4 text-sm leading-5 text-muted">
             {mode === "demo"
               ? "Sample mode plays a fixed repair scenario. Your prompt is not executed; no Nebius job or Supabase write occurs."
               : "Mend writes, runs, and repairs within the backend limits. You review the result before using it."}
           </p>
           {busy ? (
-            <motion.button
-              variants={entrance(reduced)}
-              type="button"
+            <Button
+              label={mode === "demo" ? "Stop sample" : status === "stopping" ? "Retry cancellation" : "Stop task"}
+              variant="secondary"
               onClick={() => void onStop()}
-              className="focus-ring mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-ink bg-white px-4 text-sm font-medium leading-5"
-            >
-              <Square size={13} aria-hidden="true" />{" "}
-              {mode === "demo" ? "Stop sample" : status === "stopping" ? "Retry cancellation" : "Stop task"}
-            </motion.button>
+              icon={<Square size={13} aria-hidden="true" />}
+              width="100%"
+            />
           ) : null}
         </form>
         <div className="flex items-center justify-between gap-3 rounded-b-workbench border-t-2 border-ink bg-paper px-5 py-3.5 sm:px-8">
