@@ -58,7 +58,7 @@ for (const width of [390, 1440]) {
       expect(packet.evidence).toEqual({ investigation: "not_run", execution: "not_run", regression: "not_generated" });
       expect(packet.schema_version).toBe(1);
       await expect(hashes.nth(1)).toHaveText(createHash("sha256").update(payload).digest("hex"));
-      await expect(desk.getByRole("status")).toContainText("No task was created and no checks ran.");
+      await expect(desk.getByRole("status").filter({ hasText: "No task was created and no checks ran." })).toContainText("No task was created and no checks ran.");
       await expect(desk.locator('.bug-steps [aria-current="step"]')).toContainText("Export");
       await desk.getByRole("button", { name: "Change expected behavior", exact: true }).click();
       await expect(page.locator("#bug-expectedBehavior")).toBeFocused();

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AstryxThemeProvider } from "../components/astryx-theme-provider";
 export const metadata: Metadata = {
   title: "Mend — Code that runs. Proof to keep.",
   metadataBase: new URL("https://mend-smasher.vercel.app"),
@@ -18,7 +19,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AstryxThemeProvider>{children}</AstryxThemeProvider>
+      </body>
     </html>
   );
 }

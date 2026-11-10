@@ -1,4 +1,7 @@
 import { useId } from "react";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Text } from "@astryxdesign/core/Text";
+import { Link } from "@astryxdesign/core/Link";
 import "./proof-flow.css";
 
 type FlowNodeProps = {
@@ -37,9 +40,9 @@ export function ProofFlow() {
   return (
     <section className="mend-proof-flow" id="flow" aria-labelledby={`${id}-flow-heading`}>
       <header className="proof-flow-heading">
-        <p className="proof-flow-eyebrow"><span aria-hidden="true" /> THE REPAIR LOOP</p>
-        <h2 id={`${id}-flow-heading`}>The flow, in four steps.</h2>
-        <p>A failed check sends the patch back through Run. A passing run leads to the receipt.</p>
+        <Text type="label"><span aria-hidden="true" /> THE REPAIR LOOP</Text>
+        <div id={`${id}-flow-heading`}><Heading level={2}>The flow, in four steps.</Heading></div>
+        <Text type="body" as="p">A failed check sends the patch back through Run. A passing run leads to the receipt.</Text>
       </header>
       <ol className="proof-flow-stages" aria-label="Four stages of the Mend workflow">
         {stages.map(([number, label]) => (
@@ -97,7 +100,7 @@ export function ProofFlow() {
           <FlowNode name="repair" label="Repair" detail="Up to 3 attempts" x={105} y={480} width={215} />
           <FlowNode name="receipt" label="Receipt" detail="Code + check results" x={105} y={620} width={215} />
         </svg>
-        <figcaption><a className="proof-evidence-tag" href="#evidence-nebius">Planned Nebius workflow · see legend</a></figcaption>
+        <figcaption><Link href="#evidence-nebius">Planned Nebius workflow · see legend</Link></figcaption>
       </figure>
     </section>
   );

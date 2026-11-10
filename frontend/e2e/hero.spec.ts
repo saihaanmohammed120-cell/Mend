@@ -60,9 +60,9 @@ for (const colorScheme of ["light", "dark"] as const) {
     await expect(hero.getByRole("tabpanel", { name: "Provenance", exact: true })).toContainText("Unsigned");
     await expect(hero.getByRole("link", { name: /Download in-toto provenance JSON/ })).toBeVisible();
     const integrity = hero.getByTestId("artifact-integrity");
-    await expect(integrity.getByRole("status")).toContainText("Not checked in this browser.");
+    await expect(integrity.getByRole("status").filter({ hasText: "Not checked in this browser." })).toContainText("Not checked in this browser.");
     await integrity.getByRole("button", { name: "Check file hashes", exact: true }).click();
-    await expect(integrity.getByRole("status")).toContainText("The fetched files match this build’s recorded hashes.");
+    await expect(integrity.getByRole("status").filter({ hasText: "The fetched files match this build’s recorded hashes." })).toContainText("The fetched files match this build’s recorded hashes.");
     await expect(integrity.locator('[data-integrity="match"]')).toHaveCount(4);
     await expect(integrity).toContainText("File consistency only.");
     await expect(page.locator("#evidence-provenance")).toContainText("Unsigned.");
@@ -109,7 +109,7 @@ test("Local case preparation preserves input, exports a packet and invalidates r
   await expect(currentStep).toContainText("Review");
   await expect(currentStep).toHaveAttribute("data-step-state", "current");
   await expect(local.locator('.case-steps [data-step-state="complete"]')).toHaveCount(1);
-  await expect(local.getByRole("status")).toContainText("Case prepared locally.");
+  await expect(local.getByRole("status").filter({ hasText: "Case prepared locally." })).toContainText("Case prepared locally.");
   const waiting = page.waitForEvent("download");
   await local.getByRole("button", { name: "Download case JSON", exact: true }).click();
   const download = await waiting;
@@ -117,11 +117,11 @@ test("Local case preparation preserves input, exports a packet and invalidates r
   await expect(currentStep).toContainText("Download");
   await expect(currentStep).toContainText("Requested");
   await expect(local.locator('.case-steps [data-step-state="complete"]')).toHaveCount(2);
-  await expect(local.getByRole("status")).toContainText("Download requested. No backend task was created");
+  await expect(local.getByRole("status").filter({ hasText: "Download requested. No backend task was created" })).toContainText("Download requested. No backend task was created");
   await local.locator('textarea[name="expectedBehavior"]').fill("A changed expected result");
   await expect(currentStep).toContainText("Describe");
   await expect(local.getByRole("button", { name: "Download case JSON", exact: true })).toHaveCount(0);
-  await expect(local.getByRole("status")).toContainText("The validated case will appear here.");
+  await expect(local.getByRole("status").filter({ hasText: "The validated case will appear here." })).toContainText("The validated case will appear here.");
   await local.getByRole("button", { name: "Clear fields", exact: true }).click();
   await local.getByRole("button", { name: "Undo clear", exact: true }).click();
   await expect(local.locator('textarea[name="expectedBehavior"]')).toHaveValue("A changed expected result");
@@ -162,7 +162,7 @@ test("Hash verification reports a changed file instead of a passing fingerprint"
   await page.getByRole("tab", { name: "Provenance", exact: true }).click();
   const integrity = page.getByTestId("artifact-integrity");
   await integrity.getByRole("button", { name: "Check file hashes", exact: true }).click();
-  await expect(integrity.getByRole("status")).toContainText("A file differs from this build’s recorded hash.");
+  await expect(integrity.getByRole("status").filter({ hasText: "A file differs from this build’s recorded hash." })).toContainText("A file differs from this build’s recorded hash.");
   await expect(integrity.locator('[data-integrity="mismatch"]')).toHaveCount(1);
-  await expect(integrity.getByRole("status")).not.toContainText("The fetched files match");
+  await expect(integrity.getByRole("status").filter({ hasText: "A file differs from this build’s recorded hash." })).not.toContainText("The fetched files match");
 });

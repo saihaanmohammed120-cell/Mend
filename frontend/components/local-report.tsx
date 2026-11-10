@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { beginJsonDownload } from "../lib/bug-intake";
 import type { LocalReport } from "../lib/local-report";
+import { Button } from "@astryxdesign/core/Button";
 
 export function LocalReportDownload({ report }: { report: LocalReport }) {
   const [status, setStatus] = useState<"idle" | "requested" | "failed">("idle");
@@ -21,7 +22,7 @@ export function LocalReportDownload({ report }: { report: LocalReport }) {
   }
   return <div className="desk-line" data-testid="local-report-download">
     <details><summary>Inspect local review report JSON</summary><pre tabIndex={0} aria-label={`${report.review} local review report JSON`}>{json}</pre></details>
-    <button type="button" className="desk-button" onClick={save}>Save {report.review} review JSON</button>
+    <Button label={`Save ${report.review} review JSON`} variant="secondary" onClick={save} />
     <p className="desk-note" role="status" aria-live="polite">{status === "failed" ? "Download could not start. Inspect or select the JSON above, or retry saving." : status === "requested" ? "Download requested. This local review is unsigned, unapproved and not execution evidence." : "Optional copy of the current review metadata and identities. Original/candidate source text and changed-span contents are excluded. This is not a backend receipt."}</p>
   </div>;
 }

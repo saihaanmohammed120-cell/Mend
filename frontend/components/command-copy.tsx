@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { Button } from "@astryxdesign/core/Button";
 import "./command-copy.css";
 
 export const CAPTURED_COMMAND = "python -m unittest -v test_csv_tools";
@@ -38,7 +39,7 @@ export function CommandCopy() {
   return <div className="mend-command-copy" data-testid="command-copy">
     <div className="command-copy-row">
       <input type="text" readOnly value={CAPTURED_COMMAND} aria-label="Reproduction command" aria-describedby={`${identity}-scope`} spellCheck={false} onFocus={event => event.currentTarget.select()} />
-      <button type="button" onClick={() => void copy()} disabled={state === "copying"} aria-label="Copy reproduction command">{state === "copied" ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}{state === "copying" ? "Copying…" : state === "copied" ? "Copied" : "Copy"}</button>
+      <Button label={state === "copying" ? "Copying…" : state === "copied" ? "Copied" : "Copy"} variant="secondary" onClick={() => void copy()} isDisabled={state === "copying"} icon={state === "copied" ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />} />
     </div>
     <p id={`${identity}-scope`} className="command-copy-status" role="status" aria-live="polite">{state === "failed" ? "Copy unavailable. Select the command and copy it manually." : state === "copying" ? "Waiting for clipboard permission." : state === "copied" ? "Command copied. No checks were run." : "Run from the extracted example folder. Copying does not execute it."}</p>
   </div>;

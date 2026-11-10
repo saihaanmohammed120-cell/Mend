@@ -72,8 +72,8 @@ for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ colorScheme: width === 390 ? "dark" : "light", reducedMotion: "reduce" });
     await page.goto("/sign-in");
-    await expect(page.getByLabel("Email", { exact: true })).toBeDisabled();
-    await expect(page.getByLabel("Password", { exact: true })).toBeInViewport();
+    await expect(page.getByLabel("Email")).toBeDisabled();
+    await expect(page.getByLabel("Password")).toBeInViewport();
     await expect(page.getByRole("button", { name: "Backend setup pending" })).toBeDisabled();
     await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
     const details = page.locator("summary").filter({ hasText: "Backend connection details" });
@@ -100,9 +100,9 @@ for (const width of [390, 1440]) {
     await page.getByRole("link", { name: "Open workspace", exact: true }).click();
     await expect(page).toHaveURL(/\/sign-in$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Sign in to your workspace.");
-    await expect(page.getByLabel("Email", { exact: true })).toBeInViewport();
-    await expect(page.getByLabel("Password", { exact: true })).toBeInViewport();
-    await expect(page.getByLabel("Email", { exact: true })).toBeEnabled();
+    await expect(page.getByLabel("Email")).toBeInViewport();
+    await expect(page.getByLabel("Password")).toBeInViewport();
+    await expect(page.getByLabel("Email")).toBeEnabled();
     await expect(page.getByTestId("proof-hero")).toHaveCount(0);
     await expect(page.locator("#task-prompt")).toHaveCount(0);
     expect(await page.evaluate(key => sessionStorage.getItem(key), draftKey)).toBe("My saved CSV task");
