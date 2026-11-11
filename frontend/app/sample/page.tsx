@@ -98,7 +98,7 @@ export default function MainWorkbench() {
           className="pb-9 pt-10 sm:pb-11 sm:pt-12"
         >
           <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,.72fr)_minmax(0,1.28fr)] lg:gap-10">
-          <div className="min-w-0">
+          <div className="min-w-0 sample-block-p">
           <div className="mb-4 flex items-center gap-2">
             <Text type="label">A little less debugging</Text>
             <ChevronRight size={14} aria-hidden="true" />
@@ -169,7 +169,7 @@ export default function MainWorkbench() {
               className="mt-8 grid grid-cols-3 gap-3 sm:gap-5"
             >
               {STEPS.map(({ title, text, icon: Icon }, index) => (
-                <motion.div key={title} variants={child} className="min-w-0">
+                <motion.div key={title} variants={child} className="min-w-0 sample-block-p">
                   <div className="mb-3 flex items-center gap-2">
                     <span className="font-mono text-xs text-muted">
                       0{index + 1}
