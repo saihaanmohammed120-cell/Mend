@@ -120,6 +120,16 @@ body {
     0 97%
   );
 }
+/* Astryx Text renders display:inline even with as="p": a receipt header's
+   first <p> would run into the supporting line. Block it; the flex-row
+   <p className="flex ..."> rows in the workbench receipt are untouched
+   because this only reaches the header's first div. */
+.receipt-paper>div:first-child p{display:block}
+/* Sample page: the hero and step-card paragraphs are Astryx Text (inline),
+   so adjacent <p>s run together. Block them; the repair-phase <p> that must
+   stay flex is outside these containers. */
+.sample-block-p>p{display:block}
+.sample-block-p>p+p{margin-top:8px}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

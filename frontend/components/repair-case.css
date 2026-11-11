@@ -53,6 +53,10 @@
 .case-errors ul{padding-left:18px;margin-top:5px!important}
 .case-errors a{display:inline-block;min-height:44px;padding:10px 0;color:var(--proof-ink);font:400 14px/21px var(--proof-body);text-underline-offset:3px}
 .case-review{display:flex;flex-direction:column;align-items:start;background:color-mix(in srgb,var(--proof-pass) 4%,var(--proof-surface));scroll-margin-top:24px}
+/* The review dt holds a label + a Change button; without flex + gap they
+   sit adjacent with no space (same inline-element pattern as the nav bug).
+   Mirrors the bug-desk dt rule. */
+.mend-repair-case dt{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .case-review-heading{display:flex;align-items:center;gap:10px;margin-bottom:20px}
 .case-review-status{font:400 14px/22px var(--proof-body);color:var(--proof-muted);margin-top:12px!important}
 .case-empty{padding:30px 0;flex:1}

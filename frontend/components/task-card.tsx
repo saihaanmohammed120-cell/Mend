@@ -162,15 +162,15 @@ export function TaskCard({
               <Text type="label">The working agreement</Text>
             </div>
             <Grid columns={3} gap={2}>
-              <div>
+              <div className="grid">
                 <Text type="body"><strong>Python</strong></Text>
                 <Text type="supporting">Sample scenario</Text>
               </div>
-              <div>
+              <div className="grid">
                 <Text type="body"><strong>60 seconds</strong></Text>
                 <Text type="supporting">Live job target</Text>
               </div>
-              <div>
+              <div className="grid">
                 <Text type="body"><strong>3 repairs</strong></Text>
                 <Text type="supporting">Then hand back</Text>
               </div>
