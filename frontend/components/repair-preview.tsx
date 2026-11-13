@@ -129,7 +129,7 @@ export function RepairPreview() {
             <Badge variant="neutral" label="Sample only" />
           </div>
           <Text type="body" as="p">A fixed Python example, played silently. No model call, isolated job, or live test is running.</Text>
-          <Stepper activeStep={phaseIndex} label="Illustrated repair sequence">
+          <Stepper activeStep={phaseIndex} label="Illustrated repair sequence" className="sample-steps">
             {SAMPLE_PHASES.map((step, index) => (
               <Step key={step.label} step={index} label={step.label} status={index < phaseIndex ? "success" : undefined} />
             ))}

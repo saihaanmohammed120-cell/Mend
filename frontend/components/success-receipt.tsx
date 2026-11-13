@@ -85,12 +85,15 @@ export function SuccessReceipt({ receipt }: { receipt: Receipt | null }) {
                   </div>
                 </div>
                 <Badge variant="success" label="PASSED THE LISTED CHECKS" />
-                <Text type="code" as="p">
+                {/* Astryx Text defaults to display:inline, so without
+                    display="block" the JOB line runs onto the badge's line
+                    and the sentence below glues onto the SHA tail. */}
+                <Text type="code" as="p" display="block">
                   JOB {receipt.job_id}
                   <br />
                   SHA256 {receipt.snapshot_sha256}
                 </Text>
-                <Text type="supporting" as="p">
+                <Text type="supporting" as="p" display="block">
                   {receipt.source === "demo"
                     ? "Illustrative sample. No real provider execution or database storage."
                     : "Covers the checks recorded by the backend. Review the change before using it."}
