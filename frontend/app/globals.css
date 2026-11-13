@@ -162,3 +162,17 @@ body {
 }
 .mend-workbench { overflow-wrap: anywhere; }
 .mend-workbench :is(input, textarea, pre) { min-width: 0; max-width: 100%; }
+
+/* Sample stepper labels (repair-preview): Astryx truncates the longest label
+   ("Sample checks pass") with an ellipsis whenever the step column is
+   narrower than the text. The column width varies with the page layout, so
+   the truncation shows at 640, 700, 768, 1024 and 1200, not only at 768.
+   Letting the label wrap to a second line shows the full name wherever it
+   does not fit, and changes nothing where it fits on one line. Scoped to
+   this stepper only. Lives here, not in a per-component file, because the
+   component test harness only allows a fixed import list per component. */
+.sample-steps .astryx-step-label {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}

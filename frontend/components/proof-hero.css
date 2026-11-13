@@ -227,6 +227,11 @@
  .proof-case-summary>div:last-child{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;padding-top:7px;border-top:1px dashed color-mix(in srgb,var(--proof-ink) 20%,transparent)}
  .proof-case-summary>div:last-child dd{padding-top:0}
  .proof-copy>.proof-event{grid-template-columns:minmax(0,1fr);gap:10px}
+ /* The boundaries-details event is not inside .proof-copy, so it needs its
+    own single-column rule here. Without this, the later max-width:1050px
+    2-column rule (below the first max-width:520px block) wins by source
+    order and squeezes the two credit lines into ~175px columns on phones. */
+ .proof-event{grid-template-columns:minmax(0,1fr);gap:8px}
  .proof-limits{gap:12px!important}
  .proof-limits dt{font-size:12px}
  .proof-limits dd{font-size:11px;line-height:18px}
