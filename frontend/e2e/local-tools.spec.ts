@@ -25,6 +25,11 @@ for (const width of [390, 1440]) for (const colorScheme of ["light", "dark"] as 
     await page.setViewportSize({ width, height: 1000 });
     await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
     await page.goto("/");
+    if (width === 390) {
+      // Below 768px the centre links are hidden and the hamburger menu is
+      // the real phone path to them: open it first, then click the link.
+      await page.getByRole("navigation", { name: "Main navigation" }).getByRole("button", { name: "Open menu", exact: true }).click();
+    }
     await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Local tools", exact: true }).click();
     await expect(page).toHaveURL(/\/tools$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Keep the review on your desk.");

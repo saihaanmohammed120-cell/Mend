@@ -1,0 +1,67 @@
+/* Mobile menu: hamburger + drop-down panel, only below 768px.
+   Astryx TopNav has no mobile collapse, so the centre links are hidden
+   below 768px (landing.css / desk.css) and this menu is the phone path
+   to them. Plain button + panel on purpose: no Astryx internals, no
+   Drawer props, so the panel stays inside the <nav> landmark the e2e
+   "Main navigation" scope finds the links in. */
+
+.mend-mobile-menu{display:contents}
+
+.mend-mobile-menu-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  min-height:44px;
+  padding:10px 12px;
+  border:1px solid var(--mend-control);
+  border-radius:8px;
+  background:var(--mend-surface);
+  color:var(--mend-ink);
+  cursor:pointer;
+  flex-shrink:0;
+}
+.mend-mobile-menu-toggle:focus-visible{outline:3px solid var(--mend-ink);outline-offset:3px}
+@media(max-width:767px){.mend-mobile-menu-toggle{display:inline-flex}}
+
+/* Three bars drawn in CSS (no icon font, no emoji). When open they
+   rotate into a close cross. */
+.mend-mobile-menu-icon{display:flex;flex-direction:column;gap:5px;width:20px}
+.mend-mobile-menu-icon>span{display:block;height:2px;background:currentColor;border-radius:1px;transition:transform 150ms ease,opacity 150ms ease}
+.mend-mobile-menu-toggle[aria-expanded="true"] .mend-mobile-menu-icon>span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.mend-mobile-menu-toggle[aria-expanded="true"] .mend-mobile-menu-icon>span:nth-child(2){opacity:0}
+.mend-mobile-menu-toggle[aria-expanded="true"] .mend-mobile-menu-icon>span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(prefers-reduced-motion:reduce){.mend-mobile-menu-icon>span{transition:none}}
+
+/* Hidden everywhere by default; shown only below 768px while open.
+   Absolute against the TopNav (which the pages set position:relative
+   on), so the panel drops flush under the bar at any bar height. */
+.mend-mobile-menu-panel{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  z-index:30;
+  background:var(--mend-surface);
+  border:1px solid var(--mend-line);
+  border-radius:0 0 12px 12px;
+  box-shadow:0 12px 32px rgb(0 0 0 / .18);
+  padding:8px 0;
+}
+@media(max-width:767px){.mend-mobile-menu-panel[data-open="true"]{display:block}}
+.mend-mobile-menu-panel ul{list-style:none;margin:0;padding:0}
+.mend-mobile-menu-panel li{display:block}
+.mend-mobile-menu-panel li+li{border-top:1px solid var(--mend-line)}
+/* One class + one element beats the Astryx Link atomic class, so the
+   row layout holds. 48px rows, same as the rest of the site. */
+.mend-mobile-menu-panel a{
+  display:flex;
+  align-items:center;
+  min-height:48px;
+  padding:12px 20px;
+  text-decoration:none;
+  font-size:16px;
+}
+.mend-mobile-menu-panel a:hover{text-decoration:underline;text-underline-offset:5px}
+.mend-mobile-menu-panel a:focus-visible{outline:3px solid var(--mend-ink);outline-offset:-3px}

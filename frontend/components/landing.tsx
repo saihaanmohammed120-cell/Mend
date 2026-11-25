@@ -5,6 +5,7 @@ import { ProofFlow } from "./proof-flow";
 import { ProofRoadmap } from "./proof-roadmap";
 import { RepairCase } from "./repair-case";
 import { MendLink, MendButtonLink } from "./mend-link";
+import { MobileMenu } from "./mobile-menu";
 import "./landing.css";
 
 /** The public page has no session bootstrap or task transport. */
@@ -13,13 +14,21 @@ export function Landing() {
     <a className="landing-skip" href="#main-content">Skip to content</a>
     <TopNav
       label="Main navigation"
+      style={{ position: "relative" }}
       heading={<Link href="/" aria-label="Mend home" className="landing-brand"><span className="proof-wordmark-mark" aria-hidden="true" /><span>mend</span></Link>}
       centerContent={<span className="landing-nav-links">
         <MendLink href="#worked-example">Explore the example</MendLink>
         <MendLink href="/tools">Local tools</MendLink>
         <MendLink href="/help#source">Source</MendLink>
       </span>}
-      endContent={<MendButtonLink href="/sign-in" label="Open workspace" variant="secondary" />}
+      endContent={<span className="landing-end">
+        <MobileMenu id="landing-menu" links={[
+          { href: "#worked-example", label: "Explore the example" },
+          { href: "/tools", label: "Local tools" },
+          { href: "/help#source", label: "Source" },
+        ]} />
+        <MendButtonLink href="/sign-in" label="Open workspace" variant="secondary" />
+      </span>}
     />
     <main id="main-content" tabIndex={-1}>
       <ProofHero task={null} receipt={null} events={[]} runtime={null} connection="closed" receiptFresh={false} />
