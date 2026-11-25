@@ -26,6 +26,9 @@
 /* Astryx TopNav centre links: JSX collapses the whitespace between the
    links, so without a gap they render as one unbroken phrase (0px between
    them). Flex + gap restores the spacing the native header had. */
+/* End slot: hamburger only, below 768px. JSX collapses whitespace, so
+   the slot is a flex row even with a single child. */
+.desk-end{display:inline-flex;align-items:center;gap:12px}
 .desk-nav-links{display:inline-flex;gap:24px;align-items:center}
 /* Responsive: Astryx TopNav has no mobile collapse, so hide the centre links below 768px. Brand stays; the same links exist in the footer. */
 @media(max-width:767px){.desk-nav-links{display:none}}

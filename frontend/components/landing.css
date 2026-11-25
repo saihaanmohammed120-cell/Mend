@@ -87,6 +87,15 @@
 /* Astryx TopNav centre links: JSX collapses the whitespace between the
    links, so without a gap they render as one unbroken phrase (0px between
    them). Flex + gap restores the spacing the native header had. */
+/* End slot: hamburger + main action. JSX collapses the whitespace
+   between them, so the gap has to come from flex, not the markup. */
+.landing-end{display:inline-flex;align-items:center;gap:12px}
+/* Below 768px the Astryx grid (1fr auto 1fr) gives the end slot only
+   half the bar, and the hamburger + Open workspace button no longer fit:
+   the button label truncates. Let the brand take only its own width and
+   give the rest to the end slot. Class + attribute beats the Astryx grid
+   class, no !important needed. */
+@media(max-width:767px){.mend-landing nav[aria-label="Main navigation"]{grid-template-columns:auto auto 1fr}}
 .landing-nav-links{display:inline-flex;gap:24px;align-items:center}
 /* Responsive: Astryx TopNav has no mobile collapse, so hide the centre links below 768px. Brand + main action stay. Links remain in the DOM (footer carries them too). */
 @media(max-width:767px){.landing-nav-links{display:none}}
